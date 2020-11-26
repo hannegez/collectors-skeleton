@@ -3,12 +3,19 @@
     <main>
       <div class="buttons">
         <button @click="drawCard">
-          {{ labels.draw }} 
+          {{ labels.draw }}
         </button>
       </div>
       <div class="my-cards">
         <CollectorsCard v-for="(card, index) in myCards" :card="card" :key="index"/>
       </div>
+
+
+<!-- TESTAR HÄR ATT FÅ IN GAME BOARD -->
+      <div>
+        <GameBoard/>
+      </div>
+
     </main>
     <footer>
         <p>
@@ -23,18 +30,20 @@
 /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "[iI]gnored" }]*/
 
 import CollectorsCard from '@/components/CollectorsCard.vue'
+import GameBoard from '@/components/GameBoard.vue'                            /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
 
 export default {
   name: 'Collectors',
   components: {
-    CollectorsCard
+    CollectorsCard,
+    GameBoard                                                                 /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
   },
   data: function () {
     return {
       publicPath: "localhost:8080/#", //"collectors-groupxx.herokuapp.com/#",
       touchScreen: false,
       myCards: [],
-      maxSizes: { x: 0, 
+      maxSizes: { x: 0,
                   y: 0 },
       labels: {},
       points: {}
@@ -47,17 +56,17 @@ export default {
     const newRoute = this.$route.params.id + "?id=" + this.$store.state.playerId;
     if (this.$route.params.id + "?id=" + this.$route.query.id !== newRoute)
       this.$router.push(newRoute);
-    this.$store.state.socket.emit('collectorsLoaded', 
-      { roomId: this.$route.params.id, 
+    this.$store.state.socket.emit('collectorsLoaded',
+      { roomId: this.$route.params.id,
         playerId: this.$store.state.playerId } );
-    this.$store.state.socket.on('collectorsInitialize', 
+    this.$store.state.socket.on('collectorsInitialize',
       function(d) {
         this.labels = d.labels;
         this.myCards = d.hand;
       }.bind(this));
     this.$store.state.socket.on('collectorsPointsUpdated', (d) => this.points = d );
 
-    this.$store.state.socket.on('collectorsCardDrawn', 
+    this.$store.state.socket.on('collectorsCardDrawn',
       function(d) {
         console.log(d);
         if(d.playerId === this.$route.query.id) {
@@ -74,7 +83,7 @@ export default {
       n.target.select();
     },
     drawCard: function () {
-      this.$store.state.socket.emit('collectorsDrawCard', { roomId: this.$route.params.id, 
+      this.$store.state.socket.emit('collectorsDrawCard', { roomId: this.$route.params.id,
            playerId: this.$store.state.playerId });
     }
   },

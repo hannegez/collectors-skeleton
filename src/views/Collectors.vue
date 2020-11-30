@@ -12,8 +12,14 @@
 
 
 <!-- TESTAR HÄR ATT FÅ IN GAME BOARD -->
-      <div>
-        <GameBoard/>
+      <div id="collectors-board">
+        <div id="left-board">
+          <GameBoard/>
+        </div>
+
+        <div id="right-board">
+          <PlayerBoard/>
+        </div>
       </div>
 
     </main>
@@ -31,12 +37,15 @@
 
 import CollectorsCard from '@/components/CollectorsCard.vue'
 import GameBoard from '@/components/GameBoard.vue'                            /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
+import PlayerBoard from '@/components/PlayerBoard.vue'                            /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
 
+/* VUE-objekt för spelet*/
 export default {
   name: 'Collectors',
   components: {
     CollectorsCard,
-    GameBoard                                                                 /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
+    GameBoard,                                                                 /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
+    PlayerBoard                                                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
   },
   data: function () {
     return {

@@ -3,6 +3,7 @@
 
 <template>
     <div id="game-board">
+      <p>HEJHEJ</p>
     </div>
 </template>
 
@@ -21,7 +22,7 @@ export default {
     color:red;
     user-select: none;
     width:50%;
-    height:100em;
+    height:48em;
     background: url('/images/game-board2000px.png') top left no-repeat;
     background-size: contain;
     border-radius: 10px;

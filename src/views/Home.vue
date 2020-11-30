@@ -36,6 +36,7 @@
 <script>
 // @ is an alias to /src
 
+//VUE-objektet
 export default {
   name: 'Home',
   numberOfPlayers: 2,

@@ -1,7 +1,9 @@
+<!-- här har vi själva korten -->
+
 <template>
     <div class="card" :style="{'background-position': (-(card.x-1)*250)+'px ' + (-(card.y-1)*350)+'px'}">
 
-      {{card.item}} 
+      {{card.item}}
       {{card.skill}}
       {{card.market}}
     </div>

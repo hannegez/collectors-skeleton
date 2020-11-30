@@ -9,6 +9,13 @@
       <div class="my-cards">
         <CollectorsCard v-for="(card, index) in myCards" :card="card" :key="index"/>
       </div>
+
+
+<!-- TESTAR HÄR ATT FÅ IN GAME BOARD -->
+      <div>
+        <GameBoard/>
+      </div>
+
     </main>
     <footer>
         <p> /*kan välja att skriva vanlig text här..*/
@@ -23,11 +30,13 @@
 /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "[iI]gnored" }]*/
 
 import CollectorsCard from '@/components/CollectorsCard.vue'
+import GameBoard from '@/components/GameBoard.vue'                            /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
 
 export default {
   name: 'Collectors',
   components: {
-    CollectorsCard
+    CollectorsCard,
+    GameBoard                                                                 /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
   },
   data: function () {
     return {
@@ -80,6 +89,7 @@ export default {
   },
 }
 </script>
+
 <style scoped>
   header {
     user-select: none;

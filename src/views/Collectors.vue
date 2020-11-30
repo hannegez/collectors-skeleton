@@ -100,6 +100,17 @@ export default {
 </script>
 
 <style scoped>
+  #collectors-board {
+    display: grid;
+    grid-gap: 0;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "game-board player-boards";
+  }
+
+  #left-board { grid-area: game-board; }
+  #right-board { grid-area: player-boards; }
+
   header {
     user-select: none;
     position: fixed;

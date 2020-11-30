@@ -21,7 +21,7 @@ export default {
   #game-board {
     color:red;
     user-select: none;
-    width:50%;
+    width:90%;
     height:48em;
     background: url('/images/game-board2000px.png') top left no-repeat;
     background-size: contain;

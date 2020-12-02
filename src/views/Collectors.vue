@@ -1,17 +1,32 @@
 <template>
   <div>
     <main>
+
       <div class="buttons">
         <button @click="drawCard">
           {{ labels.draw }}
         </button>
       </div>
+
+
+        <!--allt för popup-->
+      <div class="popup" style= "position:relative; left:20%; top:18em;">
+        <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo" >
+        <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+      </div>
+
+
+
+
       <div class="my-cards">
         <CollectorsCard v-for="(card, index) in myCards" :card="card" :key="index"/>
       </div>
 
 
 <!-- TESTAR HÄR ATT FÅ IN GAME BOARD -->
+<body>
+
+</body>
       <div id="collectors-board">
         <div id="left-board">
           <GameBoard/>
@@ -20,6 +35,7 @@
         <div id="right-board">
           <PlayerBoard/>
         </div>
+
       </div>
 
     </main>
@@ -37,7 +53,8 @@
 
 import CollectorsCard from '@/components/CollectorsCard.vue'
 import GameBoard from '@/components/GameBoard.vue'                            /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
-import PlayerBoard from '@/components/PlayerBoard.vue'                            /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
+import PlayerBoard from '@/components/PlayerBoard.vue'   /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
+//import possibleActions from '@/components/infoBoxes.vue'                        /*testar att lägga till buyitem*/
 
 /* VUE-objekt för spelet*/
 export default {
@@ -45,7 +62,8 @@ export default {
   components: {
     CollectorsCard,
     GameBoard,                                                                 /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
-    PlayerBoard                                                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
+    PlayerBoard,                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
+    //possibleActions                                                   /*testar att lägga till buyitem*/
   },
   data: function () {
     return {
@@ -57,6 +75,7 @@ export default {
       labels: {},
       points: {}
     }
+
   },
   created: function () {
     this.$store.commit('SET_PLAYER_ID', this.$route.query.id)
@@ -94,22 +113,37 @@ export default {
     drawCard: function () {
       this.$store.state.socket.emit('collectorsDrawCard', { roomId: this.$route.params.id,
            playerId: this.$store.state.playerId });
+    },
+    getInfo: function(){
+      console.log("bajs");
+      var popup = document.getElementById("myPopup");
+      popup.classList.toggle("show");
+
+
+
     }
   },
 }
+
+
+
 </script>
+
 
 <style scoped>
   #collectors-board {
     display: grid;
     grid-gap: 0;
     grid-template-columns: 1fr 1fr;
+
     grid-template-areas:
       "game-board player-boards";
+
   }
 
   #left-board { grid-area: game-board; }
   #right-board { grid-area: player-boards; }
+
 
   header {
     user-select: none;
@@ -118,10 +152,13 @@ export default {
     pointer-events: none;
   }
   main {
+
     user-select: none;
+
   }
   footer {
     margin-top: 5em auto;
+
   }
   footer a {
     text-decoration: none;
@@ -145,6 +182,50 @@ export default {
     transform: scale(1)translate(-25%,0);
     z-index: 1;
   }
+
+  /*allt för popup*/
+  .popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: pink;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: pink transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+}
   @media screen and (max-width: 800px) {
     main {
       width:90vw;

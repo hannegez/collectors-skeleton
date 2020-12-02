@@ -1,7 +1,7 @@
 <!-- här har vi själva korten -->
 
 <template>
-    <div class="card" :style="{'background-position': (-(card.x-1)*250)+'px ' + (-(card.y-1)*350)+'px'}">
+    <div v-if="card.x>0" :class="['card', {'available-to-choose': availableAction}]" :style="{'background-position': (-(card.x-1)*250)+'px ' + (-(card.y-1)*350)+'px'}" @click="doAction">
 
       {{card.item}}
       {{card.skill}}
@@ -13,7 +13,13 @@
 export default {
   name: 'CollectorsCard',
   props: {
-    card: Object
+    card: Object,
+    availableAction: Boolean
+  },
+  methods: {
+    doAction: function() {
+      this.$emit('doAction');
+    }
   }
 }
 </script>
@@ -28,5 +34,17 @@ export default {
     background-image: url('/images/collectors-cards.png');
     border-radius: 10px;
   }
+
+  .available-to-choose {
+    animation: jiggle 1s ease-in-out;
+    animation-iteration-count:infinite;
+    box-shadow: 0 0 10px yellow;
+  }
+  @keyframes jiggle {
+    0% {transform:rotate(0.5deg);}
+    50% {transform:rotate(-0.5deg);}
+    100% {transform:rotate(0.5deg);}
+  }
+
 
 </style>

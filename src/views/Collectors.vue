@@ -2,6 +2,8 @@
   <div>
     <main>
       {{buyPlacement}} {{chosenPlacementCost}}
+      <!-- OBS : och @ är förkortning för v-bind: och v-on:
+           VILL VI BYTA NAMN TILL CollectorsBuyItem och till @butItem="buyItem($event) och ändra från buy till item typ?"  -->
      <CollectorsBuyActions v-if="players[playerId]"
        :labels="labels"
        :player="players[playerId]"
@@ -10,15 +12,28 @@
        :placement="buyPlacement"
        @buyCard="buyCard($event)"
        @placeBottle="placeBottle('buy', $event)"/>
+
       <div class="buttons">
         <button @click="drawCard">
           {{ labels.draw }}
         </button>
       </div>
+
       Skills
      <div class="cardslots">
        <CollectorsCard v-for="(card, index) in skillsOnSale" :card="card" :key="index"/>
      </div>
+
+     <!-- DETTA VILL VI HA:
+     <CollectorsGetSkill v-if="players[playerId]"
+       :labels="labels"
+       :player="players[playerId]"
+       :skillsOnSale="skillsOnSale"
+       :placement="buyPlacement"
+       @getSkill="getSkill($event)"
+       @placeBottle="placeBottle('skill', $event)"/>
+     -->
+
      Auction
      <div class="cardslots">
        <CollectorsCard v-for="(card, index) in auctionCards" :card="card" :key="index"/>
@@ -32,6 +47,7 @@
        <CollectorsCard v-for="(card, index) in players[playerId].items" :card="card" :key="index"/>
       </div>
 
+      <!-- NÅNTING MED WORK HÄR -->
 
 <!-- TESTAR HÄR ATT FÅ IN GAME BOARD -->
       <div id="collectors-board">
@@ -82,7 +98,7 @@ export default {
       touchScreen: false,
       maxSizes: { x: 0,
                   y: 0 },
-      labels: {},
+      labels: {},                                                           //ALLT ÄR TOMT, VÄRDENA SÄTTS LÄNGRE NER
       players: {},
       // playerId: {
       //   hand: [],
@@ -97,6 +113,10 @@ export default {
       skillPlacement: [],
       auctionPlacement: [],
       marketPlacement: [],
+
+      //HÄR LÄGGER VI TILL workPlacement
+      //workPlacement: [],
+
       chosenPlacementCost: null,
       marketValues: { fastaval: 0,
                      movie: 0,
@@ -106,6 +126,9 @@ export default {
       itemsOnSale: [],
       skillsOnSale: [],
       auctionCards: [],
+
+      //NÅTT LIKNANDE SOM OVAN FAST FÖR WORK?
+
       playerid: 0
     }
   },
@@ -135,7 +158,7 @@ export default {
       { roomId: this.$route.params.id,
         playerId: this.playerId } );
 
-    this.$store.state.socket.on('collectorsInitialize',
+    this.$store.state.socket.on('collectorsInitialize',    //HÄR LÄGGER VI TILL ALLA VÄRDEN SOM SKICKATS I OBJEKTET I socketsCollectors.js
       function(d) {
         this.labels = d.labels;
         this.players = d.players;
@@ -143,10 +166,12 @@ export default {
        this.marketValues = d.marketValues;
        this.skillsOnSale = d.skillsOnSale;
        this.auctionCards = d.auctionCards;
+       //NÅTT SOM OVAN FAST MED WORK
        this.buyPlacement = d.placements.buyPlacement;
        this.skillPlacement = d.placements.skillPlacement;
        this.marketPlacement = d.placements.marketPlacement;
        this.auctionPlacement = d.placements.auctionPlacement;
+       //this.workPlacement = d.placements.workPlacement;
      }.bind(this));
    this.$store.state.socket.on('collectorsBottlePlaced',
      function(d) {
@@ -154,6 +179,7 @@ export default {
        this.skillPlacement = d.skillPlacement;
        this.marketPlacement = d.marketPlacement;
        this.auctionPlacement = d.auctionPlacement;
+       //this.workPlacement = d.workPlacement;
       }.bind(this));
 
     this.$store.state.socket.on('collectorsPointsUpdated', (d) => this.points = d );

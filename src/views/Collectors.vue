@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="wrapper">
     <main>
       {{buyPlacement}} {{chosenPlacementCost}}
       <!-- OBS : och @ är förkortning för v-bind: och v-on:
@@ -235,6 +235,10 @@ export default {
 </script>
 
 <style scoped>
+  #wrapper {          /*lade till här så att all text är svart och syns*/
+    color: #000;
+  }
+
   #collectors-board {
     display: grid;
     grid-gap: 0;
@@ -254,7 +258,6 @@ export default {
   }
   main {
     user-select: none;
-    color: #000;
   }
   footer {
     margin-top: 5em auto;

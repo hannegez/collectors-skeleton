@@ -182,7 +182,7 @@ Data.prototype.buyCard = function (roomId, playerId, card, cost) {
   }
 }
 
-Data.prototype.placeBottle = function (roomId, playerId, action, cost) {
+Data.prototype.placeBottle = function (roomId, playerId, action, cost) {      
   let room = this.rooms[roomId];
   if (typeof room !== 'undefined') {
     let activePlacement = [];
@@ -205,7 +205,7 @@ Data.prototype.placeBottle = function (roomId, playerId, action, cost) {
     }   */
 
     for(let i = 0; i < activePlacement.length; i += 1) {
-        if( activePlacement[i].cost === cost &&       
+        if( activePlacement[i].cost === cost &&
             activePlacement[i].playerId === null ) {
           activePlacement[i].playerId = playerId;
           break;

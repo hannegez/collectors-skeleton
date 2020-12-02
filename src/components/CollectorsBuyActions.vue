@@ -39,6 +39,7 @@ export default {
     itemsOnSale: Array,
     marketValues: Object,
     placement: Array
+    //NÅNTING MED WORK?
   },
   methods: {
     cannotAfford: function (cost) {

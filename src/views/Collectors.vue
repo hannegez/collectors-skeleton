@@ -67,7 +67,7 @@
       fake more money
     </button>
     <footer>
-        <p>
+        <p> /*kan välja att skriva vanlig text här..*/
           {{ labels.invite }}
           <input type="text" :value="publicPath + $route.path" @click="selectAll" readonly="readonly">
         </p>

@@ -39,7 +39,6 @@
 //VUE-objektet
 export default {
   name: 'Home',
-  numberOfPlayers: 2,
   created: function () {
     this.$store.commit('SET_ROOM_ID');
   },
@@ -49,6 +48,7 @@ export default {
       return numberOfPlayers;
     },
     setupCollectors: function (playerCount, lang="en") {
+      console.log(playerCount);
       this.$store.commit('SETUP_GAME', {roomId: this.$store.state.roomId,
         playerCount: playerCount,
         lang: lang });

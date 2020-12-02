@@ -2,35 +2,50 @@
   <div>
     <main>
       {{buyPlacement}} {{chosenPlacementCost}}
-      <CollectorsBuyActions v-if="players[playerId]"
-        :labels="labels"
-        :player="players[playerId]"
-        :itemsOnSale="itemsOnSale"
-        :marketValues="marketValues"
-        :placement="buyPlacement"
-        @buyCard="buyCard($event)"
-        @placeBottle="placeBottle('buy', $event)"/>
+      <!-- OBS : och @ är förkortning för v-bind: och v-on:
+           VILL VI BYTA NAMN TILL CollectorsBuyItem och till @butItem="buyItem($event) och ändra från buy till item typ?"  -->
+     <CollectorsBuyActions v-if="players[playerId]"
+       :labels="labels"
+       :player="players[playerId]"
+       :itemsOnSale="itemsOnSale"
+       :marketValues="marketValues"
+       :placement="buyPlacement"
+       @buyCard="buyCard($event)"
+       @placeBottle="placeBottle('buy', $event)"/>
+
       <div class="buttons">
         <button @click="drawCard">
           {{ labels.draw }}
         </button>
       </div>
+
       Skills
-      <div class="cardslots">
-        <CollectorsCard v-for="(card, index) in skillsOnSale" :card="card" :key="index"/>
-      </div>
-      Auction
-      <div class="cardslots">
-        <CollectorsCard v-for="(card, index) in auctionCards" :card="card" :key="index"/>
-      </div>
-      Hand
-      <div class="cardslots" v-if="players[playerId]">
-        <CollectorsCard v-for="(card, index) in players[playerId].hand" :card="card" :availableAction="card.available" @doAction="buyCard(card)" :key="index"/>
-      </div>
-      Items
-      <div class="cardslots" v-if="players[playerId]">
-        <CollectorsCard v-for="(card, index) in players[playerId].items" :card="card" :key="index"/>
-      </div>
+     <div class="cardslots">
+       <CollectorsCard v-for="(card, index) in skillsOnSale" :card="card" :key="index"/>
+     </div>
+
+     <!-- DETTA VILL VI HA:
+     <CollectorsGetSkill v-if="players[playerId]"
+       :labels="labels"
+       :player="players[playerId]"
+       :skillsOnSale="skillsOnSale"
+       :placement="buyPlacement"
+       @getSkill="getSkill($event)"
+       @placeBottle="placeBottle('skill', $event)"/>
+     -->
+
+     Auction
+     <div class="cardslots">
+       <CollectorsCard v-for="(card, index) in auctionCards" :card="card" :key="index"/>
+     </div>
+     Hand
+     <div class="cardslots" v-if="players[playerId]">
+       <CollectorsCard v-for="(card, index) in players[playerId].hand" :card="card" :availableAction="card.available" @doAction="buyCard(card)" :key="index"/>
+     </div>
+     Items
+     <div class="cardslots" v-if="players[playerId]">
+       <CollectorsCard v-for="(card, index) in players[playerId].items" :card="card" :key="index"/>
+</div>
       <!-- TESTAR HÄR ATT FÅ IN GAME BOARD -->
           <div id="collectors-board">
             <div id="left-board">
@@ -42,7 +57,7 @@
             </div>
             <div id="middle-board" class="popup">
               <possibleActions/>
-
+<!-- NÅNTING MED WORK HÄR -->
             </div>
           </div>
 
@@ -62,7 +77,7 @@
       fake more money
     </button>
     <footer>
-        <p>
+        <p> /*kan välja att skriva vanlig text här..*/
           {{ labels.invite }}
           <input type="text" :value="publicPath + $route.path" @click="selectAll" readonly="readonly">
         </p>
@@ -97,49 +112,57 @@ export default {
     possibleActions                                                                                                                                                               /*HÄÄÄÄÄÄÄÄÄÄR*/
   },
   data: function () {
-      return {
-        publicPath: "localhost:8080/#", //"collectors-groupxx.herokuapp.com/#",
-        touchScreen: false,
-        maxSizes: { x: 0,
-                    y: 0 },
-        labels: {},
-        players: {},
-        // playerId: {
-        //   hand: [],
-        //   money: 1,
-        //   points: 0,
-        //   skills: [],
-        //   items: [],
-        //   income: [],
-        //   secret: []
-        // }
-        buyPlacement: [],
-        skillPlacement: [],
-        auctionPlacement: [],
-        marketPlacement: [],
-        chosenPlacementCost: null,
-        marketValues: { fastaval: 0,
-                       movie: 0,
-                       technology: 0,
-                       figures: 0,
-                       music: 0 },
-        itemsOnSale: [],
-        skillsOnSale: [],
-        auctionCards: [],
-        playerid: 0
-      }
-    },
-    computed: {
-       playerId: function() { return this.$store.state.playerId}
-     },
-     watch: {
-       players: function(newP, oldP) {
-         console.log(newP, oldP)
-         for (let p in this.players) {
-           for(let c = 0; c < this.players[p].hand.length; c += 1) {
-             if (typeof this.players[p].hand[c].item !== "undefined")
-             this.$set(this.players[p].hand[c], "available", false);
-           }
+    return {
+      publicPath: "localhost:8080/#", //"collectors-groupxx.herokuapp.com/#",
+      touchScreen: false,
+      maxSizes: { x: 0,
+                  y: 0 },
+      labels: {},                                                           //ALLT ÄR TOMT, VÄRDENA SÄTTS LÄNGRE NER
+      players: {},
+      // playerId: {
+      //   hand: [],
+      //   money: 1,
+      //   points: 0,
+      //   skills: [],
+      //   items: [],
+      //   income: [],
+      //   secret: []
+      // }
+      buyPlacement: [],
+      skillPlacement: [],
+      auctionPlacement: [],
+      marketPlacement: [],
+
+      //HÄR LÄGGER VI TILL workPlacement
+      //workPlacement: [],
+
+      chosenPlacementCost: null,
+      marketValues: { fastaval: 0,
+                     movie: 0,
+                     technology: 0,
+                     figures: 0,
+                     music: 0 },
+      itemsOnSale: [],
+      skillsOnSale: [],
+      auctionCards: [],
+
+      //NÅTT LIKNANDE SOM OVAN FAST FÖR WORK?
+
+      playerid: 0
+    }
+  },
+  computed: {
+    playerId: function() { return this.$store.state.playerId}
+  },
+  watch: {
+    players: function(newP, oldP) {
+      console.log(newP, oldP)
+      for (let p in this.players) {
+        for(let c = 0; c < this.players[p].hand.length; c += 1) {
+          if (typeof this.players[p].hand[c].item !== "undefined")
+          this.$set(this.players[p].hand[c], "available", false);
+        }
+
          }
        }
      },
@@ -153,27 +176,31 @@ export default {
        this.$store.state.socket.emit('collectorsLoaded',
          { roomId: this.$route.params.id,
            playerId: this.playerId } );
-       this.$store.state.socket.on('collectorsInitialize',
-         function(d) {
-           this.labels = d.labels;
-           this.players = d.players;
-           this.itemsOnSale = d.itemsOnSale;
-           this.marketValues = d.marketValues;
-           this.skillsOnSale = d.skillsOnSale;
-           this.auctionCards = d.auctionCards;
-           this.buyPlacement = d.placements.buyPlacement;
-           this.skillPlacement = d.placements.skillPlacement;
-           this.marketPlacement = d.placements.marketPlacement;
-           this.auctionPlacement = d.placements.auctionPlacement;
-         }.bind(this));
 
-         this.$store.state.socket.on('collectorsBottlePlaced',
-               function(d) {
-                 this.buyPlacement = d.buyPlacement;
-                 this.skillPlacement = d.skillPlacement;
-                 this.marketPlacement = d.marketPlacement;
-                 this.auctionPlacement = d.auctionPlacement;
-               }.bind(this));
+
+    this.$store.state.socket.on('collectorsInitialize',    //HÄR LÄGGER VI TILL ALLA VÄRDEN SOM SKICKATS I OBJEKTET I socketsCollectors.js
+      function(d) {
+        this.labels = d.labels;
+        this.players = d.players;
+       this.itemsOnSale = d.itemsOnSale;
+       this.marketValues = d.marketValues;
+       this.skillsOnSale = d.skillsOnSale;
+       this.auctionCards = d.auctionCards;
+       //NÅTT SOM OVAN FAST MED WORK
+       this.buyPlacement = d.placements.buyPlacement;
+       this.skillPlacement = d.placements.skillPlacement;
+       this.marketPlacement = d.placements.marketPlacement;
+       this.auctionPlacement = d.placements.auctionPlacement;
+       //this.workPlacement = d.placements.workPlacement;
+     }.bind(this));
+   this.$store.state.socket.on('collectorsBottlePlaced',
+     function(d) {
+       this.buyPlacement = d.buyPlacement;
+       this.skillPlacement = d.skillPlacement;
+       this.marketPlacement = d.marketPlacement;
+       this.auctionPlacement = d.auctionPlacement;
+       //this.workPlacement = d.workPlacement;
+      }.bind(this));
 
          this.$store.state.socket.on('collectorsPointsUpdated', (d) => this.points = d );
 

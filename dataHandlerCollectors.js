@@ -64,7 +64,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
   room.skillsOnSale = room.deck.splice(0, 5);
   room.auctionCards = room.deck.splice(0, 4);
   room.market = [];
-  room.buyPlacement = [ {cost:1, playerId: null},
+  room.buyPlacement = [ {cost:1, playerId: null},           //HÄR ÄNDRAR VI OM VI VILL ÄNDRA VAD SAKER KOSTAR AV NÅGON ANLEDNING
                         {cost:1, playerId: null},
                         {cost:2, playerId: null},
                         {cost:2, playerId: null},
@@ -81,6 +81,14 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
   room.marketPlacement = [ {cost:0, playerId: null},
                            {cost:-2, playerId: null},
                            {cost:0, playerId: null} ];
+
+  /*DETTA VILL VI SEN IMPLEMENTERA MED workPlacement:
+  room.workPlacement = [ {cost:-3, playerId: null},
+                        {cost:-1, playerId: null},
+                        {cost:1, playerId: null},
+                        {cost:0, playerId: null},
+                        {cost:0, playerId: null},]  */
+
   this.rooms[roomId] = room;
 }
 
@@ -190,8 +198,14 @@ Data.prototype.placeBottle = function (roomId, playerId, action, cost) {
     else if (action === "market") {
       activePlacement = room.marketPlacement;
     }
+
+    /* HÄR LÄGGER VI SEN TILL workPlacement:
+    else if (action === "work") {
+      activePlacement = room.workPlacement;
+    }   */
+
     for(let i = 0; i < activePlacement.length; i += 1) {
-        if( activePlacement[i].cost === cost &&
+        if( activePlacement[i].cost === cost &&       
             activePlacement[i].playerId === null ) {
           activePlacement[i].playerId = playerId;
           break;
@@ -216,6 +230,8 @@ Data.prototype.getPlacements = function(roomId){
     return { buyPlacement: room.buyPlacement,
              skillPlacement: room.skillPlacement,
              auctionPlacement: room.auctionPlacement,
+             //HÄR VILL VI LÄGGA TILL workPlacement
+             // workPlacement: room.workPlacement,
              marketPlacement: room.marketPlacement }
   }
   else return {};
@@ -259,5 +275,7 @@ Data.prototype.getAuctionCards = function(roomId){
   }
   else return [];
 }
+
+//LÄGG TILL FUNKTION FÖR WORK-GREJERNA
 
 module.exports = Data;

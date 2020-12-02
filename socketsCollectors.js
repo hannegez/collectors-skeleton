@@ -9,21 +9,24 @@ function sockets(io, socket, data) {
     socket.on('setupCollectors', function(d) {
       data.createRoom(d.roomId, d.playerCount, d.lang);
     })
+    /**/
     socket.on('collectorsLoaded', function(d) {
       socket.join(d.roomId);
       if (data.joinGame(d.roomId, d.playerId)) {
-         socket.emit('collectorsInitialize', {
-             labels: data.getUILabels(d.roomId),
-             players: data.getPlayers(d.roomId),
-             itemsOnSale: data.getItemsOnSale(d.roomId),
+         socket.emit('collectorsInitialize', {                //HÄR LÄR VI LÄGGA TILL/ÄNDRA VAD SOM SKA SÄNDAS UT NÄR NÅN JOINAR
+             labels: data.getUILabels(d.roomId),              //OBJEKTET SOM SKICKAS SOM 2:A PARAMETER ÄR DET SOM KALLAS FÖR d I
+             players: data.getPlayers(d.roomId),              //Collectors.vue: "this.$store.state.socket.on('collectorsInitialize',
+             itemsOnSale: data.getItemsOnSale(d.roomId),      //  function(d) { ...... "
              marketValues: data.getMarketValues(d.roomId),
              skillsOnSale: data.getSkillsOnSale(d.roomId),
              auctionCards: data.getAuctionCards(d.roomId),
+             //NÅTT MED WORK
              placements: data.getPlacements(d.roomId)
            }
          );
        }
     });
+    /**/
     socket.on('collectorsDrawCard', function(d) {
       io.to(d.roomId).emit('collectorsCardDrawn',
       data.drawCard(d.roomId, d.playerId)

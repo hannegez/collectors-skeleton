@@ -3,14 +3,26 @@
 <!--Här har jag lagt en fin kommentar för att testa push/pull-->
 <!-- tjhooooo -->
 <template>
-    <div id="game-board">
-      <p>HEJHEJ</p>
+
+
+
+    <div id="game-board" @click="click">
+      <p>hej</p>
+
     </div>
 </template>
+
+
+
 
 <script>
 export default {
   name: 'GameBoard',
+  methods: {
+    click:function(event){
+      alert(event.x +", "+ event.y)
+
+    }}
   // props: {
   //   card: Object
   // }
@@ -20,14 +32,17 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   #game-board {
-    color:red;
+    color:black;
     user-select: none;
     width:90%;
     height:48em;
-    background: url('/images/game-board2000px.png') top left no-repeat;
+    background: url('/images/game_board_redigerat.PNG') top left no-repeat;
     background-size: contain;
     border-radius: 10px;
     margin-left: 1em;
   }
+
+
+
 
 </style>

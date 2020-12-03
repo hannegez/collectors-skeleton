@@ -2,7 +2,7 @@
     copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
 <template>
-    <div class="player-board">
+    <div class="player-board" >
       <p>HEJHEJ</p>
     </div>
 </template>

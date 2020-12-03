@@ -18,7 +18,9 @@ export default {
   },
   methods: {
     doAction: function() {
-      this.$emit('doAction');
+      if (this.availableAction) {
+        this.$emit('doAction');
+      }
     }
   }
 }

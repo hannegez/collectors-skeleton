@@ -33,7 +33,7 @@ export default {
   components: {
     CollectorsCard
   },
-  props: {
+  props: {            //HÄR ÄR ALLA v-binds FRÅN ELEMENTET I Collectors.vue
     labels: Object,
     player: Object,
     itemsOnSale: Array,
@@ -57,25 +57,20 @@ export default {
       this.$emit('placeBottle', p.cost);
       this.highlightAvailableCards(p.cost);
     },
+    checkAvailable: function (card, cost) {
+      if (this.marketValues[card.item] <= this.player.money - cost) {
+        this.$set(card, "available", true);
+      }
+      else {
+        this.$set(card, "available", false);
+      }
+    },
     highlightAvailableCards: function (cost=100) {
       for (let i = 0; i < this.itemsOnSale.length; i += 1) {
-        if (this.marketValues[this.itemsOnSale[i].item] <= this.player.money - cost) {
-          this.$set(this.itemsOnSale[i], "available", true);
-        }
-        else {
-          this.$set(this.itemsOnSale[i], "available", false);
-        }
-        this.chosenPlacementCost = cost;
+        this.checkAvailable(this.itemsOnSale[i], cost);
       }
-      for (let i = 0; i < this.player.hand.length; i += 1) {
-        if (this.marketValues[this.player.hand[i].item] <= this.player.money - cost) {
-          this.$set(this.player.hand[i], "available", true);
-          this.chosenPlacementCost = cost;
-        }
-        else {
-          this.$set(this.player.hand[i], "available", false);
-          this.chosenPlacementCost = cost;
-        }
+      for (let i = 0; i < this.player.hand.length; i += 1) {                              //ÄVEN KORTEN PÅ HAND HIGHLIGHTAS, SÅ VILL VI EJ HA DET
+        this.checkAvailable(this.player.hand[i], cost);
       }
     },
     buyCard: function (card) {

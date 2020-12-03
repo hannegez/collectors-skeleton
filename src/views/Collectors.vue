@@ -45,11 +45,11 @@
      Items
      <div class="cardslots" v-if="players[playerId]">
        <CollectorsCard v-for="(card, index) in players[playerId].items" :card="card" :key="index"/>
-</div>
-<div class="popup" style= "position:relative; left:0; top:0em;">
-  <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
-  <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-</div>
+      </div>
+      <div class="popup" style= "position:relative; left:0; top:0em;">
+        <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
+        <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+      </div>
       <!-- TESTAR HÄR ATT FÅ IN GAME BOARD -->
           <div id="collectors-board">
             <div id="left-board">

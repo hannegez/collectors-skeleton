@@ -47,30 +47,33 @@
          </div>
 
     <h1>Skills</h1>
-      <!-- DETTA VILL VI HA: -->
-      <CollectorsBuyActions v-if="players[playerId]"
-        :labels="labels"
-        :player="players[playerId]"
-        :skillsOnSale="skillsOnSale"
-        :placement="skillPlacement"
-        @gainSkill="gainSkill($event)"
-        @placeBottle="placeBottle('skill', $event)"/>
+    <CollectorsGainSkill v-if="players[playerId]"
+      :labels="labels"
+      :player="players[playerId]"
+      :skillsOnSale="skillsOnSale"
+      :marketValues="marketValues"
+      :placement="skillPlacement"
+      @gainSkill="gainSkill($event)"
+      @placeBottle="placeBottle('skill', $event)"/>
 
+      DETTA KAN VI TA BORT SEN NÄR COLLECTORSGAINSKILL FUNKAR
         <h2>Skills on sale</h2>
-     <div class="cardslots">
+     <!-- <div class="cardslots">
        <CollectorsCard v-for="(card, index) in skillsOnSale" :card="card" :key="index"/>
-     </div>
+     </div> -->
 
 
      <h1>Auction</h1>
-     <div class="cardslots">
+     <!--<CollectorsStartAuction/>-->
+     <!-- <div class="cardslots">
        <CollectorsCard v-for="(card, index) in auctionCards" :card="card" :key="index"/>
-     </div>
+     </div> -->
 
-
-
-      <!-- NÅNTING MED WORK HÄR -->
       <h1>Work</h1>
+      <!-- <CollectorsWork/> -->
+
+      <h1>Raise Value</h1>
+      <!-- <CollectorsRaiseValue/> -->
 
 
 
@@ -119,6 +122,10 @@
 
 import CollectorsCard from '@/components/CollectorsCard.vue'
 import CollectorsBuyActions from '@/components/CollectorsBuyActions.vue'
+import CollectorsGainSkill from '@/components/CollectorsGainSkill.vue'
+//import CollectorsRaiseValue from '@/components/CollectorsRaiseValue.vue'
+//import CollectorsStartAuction from '@/components/CollectorsStartAuction.vue'
+//import CollectorsWork from '@/components/CollectorsWork.vue'
 import GameBoard from '@/components/GameBoard.vue'                            /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
 import PlayerBoard from '@/components/PlayerBoard.vue'   /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
 import possibleActions from '@/components/infoBoxes.vue'                                                                                                                        /*HÄÄÄÄÄÄÄÄÄÄR*/
@@ -129,6 +136,10 @@ export default {
   components: {
     CollectorsCard,
     CollectorsBuyActions,
+    CollectorsGainSkill,
+//    CollectorsRaiseValue,
+  //  CollectorsStartAuction,
+    //CollectorsWork,
     GameBoard,                                                                 /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
     PlayerBoard,                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
     possibleActions                                                                                                                                                               /*HÄÄÄÄÄÄÄÄÄÄR*/

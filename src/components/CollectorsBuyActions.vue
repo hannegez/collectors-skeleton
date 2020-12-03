@@ -34,7 +34,7 @@ export default {
     CollectorsCard
   },
   props: {            //HÄR ÄR ALLA v-binds FRÅN ELEMENTET I Collectors.vue
-    labels: Object,
+    labels: Object,  //specify what kind of object
     player: Object,
     itemsOnSale: Array,
     marketValues: Object,

@@ -18,9 +18,9 @@ export default {
   },
   methods: {
     doAction: function() {
-      if (this.availableAction) {
-        this.$emit('doAction');
-      }
+      if (this.availableAction){ //han säger att vi ska lägga till det i bilden
+      this.$emit('doAction');
+    }
     }
   }
 }

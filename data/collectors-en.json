@@ -2,6 +2,7 @@
 	"draw": "Draw card",
 	"invite": "Invite other players with this link:",
 	"endTurn": "End turn",
-	"buyItem": "Buy a card",
-	"gainSkill": "Gain a skill"
+	"buyCard": "Buy a card",
+	"gainSkill": "Gain a skill",
+	"raiseValue": "Raise value"
 }

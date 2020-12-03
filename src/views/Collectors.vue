@@ -31,13 +31,13 @@
          </button>
        </div>
 
-<!--Test på raise value-->
+<!--Test på raise value
        <div class="buttons">
         <button @click="testRaiseValue">
           {{ labels.raiseValue }}
           testRaise
         </button>
-      </div>
+      </div> -->
 
        <h2>Your hand</h2>
        <div class="cardslots" v-if="players[playerId]">
@@ -313,15 +313,15 @@ export default {
     }
   },
 
-  //TESTTEST
-     testRaiseValue: function () {
-       console.log("testRaiseValue");
-       this.$store.state.socket.emit('collectorsTestRaiseValue', {
-         roomId: this.$route.params.id,
-         playerId: this.playerId
-       }
-     );
-   }
+  // //TESTTEST
+  //    testRaiseValue: function () {
+  //      console.log("testRaiseValue");
+  //      this.$store.state.socket.emit('collectorsTestRaiseValue', {
+  //        roomId: this.$route.params.id,
+  //        playerId: this.playerId
+  //      }
+  //    );
+  //  }
 }
 </script>
 <!--  /*getInfo: function(){

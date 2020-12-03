@@ -20,19 +20,19 @@
       </div>
 
       Skills
+      <!-- DETTA VILL VI HA: -->
+      <CollectorsBuyActions v-if="players[playerId]"
+        :labels="labels"
+        :player="players[playerId]"
+        :skillsOnSale="skillsOnSale"
+        :placement="buyPlacement"
+        @getSkill="gainSkill($event)"
+        @placeBottle="placeBottle('skill', $event)"/>
+
      <div class="cardslots">
        <CollectorsCard v-for="(card, index) in skillsOnSale" :card="card" :key="index"/>
      </div>
 
-     <!-- DETTA VILL VI HA:
-     <CollectorsGetSkill v-if="players[playerId]"
-       :labels="labels"
-       :player="players[playerId]"
-       :skillsOnSale="skillsOnSale"
-       :placement="buyPlacement"
-       @getSkill="getSkill($event)"
-       @placeBottle="placeBottle('skill', $event)"/>
-     -->
 
      Auction
      <div class="cardslots">
@@ -49,6 +49,20 @@
 
       <!-- NÅNTING MED WORK HÄR -->
 
+
+
+      {{players}}
+      {{marketValues}}
+      <button v-if="players[playerId]" @click="players[playerId].money += 1">
+        fake more money
+      </button>
+
+
+      <p> /*kan välja att skriva vanlig text här..*/
+        {{ labels.invite }}
+        <input type="text" :value="publicPath + $route.path" @click="selectAll" readonly="readonly">
+      </p>
+
 <!-- TESTAR HÄR ATT FÅ IN GAME BOARD -->
       <div id="collectors-board">
         <div id="left-board">
@@ -60,17 +74,11 @@
         </div>
       </div>
 
+
     </main>
-    {{players}}
-    {{marketValues}}
-    <button v-if="players[playerId]" @click="players[playerId].money += 1">
-      fake more money
-    </button>
+
     <footer>
-        <p> /*kan välja att skriva vanlig text här..*/
-          {{ labels.invite }}
-          <input type="text" :value="publicPath + $route.path" @click="selectAll" readonly="readonly">
-        </p>
+
     </footer>
   </div>
 </template>

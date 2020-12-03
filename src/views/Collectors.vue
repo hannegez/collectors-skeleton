@@ -19,6 +19,15 @@
         </button>
       </div>
 
+       <div class="buttons">
+        <button @click="testRaiseValue">
+          {{ labels.raiseValue }}
+          testRaise
+        </button>
+      </div>
+
+
+
       Skills
      <div class="cardslots">
        <CollectorsCard v-for="(card, index) in skillsOnSale" :card="card" :key="index"/>
@@ -61,6 +70,7 @@
       </div>
 
     </main>
+
     {{players}}
     {{marketValues}}
     <button v-if="players[playerId]" @click="players[playerId].money += 1">
@@ -229,8 +239,20 @@ export default {
          cost: this.marketValues[card.market] + this.chosenPlacementCost
        }
      );
-    }
-  },
+   },
+
+
+//TESTTEST
+   testRaiseValue: function () {
+     console.log("testRaiseValue");
+     this.$store.state.socket.emit('collectorsTestRaiseValue', {
+       roomId: this.$route.params.id,
+       playerId: this.playerId
+     }
+   );
+ }
+
+}
 }
 </script>
 

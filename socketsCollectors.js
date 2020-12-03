@@ -32,6 +32,15 @@ function sockets(io, socket, data) {
       data.drawCard(d.roomId, d.playerId)
     );
   });
+  socket.on('collectorsGainSkill', function(d) {
+    data.gainSkill(d.roomId, d.playerId, d.card, d.cost)
+    io.to(d.roomId).emit('collectorsSkillGained', {
+        playerId: d.playerId,
+        players: data.getPlayers(d.roomId),
+        skillsOnSale: data.getSkillsOnSale(d.roomId)
+      }
+    );
+  });
   socket.on('collectorsBuyCard', function(d) {
     data.buyCard(d.roomId, d.playerId, d.card, d.cost)
     io.to(d.roomId).emit('collectorsCardBought', {

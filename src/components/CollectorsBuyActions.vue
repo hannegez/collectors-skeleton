@@ -1,6 +1,9 @@
 <template>
     <div>
-      <h1>{{ labels.buyCard }}</h1>
+        <p>Denna rubrik vill vi ändra så att det står annat för gain skill:</p>
+      <h2>{{ labels.buyCard }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+
+<!--BUY CARDS -->
       <div class="buy-cards">
         <div v-for="(card, index) in itemsOnSale" :key="index">
           <CollectorsCard
@@ -10,6 +13,7 @@
           {{ cardCost(card) }}
         </div>
       </div>
+
       <div>
         <div class="buttons" v-for="(p, index) in placement" :key="index">
           <button
@@ -23,7 +27,21 @@
           </div>
         </div>
       </div>
+
+      <!-- TESTAR ATT LÄGGA IN FÖR SKILLS
+            <div class="buy-cards">
+              <div v-for="(card, index) in skillsOnSale" :key="index">
+                <CollectorsCard
+                  :card="card"
+                  :availableAction="card.available"
+                  @doAction="gainSkill(card)"/>
+                {{ cardCost(card) }}
+              </div>
+            </div> -->
+
+
     </div>
+
 </template>
 
 <script>
@@ -37,6 +55,7 @@ export default {
     labels: Object,  //specify what kind of object
     player: Object,
     itemsOnSale: Array,
+    skillsOnSale: Array,
     marketValues: Object,
     placement: Array
     //NÅNTING MED WORK?
@@ -71,6 +90,12 @@ export default {
       }
       for (let i = 0; i < this.player.hand.length; i += 1) {                              //ÄVEN KORTEN PÅ HAND HIGHLIGHTAS, SÅ VILL VI EJ HA DET
         this.checkAvailable(this.player.hand[i], cost);
+      }
+    },
+    gainSkill: function (card) {
+      if (card.available) {
+        this.$emit('gainSkill', card)
+        this.highlightAvailableCards()
       }
     },
     buyCard: function (card) {

@@ -36,7 +36,7 @@ export default {
     user-select: none;
     width:90%;
     height:48em;
-    background: url('/images/game-board2000px.png') top left no-repeat;
+    background: url('/images/game_board_redigerat.PNG') top left no-repeat;
     background-size: contain;
     border-radius: 10px;
     margin-left: 1em;

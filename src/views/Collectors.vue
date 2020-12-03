@@ -28,7 +28,7 @@
      <CollectorsGetSkill v-if="players[playerId]"
        :labels="labels"
        :player="players[playerId]"
-       :skillsOnSale="skillsOnSale"
+       :skillsOnSale="skillsOnSale" //kopiera från buy action
        :placement="buyPlacement"
        @getSkill="getSkill($event)"
        @placeBottle="placeBottle('skill', $event)"/>
@@ -46,6 +46,10 @@
      <div class="cardslots" v-if="players[playerId]">
        <CollectorsCard v-for="(card, index) in players[playerId].items" :card="card" :key="index"/>
 </div>
+<div class="popup" style= "position:relative; left:0; top:0em;">
+  <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
+  <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+</div>
       <!-- TESTAR HÄR ATT FÅ IN GAME BOARD -->
           <div id="collectors-board">
             <div id="left-board">
@@ -61,10 +65,7 @@
             </div>
           </div>
 
-            <div class="popup" style= "position:relative; left:0; top:0em;">
-              <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo" >
-              <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-            </div>
+
             <!--allt för popup-->
             <!--<div class="popup" style= "position:relative; left:20%; top:18em;">
               <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo" >
@@ -252,10 +253,15 @@ export default {
         }
       );
     },
-    getInfo: function(){
-        console.log("bajs");
+    getInfo: function(event){
+
         var popup = document.getElementById("myPopup");
+      //  console.log(popup);
         popup.classList.toggle("show");
+        popup.style.left=event.clientX - event.target.getBoundingClientRect().x +"px";
+        popup.style.top=event.clientY - event.target.getBoundingClientRect().y - 70+"px"  ;
+        console.log(popup.style, event.clientX, event.clientY);
+
     }
   },
 }
@@ -321,29 +327,23 @@ export default {
   }
   /*allt för popup*/
 
-  .popup {
-  position: relative;
-  display: inline-block;
+  .popuptext {
+  position: absolute;
+  display: none;
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+
   user-select: none;
-}
 
 
-.popup .popuptext {
-  visibility: hidden;
   width: 160px;
   background-color: pink;
   color: black;
   text-align: center;
   border-radius: 6px;
   padding: 8px 0;
-  position: absolute;
+
   z-index: 1;
-  bottom: 125%;
-  left: 50%;
+
   margin-left: -80px;
 }
 
@@ -361,7 +361,7 @@ export default {
 
 
 .popup .show {
-  visibility: visible;
+  display: block;
 } /*nu fungerar de*/
 
 

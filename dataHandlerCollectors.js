@@ -207,7 +207,7 @@ Data.prototype.gainSkill = function (roomId, playerId, card, cost) {
         break;
       }
     }
-    room.players[playerId]skills.push(...c);
+    room.players[playerId].skills.push(...c);
     room.players[playerId].money -= cost;
 
   }

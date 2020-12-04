@@ -31,6 +31,28 @@
          </button>
        </div>
 
+       <!-- KARRO TESTAR DRA-KORT-HÖG
+            OBS: den första knappen är bortkommenterad pga fett jävla svårt
+            att ha responsiv, blir knas när jag ändrar width på .imgButton.
+            Men den andra lyckas jag inte få text på själva knappen, men det
+            kanske inte gör något, utan vi kanske kan ha den infon vid sidan av -->
+
+      <!--  sätt nr 1 -->
+       <!-- <div id="drawCard" class="buttons">
+         <button class="imgButton" @click="drawCard">
+           <p class="buttonText">{{ labels.draw }}</p>
+           <img class="buttonImg" src='/images/card_backside300px.png'>
+         </button>
+      </div> -->
+
+      <!--  sätt nr 2 -->
+     <div id="drawCard" class="buttons">
+        <p class="buttonText">{{ labels.draw }}</p>
+        <input type="image" @click="drawCard" class="imgButton" alt="Login"
+         src='/images/card_backside300px.png' value="Draw card">    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
+      </div>
+
+
 <!--Test på raise value
        <div class="buttons">
         <button @click="testRaiseValue">
@@ -373,6 +395,36 @@ export default {
   main {
     user-select: none;
   }
+
+  /*hitta hit, karro*/
+  /* ========================= */
+  /* DRAW CARD BUTTON */
+  .imgButton {
+    border: solid thin #787975;
+    margin: 1em;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px #787975;
+    width: 10%;
+  }
+  .imgButton:hover {
+    box-shadow: inset 2px 2px 3px #787975;
+    cursor: pointer;
+  }
+  .imgButton:focus {
+    outline: none;
+  }
+  .buttonText, .buttonImg {
+    margin: 0;
+    padding: 0;
+  }
+  .buttonText {
+    font-size: 2em;
+    font-weight: bold;
+    color: #3c3c3b;
+  }
+
+  /* ========================= */
+
   footer {
     margin-top: 5em auto;
   }

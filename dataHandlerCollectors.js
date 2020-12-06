@@ -182,7 +182,38 @@ Data.prototype.buyCard = function (roomId, playerId, card, cost) {
   }
 }
 
-Data.prototype.placeBottle = function (roomId, playerId, action, cost) {      
+/* moves card from skillsOnSale to a player's hand */
+Data.prototype.gainSkill = function (roomId, playerId, card, cost) {
+  let room = this.rooms[roomId];
+  if (typeof room !== 'undefined') {
+    let c = null;
+    /// check first if the card is among the skills on sale
+    for (let i = 0; i < room.skillsOnSale.length; i += 1) {
+      // since card comes from the client, it is NOT the same object (reference)
+      // so we need to compare properties for determining equality
+      if (room.skillsOnSale[i].x === card.x &&
+          room.skillsOnSale[i].y === card.y) {
+        c = room.skillsOnSale.splice(i,1, {});
+        break;
+      }
+    }
+    // ...then check if it is in the hand. It cannot be in both so it's safe
+    for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
+      // since card comes from the client, it is NOT the same object (reference)
+      // so we need to compare properties for determining equality
+      if (room.players[playerId].hand[i].x === card.x &&
+          room.players[playerId].hand[i].y === card.y) {
+        c = room.players[playerId].hand.splice(i,1);
+        break;
+      }
+    }
+    room.players[playerId].skills.push(...c);
+    room.players[playerId].money -= cost;
+
+  }
+}
+
+Data.prototype.placeBottle = function (roomId, playerId, action, cost) {
   let room = this.rooms[roomId];
   if (typeof room !== 'undefined') {
     let activePlacement = [];

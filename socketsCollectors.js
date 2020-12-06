@@ -18,6 +18,7 @@ function sockets(io, socket, data) {
              players: data.getPlayers(d.roomId),              //Collectors.vue: "this.$store.state.socket.on('collectorsInitialize',
              itemsOnSale: data.getItemsOnSale(d.roomId),      //  function(d) { ...... "
              marketValues: data.getMarketValues(d.roomId),
+             //testMarketValues: data.getMarketValues(d.roomId),
              skillsOnSale: data.getSkillsOnSale(d.roomId),
              auctionCards: data.getAuctionCards(d.roomId),
              //NÅTT MED WORK
@@ -30,6 +31,15 @@ function sockets(io, socket, data) {
     socket.on('collectorsDrawCard', function(d) {
       io.to(d.roomId).emit('collectorsCardDrawn',
       data.drawCard(d.roomId, d.playerId)
+    );
+  });
+  socket.on('collectorsGainSkill', function(d) {
+    data.gainSkill(d.roomId, d.playerId, d.card, d.cost)
+    io.to(d.roomId).emit('collectorsSkillGained', {
+        playerId: d.playerId,
+        players: data.getPlayers(d.roomId),
+        skillsOnSale: data.getSkillsOnSale(d.roomId)
+      }
     );
   });
   socket.on('collectorsBuyCard', function(d) {
@@ -46,6 +56,16 @@ function sockets(io, socket, data) {
     io.to(d.roomId).emit('collectorsBottlePlaced', data.getPlacements(d.roomId)
     );
     });
+
+//testTESTTEST
+  socket.on('collectorsTestRaiseValue', function(d) {
+    data.getMarketValues(d.roomId, d.playerId, d.action, d.cost);
+    io.to(d.roomId).emit('collectorsTestValueRaised', data.getMarketValues(d.roomId)
+    );
+  }
+)
+
+
 }
 
 module.exports = sockets;

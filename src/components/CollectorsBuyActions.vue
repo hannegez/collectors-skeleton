@@ -21,9 +21,12 @@
           <div v-if="p.playerId !== null">
             {{p.playerId}}
           </div>
+
         </div>
       </div>
+      <h1>hej hej</h1>
     </div>
+
 </template>
 
 <script>

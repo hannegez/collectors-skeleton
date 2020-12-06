@@ -17,12 +17,11 @@ export default {
   .possible_Actions {
     color:red;
     user-select: none;
-    width:100px;
-    height:100px;
+    width:250px;
+    height:350px;
     background: url('/images/actions.PNG') no-repeat;
     background-position: -100px 0px;
-    background-size: 400px 100px;
-
+    background-size: contain;
     border-radius: 10px;
 
   }

@@ -19,7 +19,7 @@
         </button>
       </div>
 
-      Skills
+      <h1 >Skills </h1>
      <div class="cardslots">
        <CollectorsCard v-for="(card, index) in skillsOnSale" :card="card" :key="index"/>
      </div>
@@ -34,36 +34,93 @@
        @placeBottle="placeBottle('skill', $event)"/>
      -->
 
-     Auction
+     <h1 >Auction </h1>
      <div class="cardslots">
        <CollectorsCard v-for="(card, index) in auctionCards" :card="card" :key="index"/>
      </div>
-     Hand
+     <h1 > Hand </h1>
      <div class="cardslots" v-if="players[playerId]">
        <CollectorsCard v-for="(card, index) in players[playerId].hand" :card="card" :availableAction="card.available" @doAction="buyCard(card)" :key="index"/>
      </div>
-     Items
+     <h1 > Items </h1>
      <div class="cardslots" v-if="players[playerId]">
        <CollectorsCard v-for="(card, index) in players[playerId].items" :card="card" :key="index"/>
       </div>
-      <div class="popup" style= "position:relative; left:0; top:0em;">
+  <!--  <div class="popup" style= "position:relative; left:0; top:0em;">
         <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
         <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-      </div>
+      </div>-->
       <!-- TESTAR HÄR ATT FÅ IN GAME BOARD -->
-          <div id="collectors-board">
-            <div id="left-board">
+
+      <!--  <div class="popup" style= "position:relative; left:0; top:0em;">
+            <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
+            <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+          </div>-->
+
+
+
+
+        <div class="container">
+              <div class="box pink"> <!-- detta ska på något sätt flyttas till collectors buyaction alla ovan ska delas upp -->
+                  <div class="box arrow">pilar</div>
+                  <div class="box bottlePink">flaskor</div>
+                  <div class="box pinks">enfärg</div>
+                  <div class="box pinkInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
+                  <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+                    </div>
+              </div>
+            <div class="box green">top</div>
+            <div class="box yellow">lside</div>
+            <div class="box blue">
+              <div class="box char">karaktar</div>
+              <div class="box bottleBlue">flaskor</div>
+              <div class="box blues">enfärg</div>
+              <div class="box blueInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
+              <span class="popuptext" id="myPopup"> raise value gör det här och det här</span>
+                </div>
+            </div>
+            <div class="box beige">rside</div>
+
+          </div>
+    <!--        <div class="itemGameBoard">
               <GameBoard/>
             </div>
 
-            <div id="right-board">
+            <div class="itemPlayerBoard">
               <PlayerBoard/>
             </div>
-            <div id="middle-board" class="popup">
+            <div class="itemPossibleActions" >
               <possibleActions/>
-<!-- NÅNTING MED WORK HÄR -->
+            </div>  -->
+            <!-- NÅNTING MED WORK HÄR -->
+        <!--     <div class="itemRosa" >
+              pink
+                <apinkBG/>
             </div>
-          </div>
+            <div class="itemGron" >
+              green
+
+
+            </div>
+            <div class="itemGul" >
+              yellow
+
+            </div>
+            <div class="itemBeige" >
+              beige
+
+            </div>
+            <div class="itemBlue" >
+              blue
+
+            </div>
+
+              pink
+            </div>
+            <div class="bottleOne" >
+                <bottlePayOne/>
+            </div> -->
+      <!--     </div>-->
 
 
             <!--allt för popup-->
@@ -98,9 +155,13 @@
 
 import CollectorsCard from '@/components/CollectorsCard.vue'
 import CollectorsBuyActions from '@/components/CollectorsBuyActions.vue'
-import GameBoard from '@/components/GameBoard.vue'                            /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
-import PlayerBoard from '@/components/PlayerBoard.vue'   /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
-import possibleActions from '@/components/infoBoxes.vue'                                                                                                                        /*HÄÄÄÄÄÄÄÄÄÄR*/
+//import GameBoard from '@/components/GameBoard.vue'                            /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
+//import PlayerBoard from '@/components/PlayerBoard.vue'   /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
+//import possibleActions from '@/components/infoBoxes.vue'
+//import apinkBG from '@/components/pinkBG.vue'
+//import agreenBG from '@/components/greenBG.vue'
+//import abeigeBG from '@/components/beige.vue'
+//import bottlePayOne from '@/components/bottleone.vue'                                                                                                                    /*HÄÄÄÄÄÄÄÄÄÄR*/
 
 /* VUE-objekt för spelet*/
 export default {
@@ -108,9 +169,14 @@ export default {
   components: {
     CollectorsCard,
     CollectorsBuyActions,
-    GameBoard,                                                                 /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
-    PlayerBoard,                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
-    possibleActions                                                                                                                                                               /*HÄÄÄÄÄÄÄÄÄÄR*/
+//    bottlePayOne
+//    GameBoard,                                                                 /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
+//    PlayerBoard,                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
+//    possibleActions,
+//    apinkBG,
+//    agreenBG,
+//    abeigeBG,
+//    ayellowBG                                                                                                                                              /*HÄÄÄÄÄÄÄÄÄÄR*/
   },
   data: function () {
     return {
@@ -276,19 +342,160 @@ export default {
 
 
 <style scoped>
-  #collectors-board {
-    display: grid;
-    grid-gap: 0;
-    grid-template-columns: 1fr 1fr;
+/*nytt försök med grids*/
+
+.container {
+  display: grid;
+  height: 500px;
+  width: 1000px;
+  grid-template-columns: 1fr 1fr 1fr ;
+  grid-template-rows: 1fr 1fr 1fr 1fr ;
+  grid-template-areas:
+    "topp topp topp"
+    "lside mside rside "
+    "lside mside rside "
+    "bottoms bottoms bottoms" ;
+  }
+.green {
+  grid-area: lside;
+  background: #dfeccc;
+}
+.yellow {
+  grid-area: mside;
+  background: #f5f2cc;
+}
+.beige{
+  grid-area: rside;
+  background: #f5f1e2;
+}
+
+/*påbörjar den rosa delen*/
+.pink{
+  grid-area: topp;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr ;
+  grid-template-areas:
+    " a a a a a c"
+    " b b b b b g ";
+}
+.arrow{
+  grid-area: a;
+  background: url('/images/pilrosa.PNG' ) ;
+  min-width: 100%;
+  min-height: 100%;
+}
+.bottlePink{
+  grid-area: b;
+  background: url('/images/rosaflaska.PNG' ) ;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: contain;
+
+}
+.pinks{
+  grid-area: c;
+  background: url('/images/rosa.PNG' ) ;
+  object-fit: contain;
+}
+.pinkInfo{
+  grid-area: g;
+  background: url('/images/buyItem.PNG' ) ;
+}
+
+/*påbörjar den blåa delen*/
+.blue{
+  grid-area: bottoms;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr ;
+  grid-template-areas:
+    " d d d d d f"
+    " e e e e e h ";
+}
+
+.char{
+  grid-area: e;
+  background: url('/images/pilbla.PNG' ) ;
+  min-width: 100%;
+  min-height: 100%;
+}
+.bottleBlue{
+  grid-area: d;
+
+  background: url('/images/blaflaska.PNG' ) ;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: contain;
+
+}
+.blues{
+  grid-area: h;
+  background: url('/images/bla.PNG' ) ;
+}
+
+.blueInfo{
+  grid-area: f;
+  background: url('/images/raiseValue.PNG' ) ;
+}
+
+
+
+
+
+
+/*
+    /display: grid;
+    grid-template-columns: repeat(4, 100px);
+
+    grid-template-rows: repeat(4, 100px);
 
     grid-template-areas:
-      "game-board middle-boards player-boards";
+    "ro ro ro ro "
+    "gr gu be be "
+    "gr gu be be "
+    "gr bl bl bl  "
+    ;
+
+
+
 
   }
 
-  #left-board { grid-area: game-board; }
-  #right-board { grid-area: player-boards; }
-  #middle-board {grid-area: middle-boards }
+
+  .itemRosa {
+  grid-area: ro;
+  background: #f8dcce;
+
+}
+
+.itemGron {
+  grid-area: gr;
+  background: #dfeccc;
+}
+
+.itemGul{
+  grid-area: gu;
+  background: #f5f2cc;
+}
+
+.itemBeige{
+  grid-area: be;
+  background: #f5f1e2;
+}
+.itemBlue{
+  grid-area: bl;
+  background: #cfdcf2;
+}
+.bottleOne{
+  grid-area: b1;
+}*/
+
+
+
+h1{
+  color: black;
+}
 
 
   header {
@@ -348,7 +555,7 @@ export default {
 }
 
 
-.popup .popuptext::after {
+.box .popuptext::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -360,7 +567,7 @@ export default {
 }
 
 
-.popup .show {
+.box .show {
   display: block;
 } /*nu fungerar de*/
 

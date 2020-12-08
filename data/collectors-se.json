@@ -4,5 +4,7 @@
 	"endTurn": "Avsluta runda",
 	"buyCard": "Köp ett kort",
 	"gainSkill": "Skaffa en färdighet",
-	"raiseValue": "Höj värdet"
+	"raiseValue": "Höj värdet",
+	"startAuction": "Starta en auktion",
+	"auctionSpot": "Kort öppet för budgivning"
 }

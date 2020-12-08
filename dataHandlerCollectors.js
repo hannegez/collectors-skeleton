@@ -207,7 +207,6 @@ Data.prototype.startAuction = function (roomId, playerId, card, cost) {
     }
     //room.players[playerId].items.push(...c);
     room.auctionSpot.push(...c);
-    console.log("nu är vi förbi");
     room.players[playerId].money -= cost;
 
   }

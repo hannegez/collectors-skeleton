@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h2>{{ labels.buyCard }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+      <h2>{{ labels.startAuction }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
 
 <!--BUY CARDS -->
       <div class="buy-cards">
@@ -28,7 +28,7 @@
         </div>
       </div>
 
-      <h2> AuctionSpot </h2>
+      <h2>{{ labels.auctionSpot }}</h2> <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
       <div class="buy-cards">
         <div v-for="(card, index) in auctionSpot" :key="index">
           <CollectorsCard

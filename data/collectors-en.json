@@ -4,5 +4,7 @@
 	"endTurn": "End turn",
 	"buyCard": "Buy a card",
 	"gainSkill": "Gain a skill",
-	"raiseValue": "Raise value"
+	"raiseValue": "Raise value",
+	"startAuction": "Start auction",
+	"auctionSpot": "Card open for bidding"
 }

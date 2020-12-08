@@ -11,8 +11,14 @@
         <input type="radio" id="fourPlayers" name="choosePlayers" value="4">
         <label for="fourPlayers">4</label>
       </p>
+      <p> Choose language:
+        <input type="radio" id="english" name="chooseLanguage" value="en" checked>
+        <label for="english">English</label>
+        <input type="radio" id="svenska" name="chooseLanguage" value="se">
+        <label for="svenska">Svenska</label>
+      </p>
 
-        <button v-on:click="setupCollectors(getPlayers(), 'en')">Play game</button>
+        <button v-on:click="setupCollectors(getPlayers(), getLanguage())">Play game</button>
         <button v-on:click="getPlayers()">Tutorial mode</button>  <!-- Här händer nått annat än @click="setupCollectors(i+1, 'en')", kanske en setupTutorial?? -->
 
 <!-- DETTA KAN VI NU TA BORT PGA ERSATT MED PLAY GAME-KNAPP, OCH BEHÖVER VI ENS EN SVENSK VERSION.... ?
@@ -44,11 +50,16 @@ export default {
   },
   methods: {
     getPlayers: function() {
-      const numberOfPlayers = document.querySelector('input[type=radio]:checked').value;
+      const numberOfPlayers = document.querySelector('input[name=choosePlayers]:checked').value;
       return numberOfPlayers;
     },
+    getLanguage: function() {
+      const lang = document.querySelector('input[name=chooseLanguage]:checked').value;
+      console.log(typeof(lang));
+      return lang;
+    },
     setupCollectors: function (playerCount, lang="en") {
-      console.log(playerCount);
+      console.log("Setting up Collectors with", playerCount, "players in", lang);
       this.$store.commit('SETUP_GAME', {roomId: this.$store.state.roomId,
         playerCount: playerCount,
         lang: lang });

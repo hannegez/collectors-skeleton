@@ -10,7 +10,6 @@
       fake more money
       </button>
 
-      <!--  sätt nr 2 -->
      <div id="drawCard" class="buttons">
         <p class="buttonText">{{ labels.draw }}</p>
         <input type="image" @click="drawCard" class="imgButton" alt="Login"
@@ -298,19 +297,23 @@ export default {
   methods: {
     chooseAction(action, card){
       console.log("action utskrift", action);
-      console.log("choose action :D", card);
-      this.$store.state.socket.emit('CollectorsStartAuction', {
-          roomId: this.$route.params.id,
-          playerId: this.playerId,
-          card: card,
-          cost: this.marketValues[card.market] + this.chosenPlacementCost     //marknadsvärde (raise value) + placeringskostnad
-        }
-      );
+      if (action === "buy") {
+        this.buyCard(card);
+      }
+      else if (action === "skill") {
+        this.gainSkill(card);
+      }
+      else if (action === "auction") {
+        this.startAuction(card);
+      }
+      else if (action === "market") {
+        //raiseValue(card);   DENNA ÄR INTE SKAPAD ÄN
+      }
+      /* HÄR LÄGGER VI SEN TILL workPlacement:
+      else if (action === "work") {
+        work(card);
+      }   */
     },
-
-
-
-
     selectAll: function (n) {
       n.target.select();
     },
@@ -436,12 +439,12 @@ export default {
   .imgButton {
     border: solid thin #787975;
     margin: 1em;
-    border-radius: 10px;
-    box-shadow: 2px 2px 3px #787975;
+    border-radius: 0.3em;
+    box-shadow: 0.2em 0.2em 0.3em #787975;
     width: 10%;
   }
   .imgButton:hover {
-    box-shadow: inset 2px 2px 3px #787975;
+    box-shadow: inset 0.2em 0.2em 0.3em #787975;
     cursor: pointer;
   }
   .imgButton:focus {

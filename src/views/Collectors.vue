@@ -419,6 +419,7 @@ export default {
 
 <style scoped>
 /*Här ligger gridsen, uppdelade genom att placera de små gridsen i den stora. De små ska flyttas till respektive komponent. /Dani*/
+#wrapper { color: #000; }
 
 .container {
   display: grid;

@@ -77,6 +77,7 @@
          </div>
 
     <h1>Skills</h1>
+    <!-- SKA TA BORT MARKET VALUE HÄRIFRÅN-->
     <CollectorsGainSkill v-if="players[playerId]"
       :labels="labels"
       :player="players[playerId]"

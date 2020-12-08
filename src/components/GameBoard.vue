@@ -34,12 +34,13 @@ export default {
   #game-board {
     color:black;
     user-select: none;
-    width:90%;
-    height:48em;
-    background: url('/images/game_board_redigerat.PNG') top left no-repeat;
-    background-size: contain;
+/*   width:90%;*/
+    height:500px;
+
+    background: url('/images/game_board_redigerat.PNG') ;
+  /*  background-size: contain; */
     border-radius: 10px;
-    margin-left: 1em;
+/*    margin-left: 1em;*/
   }
 
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="wrapper">
     <main>
       {{buyPlacement}} {{chosenPlacementCost}}
       <!-- OBS : och @ är förkortning för v-bind: och v-on:
@@ -284,6 +284,10 @@ export default {
     grid-template-areas:
       "game-board middle-boards player-boards";
 
+  }
+
+  #wrapper {
+    color: black;
   }
 
   #left-board { grid-area: game-board; }

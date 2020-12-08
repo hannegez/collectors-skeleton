@@ -1,6 +1,31 @@
 <template>
   <div id="wrapper">
     <main>
+      <h1>PLAYER INFO</h1>
+       <p>Players: {{players}}</p>
+      <p>marketValues: {{marketValues}}</p>
+
+      <h2>FAKE MONEY</h2>
+      <button v-if="players[playerId]" @click="players[playerId].money += 1">
+      fake more money
+      </button>
+
+      <!--  sätt nr 2 -->
+     <div id="drawCard" class="buttons">
+        <p class="buttonText">{{ labels.draw }}</p>
+        <input type="image" @click="drawCard" class="imgButton" alt="Login"
+         src='/images/card_backside300px.png' value="Draw card">    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
+      </div>
+<!--
+      <h2>DRAW CARD</h2>
+      <div class="buttons">
+        <button @click="drawCard">        NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY
+          {{ labels.draw }}
+        </button>
+      </div>
+ -->
+
+
       <!-- OBS : och @ är förkortning för v-bind: och v-on: -->
       <h1>Items</h1>
      <CollectorsBuyActions v-if="players[playerId]"
@@ -15,43 +40,6 @@
        <p>buyPlacement: {{buyPlacement}}</p>
         <p>chosenPlacementCost: {{chosenPlacementCost}}</p>
 
-       <h1>PLAYER INFO</h1>
-        <p>Players: {{players}}</p>
-       <p>marketValues: {{marketValues}}</p>
-
-       <h2>FAKE MONEY</h2>
-       <button v-if="players[playerId]" @click="players[playerId].money += 1">
-       fake more money
-       </button>
-
-       <h2>DRAW CARD</h2>
-       <div class="buttons">
-         <button @click="drawCard">       <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
-           {{ labels.draw }}
-         </button>
-       </div>
-
-       <!-- KARRO TESTAR DRA-KORT-HÖG
-            OBS: den första knappen är bortkommenterad pga fett jävla svårt
-            att ha responsiv, blir knas när jag ändrar width på .imgButton.
-            Men den andra lyckas jag inte få text på själva knappen, men det
-            kanske inte gör något, utan vi kanske kan ha den infon vid sidan av -->
-
-      <!--  sätt nr 1 -->
-       <!-- <div id="drawCard" class="buttons">
-         <button class="imgButton" @click="drawCard">
-           <p class="buttonText">{{ labels.draw }}</p>
-           <img class="buttonImg" src='/images/card_backside300px.png'>
-         </button>
-      </div> -->
-
-      <!--  sätt nr 2 -->
-     <div id="drawCard" class="buttons">
-        <p class="buttonText">{{ labels.draw }}</p>
-        <input type="image" @click="drawCard" class="imgButton" alt="Login"
-         src='/images/card_backside300px.png' value="Draw card">    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
-      </div>
-
 
 <!--Test på raise value
        <div class="buttons">
@@ -62,8 +50,10 @@
       </div> -->
 
        <h2>Your hand</h2>
+
+       <!-- Göra en funktion som hanterar actions -->
        <div class="cardslots" v-if="players[playerId]">
-         <CollectorsCard v-for="(card, index) in players[playerId].hand" :card="card" :availableAction="card.available" @doAction="buyCard(card)" :key="index"/>
+         <CollectorsCard v-for="(card, index) in players[playerId].hand" :card="card" :availableAction="card.available" @doAction="chooseAction(chosenAction, card)" :key="index"/>
        </div>
 
       <h2> Your items </h2>
@@ -77,28 +67,27 @@
          </div>
 
     <h1>Skills</h1>
-    <!-- SKA TA BORT MARKET VALUE HÄRIFRÅN-->
     <CollectorsGainSkill v-if="players[playerId]"
       :labels="labels"
       :player="players[playerId]"
       :skillsOnSale="skillsOnSale"
-      :marketValues="marketValues"
       :placement="skillPlacement"
       @gainSkill="gainSkill($event)"
       @placeBottle="placeBottle('skill', $event)"/>
 
-      DETTA KAN VI TA BORT SEN NÄR COLLECTORSGAINSKILL FUNKAR
-        <h2>Skills on sale</h2>
-     <!-- <div class="cardslots">
-       <CollectorsCard v-for="(card, index) in skillsOnSale" :card="card" :key="index"/>
-     </div> -->
-
-
+<!-- TESTAR ATT LÄGGA TILL AUCTIONSPOT-->
      <h1>Auction</h1>
-     <!--<CollectorsStartAuction/>-->
-     <!-- <div class="cardslots">
-       <CollectorsCard v-for="(card, index) in auctionCards" :card="card" :key="index"/>
-     </div> -->
+     <CollectorsStartAuction v-if="players[playerId]"
+       :labels="labels"
+       :player="players[playerId]"
+       :auctionCards="auctionCards"
+       :auctionSpot = "auctionSpot"
+       :marketValues="marketValues"
+       :placement="auctionPlacement"
+       @startAuction="startAuction($event)"
+       @placeBottle="placeBottle('auction', $event)"/>
+
+
 
       <h1>Work</h1>
       <!-- <CollectorsWork/> -->
@@ -155,7 +144,7 @@ import CollectorsCard from '@/components/CollectorsCard.vue'
 import CollectorsBuyActions from '@/components/CollectorsBuyActions.vue'
 import CollectorsGainSkill from '@/components/CollectorsGainSkill.vue'
 //import CollectorsRaiseValue from '@/components/CollectorsRaiseValue.vue'
-//import CollectorsStartAuction from '@/components/CollectorsStartAuction.vue'
+import CollectorsStartAuction from '@/components/CollectorsStartAuction.vue'
 //import CollectorsWork from '@/components/CollectorsWork.vue'
 import GameBoard from '@/components/GameBoard.vue'                            /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
 import PlayerBoard from '@/components/PlayerBoard.vue'   /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
@@ -169,7 +158,7 @@ export default {
     CollectorsBuyActions,
     CollectorsGainSkill,
 //    CollectorsRaiseValue,
-  //  CollectorsStartAuction,
+    CollectorsStartAuction,
     //CollectorsWork,
     GameBoard,                                                                 /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
     PlayerBoard,                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
@@ -201,6 +190,7 @@ export default {
       //workPlacement: [],
 
       chosenPlacementCost: null,
+      chosenAction: null,           //MAJA LA TILL DENNA
       marketValues: { fastaval: 0,
                      movie: 0,
                      technology: 0,
@@ -209,6 +199,7 @@ export default {
       itemsOnSale: [],
       skillsOnSale: [],
       auctionCards: [],
+      auctionSpot: [], // TEST??
 
       //NÅTT LIKNANDE SOM OVAN FAST FÖR WORK?
 
@@ -250,6 +241,7 @@ export default {
        this.marketValues = d.marketValues;
        this.skillsOnSale = d.skillsOnSale;
        this.auctionCards = d.auctionCards;
+       this.auctionSpot = d.auctionSpot; // TEST????
        //NÅTT SOM OVAN FAST MED WORK
        this.buyPlacement = d.placements.buyPlacement;
        this.skillPlacement = d.placements.skillPlacement;
@@ -285,6 +277,15 @@ export default {
       }.bind(this)
     );
 
+    this.$store.state.socket.on('collectorsAuctionStarted',
+      function(d) {
+        console.log(d.playerId, "started an auction");
+        this.players = d.players;
+        this.auctionCards = d.auctionCards;
+        this.auctionSpot = d.auctionSpot; //TEST ???
+      }.bind(this)
+    );
+
     this.$store.state.socket.on('collectorsSkillGained',
       function(d) {
         console.log(d.playerId, "gained a skill");
@@ -295,11 +296,27 @@ export default {
   },        //END OF CREATED
 
   methods: {
+    chooseAction(action, card){
+      console.log("action utskrift", action);
+      console.log("choose action :D", card);
+      this.$store.state.socket.emit('CollectorsStartAuction', {
+          roomId: this.$route.params.id,
+          playerId: this.playerId,
+          card: card,
+          cost: this.marketValues[card.market] + this.chosenPlacementCost     //marknadsvärde (raise value) + placeringskostnad
+        }
+      );
+    },
+
+
+
+
     selectAll: function (n) {
       n.target.select();
     },
     placeBottle: function (action, cost) {
       this.chosenPlacementCost = cost;
+      this.chosenAction = action;
       this.$store.state.socket.emit('collectorsPlaceBottle', {
           roomId: this.$route.params.id,
           playerId: this.playerId,
@@ -325,6 +342,18 @@ export default {
         }
       );
     },
+
+    startAuction: function (card) {
+      console.log("startAuction", card);
+      this.$store.state.socket.emit('CollectorsStartAuction', {
+          roomId: this.$route.params.id,
+          playerId: this.playerId,
+          card: card,
+          cost: this.chosenPlacementCost
+        }
+      );
+    },
+
     buyCard: function (card) {
       console.log("buyCard", card);
       this.$store.state.socket.emit('collectorsBuyCard', {

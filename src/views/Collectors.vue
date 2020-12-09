@@ -90,7 +90,16 @@
 
 
       <h1>Work</h1>
-      <!-- <CollectorsWork/> -->
+      <CollectorsStartWork v-if="players[playerId]"
+        :labels="labels"
+        :player="players[playerId]"
+
+        :marketValues="marketValues"
+        :placement="workPlacement"
+        @startWork="startWork($event)"
+        @placeBottle="placeBottle('work', $event)"/> <!--kanske änsdras-->
+
+
 
       <h1>Raise Value</h1>
       <!-- <CollectorsRaiseValue/> -->
@@ -145,10 +154,9 @@ import CollectorsBuyActions from '@/components/CollectorsBuyActions.vue'
 import CollectorsGainSkill from '@/components/CollectorsGainSkill.vue'
 //import CollectorsRaiseValue from '@/components/CollectorsRaiseValue.vue'
 import CollectorsStartAuction from '@/components/CollectorsStartAuction.vue'
-//import CollectorsWork from '@/components/CollectorsWork.vue'
-import GameBoard from '@/components/GameBoard.vue'                            /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
-import PlayerBoard from '@/components/PlayerBoard.vue'   /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
-//import possibleActions from '@/components/infoBoxes.vue'                                                                                                                        /*HÄÄÄÄÄÄÄÄÄÄR*/
+import CollectorsStartWork from '@/components/CollectorsWork.vue'
+
+//import PlayerBoard from '@/components/PlayerBoard.vue'   /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
 
 /* VUE-objekt för spelet*/
 export default {
@@ -159,10 +167,8 @@ export default {
     CollectorsGainSkill,
 //    CollectorsRaiseValue,
     CollectorsStartAuction,
-    //CollectorsWork,
-    GameBoard,                                                                 /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
-    PlayerBoard,                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
-    //possibleActions                                                                                                                                                               /*HÄÄÄÄÄÄÄÄÄÄR*/
+    CollectorsStartWork,
+  //  PlayerBoard,                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/                                                                                                                                                           /*HÄÄÄÄÄÄÄÄÄÄR*/
   },
   data: function () {
     return {
@@ -185,6 +191,7 @@ export default {
       skillPlacement: [],
       auctionPlacement: [],
       marketPlacement: [],
+      workPlacement: [],
 
       //HÄR LÄGGER VI TILL workPlacement
       //workPlacement: [],
@@ -247,7 +254,7 @@ export default {
        this.skillPlacement = d.placements.skillPlacement;
        this.marketPlacement = d.placements.marketPlacement;
        this.auctionPlacement = d.placements.auctionPlacement;
-       //this.workPlacement = d.placements.workPlacement;
+       this.workPlacement = d.placements.workPlacement;
      }.bind(this));
 
    this.$store.state.socket.on('collectorsBottlePlaced',
@@ -256,7 +263,7 @@ export default {
        this.skillPlacement = d.skillPlacement;
        this.marketPlacement = d.marketPlacement;
        this.auctionPlacement = d.auctionPlacement;
-       //this.workPlacement = d.workPlacement;
+       this.workPlacement = d.workPlacement;
       }.bind(this));
 
    this.$store.state.socket.on('collectorsPointsUpdated', (d) => this.points = d );
@@ -285,6 +292,14 @@ export default {
         this.auctionSpot = d.auctionSpot; //TEST ???
       }.bind(this)
     );
+    this.$store.state.socket.on('collectorsWorkStarted',
+      function(d) {
+        console.log(d.playerId, "started Work");
+        this.players = d.players;
+        this.auctionCards = d.auctionCards;
+        this.auctionSpot = d.auctionSpot; //TEST ???
+      }.bind(this)
+    );
 
     this.$store.state.socket.on('collectorsSkillGained',
       function(d) {
@@ -298,14 +313,23 @@ export default {
   methods: {
     chooseAction(action, card){
       console.log("action utskrift", action);
-      console.log("choose action :D", card);
-      this.$store.state.socket.emit('CollectorsStartAuction', {
-          roomId: this.$route.params.id,
-          playerId: this.playerId,
-          card: card,
-          cost: this.marketValues[card.market] + this.chosenPlacementCost     //marknadsvärde (raise value) + placeringskostnad
-        }
-      );
+      if (action === "buy") {
+        this.buyCard(card);
+      }
+      else if (action === "skill") {
+        this.gainSkill(card);
+      }
+      else if (action === "auction") {
+        this.startAuction(card);
+      }
+      else if (action === "market") {
+        //raiseValue(card);   DENNA ÄR INTE SKAPAD ÄN
+      }
+      /* HÄR LÄGGER VI SEN TILL workPlacement: */
+      else if (action === "work") {
+        this.startWork(card); /*måste ändras*/
+      //  work(card);
+      }
     },
 
 
@@ -315,6 +339,7 @@ export default {
       n.target.select();
     },
     placeBottle: function (action, cost) {
+
       this.chosenPlacementCost = cost;
       this.chosenAction = action;
       this.$store.state.socket.emit('collectorsPlaceBottle', {
@@ -346,6 +371,16 @@ export default {
     startAuction: function (card) {
       console.log("startAuction", card);
       this.$store.state.socket.emit('CollectorsStartAuction', {
+          roomId: this.$route.params.id,
+          playerId: this.playerId,
+          card: card,
+          cost: this.chosenPlacementCost
+        }
+      );
+    },
+    startWork: function (card) {
+      console.log("startWork", card);
+      this.$store.state.socket.emit('CollectorsStartWork', {
           roomId: this.$route.params.id,
           playerId: this.playerId,
           card: card,

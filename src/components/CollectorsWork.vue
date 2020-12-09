@@ -1,5 +1,6 @@
 <template>
     <div>
+<<<<<<< HEAD
         <p>Här börjar vi med Work</p>
       <h2>{{ labels.gainSkill }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
 
@@ -12,6 +13,21 @@
             @doAction="gainSkill(card)"/>
         </div>
       </div>
+=======
+      <h2>{{ labels.startAuction }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+
+<!--BUY CARDS -->
+<!--       <div class="buy-cards">
+        <div v-for="(card, index) in auctionCards" :key="index">
+          <CollectorsCard
+            :card="card"
+            :availableAction="card.available"
+            @doAction="startWork(card)"/>
+
+        </div>
+      </div> -->
+
+>>>>>>> c3fac5beb5a30e54f6f5fe799e89d1a2be586ea2
 
       <div>
         <div class="buttons" v-for="(p, index) in placement" :key="index">
@@ -26,17 +42,26 @@
           </div>
         </div>
       </div>
+<!--börjar här -->
+      <h2>{{ labels.workSpot }}</h2> <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
+<!--      <div class="buy-cards">
+        <div v-for="(card, index) in auctionSpot" :key="index">
+          <CollectorsCard
+            :card="card"
+            :availableAction="card.available"
+            @doAction="startWork(card)"/>
+
+        </div>
+      </div>  -->
 
     </div>
 
 </template>
 
 <script>
-import CollectorsCard from '@/components/CollectorsCard.vue'
 export default {
-  name: 'CollectorsGainSkill',
+  name: 'CollectorsStartWork',
   components: {
-    CollectorsCard
   },
   props: {            //HÄR ÄR ALLA v-binds FRÅN ELEMENTET I Collectors.vue
     labels: Object,  //specify what kind of object
@@ -53,31 +78,24 @@ export default {
       return (this.player.money < minCost);
     },
 
-
     placeBottle: function (p) {
       this.$emit('placeBottle', p.cost);
-      this.highlightAvailableCards(p.cost);
     },
     setAvailable: function (card) {
-        this.$set(card, "available", true);
+      this.$set(card, "available", true);
     },
-    highlightAvailableCards: function () {
-      for (let i = 0; i < this.skillsOnSale.length; i += 1) {
-        this.setAvailable(this.skillsOnSale[i]);
-      }
-    },
-    gainSkill: function (card) {
+    startWork: function (card) {
       if (card.available) {
-        this.$emit('gainSkill', card)
-        this.highlightAvailableCards()
+        this.$emit('startWork', card);
+
       }
-    },
+    }
   }
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .gain-skill, .buttons {
+  .buy-cards, .buttons {
     display: grid;
     grid-template-columns: repeat(auto-fill, 130px);
   }

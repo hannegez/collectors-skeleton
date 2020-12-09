@@ -50,13 +50,11 @@
       </div> -->
 
        <h2>Your hand</h2>
-
-       <!-- Göra en funktion som hanterar actions -->
        <div class="cardslots" v-if="players[playerId]">
          <CollectorsCard v-for="(card, index) in players[playerId].hand" :card="card" :availableAction="card.available" @doAction="chooseAction(chosenAction, card)" :key="index"/>
        </div>
 
-      <h2> Your items </h2>
+      <h2>Your items </h2>
        <div class="cardslots" v-if="players[playerId]">
          <CollectorsCard v-for="(card, index) in players[playerId].items" :card="card" :key="index"/>
         </div>
@@ -75,7 +73,6 @@
       @gainSkill="gainSkill($event)"
       @placeBottle="placeBottle('skill', $event)"/>
 
-<!-- TESTAR ATT LÄGGA TILL AUCTIONSPOT-->
      <h1>Auction</h1>
      <CollectorsStartAuction v-if="players[playerId]"
        :labels="labels"
@@ -102,7 +99,16 @@
 
 
       <h1>Raise Value</h1>
-      <!-- <CollectorsRaiseValue/> -->
+      <CollectorsRaiseValue v-if="players[playerId]"
+        :labels="labels"
+        :player="players[playerId]"
+        :itemsOnSale="itemsOnSale"
+        :market="market"
+        :marketValues="marketValues"
+        :raiseValueOnSale="raiseValueOnSale"
+        :placement="marketPlacement"
+        @raiseValue="raiseValue($event)"
+        @placeBottle="placeBottle('market', $event)"/>
 
 
 
@@ -152,7 +158,7 @@
 import CollectorsCard from '@/components/CollectorsCard.vue'
 import CollectorsBuyActions from '@/components/CollectorsBuyActions.vue'
 import CollectorsGainSkill from '@/components/CollectorsGainSkill.vue'
-//import CollectorsRaiseValue from '@/components/CollectorsRaiseValue.vue'
+import CollectorsRaiseValue from '@/components/CollectorsRaiseValue.vue'
 import CollectorsStartAuction from '@/components/CollectorsStartAuction.vue'
 import CollectorsStartWork from '@/components/CollectorsWork.vue'
 
@@ -165,7 +171,7 @@ export default {
     CollectorsCard,
     CollectorsBuyActions,
     CollectorsGainSkill,
-//    CollectorsRaiseValue,
+    CollectorsRaiseValue,
     CollectorsStartAuction,
     CollectorsStartWork,
   //  PlayerBoard,                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/                                                                                                                                                           /*HÄÄÄÄÄÄÄÄÄÄR*/
@@ -203,6 +209,8 @@ export default {
                      technology: 0,
                      figures: 0,
                      music: 0 },
+      raiseValueOnSale: [],
+      market: [],
       itemsOnSale: [],
       skillsOnSale: [],
       auctionCards: [],
@@ -245,10 +253,12 @@ export default {
         this.labels = d.labels;
         this.players = d.players;
        this.itemsOnSale = d.itemsOnSale;
+       this.raiseValueOnSale = d.raiseValueOnSale;
        this.marketValues = d.marketValues;
+       this.market = d.market;
        this.skillsOnSale = d.skillsOnSale;
        this.auctionCards = d.auctionCards;
-       this.auctionSpot = d.auctionSpot; // TEST????
+       this.auctionSpot = d.auctionSpot;
        //NÅTT SOM OVAN FAST MED WORK
        this.buyPlacement = d.placements.buyPlacement;
        this.skillPlacement = d.placements.skillPlacement;
@@ -281,6 +291,15 @@ export default {
         console.log(d.playerId, "bought a card");
         this.players = d.players;
         this.itemsOnSale = d.itemsOnSale;
+      }.bind(this)
+    );
+
+    this.$store.state.socket.on('collectorsValueRaised',
+      function(d) {
+        console.log(d.playerId, "raised a value");
+        this.players = d.players;
+        this.raiseValueOnSale = d.raiseValueOnSale;
+        this.market = d.market;
       }.bind(this)
     );
 
@@ -323,7 +342,7 @@ export default {
         this.startAuction(card);
       }
       else if (action === "market") {
-        //raiseValue(card);   DENNA ÄR INTE SKAPAD ÄN
+        this.raiseValue(card);
       }
       /* HÄR LÄGGER VI SEN TILL workPlacement: */
       else if (action === "work") {
@@ -399,6 +418,19 @@ export default {
         }
       );
     },
+
+    raiseValue: function (card) {
+      console.log("raiseValue", card);
+      this.$store.state.socket.emit('collectorsRaiseValue', {
+          roomId: this.$route.params.id,
+          playerId: this.playerId,
+          card: card,
+          cost: this.chosenPlacementCost     //placeringskostnad
+        }
+      );
+    },
+
+    /*funktion för att ge popup när man trycker på informationen i gameboardet //dani*/
     getInfo: function(event){
 
         var popup = document.getElementById("myPopup");

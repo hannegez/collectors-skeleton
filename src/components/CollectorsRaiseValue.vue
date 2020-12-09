@@ -88,6 +88,10 @@ export default {
     highlightAvailableCards: function (cost=100) {
       /* för alla kort i raiseValueOnSale ska motsvarade kort i skillsOnSale,
       auctionCards och player.hand highlightas */
+
+      //GÅ IGENOM skillsOnSale AUCTIONCARDS OCH PLAYER HAnd och sätt available på de som ska vara det
+      //NÄSTA STEG: ta bort raiseValueOnSale
+
       for (let i = 0; i < this.raiseValueOnSale.length; i += 1) {
         this.checkAvailable(this.raiseValueOnSale[i], cost);
       }

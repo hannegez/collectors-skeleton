@@ -63,7 +63,8 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
   room.itemsOnSale = room.deck.splice(0, 5);
   room.skillsOnSale = room.deck.splice(0, 5);
   room.auctionCards = room.deck.splice(0, 4);
-  room.auctionSpot = []; //TEST???
+  room.raiseValueOnSale = [room.deck.splice(0, 4)]; //SKA ÄNDRAS
+  room.auctionSpot = [];
   room.market = [];
   room.buyPlacement = [ {cost:1, playerId: null},           //HÄR ÄNDRAR VI OM VI VILL ÄNDRA VAD SAKER KOSTAR AV NÅGON ANLEDNING
                         {cost:1, playerId: null},
@@ -180,6 +181,36 @@ Data.prototype.buyCard = function (roomId, playerId, card, cost) {
     room.players[playerId].items.push(...c);
     room.players[playerId].money -= cost;
 
+  }
+}
+
+/* moves card from raiseValueOnSale to market */
+Data.prototype.raiseValue = function (roomId, playerId, card, cost) {
+  let room = this.rooms[roomId];
+  if (typeof room !== 'undefined') {
+    let c = null;
+    /// check first if the card is among the raise value on sale
+    for (let i = 0; i < room.raiseValueOnSale.length; i += 1) {
+      // since card comes from the client, it is NOT the same object (reference)
+      // so we need to compare properties for determining equality
+      if (room.raiseValueOnSale[i].x === card.x &&
+          room.raiseValueOnSale[i].y === card.y) {
+        c = room.raiseValueOnSale.splice(i,1, {});
+        break;
+      }
+    }
+    // ...then check if it is in the hand. It cannot be in both so it's safe
+    for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
+      // since card comes from the client, it is NOT the same object (reference)
+      // so we need to compare properties for determining equality
+      if (room.players[playerId].hand[i].x === card.x &&
+          room.players[playerId].hand[i].y === card.y) {
+        c = room.players[playerId].hand.splice(i,1);
+        break;
+      }
+    }
+    room.market.push(...c);
+    room.players[playerId].money -= cost;
   }
 }
 
@@ -308,6 +339,14 @@ Data.prototype.getItemsOnSale = function(roomId){
   else return [];
 }
 
+Data.prototype.getRaiseValueOnSale = function(roomId){
+  let room = this.rooms[roomId];
+  if (typeof room !== 'undefined') {
+    return room.raiseValueOnSale;
+  }
+  else return [];
+}
+
 Data.prototype.getMarketValues = function(roomId){
   let room = this.rooms[roomId];
   if (typeof room !== 'undefined') {
@@ -319,6 +358,14 @@ Data.prototype.getMarketValues = function(roomId){
       technology: 0,
       figures: 0,
       music: 0 });
+  }
+  else return [];
+}
+
+Data.prototype.getMarket = function(roomId){
+  let room = this.rooms[roomId];
+  if (typeof room !== 'undefined') {
+    return room.market;
   }
   else return [];
 }
@@ -339,7 +386,6 @@ Data.prototype.getAuctionCards = function(roomId){
   else return [];
 }
 
-// TEST FÖR AUCTIONSPOT
 Data.prototype.getAuctionSpot = function(roomId){
   let room = this.rooms[roomId];
   if (typeof room !== 'undefined') {

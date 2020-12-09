@@ -55,12 +55,12 @@ function sockets(io, socket, data) {
     );
   });
   socket.on('CollectorsStartWork', function(d) {
-    data.startWork(d.roomId, d.playerId, d.card, d.cost)
+    data.startWork(d.roomId, d.playerId, d.cost)
     io.to(d.roomId).emit('collectorsWorkStarted', {
         playerId: d.playerId,
         players: data.getPlayers(d.roomId),
-        auctionCards: data.getAuctionCards(d.roomId),
-        auctionSpot: data.getAuctionSpot(d.roomId) //TEST ??
+      //  auctionCards: data.getAuctionCards(d.roomId),
+    //    auctionSpot: data.getAuctionSpot(d.roomId) //TEST ??
       }
     );
   });

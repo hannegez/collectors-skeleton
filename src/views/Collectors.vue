@@ -92,8 +92,7 @@
       <CollectorsStartWork v-if="players[playerId]"
         :labels="labels"
         :player="players[playerId]"
-        :auctionCards="auctionCards"
-        :auctionSpot = "auctionSpot"
+
         :marketValues="marketValues"
         :placement="workPlacement"
         @startWork="startWork($event)"

@@ -211,10 +211,10 @@ Data.prototype.startAuction = function (roomId, playerId, card, cost) {
 
   }
 }
-Data.prototype.startWork = function (roomId, playerId, card, cost) {
+Data.prototype.startWork = function (roomId, playerId, cost) {
   let room = this.rooms[roomId];
   if (typeof room !== 'undefined') {
-    let c = null;
+    /*let c = null;
     for (let i = 0; i < room.auctionCards.length; i += 1) {
       if (room.auctionCards[i].x === card.x &&
           room.auctionCards[i].y === card.y) {
@@ -231,9 +231,9 @@ Data.prototype.startWork = function (roomId, playerId, card, cost) {
         c = room.players[playerId].hand.splice(i,1);
         break;
       }
-    }
+    }*/
     //room.players[playerId].items.push(...c);
-    room.auctionSpot.push(...c);
+  //room.auctionSpot.push(...c);
     room.players[playerId].money -= cost;
 
   }

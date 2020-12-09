@@ -89,7 +89,17 @@
 
 
       <h1>Work</h1>
-      <!-- <CollectorsWork/> -->
+      <CollectorsStartWork v-if="players[playerId]"
+        :labels="labels"
+        :player="players[playerId]"
+        :auctionCards="auctionCards"
+        :auctionSpot = "auctionSpot"
+        :marketValues="marketValues"
+        :placement="workPlacement"
+        @startWork="startWork($event)"
+        @placeBottle="placeBottle('work', $event)"/> <!--kanske änsdras-->
+
+
 
       <h1>Raise Value</h1>
       <!-- <CollectorsRaiseValue/> -->
@@ -168,7 +178,7 @@ import CollectorsBuyActions from '@/components/CollectorsBuyActions.vue'
 import CollectorsGainSkill from '@/components/CollectorsGainSkill.vue'
 //import CollectorsRaiseValue from '@/components/CollectorsRaiseValue.vue'
 import CollectorsStartAuction from '@/components/CollectorsStartAuction.vue'
-//import CollectorsWork from '@/components/CollectorsWork.vue'
+import CollectorsStartWork from '@/components/CollectorsWork.vue'
 
 //import PlayerBoard from '@/components/PlayerBoard.vue'   /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
 
@@ -181,7 +191,7 @@ export default {
     CollectorsGainSkill,
 //    CollectorsRaiseValue,
     CollectorsStartAuction,
-    //CollectorsWork,
+    CollectorsStartWork,
   //  PlayerBoard,                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/                                                                                                                                                           /*HÄÄÄÄÄÄÄÄÄÄR*/
   },
   data: function () {
@@ -205,6 +215,7 @@ export default {
       skillPlacement: [],
       auctionPlacement: [],
       marketPlacement: [],
+      workPlacement: [],
 
       //HÄR LÄGGER VI TILL workPlacement
       //workPlacement: [],
@@ -267,7 +278,7 @@ export default {
        this.skillPlacement = d.placements.skillPlacement;
        this.marketPlacement = d.placements.marketPlacement;
        this.auctionPlacement = d.placements.auctionPlacement;
-       //this.workPlacement = d.placements.workPlacement;
+       this.workPlacement = d.placements.workPlacement;
      }.bind(this));
 
    this.$store.state.socket.on('collectorsBottlePlaced',
@@ -276,7 +287,7 @@ export default {
        this.skillPlacement = d.skillPlacement;
        this.marketPlacement = d.marketPlacement;
        this.auctionPlacement = d.auctionPlacement;
-       //this.workPlacement = d.workPlacement;
+       this.workPlacement = d.workPlacement;
       }.bind(this));
 
    this.$store.state.socket.on('collectorsPointsUpdated', (d) => this.points = d );
@@ -300,6 +311,14 @@ export default {
     this.$store.state.socket.on('collectorsAuctionStarted',
       function(d) {
         console.log(d.playerId, "started an auction");
+        this.players = d.players;
+        this.auctionCards = d.auctionCards;
+        this.auctionSpot = d.auctionSpot; //TEST ???
+      }.bind(this)
+    );
+    this.$store.state.socket.on('collectorsWorkStarted',
+      function(d) {
+        console.log(d.playerId, "started Work");
         this.players = d.players;
         this.auctionCards = d.auctionCards;
         this.auctionSpot = d.auctionSpot; //TEST ???
@@ -330,15 +349,17 @@ export default {
       else if (action === "market") {
         //raiseValue(card);   DENNA ÄR INTE SKAPAD ÄN
       }
-      /* HÄR LÄGGER VI SEN TILL workPlacement:
+      /* HÄR LÄGGER VI SEN TILL workPlacement: */
       else if (action === "work") {
-        work(card);
-      }   */
+        this.startWork(card); /*måste ändras*/
+      //  work(card);
+      }
     },
     selectAll: function (n) {
       n.target.select();
     },
     placeBottle: function (action, cost) {
+
       this.chosenPlacementCost = cost;
       this.chosenAction = action;
       this.$store.state.socket.emit('collectorsPlaceBottle', {
@@ -370,6 +391,16 @@ export default {
     startAuction: function (card) {
       console.log("startAuction", card);
       this.$store.state.socket.emit('CollectorsStartAuction', {
+          roomId: this.$route.params.id,
+          playerId: this.playerId,
+          card: card,
+          cost: this.chosenPlacementCost
+        }
+      );
+    },
+    startWork: function (card) {
+      console.log("startWork", card);
+      this.$store.state.socket.emit('CollectorsStartWork', {
           roomId: this.$route.params.id,
           playerId: this.playerId,
           card: card,

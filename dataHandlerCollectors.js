@@ -63,7 +63,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
   room.itemsOnSale = room.deck.splice(0, 5);
   room.skillsOnSale = room.deck.splice(0, 5);
   room.auctionCards = room.deck.splice(0, 4);
-  room.raiseValueOnSale = [room.deck.splice(0, 4)]; //SKA ÄNDRAS
+  room.raiseValueOnSale = room.deck.splice(0, 4); //SKA ÄNDRAS
   room.auctionSpot = [];
   room.market = [];
   room.buyPlacement = [ {cost:1, playerId: null},           //HÄR ÄNDRAR VI OM VI VILL ÄNDRA VAD SAKER KOSTAR AV NÅGON ANLEDNING

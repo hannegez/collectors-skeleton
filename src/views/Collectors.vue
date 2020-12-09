@@ -10,6 +10,7 @@
       fake more money
       </button>
 
+      <!--  sätt nr 2 -->
      <div id="drawCard" class="buttons">
         <p class="buttonText">{{ labels.draw }}</p>
         <input type="image" @click="drawCard" class="imgButton" alt="Login"
@@ -95,61 +96,32 @@
       <!-- <CollectorsRaiseValue/> -->
 
 
-      <!-- Här provade jag att lägga in en klickbar bild som skulle ge info när man tryckte på den. Det ska fungera men placeringen av inforutan är skev, men vi kan avvakta med detta /dani-->
+
       <div class="popup" style= "position:relative; left:0; top:0em;">
         <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
         <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
       </div>
 
-
-
-
-
-      <!-- Här vill jag lägga in ett grid med uppdelade grids inuti, se Style längre ned.
-i collectors.vue ska det finnas en grid som sammanställer mer detaljerade grid i respektive komponent ex från buy actions. Detta har jag dock inte fått till..
-Från Mikael:
-1. Att lägga ett element i en komponent betyder att du också flyttar över relevant CSS till komponenten. Föräldrakomponenten behöver då inte bry sig om denna alls. Så flytta allt som har med “pink” att göra till komponenten.
-
-Se css längre ned /dani
-
-    -->
-        <div class="container">
-              <div class="box pink">
-                  <div class="box arrow">pilar</div>
-                  <div class="box bottlePink">flaskor</div>
-                  <div class="box pinks">enfärg</div>
-                  <div class="box pinkInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
-                  <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-                  </div>
-              </div>
-            <div class="box green">
-              <div class="box arrowGreen">pilar</div>
-              <div class="box bottleGreen">flaskor</div>
-              <div class="box greens">enfärg</div>
-              <div class="box greenInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
-              <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-              </div>
+      <!-- TESTAR HÄR ATT FÅ IN GAME BOARD -->
+          <div id="collectors-board">
+            <div id="left-board">
+              <GameBoard/>
             </div>
-            <div class="box yellow">
-              <div class="box bottleYellow">flaskor</div>
-              <div class="box yellowInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
-              <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-              </div>
 
-
+            <div id="right-board">
+              <PlayerBoard/>
             </div>
-            <div class="box blue">
-              <div class="box char">karaktar</div>
-              <div class="box bottleBlue">flaskor</div>
-              <div class="box blues">enfärg</div>
-              <div class="box blueInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
-              <span class="popuptext" id="myPopup"> raise value gör det här och det här</span>
-                </div>
+            <div id="middle-board" class="popup">
+              <!-- <possibleActions/> -->
             </div>
-            <div class="box beige">rside</div>
-
           </div>
 
+
+            <!--allt för popup-->
+            <!--<div class="popup" style= "position:relative; left:20%; top:18em;">
+              <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo" >
+              <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+            </div>-->
           </main>
 
     <footer>
@@ -158,6 +130,11 @@ Se css längre ned /dani
   </div>
 </template>
 
+      <!--allt för popup-->
+      <!--<div class="popup" style= "position:relative; left:20%; top:18em;">
+        <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo" >
+        <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+      </div>-->
 
 
 <script>
@@ -169,8 +146,9 @@ import CollectorsGainSkill from '@/components/CollectorsGainSkill.vue'
 //import CollectorsRaiseValue from '@/components/CollectorsRaiseValue.vue'
 import CollectorsStartAuction from '@/components/CollectorsStartAuction.vue'
 //import CollectorsWork from '@/components/CollectorsWork.vue'
-
-//import PlayerBoard from '@/components/PlayerBoard.vue'   /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
+import GameBoard from '@/components/GameBoard.vue'                            /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
+import PlayerBoard from '@/components/PlayerBoard.vue'   /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
+//import possibleActions from '@/components/infoBoxes.vue'                                                                                                                        /*HÄÄÄÄÄÄÄÄÄÄR*/
 
 /* VUE-objekt för spelet*/
 export default {
@@ -182,7 +160,9 @@ export default {
 //    CollectorsRaiseValue,
     CollectorsStartAuction,
     //CollectorsWork,
-  //  PlayerBoard,                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/                                                                                                                                                           /*HÄÄÄÄÄÄÄÄÄÄR*/
+    GameBoard,                                                                 /*TESTAR HÄR ATT FÅ IN GAME BOARD*/
+    PlayerBoard,                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
+    //possibleActions                                                                                                                                                               /*HÄÄÄÄÄÄÄÄÄÄR*/
   },
   data: function () {
     return {
@@ -318,23 +298,19 @@ export default {
   methods: {
     chooseAction(action, card){
       console.log("action utskrift", action);
-      if (action === "buy") {
-        this.buyCard(card);
-      }
-      else if (action === "skill") {
-        this.gainSkill(card);
-      }
-      else if (action === "auction") {
-        this.startAuction(card);
-      }
-      else if (action === "market") {
-        //raiseValue(card);   DENNA ÄR INTE SKAPAD ÄN
-      }
-      /* HÄR LÄGGER VI SEN TILL workPlacement:
-      else if (action === "work") {
-        work(card);
-      }   */
+      console.log("choose action :D", card);
+      this.$store.state.socket.emit('CollectorsStartAuction', {
+          roomId: this.$route.params.id,
+          playerId: this.playerId,
+          card: card,
+          cost: this.marketValues[card.market] + this.chosenPlacementCost     //marknadsvärde (raise value) + placeringskostnad
+        }
+      );
     },
+
+
+
+
     selectAll: function (n) {
       n.target.select();
     },
@@ -388,11 +364,10 @@ export default {
         }
       );
     },
-
-    /*funktion för att ge popup när man trycker på informationen i gameboardet //dani*/
     getInfo: function(event){
 
         var popup = document.getElementById("myPopup");
+      //  console.log(popup);
         popup.classList.toggle("show");
         popup.style.left=event.clientX - event.target.getBoundingClientRect().x +"px";
         popup.style.top=event.clientY - event.target.getBoundingClientRect().y - 70+"px"  ;
@@ -412,197 +387,37 @@ export default {
   //  }
 }
 </script>
-
+<!--  /*getInfo: function(){
+    console.log("bajs");
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+},*/-->
 
 
 
 
 <style scoped>
-/*Här ligger gridsen, uppdelade genom att placera de små gridsen i den stora. De små ska flyttas till respektive komponent. /Dani*/
-#wrapper { color: #000; }
-
-.container {
-  display: grid;
-  height: 1000px;
-  width: 1200px;
-  padding-left: 200px;
-  padding-bottom: 200px;
-  grid-template-columns: 1fr 1fr 1fr ;
-  grid-template-rows: 1fr 2fr 2fr 1fr ;
-  grid-template-areas:
-    "topp topp topp"
-    "lside mside rside "
-    "lside mside rside "
-    "bottoms bottoms bottoms" ;
+  #wrapper {
+    color: #000;
   }
-.green {
-  grid-area: lside;
-  background: #dfeccc;
-}
-.yellow {
-  grid-area: mside;
-  background: #f5f2cc;
-}
-.beige{
-  grid-area: rside;
-  background: #f5f1e2;
-}
 
-/*påbörjar den rosa delen*/
-.pink{
-  grid-area: topp;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr ;
-  grid-template-areas:
-    " a a a a a g"
-    " b b b b b c ";
-}
-.arrow{
-  grid-area: a;
-  background: url('/images/pilrosa.PNG' ) ;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-.bottlePink{
-  grid-area: b;
-  background: url('/images/rosaflaska.PNG' )  ;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  #collectors-board {
+    display: grid;
+    grid-gap: 0;
+    grid-template-columns: 1fr 1fr;
 
-}
-.pinks{
-  grid-area: c;
-  background: url('/images/rosa.PNG' ) ;
-  background-repeat: no-repeat; /* gör att endast en syns men vill att en ska synas per grid*/
-  background-size: 100% 100%;
+    grid-template-areas:
+      "game-board middle-boards player-boards";
 
-}
-.pinkInfo{
-  grid-area: g;
-  background: url('/images/buyItem.PNG' ) ;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
+  }
 
-/*påbörjar den blåa delen*/
-.blue{
-  grid-area: bottoms;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr ;
-  grid-template-areas:
-    " d d d d d f"
-    " e e e e e h ";
-}
+  #wrapper {
+    color: black;
+  }
 
-.bottleBlue{
-  grid-area: d;
-
-  background: url('/images/blaflaska.PNG' ) ;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-.char{
-  grid-area: e;
-  background: url('/images/pilbla.PNG' ) ;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-.blues{
-  grid-area: h;
-  background: url('/images/bla.PNG' ) ;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
-.blueInfo{
-  grid-area: f;
-  background: url('/images/raiseValue.PNG' ) ;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-
-}
-
-/*påbörjar den gröna rosa delen*/
-.green{
-  grid-area: lside;
-  display: grid;
-  grid-template-columns: 1fr 1fr ;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-
-  grid-template-areas:
-    " i j "
-    " k l "
-    " k l "
-    " k l "
-    " k l "
-    " k l ";
-}
-.arrowGreen{
-  grid-area: k;
-  background: url('/images/pilgron.PNG' ) ;
-  background-repeat: no-repeat;
-  background-size: 30% 95%;
-
-}
-.bottleGreen{
-  grid-area: l;
-  background: url('/images/gronflaska.PNG' )  ;
-
-  background-repeat: no-repeat;
-  background-size: 100% 95%;
-
-}
-.greens{
-  grid-area: i;
-  background: url('/images/gron.PNG' ) ;
-  background-repeat: no-repeat; /* gör att endast en syns men vill att en ska synas per grid*/
-  background-size: 110% 100%;
-
-}
-.greenInfo{
-  grid-area: j;
-  background: url('/images/gainSkill.PNG' ) ;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
-/*påbörjar den GULA delen*/
-.yellow{
-  grid-area: mside;
-  display: grid;
-  grid-template-columns: 1fr 1fr ;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-
-  grid-template-areas:
-    " m m "
-    " m m "
-    " n n "
-    " n n "
-    " n n "
-    " n n ";
-}
-.yellowInfo{
-  grid-area: m;
-  background: url('/images/workInfo.PNG' ) ;
-  background-size: 100% 100%;
-}
-
-.bottleYellow{
-  grid-area: n;
-  background: url('/images/gulflaska.PNG' )  ;
-
-  background-repeat: no-repeat;
-  background-size: 100% 95%;
-
-}
-
-h1{
-  color: black;
-}
+  #left-board { grid-area: game-board; }
+  #right-board { grid-area: player-boards; }
+  #middle-board {grid-area: middle-boards }
 
 
   header {
@@ -621,12 +436,12 @@ h1{
   .imgButton {
     border: solid thin #787975;
     margin: 1em;
-    border-radius: 0.3em;
-    box-shadow: 0.2em 0.2em 0.3em #787975;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px #787975;
     width: 10%;
   }
   .imgButton:hover {
-    box-shadow: inset 0.2em 0.2em 0.3em #787975;
+    box-shadow: inset 2px 2px 3px #787975;
     cursor: pointer;
   }
   .imgButton:focus {
@@ -692,7 +507,7 @@ h1{
 }
 
 
-.box .popuptext::after {
+.popup .popuptext::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -704,7 +519,7 @@ h1{
 }
 
 
-.box .show {
+.popup .show {
   display: block;
 } /*nu fungerar de*/
 

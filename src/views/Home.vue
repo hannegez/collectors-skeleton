@@ -55,10 +55,11 @@ export default {
     },
     getLanguage: function() {
       const lang = document.querySelector('input[name=chooseLanguage]:checked').value;
+    //  console.log(lang);
       console.log(typeof(lang));
       return lang;
     },
-    setupCollectors: function (playerCount, lang="en") {
+    setupCollectors: function (playerCount, lang) {
       console.log("Setting up Collectors with", playerCount, "players in", lang);
       this.$store.commit('SETUP_GAME', {roomId: this.$store.state.roomId,
         playerCount: playerCount,

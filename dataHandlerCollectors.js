@@ -85,11 +85,11 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                            {cost:0, playerId: null} ];
 
   /*DETTA VILL VI SEN IMPLEMENTERA MED workPlacement:*/
-  room.workPlacement = [ {cost:-3, playerId: null},
-                        {cost:-1, playerId: null},
-                        {cost:1, playerId: null},
-                        {cost:0, playerId: null},
-                        {cost:0, playerId: null},]
+  room.workPlacement = [ {cost:-3, playerId: null, workAction: 1},
+                        {cost:-1, playerId: null, workAction: 2},
+                        {cost:1, playerId: null, workAction: 3},
+                        {cost:0, playerId: null, workAction: 4},
+                        {cost:0, playerId: null, workAction: 5},]
 
   this.rooms[roomId] = room;
 }
@@ -192,7 +192,10 @@ Data.prototype.raiseValue = function (roomId, playerId, card, cost) {
 
     //GÅ IGENOM SKILLSONSALE, AUCTIONCARDS OCH HAND
     //NÄSTA STEG: ta bort raiseValueOnSale
+<<<<<<< HEAD
+=======
     //för skill och auction istället för raisevalueonsale
+>>>>>>> 3de7a5703da535e113e46d213ccff24510605d5f
 
     /// check first if the card is among the raise value on sale
     for (let i = 0; i < room.auctionCards.length; i += 1) {
@@ -268,9 +271,12 @@ Data.prototype.startAuction = function (roomId, playerId, card, cost) {
 
   }
 }
-Data.prototype.startWork = function (roomId, playerId, cost) {
+ // lös problemet med att pengar inte dras bort
+Data.prototype.startWork = function (roomId, playerId, cost, workAction) { // bör läggas till workAction?
   let room = this.rooms[roomId];
   if (typeof room !== 'undefined') {
+    console.log(workAction);
+
     /*let c = null;
     for (let i = 0; i < room.auctionCards.length; i += 1) {
       if (room.auctionCards[i].x === card.x &&
@@ -346,10 +352,6 @@ Data.prototype.placeBottle = function (roomId, playerId, action, cost) {
       activePlacement = room.marketPlacement;
     }
 
-    /* HÄR LÄGGER VI SEN TILL workPlacement:*/
-    else if (action === "work") {
-      activePlacement = room.workPlacement;
-    }
 
     for(let i = 0; i < activePlacement.length; i += 1) {
         if( activePlacement[i].cost === cost &&
@@ -360,6 +362,46 @@ Data.prototype.placeBottle = function (roomId, playerId, action, cost) {
     }
   }
 }
+
+Data.prototype.placeWorkBottle = function (roomId, playerId, cost, workAction) {
+  let room = this.rooms[roomId];
+  if (typeof room !== 'undefined') {
+    let activePlacement = room.workPlacement;
+
+
+    for(let i = 0; i < activePlacement.length; i += 1) {
+        if( activePlacement[i].workAction === workAction &&
+            activePlacement[i].playerId === null ) {
+          activePlacement[i].playerId = playerId;
+          //lägg till if satser / metod med if satser.
+          if (workAction === 1){
+            console.log("workaction 1");
+          }
+          else if (workAction === 2) {
+            console.log("workaction 2");
+          }
+          else if (workAction === 3) {//tar upp två kort när knapp 3 trycks på
+            console.log("workaction 3");
+            this.drawCard(roomId, playerId);
+            this.drawCard(roomId, playerId);
+          }
+          else if (workAction === 4) {
+            console.log("workaction 4");
+          }
+          else if (workAction === 5) {
+            console.log("workaction 5");
+
+          }
+
+
+          break;
+        }
+    }
+  }
+}
+
+
+
 
 /* returns the hand of the player */
 Data.prototype.getCards = function (roomId, playerId) {

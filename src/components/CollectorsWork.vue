@@ -13,14 +13,20 @@
         </div>
       </div> -->
 
-
+<!-- gör om till objekt och skicka med kostnad och action samt ändra i placement. -->
       <div>
         <div class="buttons" v-for="(p, index) in placement" :key="index">
+          ${{p.cost}}
+          ${{p.workAction}}
+          {{p}}
+          {{index}}
           <button
             v-if="p.playerId===null"
             :disabled="cannotAfford(p.cost)"
-            @click="placeBottle(p)" >
+            @click="placeWorkBottle(p)" >
             ${{p.cost}}
+            ${{p.workAction}}
+
           </button>
           <div v-if="p.playerId !== null">
             {{p.playerId}}
@@ -65,15 +71,17 @@ export default {
       return (this.player.money < minCost);
     },
 
-    placeBottle: function (p) {
-      this.$emit('placeBottle', p.cost);
+    placeWorkBottle: function (p) {
+      this.$emit('placeWorkBottle', p); //emitta hela p.
     },
     setAvailable: function (card) {
       this.$set(card, "available", true);
     },
-    startWork: function (card) {
+    startWork: function (card) {//skicka placerin/textsträng till startWork ex actiion
+      console.log("startWork 1" + card);
       if (card.available) {
-        this.$emit('startWork', card);
+        this.$emit('startWork', card); //skicka placerin/textsträng till startWork ex actiion
+        console.log("startWork 2" + card);
 
       }
     }

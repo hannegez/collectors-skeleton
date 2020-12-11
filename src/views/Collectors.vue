@@ -69,8 +69,7 @@
       :player="players[playerId]"
       :skillsOnSale="skillsOnSale"
       :placement="skillPlacement"
-      :chosenAction="chosenAction"
-      @gainSkill="gainSkill($event)"
+      @chooseAction="chooseAction(chosenAction, $event)"
       @placeBottle="placeBottle('skill', $event)"/>
 
      <h1>Auction</h1>
@@ -81,8 +80,7 @@
        :auctionSpot = "auctionSpot"
        :marketValues="marketValues"
        :placement="auctionPlacement"
-       :chosenAction="chosenAction"
-       @startAuction="startAuction($event)"
+       @chooseAction="chooseAction(chosenAction, $event)"
        @placeBottle="placeBottle('auction', $event)"/>
 
 
@@ -91,11 +89,11 @@
       <CollectorsStartWork v-if="players[playerId]"
         :labels="labels"
         :player="players[playerId]"
-
         :marketValues="marketValues"
         :placement="workPlacement"
         @startWork="startWork($event)"
-        @placeBottle="placeBottle('work', $event)"/> <!--kanske änsdras-->
+        @placeWorkBottle="placeWorkBottle( $event)"/>
+
 
 
 <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
@@ -131,14 +129,7 @@ Se css längre ned /dani
 
     -->
         <div class="container">
-              <div class="box pink">
-                  <div class="box arrow">pilar</div>
-                  <div class="box bottlePink">flaskor</div>
-                  <div class="box pinks">enfärg</div>
-                  <div class="box pinkInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
-                  <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-                  </div>
-              </div>
+
             <div class="box green">
               <div class="box arrowGreen">pilar</div>
               <div class="box bottleGreen">flaskor</div>
@@ -226,7 +217,7 @@ export default {
 
       //HÄR LÄGGER VI TILL workPlacement
       //workPlacement: [],
-
+      chosenWorkAction: null, //bajs
       chosenPlacementCost: null,
       chosenAction: null,           //MAJA LA TILL DENNA
       marketValues: { fastaval: 0,
@@ -298,8 +289,15 @@ export default {
        this.skillPlacement = d.skillPlacement;
        this.marketPlacement = d.marketPlacement;
        this.auctionPlacement = d.auctionPlacement;
-       this.workPlacement = d.workPlacement;
       }.bind(this));
+
+      this.$store.state.socket.on('collectorsWorkBottlePlaced',
+        function(d) {
+          this.players= d.players;
+          this.placements = d.placements;
+          this.workPlacement = d.placements.workPlacement;
+
+         }.bind(this));
 
    this.$store.state.socket.on('collectorsPointsUpdated', (d) => this.points = d );
 
@@ -376,13 +374,12 @@ export default {
       else if (action === "work") {
         this.startWork(card); /*måste ändras*/
       //  work(card);
-      }
+    }
     },
     selectAll: function (n) {
       n.target.select();
     },
-    placeBottle: function (action, cost) {
-
+    placeBottle: function (action, cost) { /* skicka till server och gör förändring där.*/
       this.chosenPlacementCost = cost;
       this.chosenAction = action;
       this.$store.state.socket.emit('collectorsPlaceBottle', {
@@ -390,6 +387,20 @@ export default {
           playerId: this.playerId,
           action: action,
           cost: cost,
+        }
+      );
+    },
+    placeWorkBottle: function (p) { /* skicka till server och gör förändring där.*/
+
+      this.chosenPlacementCost = p.cost;
+      this.chosenAction = "work";
+      this.chosenWorkAction= p.workAction;
+      this.$store.state.socket.emit('collectorsPlaceWorkBottle', {
+          roomId: this.$route.params.id,
+          playerId: this.playerId,
+          action: "work",
+          cost: p.cost,
+          workAction:p.workAction,
         }
       );
     },
@@ -427,7 +438,8 @@ export default {
           roomId: this.$route.params.id,
           playerId: this.playerId,
           card: card,
-          cost: this.chosenPlacementCost
+          cost: this.chosenPlacementCost,
+          workAction:this.chosenWorkAction
         }
       );
     },
@@ -486,6 +498,7 @@ export default {
 /*Här ligger gridsen, uppdelade genom att placera de små gridsen i den stora. De små ska flyttas till respektive komponent. /Dani*/
 #wrapper { color: #000; }
 
+
 .container {
   display: grid;
   height: 1000px;
@@ -514,41 +527,8 @@ export default {
 }
 
 /*påbörjar den rosa delen*/
-.pink{
-  grid-area: topp;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr ;
-  grid-template-areas:
-    " a a a a a g"
-    " b b b b b c ";
-}
-.arrow{
-  grid-area: a;
-  background: url('/images/pilrosa.PNG' ) ;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-.bottlePink{
-  grid-area: b;
-  background: url('/images/rosaflaska.PNG' )  ;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 
-}
-.pinks{
-  grid-area: c;
-  background: url('/images/rosa.PNG' ) ;
-  background-repeat: no-repeat; /* gör att endast en syns men vill att en ska synas per grid*/
-  background-size: 100% 100%;
 
-}
-.pinkInfo{
-  grid-area: g;
-  background: url('/images/buyItem.PNG' ) ;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
 
 /*påbörjar den blåa delen*/
 .blue{

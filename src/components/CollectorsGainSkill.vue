@@ -9,7 +9,7 @@
           <CollectorsCard
             :card="card"
             :availableAction="card.available"
-            @doAction="chooseAction(chosenAction, card)"/>
+            @doAction="chooseAction(card)"/>
         </div>
       </div>
 
@@ -27,9 +27,17 @@
         </div>
       </div>
 
+
+
     </div>
 
 </template>
+
+
+
+
+
+
 
 <script>
 import CollectorsCard from '@/components/CollectorsCard.vue'
@@ -74,28 +82,77 @@ export default {
       }
     },
 
-    chooseAction(action, card){
-      console.log("action utskrift", action);
-    if (action === "skill") {
-        this.gainSkill(card);
-      }
+    // chooseAction(action, card){
+    //   console.log("action utskrift", action);
+    // if (action === "skill") {
+    //     this.gainSkill(card);
+    //   }
+    //
+    //   else if (action === "market") {
+    //     this.raiseValue(card);
+    //   }
+    //   /* HÄR LÄGGER VI SEN TILL workPlacement: */
+    //   else if (action === "work") {
+    //     this.startWork(card); /*måste ändras*/
+    //   //  work(card);
+    //   }
 
-      else if (action === "market") {
-        this.raiseValue(card);
-      }
-      /* HÄR LÄGGER VI SEN TILL workPlacement: */
-      else if (action === "work") {
-        this.startWork(card); /*måste ändras*/
-      //  work(card);
-      }
+    chooseAction(card){
+      this.$emit('chooseAction', card);
     },
   }
 }
 </script>
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .gain-skill, .buttons {
     display: grid;
     grid-template-columns: repeat(auto-fill, 130px);
+  }
+
+
+
+  .green{
+    grid-area: lside;
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+    grid-template-areas:
+      " i j "
+      " k l "
+      " k l "
+      " k l "
+      " k l "
+      " k l ";
+  }
+  .arrowGreen{
+    grid-area: k;
+    background: url('/images/pilgron.PNG' ) ;
+    background-repeat: no-repeat;
+    background-size: 30% 95%;
+
+  }
+  .bottleGreen{
+    grid-area: l;
+    background: url('/images/gronflaska.PNG' )  ;
+
+    background-repeat: no-repeat;
+    background-size: 100% 95%;
+
+  }
+  .greens{
+    grid-area: i;
+    background: url('/images/gron.PNG' ) ;
+    background-repeat: no-repeat; /* gör att endast en syns men vill att en ska synas per grid*/
+    background-size: 110% 100%;
+
+  }
+  .greenInfo{
+    grid-area: j;
+    background: url('/images/gainSkill.PNG' ) ;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
   }
 </style>

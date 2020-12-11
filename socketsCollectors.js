@@ -24,6 +24,7 @@ function sockets(io, socket, data) {
              auctionSpot: data.getAuctionSpot(d.roomId), // TEST ???
              //NÅTT MED WORK
              placements: data.getPlacements(d.roomId)
+
            }
          );
        }
@@ -55,7 +56,7 @@ function sockets(io, socket, data) {
     );
   });
   socket.on('CollectorsStartWork', function(d) {
-    data.startWork(d.roomId, d.playerId, d.cost)
+    data.startWork(d.roomId, d.playerId, d.cost, d.workAction)
     io.to(d.roomId).emit('collectorsWorkStarted', {
         playerId: d.playerId,
         players: data.getPlayers(d.roomId),
@@ -75,10 +76,16 @@ function sockets(io, socket, data) {
     );
   });
   socket.on('collectorsPlaceBottle', function(d) {
-    data.placeBottle(d.roomId, d.playerId, d.action, d.cost);
+    data.placeBottle(d.roomId, d.playerId, d.action, d.cost); //lägg till workaction i collectrs placebottle
     io.to(d.roomId).emit('collectorsBottlePlaced', data.getPlacements(d.roomId)
     );
     });
+  socket.on('collectorsPlaceWorkBottle', function(d) {
+      data.placeWorkBottle(d.roomId, d.playerId, d.action, d.cost, d.workAction); //lägg till workaction i collectrs placebottle
+      //console.log("hääär" + d.workAction + d.cost + d.playerId); //FRÅGA varför kopplas d.workAction till cost
+      io.to(d.roomId).emit('collectorsWorkBottlePlaced', data.getPlacements(d.roomId)
+      );
+      });
 
 //testTESTTEST
   socket.on('collectorsTestRaiseValue', function(d) {

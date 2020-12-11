@@ -92,11 +92,11 @@
       <CollectorsStartWork v-if="players[playerId]"
         :labels="labels"
         :player="players[playerId]"
-
         :marketValues="marketValues"
         :placement="workPlacement"
         @startWork="startWork($event)"
-        @placeBottle="placeBottle('work', $event)"/> <!--kanske änsdras-->
+        @placeWorkBottle="placeWorkBottle('work', $event, $event)"/>
+
 
 
 
@@ -218,7 +218,7 @@ export default {
 
       //HÄR LÄGGER VI TILL workPlacement
       //workPlacement: [],
-
+      chosenWorkAction: null, //bajs
       chosenPlacementCost: null,
       chosenAction: null,           //MAJA LA TILL DENNA
       marketValues: { fastaval: 0,
@@ -286,8 +286,13 @@ export default {
        this.skillPlacement = d.skillPlacement;
        this.marketPlacement = d.marketPlacement;
        this.auctionPlacement = d.auctionPlacement;
-       this.workPlacement = d.workPlacement;
       }.bind(this));
+
+      this.$store.state.socket.on('collectorsWorkBottlePlaced',
+        function(d) {
+
+          this.workPlacement = d.workPlacement;
+         }.bind(this));
 
    this.$store.state.socket.on('collectorsPointsUpdated', (d) => this.points = d );
 
@@ -352,13 +357,12 @@ export default {
       else if (action === "work") {
         this.startWork(card); /*måste ändras*/
       //  work(card);
-      }
+    }
     },
     selectAll: function (n) {
       n.target.select();
     },
-    placeBottle: function (action, cost) {
-
+    placeBottle: function (action, cost) { /* skicka till server och gör förändring där.*/
       this.chosenPlacementCost = cost;
       this.chosenAction = action;
       this.$store.state.socket.emit('collectorsPlaceBottle', {
@@ -366,6 +370,22 @@ export default {
           playerId: this.playerId,
           action: action,
           cost: cost,
+        }
+      );
+    },
+    placeWorkBottle: function (action, cost, workAction) { /* skicka till server och gör förändring där.*/
+      console.log("går in i workbottle");
+      console.dir(workAction);
+
+      this.chosenPlacementCost = cost;
+      this.chosenAction = action;
+      this.chosenWorkAction= workAction;
+      this.$store.state.socket.emit('collectorsPlaceWorkBottle', {
+          roomId: this.$route.params.id,
+          playerId: this.playerId,
+          action: action,
+          cost: cost,
+          workAction:workAction,
         }
       );
     },
@@ -403,7 +423,8 @@ export default {
           roomId: this.$route.params.id,
           playerId: this.playerId,
           card: card,
-          cost: this.chosenPlacementCost
+          cost: this.chosenPlacementCost,
+          workAction:this.chosenWorkAction
         }
       );
     },

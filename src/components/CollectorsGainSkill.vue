@@ -76,15 +76,10 @@ export default {
 
     chooseAction(action, card){
       console.log("action utskrift", action);
-      if (action === "buy") {
-        this.buyCard(card);
-      }
-      else if (action === "skill") {
+    if (action === "skill") {
         this.gainSkill(card);
       }
-      else if (action === "auction") {
-        this.startAuction(card);
-      }
+
       else if (action === "market") {
         this.raiseValue(card);
       }

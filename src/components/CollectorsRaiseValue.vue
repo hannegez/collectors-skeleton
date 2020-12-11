@@ -2,9 +2,10 @@
     <div>
       <h2>{{ labels.raiseValue }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
 
-<!--BUY CARDS -->
+<!--BUY CARDS raiseValueOnSale borttagen for now-->
       <div class="buy-cards">
-        <div v-for="(card, index) in raiseValueOnSale" :key="index">
+        <div  v-for="(card, index) in itemsOnSale" :key="index"
+              v-for="(card, index) in auctionCards" :key="index">
           <CollectorsCard
             :card="card"
             :availableAction="card.available"
@@ -54,7 +55,8 @@ export default {
     labels: Object,  //specify what kind of object
     player: Object,
     itemsOnSale: Array,
-    raiseValueOnSale: Array,
+    auctionCards: Array,
+  //  raiseValueOnSale: Array,
     market: Array,
     skillsOnSale: Array,
     marketValues: Object,
@@ -77,6 +79,8 @@ export default {
       this.$emit('placeBottle', p.cost);
       this.highlightAvailableCards(p.cost);
     },
+
+    //byt ut till setavailable --> gain skill..
     checkAvailable: function (card, cost) {
       if (this.marketValues[card.item] <= this.player.money - cost) {
         this.$set(card, "available", true);
@@ -92,13 +96,30 @@ export default {
       //GÅ IGENOM skillsOnSale AUCTIONCARDS OCH PLAYER HAnd och sätt available på de som ska vara det
       //NÄSTA STEG: ta bort raiseValueOnSale
 
-      for (let i = 0; i < this.raiseValueOnSale.length; i += 1) {
-        this.checkAvailable(this.raiseValueOnSale[i], cost);
-      }
+      //    for (let i = 0; i < this.raiseValueOnSale.length; i += 1) {
+      //    this.checkAvailable(this.raiseValueOnSale[i], cost);
+      //  }
+      //Denna ovan ska bort, ska lägga till första element i auction och i skill.
+
+      //  highlightAvailableCards: function () {
+      for (let i = 0; i < this.auctionCards.length; i += 1) {
+        if (auctionCards[i] != null)
+        this.setAvailable(this.auctionCards[i]);
+        console.log("first AuctionCard ska highlightas");
+        break
+      },
+
       for (let i = 0; i < this.player.hand.length; i += 1) {                              //ÄVEN KORTEN PÅ HAND HIGHLIGHTAS, SÅ VILL VI EJ HA DET
         this.checkAvailable(this.player.hand[i], cost);
+      },
+      for (let i = 0; i < this.skillsOnSale.length; i += 1) {
+        if (skillsOnSale[i] != null)
+        this.setAvailable(this.skillsOnSale[i]);
+        console.log("first skillsOnSale ska highlightas");
+        break
       }
     },
+
     raiseValue: function (card) {
       if (card.available) {
         this.$emit('raiseValue', card)

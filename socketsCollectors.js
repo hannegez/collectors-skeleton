@@ -18,7 +18,7 @@ function sockets(io, socket, data) {
              players: data.getPlayers(d.roomId),              //Collectors.vue: "this.$store.state.socket.on('collectorsInitialize',
              itemsOnSale: data.getItemsOnSale(d.roomId),      //  function(d) { ...... "
              marketValues: data.getMarketValues(d.roomId),
-             raiseValueOnSale: data.getRaiseValueOnSale(d.roomId),
+            // raiseValueOnSale: data.getRaiseValueOnSale(d.roomId),
              market: data.getMarket(d.roomId),
              skillsOnSale: data.getSkillsOnSale(d.roomId),
              auctionCards: data.getAuctionCards(d.roomId),
@@ -81,7 +81,10 @@ function sockets(io, socket, data) {
     io.to(d.roomId).emit('collectorsValueRaised', {
         playerId: d.playerId,
         players: data.getPlayers(d.roomId),
-        raiseValueOnSale: data.getRaiseValueOnSale(d.roomId),
+
+        itemsOnSale: data.getItemsOnSale(d.roomId),
+        auctionCards: data.getAuctionCards(d.roomId),
+    //    raiseValueOnSale: data.getRaiseValueOnSale(d.roomId),
         marketValues: data.getMarketValues(d.roomId),
         market: data.getMarket(d.roomId)
       }

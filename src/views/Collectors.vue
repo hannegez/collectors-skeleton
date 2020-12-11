@@ -96,7 +96,7 @@
         @placeBottle="placeBottle('work', $event)"/> <!--kanske änsdras-->
 
 
-
+<!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
       <h1>Raise Value</h1>
       <CollectorsRaiseValue v-if="players[playerId]"
         :labels="labels"
@@ -104,7 +104,7 @@
         :itemsOnSale="itemsOnSale"
         :market="market"
         :marketValues="marketValues"
-        :raiseValueOnSale="raiseValueOnSale"
+        :auctionCards="auctionCards"
         :placement="marketPlacement"
         @raiseValue="raiseValue($event)"
         @placeBottle="placeBottle('market', $event)"/>
@@ -232,7 +232,7 @@ export default {
                      technology: 0,
                      figures: 0,
                      music: 0 },
-      raiseValueOnSale: [],
+    //  raiseValueOnSale: [],
       market: [],
       itemsOnSale: [],
       skillsOnSale: [],
@@ -276,7 +276,7 @@ export default {
         this.labels = d.labels;
         this.players = d.players;
        this.itemsOnSale = d.itemsOnSale;
-       this.raiseValueOnSale = d.raiseValueOnSale;
+  //     this.raiseValueOnSale = d.raiseValueOnSale;
        this.marketValues = d.marketValues;
        this.market = d.market;
        this.skillsOnSale = d.skillsOnSale;
@@ -321,7 +321,9 @@ export default {
       function(d) {
         console.log(d.playerId, "raised a value");
         this.players = d.players;
-        this.raiseValueOnSale = d.raiseValueOnSale;
+//        this.raiseValueOnSale = d.raiseValueOnSale;
+        this.itemsOnSale = d.itemsOnSale;
+        this.auctionCards = d.auctionCards;
         this.marketValues = d.marketValues;
         this.market = d.market;
       }.bind(this)

@@ -190,13 +190,6 @@ Data.prototype.raiseValue = function (roomId, playerId, card, cost) {
   if (typeof room !== 'undefined') {
     let c = null;
 
-    //GÅ IGENOM SKILLSONSALE, AUCTIONCARDS OCH HAND
-    //NÄSTA STEG: ta bort raiseValueOnSale
-<<<<<<< HEAD
-=======
-    //för skill och auction istället för raisevalueonsale
->>>>>>> 3de7a5703da535e113e46d213ccff24510605d5f
-
     /// check first if the card is among the raise value on sale
     for (let i = 0; i < room.auctionCards.length; i += 1) {
       // since card comes from the client, it is NOT the same object (reference)

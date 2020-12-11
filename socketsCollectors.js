@@ -82,7 +82,7 @@ function sockets(io, socket, data) {
         playerId: d.playerId,
         players: data.getPlayers(d.roomId),
 
-        itemsOnSale: data.getItemsOnSale(d.roomId),
+        skillsOnSale: data.getSkillsOnSale(d.roomId),
         auctionCards: data.getAuctionCards(d.roomId),
     //    raiseValueOnSale: data.getRaiseValueOnSale(d.roomId),
         marketValues: data.getMarketValues(d.roomId),

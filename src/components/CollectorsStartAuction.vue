@@ -8,7 +8,7 @@
           <CollectorsCard
             :card="card"
             :availableAction="card.available"
-            @doAction="startAuction(card)"/>
+            @doAction="chooseAction(chosenAction, card)"/>
             <!-- {{ cardCost(card) }} -->
         </div>
       </div>
@@ -58,7 +58,8 @@ export default {
     skillsOnSale: Array,
     itemsOnSale: Array,
     marketValues: Object,
-    placement: Array
+    placement: Array,
+    chosenAction: String
     //NÅNTING MED WORK?
   },
   methods: {
@@ -73,8 +74,30 @@ export default {
       this.$emit('placeBottle', p.cost);
       this.highlightAvailableCards(p.cost);
     },
+
     setAvailable: function (card) {
       this.$set(card, "available", true);
+    },
+
+    chooseAction(action, card){
+      console.log("action utskrift", action);
+      if (action === "buy") {
+        this.buyCard(card);
+      }
+      else if (action === "skill") {
+        this.gainSkill(card);
+      }
+      else if (action === "auction") {
+        this.startAuction(card);
+      }
+      else if (action === "market") {
+        this.raiseValue(card);
+      }
+      /* HÄR LÄGGER VI SEN TILL workPlacement: */
+      else if (action === "work") {
+        this.startWork(card); /*måste ändras*/
+      //  work(card);
+      }
     },
 
     highlightAvailableCards: function () {

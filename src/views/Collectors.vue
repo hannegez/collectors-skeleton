@@ -69,6 +69,7 @@
       :player="players[playerId]"
       :skillsOnSale="skillsOnSale"
       :placement="skillPlacement"
+      :chosenAction="chosenAction"
       @gainSkill="gainSkill($event)"
       @placeBottle="placeBottle('skill', $event)"/>
 
@@ -80,6 +81,7 @@
        :auctionSpot = "auctionSpot"
        :marketValues="marketValues"
        :placement="auctionPlacement"
+       :chosenAction="chosenAction"
        @startAuction="startAuction($event)"
        @placeBottle="placeBottle('auction', $event)"/>
 
@@ -101,10 +103,10 @@
       <CollectorsRaiseValue v-if="players[playerId]"
         :labels="labels"
         :player="players[playerId]"
-        :itemsOnSale="itemsOnSale"
         :market="market"
         :marketValues="marketValues"
         :auctionCards="auctionCards"
+        :skillsOnSale="skillsOnSale"
         :placement="marketPlacement"
         @raiseValue="raiseValue($event)"
         @placeBottle="placeBottle('market', $event)"/>
@@ -322,7 +324,7 @@ export default {
         console.log(d.playerId, "raised a value");
         this.players = d.players;
 //        this.raiseValueOnSale = d.raiseValueOnSale;
-        this.itemsOnSale = d.itemsOnSale;
+        this.skillsOnSale = d.skillsOnSale;
         this.auctionCards = d.auctionCards;
         this.marketValues = d.marketValues;
         this.market = d.market;

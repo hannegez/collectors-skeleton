@@ -9,7 +9,7 @@
           <CollectorsCard
             :card="card"
             :availableAction="card.available"
-            @doAction="gainSkill(card)"/>
+            @doAction="chooseAction(chosenAction, card)"/>
         </div>
       </div>
 
@@ -50,7 +50,8 @@ export default {
     labels: Object,  //specify what kind of object
     player: Object,
     skillsOnSale: Array,
-    placement: Array
+    placement: Array,
+    chosenAction: String
     //NÅNTING MED WORK?
   },
   methods: {
@@ -78,6 +79,27 @@ export default {
       if (card.available) {
         this.$emit('gainSkill', card)
         this.highlightAvailableCards()
+      }
+    },
+
+    chooseAction(action, card){
+      console.log("action utskrift", action);
+      if (action === "buy") {
+        this.buyCard(card);
+      }
+      else if (action === "skill") {
+        this.gainSkill(card);
+      }
+      else if (action === "auction") {
+        this.startAuction(card);
+      }
+      else if (action === "market") {
+        this.raiseValue(card);
+      }
+      /* HÄR LÄGGER VI SEN TILL workPlacement: */
+      else if (action === "work") {
+        this.startWork(card); /*måste ändras*/
+      //  work(card);
       }
     },
   }

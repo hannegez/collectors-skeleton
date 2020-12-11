@@ -69,6 +69,7 @@
       :player="players[playerId]"
       :skillsOnSale="skillsOnSale"
       :placement="skillPlacement"
+      :chosenAction="chosenAction"
       @gainSkill="gainSkill($event)"
       @placeBottle="placeBottle('skill', $event)"/>
 
@@ -80,6 +81,7 @@
        :auctionSpot = "auctionSpot"
        :marketValues="marketValues"
        :placement="auctionPlacement"
+       :chosenAction="chosenAction"
        @startAuction="startAuction($event)"
        @placeBottle="placeBottle('auction', $event)"/>
 
@@ -96,15 +98,15 @@
 
 
 
-
+<!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
       <h1>Raise Value</h1>
       <CollectorsRaiseValue v-if="players[playerId]"
         :labels="labels"
         :player="players[playerId]"
-        :itemsOnSale="itemsOnSale"
         :market="market"
         :marketValues="marketValues"
-        :raiseValueOnSale="raiseValueOnSale"
+        :auctionCards="auctionCards"
+        :skillsOnSale="skillsOnSale"
         :placement="marketPlacement"
         @raiseValue="raiseValue($event)"
         @placeBottle="placeBottle('market', $event)"/>
@@ -225,7 +227,7 @@ export default {
                      technology: 0,
                      figures: 0,
                      music: 0 },
-      raiseValueOnSale: [],
+    //  raiseValueOnSale: [],
       market: [],
       itemsOnSale: [],
       skillsOnSale: [],
@@ -269,7 +271,7 @@ export default {
         this.labels = d.labels;
         this.players = d.players;
        this.itemsOnSale = d.itemsOnSale;
-       this.raiseValueOnSale = d.raiseValueOnSale;
+  //     this.raiseValueOnSale = d.raiseValueOnSale;
        this.marketValues = d.marketValues;
        this.market = d.market;
        this.skillsOnSale = d.skillsOnSale;
@@ -321,7 +323,9 @@ export default {
       function(d) {
         console.log(d.playerId, "raised a value");
         this.players = d.players;
-        this.raiseValueOnSale = d.raiseValueOnSale;
+//        this.raiseValueOnSale = d.raiseValueOnSale;
+        this.skillsOnSale = d.skillsOnSale;
+        this.auctionCards = d.auctionCards;
         this.marketValues = d.marketValues;
         this.market = d.market;
       }.bind(this)

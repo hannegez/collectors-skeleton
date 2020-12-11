@@ -63,7 +63,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
   room.itemsOnSale = room.deck.splice(0, 5);
   room.skillsOnSale = room.deck.splice(0, 5);
   room.auctionCards = room.deck.splice(0, 4);
-  room.raiseValueOnSale = room.deck.splice(0, 4); //TA BORT raiseValueOnSale
+  // room.raiseValueOnSale = room.deck.splice(0, 4); //TA BORT raiseValueOnSale
   room.auctionSpot = [];
   room.market = [];
   room.buyPlacement = [ {cost:1, playerId: null},           //HÄR ÄNDRAR VI OM VI VILL ÄNDRA VAD SAKER KOSTAR AV NÅGON ANLEDNING
@@ -192,17 +192,42 @@ Data.prototype.raiseValue = function (roomId, playerId, card, cost) {
 
     //GÅ IGENOM SKILLSONSALE, AUCTIONCARDS OCH HAND
     //NÄSTA STEG: ta bort raiseValueOnSale
+<<<<<<< HEAD
+=======
+    //för skill och auction istället för raisevalueonsale
+>>>>>>> 3de7a5703da535e113e46d213ccff24510605d5f
 
     /// check first if the card is among the raise value on sale
-    for (let i = 0; i < room.raiseValueOnSale.length; i += 1) {
+    for (let i = 0; i < room.auctionCards.length; i += 1) {
       // since card comes from the client, it is NOT the same object (reference)
       // so we need to compare properties for determining equality
-      if (room.raiseValueOnSale[i].x === card.x &&
-          room.raiseValueOnSale[i].y === card.y) {
-        c = room.raiseValueOnSale.splice(i,1, {});
+      if (room.auctionCards[i].x === card.x &&
+          room.auctionCards[i].y === card.y) {
+        c = room.auctionCards.splice(i,1, {});
         break;
       }
     }
+
+    for (let i = 0; i < room.skillsOnSale.length; i += 1) {
+      // since card comes from the client, it is NOT the same object (reference)
+      // so we need to compare properties for determining equality
+      if (room.skillsOnSale[i].x === card.x &&
+          room.skillsOnSale[i].y === card.y) {
+        c = room.skillsOnSale.splice(i,1, {});
+        break;
+      }
+    }
+
+    // for (let i = 0; i < room.raiseValueOnSale.length; i += 1) {
+    //   // since card comes from the client, it is NOT the same object (reference)
+    //   // so we need to compare properties for determining equality
+    //   if (room.raiseValueOnSale[i].x === card.x &&
+    //       room.raiseValueOnSale[i].y === card.y) {
+    //     c = room.raiseValueOnSale.splice(i,1, {});
+    //     break;
+    //   }
+    // }
+
     // ...then check if it is in the hand. It cannot be in both so it's safe
     for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
       // since card comes from the client, it is NOT the same object (reference)
@@ -409,13 +434,14 @@ Data.prototype.getItemsOnSale = function(roomId){
   else return [];
 }
 
-Data.prototype.getRaiseValueOnSale = function(roomId){
-  let room = this.rooms[roomId];
-  if (typeof room !== 'undefined') {
-    return room.raiseValueOnSale;
-  }
-  else return [];
-}
+//RAISEVALUEONSALE
+// Data.prototype.getRaiseValueOnSale = function(roomId){
+//   let room = this.rooms[roomId];
+//   if (typeof room !== 'undefined') {
+//     return room.raiseValueOnSale;
+//   }
+//   else return [];
+// }
 
 Data.prototype.getMarketValues = function(roomId){
   let room = this.rooms[roomId];

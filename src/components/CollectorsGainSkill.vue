@@ -9,7 +9,7 @@
           <CollectorsCard
             :card="card"
             :availableAction="card.available"
-            @doAction="chooseAction(chosenAction, card)"/>
+            @doAction="chooseAction(card)"/>
         </div>
       </div>
 
@@ -73,30 +73,13 @@ export default {
         this.highlightAvailableCards()
       }
     },
-
-    chooseAction(action, card){
-      console.log("action utskrift", action);
-      if (action === "buy") {
-        this.buyCard(card);
-      }
-      else if (action === "skill") {
-        this.gainSkill(card);
-      }
-      else if (action === "auction") {
-        this.startAuction(card);
-      }
-      else if (action === "market") {
-        this.raiseValue(card);
-      }
-      /* HÄR LÄGGER VI SEN TILL workPlacement: */
-      else if (action === "work") {
-        this.startWork(card); /*måste ändras*/
-      //  work(card);
-      }
+    chooseAction(card){
+      this.$emit('chooseAction', card);
     },
   }
 }
 </script>
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .gain-skill, .buttons {

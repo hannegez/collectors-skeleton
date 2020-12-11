@@ -69,8 +69,7 @@
       :player="players[playerId]"
       :skillsOnSale="skillsOnSale"
       :placement="skillPlacement"
-      :chosenAction="chosenAction"
-      @gainSkill="gainSkill($event)"
+      @chooseAction="chooseAction(chosenAction, $event)"
       @placeBottle="placeBottle('skill', $event)"/>
 
      <h1>Auction</h1>
@@ -81,8 +80,7 @@
        :auctionSpot = "auctionSpot"
        :marketValues="marketValues"
        :placement="auctionPlacement"
-       :chosenAction="chosenAction"
-       @startAuction="startAuction($event)"
+       @chooseAction="chooseAction(chosenAction, $event)"
        @placeBottle="placeBottle('auction', $event)"/>
 
 

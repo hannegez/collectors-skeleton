@@ -61,8 +61,7 @@
       :player="players[playerId]"
       :skillsOnSale="skillsOnSale"
       :placement="skillPlacement"
-      :chosenAction="chosenAction"
-      @gainSkill="gainSkill($event)"
+      @chooseAction="chooseAction(chosenAction, $event)"
       @placeBottle="placeBottle('skill', $event)"/>
 
      <h1>Auction</h1>
@@ -73,8 +72,7 @@
        :auctionSpot = "auctionSpot"
        :marketValues="marketValues"
        :placement="auctionPlacement"
-       :chosenAction="chosenAction"
-       @startAuction="startAuction($event)"
+       @chooseAction="chooseAction(chosenAction, $event)"
        @placeBottle="placeBottle('auction', $event)"/>
 
 
@@ -83,11 +81,11 @@
       <CollectorsStartWork v-if="players[playerId]"
         :labels="labels"
         :player="players[playerId]"
-
         :marketValues="marketValues"
         :placement="workPlacement"
         @startWork="startWork($event)"
-        @placeBottle="placeBottle('work', $event)"/> <!--kanske änsdras-->
+        @placeWorkBottle="placeWorkBottle( $event)"/>
+
 
 
 <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
@@ -110,10 +108,27 @@
         <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
       </div>
 
-      <!-- TESTAR HÄR ATT FÅ IN GAME BOARD -->
-          <div id="collectors-board">
-            <div id="left-board">
-              <GameBoard/>
+
+
+
+
+      <!-- Här vill jag lägga in ett grid med uppdelade grids inuti, se Style längre ned.
+i collectors.vue ska det finnas en grid som sammanställer mer detaljerade grid i respektive komponent ex från buy actions. Detta har jag dock inte fått till..
+Från Mikael:
+1. Att lägga ett element i en komponent betyder att du också flyttar över relevant CSS till komponenten. Föräldrakomponenten behöver då inte bry sig om denna alls. Så flytta allt som har med “pink” att göra till komponenten.
+
+Se css längre ned /dani
+
+    -->
+        <div class="container">
+
+            <div class="box green">
+              <div class="box arrowGreen">pilar</div>
+              <div class="box bottleGreen">flaskor</div>
+              <div class="box greens">enfärg</div>
+              <div class="box greenInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
+              <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+              </div>
             </div>
 
             <div id="right-board">
@@ -194,7 +209,7 @@ export default {
 
       //HÄR LÄGGER VI TILL workPlacement
       //workPlacement: [],
-
+      chosenWorkAction: null, //bajs
       chosenPlacementCost: null,
       chosenAction: null,           //MAJA LA TILL DENNA
       marketValues: { fastaval: 0,
@@ -266,8 +281,15 @@ export default {
        this.skillPlacement = d.skillPlacement;
        this.marketPlacement = d.marketPlacement;
        this.auctionPlacement = d.auctionPlacement;
-       this.workPlacement = d.workPlacement;
       }.bind(this));
+
+      this.$store.state.socket.on('collectorsWorkBottlePlaced',
+        function(d) {
+          this.players= d.players;
+          this.placements = d.placements;
+          this.workPlacement = d.placements.workPlacement;
+
+         }.bind(this));
 
    this.$store.state.socket.on('collectorsPointsUpdated', (d) => this.points = d );
 
@@ -344,7 +366,7 @@ export default {
       else if (action === "work") {
         this.startWork(card); /*måste ändras*/
       //  work(card);
-      }
+    }
     },
 
 
@@ -353,8 +375,7 @@ export default {
     selectAll: function (n) {
       n.target.select();
     },
-    placeBottle: function (action, cost) {
-
+    placeBottle: function (action, cost) { /* skicka till server och gör förändring där.*/
       this.chosenPlacementCost = cost;
       this.chosenAction = action;
       this.$store.state.socket.emit('collectorsPlaceBottle', {
@@ -362,6 +383,20 @@ export default {
           playerId: this.playerId,
           action: action,
           cost: cost,
+        }
+      );
+    },
+    placeWorkBottle: function (p) { /* skicka till server och gör förändring där.*/
+
+      this.chosenPlacementCost = p.cost;
+      this.chosenAction = "work";
+      this.chosenWorkAction= p.workAction;
+      this.$store.state.socket.emit('collectorsPlaceWorkBottle', {
+          roomId: this.$route.params.id,
+          playerId: this.playerId,
+          action: "work",
+          cost: p.cost,
+          workAction:p.workAction,
         }
       );
     },
@@ -399,7 +434,8 @@ export default {
           roomId: this.$route.params.id,
           playerId: this.playerId,
           card: card,
-          cost: this.chosenPlacementCost
+          cost: this.chosenPlacementCost,
+          workAction:this.chosenWorkAction
         }
       );
     },
@@ -452,9 +488,102 @@ export default {
 
 
 <style scoped>
-  #wrapper {
-    color: #000;
+/*Här ligger gridsen, uppdelade genom att placera de små gridsen i den stora. De små ska flyttas till respektive komponent. /Dani*/
+#wrapper { color: #000; }
+
+
+.container {
+  display: grid;
+  height: 1000px;
+  width: 1200px;
+  padding-left: 200px;
+  padding-bottom: 200px;
+  grid-template-columns: 1fr 1fr 1fr ;
+  grid-template-rows: 1fr 2fr 2fr 1fr ;
+  grid-template-areas:
+    "topp topp topp"
+    "lside mside rside "
+    "lside mside rside "
+    "bottoms bottoms bottoms" ;
   }
+.green {
+  grid-area: lside;
+  background: #dfeccc;
+}
+.yellow {
+  grid-area: mside;
+  background: #f5f2cc;
+}
+.beige{
+  grid-area: rside;
+  background: #f5f1e2;
+}
+
+/*påbörjar den rosa delen*/
+
+
+
+/*påbörjar den blåa delen*/
+.blue{
+  grid-area: bottoms;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr ;
+  grid-template-areas:
+    " d d d d d f"
+    " e e e e e h ";
+}
+
+.bottleBlue{
+  grid-area: d;
+
+  background: url('/images/blaflaska.PNG' ) ;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.char{
+  grid-area: e;
+  background: url('/images/pilbla.PNG' ) ;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.blues{
+  grid-area: h;
+  background: url('/images/bla.PNG' ) ;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.blueInfo{
+  grid-area: f;
+  background: url('/images/raiseValue.PNG' ) ;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+
+}
+
+/*påbörjar den gröna rosa delen*/
+.green{
+  grid-area: lside;
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+  grid-template-areas:
+    " i j "
+    " k l "
+    " k l "
+    " k l "
+    " k l "
+    " k l ";
+}
+.arrowGreen{
+  grid-area: k;
+  background: url('/images/pilgron.PNG' ) ;
+  background-repeat: no-repeat;
+  background-size: 30% 95%;
 
   #collectors-board {
     display: grid;

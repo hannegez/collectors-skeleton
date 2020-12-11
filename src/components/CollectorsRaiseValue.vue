@@ -3,7 +3,7 @@
       <h2>{{ labels.raiseValue }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
 
 <!--BUY CARDS raiseValueOnSale borttagen for now-->
-      <div class="buy-cards">
+      <!-- <div class="buy-cards">
         <div  v-for="(card, index) in skillsOnSale" :key="index">
           <CollectorsCard
             :card="card"
@@ -11,7 +11,7 @@
             @doAction="raiseValue(card)"/>
           {{ cardCost(card) }}
         </div>
-      </div>
+      </div> -->
 
       <div>
         <div class="buttons" v-for="(p, index) in placement" :key="index">
@@ -107,10 +107,11 @@ export default {
 
       //  highlightAvailableCards: function () {
       for (let i = 0; i < this.auctionCards.length; i += 1) {
-        if (this.auctionCards[i] != null)
-        this.setAvailable(this.auctionCards[i]);
-        console.log("first AuctionCard ska highlightas");
-        break
+        if (this.auctionCards[i].x>0) {
+          this.setAvailable(this.auctionCards[i]);
+          console.log("first AuctionCard ska highlightas");
+          break;
+        }
       }
 
       for (let i = 0; i < this.player.hand.length; i += 1) {                              //ÄVEN KORTEN PÅ HAND HIGHLIGHTAS, SÅ VILL VI EJ HA DET
@@ -118,10 +119,11 @@ export default {
       }
 
       for (let i = 0; i < this.skillsOnSale.length; i += 1) {
-        if (this.skillsOnSale[i] != null)
-        this.setAvailable(this.skillsOnSale[i]);
-        console.log("first skillsOnSale ska highlightas");
-        break
+        if (this.skillsOnSale[i].x>0) {
+          this.setAvailable(this.skillsOnSale[i]);
+          console.log("first skillsOnSale ska highlightas");
+          break;
+        }
       }
     },
 

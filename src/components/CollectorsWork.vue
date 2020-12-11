@@ -1,19 +1,5 @@
 <template>
     <div>
-<<<<<<< HEAD
-        <p>Här börjar vi med Work</p>
-      <h2>{{ labels.gainSkill }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
-
-<!--BUY CARDS -->
-      <div class="gain-skill">
-        <div v-for="(card, index) in skillsOnSale" :key="index">
-          <CollectorsCard
-            :card="card"
-            :availableAction="card.available"
-            @doAction="gainSkill(card)"/>
-        </div>
-      </div>
-=======
       <h2>{{ labels.startAuction }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
 
 <!--BUY CARDS -->
@@ -27,15 +13,19 @@
         </div>
       </div> -->
 
->>>>>>> c3fac5beb5a30e54f6f5fe799e89d1a2be586ea2
-
       <div>
         <div class="buttons" v-for="(p, index) in placement" :key="index">
+          ${{p.cost}}
+          ${{p.workAction}}
+          {{p}}
+          {{index}}
           <button
             v-if="p.playerId===null"
             :disabled="cannotAfford(p.cost)"
-            @click="placeBottle(p)" >
+            @click="placeWorkBottle(p)" >
             ${{p.cost}}
+            ${{p.workAction}}
+
           </button>
           <div v-if="p.playerId !== null">
             {{p.playerId}}
@@ -78,15 +68,17 @@ export default {
       return (this.player.money < minCost);
     },
 
-    placeBottle: function (p) {
-      this.$emit('placeBottle', p.cost);
+    placeWorkBottle: function (p) {
+      this.$emit('placeWorkBottle', p); //emitta hela p.
     },
     setAvailable: function (card) {
       this.$set(card, "available", true);
     },
-    startWork: function (card) {
+    startWork: function (card) {//skicka placerin/textsträng till startWork ex actiion
+      console.log("startWork 1" + card);
       if (card.available) {
-        this.$emit('startWork', card);
+        this.$emit('startWork', card); //skicka placerin/textsträng till startWork ex actiion
+        console.log("startWork 2" + card);
 
       }
     }

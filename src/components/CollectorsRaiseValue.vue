@@ -2,9 +2,9 @@
     <div>
       <h2>{{ labels.raiseValue }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
 
-<!--BUY CARDS -->
+<!--BUY CARDS raiseValueOnSale borttagen for now-->
       <div class="buy-cards">
-        <div v-for="(card, index) in raiseValueOnSale" :key="index">
+        <div  v-for="(card, index) in skillsOnSale" :key="index">
           <CollectorsCard
             :card="card"
             :availableAction="card.available"
@@ -53,8 +53,9 @@ export default {
   props: {            //HÄR ÄR ALLA v-binds FRÅN ELEMENTET I Collectors.vue
     labels: Object,  //specify what kind of object
     player: Object,
-    itemsOnSale: Array,
-    raiseValueOnSale: Array,
+  //itemsOnSale: Array,
+    auctionCards: Array,
+  //  raiseValueOnSale: Array,
     market: Array,
     skillsOnSale: Array,
     marketValues: Object,
@@ -77,6 +78,12 @@ export default {
       this.$emit('placeBottle', p.cost);
       this.highlightAvailableCards(p.cost);
     },
+
+    setAvailable: function (card) {
+        this.$set(card, "available", true);
+    },
+
+    //byt ut till setavailable --> gain skill..
     checkAvailable: function (card, cost) {
       if (this.marketValues[card.item] <= this.player.money - cost) {
         this.$set(card, "available", true);
@@ -85,6 +92,7 @@ export default {
         this.$set(card, "available", false);
       }
     },
+
     highlightAvailableCards: function (cost=100) {
       /* för alla kort i raiseValueOnSale ska motsvarade kort i skillsOnSale,
       auctionCards och player.hand highlightas */
@@ -92,13 +100,31 @@ export default {
       //GÅ IGENOM skillsOnSale AUCTIONCARDS OCH PLAYER HAnd och sätt available på de som ska vara det
       //NÄSTA STEG: ta bort raiseValueOnSale
 
-      for (let i = 0; i < this.raiseValueOnSale.length; i += 1) {
-        this.checkAvailable(this.raiseValueOnSale[i], cost);
+      //    for (let i = 0; i < this.raiseValueOnSale.length; i += 1) {
+      //    this.checkAvailable(this.raiseValueOnSale[i], cost);
+      //  }
+      //Denna ovan ska bort, ska lägga till första element i auction och i skill.
+
+      //  highlightAvailableCards: function () {
+      for (let i = 0; i < this.auctionCards.length; i += 1) {
+        if (this.auctionCards[i] != null)
+        this.setAvailable(this.auctionCards[i]);
+        console.log("first AuctionCard ska highlightas");
+        break
       }
+
       for (let i = 0; i < this.player.hand.length; i += 1) {                              //ÄVEN KORTEN PÅ HAND HIGHLIGHTAS, SÅ VILL VI EJ HA DET
-        this.checkAvailable(this.player.hand[i], cost);
+        this.setAvailable(this.player.hand[i], cost);
+      }
+
+      for (let i = 0; i < this.skillsOnSale.length; i += 1) {
+        if (this.skillsOnSale[i] != null)
+        this.setAvailable(this.skillsOnSale[i]);
+        console.log("first skillsOnSale ska highlightas");
+        break
       }
     },
+
     raiseValue: function (card) {
       if (card.available) {
         this.$emit('raiseValue', card)

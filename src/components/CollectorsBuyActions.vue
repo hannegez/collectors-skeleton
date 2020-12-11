@@ -3,6 +3,7 @@
       <h2>{{ labels.buyCard }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
 
 <!--BUY CARDS -->
+      <p>{{ marketValues }}</p>
       <div class="buy-cards">
         <div v-for="(card, index) in itemsOnSale" :key="index">
           <CollectorsCard
@@ -65,6 +66,7 @@ export default {
       this.highlightAvailableCards(p.cost);
     },
     checkAvailable: function (card, cost) {
+      console.log("marketValue:",this.marketValues[card.item],"player money:",this.player.money, "cost:",cost);
       if (this.marketValues[card.item] <= this.player.money - cost) {
         this.$set(card, "available", true);
       }
@@ -76,7 +78,7 @@ export default {
       for (let i = 0; i < this.itemsOnSale.length; i += 1) {
         this.checkAvailable(this.itemsOnSale[i], cost);
       }
-      for (let i = 0; i < this.player.hand.length; i += 1) {                              //ÄVEN KORTEN PÅ HAND HIGHLIGHTAS, SÅ VILL VI EJ HA DET
+      for (let i = 0; i < this.player.hand.length; i += 1) {
         this.checkAvailable(this.player.hand[i], cost);
       }
     },

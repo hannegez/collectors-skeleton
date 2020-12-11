@@ -82,6 +82,7 @@ function sockets(io, socket, data) {
         playerId: d.playerId,
         players: data.getPlayers(d.roomId),
         raiseValueOnSale: data.getRaiseValueOnSale(d.roomId),
+        marketValues: data.getMarketValues(d.roomId),
         market: data.getMarket(d.roomId)
       }
     );

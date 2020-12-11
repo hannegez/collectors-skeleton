@@ -16,6 +16,10 @@
 <!-- gör om till objekt och skicka med kostnad och action samt ändra i placement. -->
       <div>
         <div class="buttons" v-for="(p, index) in placement" :key="index">
+          ${{p.cost}}
+          ${{p.workAction}}
+          {{p}}
+          {{index}}
           <button
             v-if="p.playerId===null"
             :disabled="cannotAfford(p.cost)"
@@ -68,7 +72,7 @@ export default {
     },
 
     placeWorkBottle: function (p) {
-      this.$emit('placeWorkBottle', p.cost, p.workAction); //emitta hela p.
+      this.$emit('placeWorkBottle', p); //emitta hela p.
     },
     setAvailable: function (card) {
       this.$set(card, "available", true);

@@ -95,9 +95,12 @@ function sockets(io, socket, data) {
     );
     });
   socket.on('collectorsPlaceWorkBottle', function(d) {
-      data.placeWorkBottle(d.roomId, d.playerId, d.action, d.cost, d.workAction); //lägg till workaction i collectrs placebottle
+      data.placeWorkBottle(d.roomId, d.playerId, d.cost, d.workAction); //lägg till workaction i collectrs placebottle
       //console.log("hääär" + d.workAction + d.cost + d.playerId); //FRÅGA varför kopplas d.workAction till cost
-      io.to(d.roomId).emit('collectorsWorkBottlePlaced', data.getPlacements(d.roomId)
+      io.to(d.roomId).emit('collectorsWorkBottlePlaced', {             //OBJEKTET SOM SKICKAS SOM 2:A PARAMETER ÄR DET SOM KALLAS FÖR d I
+        players: data.getPlayers(d.roomId),
+        placements: data.getPlacements(d.roomId)
+      }
       );
       });
 

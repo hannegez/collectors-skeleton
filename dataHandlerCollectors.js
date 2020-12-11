@@ -192,7 +192,7 @@ Data.prototype.raiseValue = function (roomId, playerId, card, cost) {
 
     //GÅ IGENOM SKILLSONSALE, AUCTIONCARDS OCH HAND
     //NÄSTA STEG: ta bort raiseValueOnSale
-    
+
     /// check first if the card is among the raise value on sale
     for (let i = 0; i < room.raiseValueOnSale.length; i += 1) {
       // since card comes from the client, it is NOT the same object (reference)
@@ -312,7 +312,6 @@ Data.prototype.gainSkill = function (roomId, playerId, card, cost) {
 
 Data.prototype.placeBottle = function (roomId, playerId, action, cost) {
   let room = this.rooms[roomId];
-  console.log("i placebottle" +" "+ roomId +" "+ playerId+" "+ action +" "+ cost +" "+ workAction);
   if (typeof room !== 'undefined') {
     let activePlacement = [];
     if (action === "buy") {
@@ -339,17 +338,37 @@ Data.prototype.placeBottle = function (roomId, playerId, action, cost) {
   }
 }
 
-Data.prototype.placeWorkBottle = function (roomId, playerId, action, cost, workAction) {
+Data.prototype.placeWorkBottle = function (roomId, playerId, cost, workAction) {
   let room = this.rooms[roomId];
-  console.log("i placebottle" +" "+ roomId +" "+ playerId+" "+ action +" "+ cost +" "+ workAction);
   if (typeof room !== 'undefined') {
     let activePlacement = room.workPlacement;
 
 
     for(let i = 0; i < activePlacement.length; i += 1) {
-        if( activePlacement[i].cost === cost &&
+        if( activePlacement[i].workAction === workAction &&
             activePlacement[i].playerId === null ) {
           activePlacement[i].playerId = playerId;
+          //lägg till if satser / metod med if satser.
+          if (workAction === 1){
+            console.log("workaction 1");
+          }
+          else if (workAction === 2) {
+            console.log("workaction 2");
+          }
+          else if (workAction === 3) {//tar upp två kort när knapp 3 trycks på
+            console.log("workaction 3");
+            this.drawCard(roomId, playerId);
+            this.drawCard(roomId, playerId);
+          }
+          else if (workAction === 4) {
+            console.log("workaction 4");
+          }
+          else if (workAction === 5) {
+            console.log("workaction 5");
+
+          }
+
+
           break;
         }
     }

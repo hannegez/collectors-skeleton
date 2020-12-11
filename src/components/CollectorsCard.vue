@@ -6,7 +6,6 @@
       {{card.item}}
       {{card.skill}}
       {{card.market}}
-      {{fis}}
     </div>
 </template>
 

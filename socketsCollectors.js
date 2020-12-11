@@ -18,7 +18,8 @@ function sockets(io, socket, data) {
              players: data.getPlayers(d.roomId),              //Collectors.vue: "this.$store.state.socket.on('collectorsInitialize',
              itemsOnSale: data.getItemsOnSale(d.roomId),      //  function(d) { ...... "
              marketValues: data.getMarketValues(d.roomId),
-             //testMarketValues: data.getMarketValues(d.roomId),
+             raiseValueOnSale: data.getRaiseValueOnSale(d.roomId),
+             market: data.getMarket(d.roomId),
              skillsOnSale: data.getSkillsOnSale(d.roomId),
              auctionCards: data.getAuctionCards(d.roomId),
              auctionSpot: data.getAuctionSpot(d.roomId), // TEST ???
@@ -51,7 +52,7 @@ function sockets(io, socket, data) {
         playerId: d.playerId,
         players: data.getPlayers(d.roomId),
         auctionCards: data.getAuctionCards(d.roomId),
-        auctionSpot: data.getAuctionSpot(d.roomId) //TEST ??
+        auctionSpot: data.getAuctionSpot(d.roomId)
       }
     );
   });
@@ -75,6 +76,19 @@ function sockets(io, socket, data) {
       }
     );
   });
+
+  socket.on('collectorsRaiseValue', function(d) {
+    data.raiseValue(d.roomId, d.playerId, d.card, d.cost)
+    io.to(d.roomId).emit('collectorsValueRaised', {
+        playerId: d.playerId,
+        players: data.getPlayers(d.roomId),
+        raiseValueOnSale: data.getRaiseValueOnSale(d.roomId),
+        marketValues: data.getMarketValues(d.roomId),
+        market: data.getMarket(d.roomId)
+      }
+    );
+  });
+
   socket.on('collectorsPlaceBottle', function(d) {
     data.placeBottle(d.roomId, d.playerId, d.action, d.cost); //lägg till workaction i collectrs placebottle
     io.to(d.roomId).emit('collectorsBottlePlaced', data.getPlacements(d.roomId)
@@ -87,13 +101,6 @@ function sockets(io, socket, data) {
       );
       });
 
-//testTESTTEST
-  socket.on('collectorsTestRaiseValue', function(d) {
-    data.getMarketValues(d.roomId, d.playerId, d.action, d.cost);
-    io.to(d.roomId).emit('collectorsTestValueRaised', data.getMarketValues(d.roomId)
-    );
-  }
-)
 
 
 }

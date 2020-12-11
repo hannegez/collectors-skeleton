@@ -1,15 +1,14 @@
 <template>
     <div>
-      <h2>{{ labels.buyCard }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+      <h2>{{ labels.raiseValue }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
 
 <!--BUY CARDS -->
-      <p>{{ marketValues }}</p>
       <div class="buy-cards">
-        <div v-for="(card, index) in itemsOnSale" :key="index">
+        <div v-for="(card, index) in raiseValueOnSale" :key="index">
           <CollectorsCard
             :card="card"
             :availableAction="card.available"
-            @doAction="buyCard(card)"/>
+            @doAction="raiseValue(card)"/>
           {{ cardCost(card) }}
         </div>
       </div>
@@ -29,6 +28,17 @@
         </div>
       </div>
 
+      <h2>MARKET</h2> <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
+      <div class="buy-cards">
+        <div v-for="(card, index) in market" :key="index">
+          <CollectorsCard
+            :card="card"
+            :availableAction="card.available"
+            @doAction="raiseValue(card)"/>
+            <!-- {{ cardCost(card) }} -->
+        </div>
+      </div>
+
     </div>
 
 </template>
@@ -36,7 +46,7 @@
 <script>
 import CollectorsCard from '@/components/CollectorsCard.vue'
 export default {
-  name: 'CollectorsBuyActions',
+  name: 'CollectorsRaiseValue',
   components: {
     CollectorsCard
   },
@@ -44,6 +54,8 @@ export default {
     labels: Object,  //specify what kind of object
     player: Object,
     itemsOnSale: Array,
+    raiseValueOnSale: Array,
+    market: Array,
     skillsOnSale: Array,
     marketValues: Object,
     placement: Array
@@ -66,7 +78,6 @@ export default {
       this.highlightAvailableCards(p.cost);
     },
     checkAvailable: function (card, cost) {
-      console.log("marketValue:",this.marketValues[card.item],"player money:",this.player.money, "cost:",cost);
       if (this.marketValues[card.item] <= this.player.money - cost) {
         this.$set(card, "available", true);
       }
@@ -75,16 +86,22 @@ export default {
       }
     },
     highlightAvailableCards: function (cost=100) {
-      for (let i = 0; i < this.itemsOnSale.length; i += 1) {
-        this.checkAvailable(this.itemsOnSale[i], cost);
+      /* för alla kort i raiseValueOnSale ska motsvarade kort i skillsOnSale,
+      auctionCards och player.hand highlightas */
+
+      //GÅ IGENOM skillsOnSale AUCTIONCARDS OCH PLAYER HAnd och sätt available på de som ska vara det
+      //NÄSTA STEG: ta bort raiseValueOnSale
+
+      for (let i = 0; i < this.raiseValueOnSale.length; i += 1) {
+        this.checkAvailable(this.raiseValueOnSale[i], cost);
       }
-      for (let i = 0; i < this.player.hand.length; i += 1) {
+      for (let i = 0; i < this.player.hand.length; i += 1) {                              //ÄVEN KORTEN PÅ HAND HIGHLIGHTAS, SÅ VILL VI EJ HA DET
         this.checkAvailable(this.player.hand[i], cost);
       }
     },
-    buyCard: function (card) {
+    raiseValue: function (card) {
       if (card.available) {
-        this.$emit('buyCard', card)
+        this.$emit('raiseValue', card)
         this.highlightAvailableCards()
       }
     }

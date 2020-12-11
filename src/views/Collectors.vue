@@ -40,15 +40,6 @@
        <p>buyPlacement: {{buyPlacement}}</p>
         <p>chosenPlacementCost: {{chosenPlacementCost}}</p>
 
-
-<!--Test på raise value
-       <div class="buttons">
-        <button @click="testRaiseValue">
-          {{ labels.raiseValue }}
-          testRaise
-        </button>
-      </div> -->
-
        <h2>Your hand</h2>
        <div class="cardslots" v-if="players[playerId]">
          <CollectorsCard v-for="(card, index) in players[playerId].hand" :card="card" :availableAction="card.available" @doAction="chooseAction(chosenAction, card)" :key="index"/>
@@ -444,15 +435,7 @@ export default {
     }
   },
 
-  // //TESTTEST
-  //    testRaiseValue: function () {
-  //      console.log("testRaiseValue");
-  //      this.$store.state.socket.emit('collectorsTestRaiseValue', {
-  //        roomId: this.$route.params.id,
-  //        playerId: this.playerId
-  //      }
-  //    );
-  //  }
+
 }
 </script>
 <!--  /*getInfo: function(){

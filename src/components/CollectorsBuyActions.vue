@@ -1,13 +1,12 @@
 <template>
     <div>
 
+      <div>
+        <h2>{{ labels.buyCard }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
 
+        <p>{{ marketValues }}</p>
+    </div>
 
-
-      <h2>{{ labels.buyCard }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
-
-<!--BUY CARDS -->
-      <p>{{ marketValues }}</p>
       <div class="buy-cards">
         <div v-for="(card, index) in itemsOnSale" :key="index">
           <CollectorsCard
@@ -19,6 +18,7 @@
       </div>
 
       <div>
+
         <div class="buttons" v-for="(p, index) in placement" :key="index">
           <button
             v-if="p.playerId===null"
@@ -32,10 +32,6 @@
 
         </div>
       </div>
-
-
-
-
 
     </div>
 
@@ -110,6 +106,8 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+
   .buy-cards, .buttons {
     display: grid;
     grid-template-columns: repeat(auto-fill, 130px);

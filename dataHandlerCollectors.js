@@ -190,6 +190,10 @@ Data.prototype.raiseValue = function (roomId, playerId, card, cost) {
   if (typeof room !== 'undefined') {
     let c = null;
 
+    //GÅ IGENOM SKILLSONSALE, AUCTIONCARDS OCH HAND
+    //NÄSTA STEG: ta bort raiseValueOnSale
+    //för skill och auction istället för raisevalueonsale
+
     /// check first if the card is among the raise value on sale
     for (let i = 0; i < room.auctionCards.length; i += 1) {
       // since card comes from the client, it is NOT the same object (reference)
@@ -369,21 +373,29 @@ Data.prototype.placeWorkBottle = function (roomId, playerId, cost, workAction) {
           //lägg till if satser / metod med if satser.
           if (workAction === 1){
             console.log("workaction 1");
+            room.players[playerId].money -= cost; // olika för olika rounds
           }
           else if (workAction === 2) {
             console.log("workaction 2");
+            room.players[playerId].money -= cost; //ska lägga till 1
           }
           else if (workAction === 3) {//tar upp två kort när knapp 3 trycks på
             console.log("workaction 3");
             this.drawCard(roomId, playerId);
             this.drawCard(roomId, playerId);
+            room.players[playerId].money -= cost; //ska dra bort 1 coin
           }
           else if (workAction === 4) {
             console.log("workaction 4");
+            this.drawCard(roomId, playerId);
+            //add 1st player token
           }
           else if (workAction === 5) {
             console.log("workaction 5");
-
+            this.drawCard(roomId, playerId);
+            //you must draw one card from the deck to your hand and place
+            // one card from your hand face down next to your player board
+            // on its right side
           }
 
 

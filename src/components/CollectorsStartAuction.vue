@@ -89,7 +89,7 @@ export default {
         this.setAvailable(this.auctionCards[i]);
         console.log("AuctionCard ska highlightas");
       }
-      for (let i = 0; i < this.player.hand.length; i += 1) {                              //ÄVEN KORTEN PÅ HAND HIGHLIGHTAS, SÅ VILL VI EJ HA DET
+      for (let i = 0; i < this.player.hand.length; i += 1) {
         this.setAvailable(this.player.hand[i]);
         console.log("Hand ska highlightas");
       }

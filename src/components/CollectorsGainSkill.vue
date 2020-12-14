@@ -1,9 +1,7 @@
 <template>
     <div>
-        <p>Denna rubrik vill vi ändra så att det står annat för gain skill:</p>
-      <h2>{{ labels.gainSkill }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+      <h2>{{ labels.gainSkill }}</h2>
 
-<!--BUY CARDS -->
       <div class="gain-skill">
         <div v-for="(card, index) in skillsOnSale" :key="index">
           <CollectorsCard
@@ -26,17 +24,9 @@
           </div>
         </div>
       </div>
-
-      
-
     </div>
 
 </template>
-
-
-
-
-
 
 
 <script>

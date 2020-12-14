@@ -1,5 +1,7 @@
 <template>
-    <body>
+    <div>
+
+
 
 
       <h2>{{ labels.buyCard }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
@@ -31,18 +33,11 @@
         </div>
       </div>
 
-      <div class="box pink">
-          <div class="box arrow">pilar</div>
-          <div class="box bottlePink">flaskor</div>
-          <div class="box pinks">enfärg</div>
-          <div class="box pinkInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
-          <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-          </div>
-      </div>
 
 
 
-    </body>
+
+    </div>
 
 
 </template>
@@ -120,41 +115,7 @@ export default {
     grid-template-columns: repeat(auto-fill, 130px);
   }
 
-  .pink{
-    grid-area: topp;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr ;
-    grid-template-areas:
-      " a a a a a g"
-      " b b b b b c ";
-  }
-  .arrow{
-    grid-area: a;
-    background: url('/images/pilrosa.PNG' ) ;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-  }
-  .bottlePink{
-    grid-area: b;
-    background: url('/images/rosaflaska.PNG' )  ;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
 
-  }
-  .pinks{
-    grid-area: c;
-    background: url('/images/rosa.PNG' ) ;
-    background-repeat: no-repeat; /* gör att endast en syns men vill att en ska synas per grid*/
-    background-size: 100% 100%;
-
-  }
-  .pinkInfo{
-    grid-area: g;
-    background: url('/images/buyItem.PNG' ) ;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-  }
 
 
 

@@ -128,6 +128,79 @@ Från Mikael:
 Se css längre ned /dani
 
     -->
+        <div class="testcontainer">
+            <div class="buyitem">
+              <h1>Items</h1>
+             <CollectorsBuyActions v-if="players[playerId]"
+               :labels="labels"
+               :player="players[playerId]"
+               :itemsOnSale="itemsOnSale"
+               :marketValues="marketValues"
+               :placement="buyPlacement"
+               @buyCard="buyCard($event)"
+               @placeBottle="placeBottle('buy', $event)"/>
+               <p>buyPlacement: {{buyPlacement}}</p>
+                <p>chosenPlacementCost: {{chosenPlacementCost}}</p>
+
+            </div>
+            <div class="gainskill">
+              <h1>Skills</h1>
+              <CollectorsGainSkill v-if="players[playerId]"
+                :labels="labels"
+                :player="players[playerId]"
+                :skillsOnSale="skillsOnSale"
+                :placement="skillPlacement"
+                @chooseAction="chooseAction(chosenAction, $event)"
+                @placeBottle="placeBottle('skill', $event)"/>
+            </div>
+
+            <div class="startauction">
+              <h1>Auction</h1>
+              <CollectorsStartAuction v-if="players[playerId]"
+                :labels="labels"
+                :player="players[playerId]"
+                :auctionCards="auctionCards"
+                :auctionSpot = "auctionSpot"
+                :marketValues="marketValues"
+                :placement="auctionPlacement"
+                @chooseAction="chooseAction(chosenAction, $event)"
+                @placeBottle="placeBottle('auction', $event)"/>
+
+            </div>
+            <div class="valuenwork">
+
+
+            <div class="raisevalue">
+              <h1>Raise Value</h1>
+              <CollectorsRaiseValue v-if="players[playerId]"
+                :labels="labels"
+                :player="players[playerId]"
+                :market="market"
+                :marketValues="marketValues"
+                :auctionCards="auctionCards"
+                :skillsOnSale="skillsOnSale"
+                :placement="marketPlacement"
+                @raiseValue="raiseValue($event)"
+                @placeBottle="placeBottle('market', $event)"/>
+
+            </div>
+
+            <div class="work">
+              <h1>Work</h1>
+                <CollectorsStartWork v-if="players[playerId]"
+                :labels="labels"
+                :player="players[playerId]"
+                :marketValues="marketValues"
+                :placement="workPlacement"
+                @startWork="startWork($event)"
+                @placeWorkBottle="placeWorkBottle( $event)"/>
+
+            </div>
+            </div>
+
+        </div>
+
+
         <div class="container">
 
             <div class="box green">
@@ -142,6 +215,14 @@ Se css längre ned /dani
               <div class="box bottleYellow">flaskor</div>
               <div class="box yellowInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
               <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+              </div>
+              <div class="box pink">
+                  <div class="box arrow">pilar</div>
+                  <div class="box bottlePink">flaskor</div>
+                  <div class="box pinks">enfärg</div>
+                  <div class="box pinkInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
+                  <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+                  </div>
               </div>
 
 
@@ -498,7 +579,53 @@ export default {
 /*Här ligger gridsen, uppdelade genom att placera de små gridsen i den stora. De små ska flyttas till respektive komponent. /Dani*/
 #wrapper { color: #000; }
 
+.testcontainer{
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  grid-template-rows: 1fr 1fr ;
+  grid-template-areas:
+  "gain buy"
+  "test start";
+}
+.buyitem{
+  grid-area: buy;
+  background-color: #f8dcce;
 
+}
+.gainskill{
+  grid-area: gain;
+  background-color: #dfeccc;
+}
+
+.startauction{
+  grid-area: start;
+  background-color: #f5f1e2;
+
+}
+.valuenwork{
+  grid-area: test;
+  display: grid;
+  grid-template-areas:
+  "raise work"
+}
+
+.raisevalue{
+  grid-area: raise;
+
+  padding: 40%;
+  background-color: #cfdcf2;
+
+}
+
+.work{
+  grid-area: work;
+  padding: 40%;
+  background-color: #f5f2cc;
+
+}
+
+
+/*gamla griden */
 .container {
   display: grid;
   height: 1000px;
@@ -527,7 +654,41 @@ export default {
 }
 
 /*påbörjar den rosa delen*/
+.pink{
+  grid-area: topp;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr ;
+  grid-template-areas:
+    " a a a a a g"
+    " b b b b b c ";
+}
+.arrow{
+  grid-area: a;
+  background: url('/images/pilrosa.PNG' ) ;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.bottlePink{
+  grid-area: b;
+  background: url('/images/rosaflaska.PNG' )  ;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 
+}
+.pinks{
+  grid-area: c;
+  background: url('/images/rosa.PNG' ) ;
+  background-repeat: no-repeat; /* gör att endast en syns men vill att en ska synas per grid*/
+  background-size: 100% 100%;
+
+}
+.pinkInfo{
+  grid-area: g;
+  background: url('/images/buyItem.PNG' ) ;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
 
 
 /*påbörjar den blåa delen*/

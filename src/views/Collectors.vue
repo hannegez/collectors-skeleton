@@ -475,8 +475,8 @@ getInfo: function(event){
 
 
 
-
-<style scoped>
+<!-- style scoped är bara för filen, utan scoped gäller det allt -->
+<style>
 /*Här ligger gridsen, uppdelade genom att placera de små gridsen i den stora. De små ska flyttas till respektive komponent. /Dani*/
 #wrapper {
   color: #000;
@@ -488,12 +488,13 @@ header {
   position: fixed;
   width:100%;
   pointer-events: none; */
-  background: pink;
+  border: solid thin #000;
 }
 
 main {
   user-select: none;
   display: grid;
+  grid-gap: 1em;
   grid-template-columns: 1fr 20%;
   grid-template-rows: 1fr;
   grid-template-areas:
@@ -517,7 +518,7 @@ footer a:visited {
 
 .game {
   grid-area: gameBoard;
-  background-color: red;
+  grid-gap: 1em;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -554,11 +555,17 @@ footer a:visited {
 
 /* ====================================== */
 
-
-
 .player {
   grid-area: playerBoard;
-  background-color: blue;
+  background-color: #f2f2f2;
+}
+
+/* ========================= */
+/* BUY CARD BUTTON */
+
+.buy-cards, .buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
 }
 
 /* ========================= */

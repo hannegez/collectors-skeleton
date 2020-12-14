@@ -19,7 +19,8 @@
 
       <div>
 
-        <div class="buttons" v-for="(p, index) in placement" :key="index">
+        <!-- GAMLA BOTTLE PLACEMENT - KNAPPAR
+        <div class="buttons" v-for="(p, index) in placement" :key="'original' + index">
           <button
             v-if="p.playerId===null"
             :disabled="cannotAfford(p.cost)"
@@ -29,8 +30,23 @@
           <div v-if="p.playerId !== null">
             {{p.playerId}}
           </div>
+        </div> -->
 
+<div class="bottlePlacements">
+        <div v-for="(p, index) in placement" :key="'bp' + index">
+          <input type="image"
+                 v-if="p.playerId===null"
+                 :disabled="cannotAfford(p.cost)"
+                 @click="placeBottle(p)"
+                 src='/images/bottle_placement.png' >
+          <p class="buttonText"> ${{p.cost}} </p>
+          <div v-if="p.playerId !== null">
+            {{p.playerId}}
+          </div>
         </div>
+      </div>
+
+
       </div>
 
     </div>
@@ -107,11 +123,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-
-  .buy-cards, .buttons {
+   .bottlePlacements {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 130px);
+    grid-template-columns: repeat(auto-fill, 200px);
   }
+
+
+/* HÄR LÅG buy-cards */
 
   .pink{
     grid-area: topp;

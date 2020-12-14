@@ -17,6 +17,7 @@
           @buyCard="buyCard($event)"
           @placeBottle="placeBottle('buy', $event)"/>
 
+
           <p>buyPlacement: {{buyPlacement}}</p>
           <p>chosenPlacementCost: {{chosenPlacementCost}}</p>
         </div>
@@ -39,6 +40,7 @@
             :placement="workPlacement"
             @startWork="startWork($event)"
             @placeWorkBottle="placeWorkBottle( $event)"/>
+            <img src="/images/workInfo.PNG" alt="">
           </div>
 
           <div class="auction pool">
@@ -55,6 +57,7 @@
 
             <div class="market pool">
               <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
+
               <CollectorsRaiseValue v-if="players[playerId]"
               :labels="labels"
               :player="players[playerId]"
@@ -65,9 +68,17 @@
               :placement="marketPlacement"
               @raiseValue="raiseValue($event)"
               @placeBottle="placeBottle('market', $event)"/>
-            </div>
-          </div>
 
+              <img src="/images/raiseValue.PNG" alt="">
+            </div>
+
+          </div>
+          <CollectorsPlayerBoard v-if="players[playerId]"
+          :labels="labels"
+          :player="players[playerId]"/>
+
+
+<!--
           <div class="player board">
             <h1>PLAYER INFO</h1>
             <p>Players: {{players}}</p>
@@ -96,10 +107,10 @@
             <div id="drawCard" class="buttons">
               <p class="buttonText">{{ labels.draw }}</p>
               <input type="image" @click="drawCard" class="imgButton" alt="Login"
-              src='/images/card_backside300px.png' value="Draw card">    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
+              src='/images/card_backside300px.png' value="Draw card">     NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY
             </div>
 
-          </div>
+          </div> -->
 
 
 
@@ -122,47 +133,6 @@
 
           Se css längre ned / -->
 
-        <div class="container">
-
-          <div class="box green">
-            <div class="box arrowGreen">pilar</div>
-            <div class="box bottleGreen">flaskor</div>
-            <div class="box greens">enfärg</div>
-            <div class="box greenInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
-              <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-            </div>
-          </div>
-          <div class="box yellow">
-            <div class="box bottleYellow">flaskor</div>
-            <div class="box yellowInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
-              <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-
-              </div>
-              <div class="box pink">
-                  <div class="box arrow">pilar</div>
-                  <div class="box bottlePink">flaskor</div>
-                  <div class="box pinks">enfärg</div>
-                  <div class="box pinkInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
-                  <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-                  </div>
-              </div>
-
-            </div>
-
-
-
-          </div>
-          <div class="box blue">
-            <div class="box char">karaktar</div>
-            <div class="box bottleBlue">flaskor</div>
-            <div class="box blues">enfärg</div>
-            <div class="box blueInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
-              <span class="popuptext" id="myPopup"> raise value gör det här och det här</span>
-            </div>
-          </div>
-          <div class="box beige">rside</div>
-
-        
 
       </footer>
     </div>
@@ -173,12 +143,13 @@
   <script>
   /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "[iI]gnored" }]*/
 
-  import CollectorsCard from '@/components/CollectorsCard.vue'
+//  import CollectorsCard from '@/components/CollectorsCard.vue'
   import CollectorsBuyActions from '@/components/CollectorsBuyActions.vue'
   import CollectorsGainSkill from '@/components/CollectorsGainSkill.vue'
   import CollectorsRaiseValue from '@/components/CollectorsRaiseValue.vue'
   import CollectorsStartAuction from '@/components/CollectorsStartAuction.vue'
   import CollectorsStartWork from '@/components/CollectorsWork.vue'
+  import CollectorsPlayerBoard from '@/components/PlayerBoard.vue'
 
   //import PlayerBoard from '@/components/PlayerBoard.vue'   /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
 
@@ -186,12 +157,13 @@
   export default {
     name: 'Collectors',
     components: {
-      CollectorsCard,
+      //CollectorsCard,
       CollectorsBuyActions,
       CollectorsGainSkill,
       CollectorsRaiseValue,
       CollectorsStartAuction,
       CollectorsStartWork,
+      CollectorsPlayerBoard
       //  PlayerBoard,                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/                                                                                                                                                           /*HÄÄÄÄÄÄÄÄÄÄR*/
     },
     data: function () {
@@ -490,6 +462,7 @@ getInfo: function(event){
 
 <style scoped>
 /*Här ligger gridsen, uppdelade genom att placera de små gridsen i den stora. De små ska flyttas till respektive komponent. /Dani*/
+/*info om att centrera saker https://philipwalton.github.io/solved-by-flexbox/demos/vertical-centering/*/
 #wrapper {
   color: #000;
   padding: 1em;
@@ -570,7 +543,6 @@ footer a:visited {
 
 .player {
   grid-area: playerBoard;
-  background-color: blue;
 }
 
 /* ========================= */

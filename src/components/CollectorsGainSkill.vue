@@ -24,6 +24,21 @@
           </div>
         </div>
       </div>
+
+      <div>
+              <div v-for="(p, index) in placement" :key="'bp' + index">
+                <input type="image"
+                       v-if="p.playerId===null"
+                       :disabled="cannotAfford(p.cost)"
+                       @click="placeBottle(p)"
+                       src='/images/bottle_placement.png' >
+                <p class="buttonText"> ${{p.cost}} </p>
+                <div v-if="p.playerId !== null">
+                  {{p.playerId}}
+                </div>
+              </div>
+            </div>
+
     </div>
 
 </template>

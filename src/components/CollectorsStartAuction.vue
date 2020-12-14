@@ -72,7 +72,7 @@ export default {
 
     placeBottle: function (p) {
       this.$emit('placeBottle', p.cost);
-      this.highlightAvailableCards(p.cost);
+      this.highlightAvailableCards();
     },
 
     setAvailable: function (card) {
@@ -81,7 +81,6 @@ export default {
 
     chooseAction(card){
       this.$emit('chooseAction', card);
-      }
     },
 
     highlightAvailableCards: function () {
@@ -94,6 +93,7 @@ export default {
         console.log("Hand ska highlightas");
       }
     },
+
     startAuction: function (card) {
       if (card.available) {
         this.$emit('startAuction', card);
@@ -101,6 +101,8 @@ export default {
       }
     }
   }
+}
+
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

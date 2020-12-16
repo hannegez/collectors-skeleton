@@ -117,6 +117,7 @@
   <CollectorsPlayerBoard v-if="players[playerId]"
   :labels="labels"
   :player="players[playerId]"/>
+
 </div>
 
 
@@ -158,26 +159,25 @@ Se css längre ned / -->
 <script>
 /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "[iI]gnored" }]*/
 
-import CollectorsCard from '@/components/CollectorsCard.vue'
+//import CollectorsCard from '@/components/CollectorsCard.vue'
 import CollectorsBuyActions from '@/components/CollectorsBuyActions.vue'
 import CollectorsGainSkill from '@/components/CollectorsGainSkill.vue'
 import CollectorsRaiseValue from '@/components/CollectorsRaiseValue.vue'
 import CollectorsStartAuction from '@/components/CollectorsStartAuction.vue'
 import CollectorsStartWork from '@/components/CollectorsWork.vue'
-
-//import PlayerBoard from '@/components/PlayerBoard.vue'   /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
+import CollectorsPlayerBoard from '@/components/CollectorsPlayerBoard.vue'
 
 /* VUE-objekt för spelet*/
 export default {
   name: 'Collectors',
   components: {
-    CollectorsCard,
+    //CollectorsCard,
     CollectorsBuyActions,
     CollectorsGainSkill,
     CollectorsRaiseValue,
     CollectorsStartAuction,
     CollectorsStartWork,
-    //  PlayerBoard,                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/                                                                                                                                                           /*HÄÄÄÄÄÄÄÄÄÄR*/
+    CollectorsPlayerBoard                                                                                                                                                         /*HÄÄÄÄÄÄÄÄÄÄR*/
   },
   data: function () {
     return {

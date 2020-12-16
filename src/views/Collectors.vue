@@ -32,148 +32,125 @@
           @placeBottle="placeBottle('skill', $event)"/>
         </div>
 
-      <!--  HEAD
-                <div class="work pool">
-                  <CollectorsStartWork v-if="players[playerId]"
-                  :labels="labels"
-                  :player="players[playerId]"
-                  :marketValues="marketValues"
-                  :placement="workPlacement"
-                  @startWork="startWork($event)"
-                  @placeWorkBottle="placeWorkBottle( $event)"/>
-                </div>-->
+        <!--  HEAD
+        <div class="work pool">
+        <CollectorsStartWork v-if="players[playerId]"
+        :labels="labels"
+        :player="players[playerId]"
+        :marketValues="marketValues"
+        :placement="workPlacement"
+        @startWork="startWork($event)"
+        @placeWorkBottle="placeWorkBottle( $event)"/>
+      </div>-->
 
-          <div class="work pool">
-            <CollectorsStartWork v-if="players[playerId]"
-            :labels="labels"
-            :player="players[playerId]"
-            :marketValues="marketValues"
-            :placement="workPlacement"
-            @startWork="startWork($event)"
-            @placeWorkBottle="placeWorkBottle( $event)"/>
-            <img src="/images/workInfo.PNG" alt="">
-          </div>
-
-        <div class="auction pool">
-          <CollectorsStartAuction v-if="players[playerId]"
-          :labels="labels"
-          :player="players[playerId]"
-          :auctionCards="auctionCards"
-          :auctionSpot = "auctionSpot"
-          :marketValues="marketValues"
-          :placement="auctionPlacement"
-          @chooseAction="chooseAction(chosenAction, $event)"
-          @placeBottle="placeBottle('auction', $event)"/>
-        </div>
-
-<!--        HEAD
-                <div class="market pool">-->
-                  <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
-                <!--  <CollectorsRaiseValue v-if="players[playerId]"
-                  :labels="labels"
-                  :player="players[playerId]"
-                  :market="market"
-                  :marketValues="marketValues"
-                  :auctionCards="auctionCards"
-                  :skillsOnSale="skillsOnSale"
-                  :placement="marketPlacement"
-                  @raiseValue="raiseValue($event)"
-                  @placeBottle="placeBottle('market', $event)"/>
-                </div>
-              </div>
-
-              <div class="player board">
-                <h1>PLAYER INFO</h1>
-                <p>Players: {{players}}</p>
-                <p>marketValues: {{marketValues}}</p>-->
-
-            <div class="market pool">
-              <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
-
-              <CollectorsRaiseValue v-if="players[playerId]"
-              :labels="labels"
-              :player="players[playerId]"
-              :market="market"
-              :marketValues="marketValues"
-              :auctionCards="auctionCards"
-              :skillsOnSale="skillsOnSale"
-              :placement="marketPlacement"
-              @raiseValue="raiseValue($event)"
-              @placeBottle="placeBottle('market', $event)"/>
-
-              <img src="/images/raiseValue.PNG" alt="">
-            </div>
-
-          </div>
-
-          <div class="player board">
-
-          <div id="drawCard" class="buttons">
-            <p class="buttonText">{{ labels.draw }}</p>
-            <input type="image" @click="drawCard" class="imgButton" alt="Login"
-            src='/images/card_backside300px.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
-          </div>
-
-          <CollectorsPlayerBoard v-if="players[playerId]"
-          :labels="labels"
-          :player="players[playerId]"/>
-
-        <h2>Your hand</h2>
-        <div class="cardslots" v-if="players[playerId]">
-          <CollectorsCard v-for="(card, index) in players[playerId].hand" :card="card" :availableAction="card.available" @doAction="chooseAction(chosenAction, card)" :key="index"/>
-        </div>
-
-        <h2>Your items </h2>
-        <div class="cardslots" v-if="players[playerId]">
-          <CollectorsCard v-for="(card, index) in players[playerId].items" :card="card" :key="index"/>
-        </div>
-
-        <h2>Your skills</h2>
-        <div class="cardslots" v-if="players[playerId]">
-          <CollectorsCard v-for="(card, index) in players[playerId].skills" :card="card" :key="index"/>
-        </div>
-
-        <h2>FAKE MONEY</h2>
-        <button v-if="players[playerId]" @click="players[playerId].money += 1">
-          fake more money
-        </button>
-
-        <div id="drawCard" class="buttons">
-          <p class="buttonText">{{ labels.draw }}</p>
-          <input type="image" @click="drawCard" class="imgButton" alt="Login"
-          src='/images/card_backside300px.png' value="Draw card">    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
-        </div>
-
-  <!--    <div class="popup" style= "position:relative; left:0; top:0em;">
-        <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
-        <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+      <div class="work pool">
+        <CollectorsStartWork v-if="players[playerId]"
+        :labels="labels"
+        :player="players[playerId]"
+        :marketValues="marketValues"
+        :placement="workPlacement"
+        @startWork="startWork($event)"
+        @placeWorkBottle="placeWorkBottle( $event)"/>
+        <img src="/images/workInfo.PNG" alt="">
       </div>
 
-    </main>-->
-
-
-
-    </main>
-
-    <footer>
-      HEJ HÄR ÄR FOOTER
-
-
-      <!-- Här provade jag att lägga in en klickbar bild som skulle ge info när man tryckte på den. Det ska fungera men placeringen av inforutan är skev, men vi kan avvakta med detta /dani -->
-      <div class="popup" style= "position:relative; left:0; top:0em;">
-        <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
-        <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+      <div class="auction pool">
+        <CollectorsStartAuction v-if="players[playerId]"
+        :labels="labels"
+        :player="players[playerId]"
+        :auctionCards="auctionCards"
+        :auctionSpot = "auctionSpot"
+        :marketValues="marketValues"
+        :placement="auctionPlacement"
+        @chooseAction="chooseAction(chosenAction, $event)"
+        @placeBottle="placeBottle('auction', $event)"/>
       </div>
 
-      <!-- Här vill jag lägga in ett grid med uppdelade grids inuti, se Style längre ned.
-      i collectors.vue ska det finnas en grid som sammanställer mer detaljerade grid i respektive komponent ex från buy actions. Detta har jag dock inte fått till..
-      Från Mikael:
-      1. Att lägga ett element i en komponent betyder att du också flyttar över relevant CSS till komponenten. Föräldrakomponenten behöver då inte bry sig om denna alls. Så flytta allt som har med “pink” att göra till komponenten.
-
-      Se css längre ned / -->
-
-    </footer>
+      <!--        HEAD
+      <div class="market pool">-->
+      <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
+      <!--  <CollectorsRaiseValue v-if="players[playerId]"
+      :labels="labels"
+      :player="players[playerId]"
+      :market="market"
+      :marketValues="marketValues"
+      :auctionCards="auctionCards"
+      :skillsOnSale="skillsOnSale"
+      :placement="marketPlacement"
+      @raiseValue="raiseValue($event)"
+      @placeBottle="placeBottle('market', $event)"/>
+    </div>
   </div>
+
+  <div class="player board">
+  <h1>PLAYER INFO</h1>
+  <p>Players: {{players}}</p>
+  <p>marketValues: {{marketValues}}</p>-->
+
+  <div class="market pool">
+    <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
+
+    <CollectorsRaiseValue v-if="players[playerId]"
+    :labels="labels"
+    :player="players[playerId]"
+    :market="market"
+    :marketValues="marketValues"
+    :auctionCards="auctionCards"
+    :skillsOnSale="skillsOnSale"
+    :placement="marketPlacement"
+    @raiseValue="raiseValue($event)"
+    @placeBottle="placeBottle('market', $event)"/>
+
+    <img src="/images/raiseValue.PNG" alt="">
+  </div>
+
+</div>
+
+<div class="player board">
+
+  <div id="drawCard" class="buttons">
+    <p class="buttonText">{{ labels.draw }}</p>
+    <input type="image" @click="drawCard" class="imgButton" alt="Login"
+    src='/images/card_backside300px.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
+  </div>
+
+  <CollectorsPlayerBoard v-if="players[playerId]"
+  :labels="labels"
+  :player="players[playerId]"/>
+</div>
+
+
+
+<!--    <div class="popup" style= "position:relative; left:0; top:0em;">
+<img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
+<span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+</div>
+
+</main>-->
+
+
+
+</main>
+
+<footer>
+  HEJ HÄR ÄR FOOTER
+
+
+  <!-- Här provade jag att lägga in en klickbar bild som skulle ge info när man tryckte på den. Det ska fungera men placeringen av inforutan är skev, men vi kan avvakta med detta /dani -->
+  <!--    <div class="popup" style= "position:relative; left:0; top:0em;">
+  <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
+  <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+</div>-->
+
+<!-- Här vill jag lägga in ett grid med uppdelade grids inuti, se Style längre ned.
+i collectors.vue ska det finnas en grid som sammanställer mer detaljerade grid i respektive komponent ex från buy actions. Detta har jag dock inte fått till..
+Från Mikael:
+1. Att lägga ett element i en komponent betyder att du också flyttar över relevant CSS till komponenten. Föräldrakomponenten behöver då inte bry sig om denna alls. Så flytta allt som har med “pink” att göra till komponenten.
+
+Se css längre ned / -->
+
+</footer>
+</div>
 </template>
 
 
@@ -385,114 +362,115 @@ methods: {
       this.startWork(card); /*måste ändras*/
       //  work(card);
     }
-    },
+  },
+
+  /*
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+  popup.style.left=event.clientX - event.target.getBoundingClientRect().x +"px";
+  popup.style.top=event.clientY - event.target.getBoundingClientRect().y - 70+"px"  ;
+  console.log(popup.style, event.clientX, event.clientY);*/
 
 
-var popup = document.getElementById("myPopup");
-popup.classList.toggle("show");
-popup.style.left=event.clientX - event.target.getBoundingClientRect().x +"px";
-popup.style.top=event.clientY - event.target.getBoundingClientRect().y - 70+"px"  ;
-console.log(popup.style, event.clientX, event.clientY);
+  selectAll: function (n) {
+    n.target.select();
+  },
 
+  placeBottle: function (action, cost) { /* skicka till server och gör förändring där.*/
+    this.chosenPlacementCost = cost;
+    this.chosenAction = action;
+    this.$store.state.socket.emit('collectorsPlaceBottle', {
+      roomId: this.$route.params.id,
+      playerId: this.playerId,
+      action: action,
+      cost: cost,
+    }
+  );
+},
 
-    selectAll: function (n) {
-      n.target.select();
-    },
-    placeBottle: function (action, cost) { /* skicka till server och gör förändring där.*/
-      this.chosenPlacementCost = cost;
-      this.chosenAction = action;
-      this.$store.state.socket.emit('collectorsPlaceBottle', {
-          roomId: this.$route.params.id,
-          playerId: this.playerId,
-          action: action,
-          cost: cost,
-        }
-      );
-    },
-    placeWorkBottle: function (p) { /* skicka till server och gör förändring där.*/
+placeWorkBottle: function (p) { /* skicka till server och gör förändring där.*/
 
-      this.chosenPlacementCost = p.cost;
-      this.chosenAction = "work";
-      this.chosenWorkAction= p.workAction;
-      this.$store.state.socket.emit('collectorsPlaceWorkBottle', {
-          roomId: this.$route.params.id,
-          playerId: this.playerId,
-          action: "work",
-          cost: p.cost,
-          workAction:p.workAction,
-        }
-      );
-    },
-    drawCard: function () {                                  /* NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY */
-      this.$store.state.socket.emit('collectorsDrawCard', {
-          roomId: this.$route.params.id,
-          playerId: this.playerId
-        }
-      );
-    },
-    gainSkill: function (card) {
-      console.log("gainSkill", card);
-      this.$store.state.socket.emit('collectorsGainSkill', {
-          roomId: this.$route.params.id,
-          playerId: this.playerId,
-          card: card,
-          cost: this.chosenPlacementCost     //placeringskostnad
-        }
-      );
-    },
+  this.chosenPlacementCost = p.cost;
+  this.chosenAction = "work";
+  this.chosenWorkAction= p.workAction;
+  this.$store.state.socket.emit('collectorsPlaceWorkBottle', {
+    roomId: this.$route.params.id,
+    playerId: this.playerId,
+    action: "work",
+    cost: p.cost,
+    workAction:p.workAction,
+  }
+);
+},
+drawCard: function () {                                  /* NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY */
+  this.$store.state.socket.emit('collectorsDrawCard', {
+    roomId: this.$route.params.id,
+    playerId: this.playerId
+  }
+);
+},
+gainSkill: function (card) {
+  console.log("gainSkill", card);
+  this.$store.state.socket.emit('collectorsGainSkill', {
+    roomId: this.$route.params.id,
+    playerId: this.playerId,
+    card: card,
+    cost: this.chosenPlacementCost     //placeringskostnad
+  }
+);
+},
 
-    startAuction: function (card) {
-      console.log("startAuction", card);
-      this.$store.state.socket.emit('CollectorsStartAuction', {
-          roomId: this.$route.params.id,
-          playerId: this.playerId,
-          card: card,
-          cost: this.chosenPlacementCost
-        }
-      );
-    },
-    startWork: function (card) {
-      console.log("startWork", card);
-      this.$store.state.socket.emit('CollectorsStartWork', {
-          roomId: this.$route.params.id,
-          playerId: this.playerId,
-          card: card,
-          cost: this.chosenPlacementCost,
-          workAction:this.chosenWorkAction
-        }
-      );
-    },
+startAuction: function (card) {
+  console.log("startAuction", card);
+  this.$store.state.socket.emit('CollectorsStartAuction', {
+    roomId: this.$route.params.id,
+    playerId: this.playerId,
+    card: card,
+    cost: this.chosenPlacementCost
+  }
+);
+},
+startWork: function (card) {
+  console.log("startWork", card);
+  this.$store.state.socket.emit('CollectorsStartWork', {
+    roomId: this.$route.params.id,
+    playerId: this.playerId,
+    card: card,
+    cost: this.chosenPlacementCost,
+    workAction:this.chosenWorkAction
+  }
+);
+},
 
-    buyCard: function (card) {
-      console.log("buyCard", card);
-      this.$store.state.socket.emit('collectorsBuyCard', {
-          roomId: this.$route.params.id,
-          playerId: this.playerId,
-          card: card,
-          cost: this.marketValues[card.market] + this.chosenPlacementCost     //marknadsvärde (raise value) + placeringskostnad
-        }
-      );
-    },
+buyCard: function (card) {
+  console.log("buyCard", card);
+  this.$store.state.socket.emit('collectorsBuyCard', {
+    roomId: this.$route.params.id,
+    playerId: this.playerId,
+    card: card,
+    cost: this.marketValues[card.market] + this.chosenPlacementCost     //marknadsvärde (raise value) + placeringskostnad
+  }
+);
+},
 
-    raiseValue: function (card) {
-      console.log("raiseValue", card);
-      this.$store.state.socket.emit('collectorsRaiseValue', {
-          roomId: this.$route.params.id,
-          playerId: this.playerId,
-          card: card,
-          cost: this.chosenPlacementCost     //placeringskostnad
-        }
-      );
-    },
-
+raiseValue: function (card) {
+  console.log("raiseValue", card);
+  this.$store.state.socket.emit('collectorsRaiseValue', {
+    roomId: this.$route.params.id,
+    playerId: this.playerId,
+    card: card,
+    cost: this.chosenPlacementCost     //placeringskostnad
+  }
+);
 }
-
+},
 };
+
 </script>
 <!--  /*getInfo: function(){
-    console.log("bajs");
-    var popup = document.getElementById("myPopup");
-    popup.classList.toggle("show");
+console.log("bajs");
+var popup = document.getElementById("myPopup");
+popup.classList.toggle("show");
 },*/-->
 
 
@@ -536,7 +514,7 @@ footer a:visited {
   color:ivory;
 }
 /* =====================================
-    PlayerBoard (GRID)                 */
+PlayerBoard (GRID)                 */
 
 
 /* =====================================
@@ -664,74 +642,74 @@ GAME BOARD (GRID)                 */
 /*DANIS GREJER*/
 /*allt för popup*/
 
-  header {
-    user-select: none;
+header {
+  user-select: none;
   /*  position: fixed; */
-    width:100%;
-    pointer-events: none;
-  }
-  main {
-    user-select: none;
-  }
+  width:100%;
+  pointer-events: none;
+}
+main {
+  user-select: none;
+}
 
-  /*hitta hit, karro*/
-  /* ========================= */
-  /* DRAW CARD BUTTON */
-  .imgButton {
-    border: solid thin #787975;
-    margin: 1em;
-    border-radius: 10px;
-    box-shadow: 2px 2px 3px #787975;
-    width: 10%;
-  }
+/*hitta hit, karro*/
+/* ========================= */
+/* DRAW CARD BUTTON */
+.imgButton {
+  border: solid thin #787975;
+  margin: 1em;
+  border-radius: 10px;
+  box-shadow: 2px 2px 3px #787975;
+  width: 10%;
+}
 
-  .imgButton:hover {
-    box-shadow: inset 2px 2px 3px #787975;
-    cursor: pointer;
-  }
-  .imgButton:focus {
-    outline: none;
-  }
-  .buttonText, .buttonImg {
-    margin: 0;
-    padding: 0;
-  }
-  .buttonText {
-    font-size: 2em;
-    font-weight: bold;
-    color: #3c3c3b;
-  }
+.imgButton:hover {
+  box-shadow: inset 2px 2px 3px #787975;
+  cursor: pointer;
+}
+.imgButton:focus {
+  outline: none;
+}
+.buttonText, .buttonImg {
+  margin: 0;
+  padding: 0;
+}
+.buttonText {
+  font-size: 2em;
+  font-weight: bold;
+  color: #3c3c3b;
+}
 
-  /* ========================= */
+/* ========================= */
 
-  footer {
-    margin-top: 5em auto;
-  }
-  footer a {
-    text-decoration: none;
-    border-bottom: 2px dotted ivory;
-  }
-  footer a:visited {
-    color:ivory;
-  }
-  .cardslots {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 130px);
-    grid-template-rows: repeat(auto-fill, 180px);
-  }
-  .cardslots div {
-    transform: scale(0.5)translate(-50%,-50%);
-    transition:0.2s;
-    transition-timing-function: ease-out;
-    z-index: 0;
-  }
-  .cardslots div:hover {
-    transform: scale(1)translate(-25%,0);
-    z-index: 1;
-  }
-  /*allt för popup*/
+footer {
+  margin-top: 5em auto;
+}
+footer a {
+  text-decoration: none;
+  border-bottom: 2px dotted ivory;
+}
+footer a:visited {
+  color:ivory;
+}
+.cardslots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 130px);
+  grid-template-rows: repeat(auto-fill, 180px);
+}
+.cardslots div {
+  transform: scale(0.5)translate(-50%,-50%);
+  transition:0.2s;
+  transition-timing-function: ease-out;
+  z-index: 0;
+}
+.cardslots div:hover {
+  transform: scale(1)translate(-25%,0);
+  z-index: 1;
+}
+/*allt för popup*/
 
-  .popuptext {
+.popuptext {
   position: absolute;
   display: none;
   cursor: pointer;

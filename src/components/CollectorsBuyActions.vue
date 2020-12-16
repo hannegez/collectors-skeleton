@@ -1,11 +1,12 @@
 <template>
-    <body>
+    <div>
 
+      <div>
+        <h2>{{ labels.buyCard }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
 
-      <h2>{{ labels.buyCard }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+        <p>{{ marketValues }}</p>
+    </div>
 
-<!--BUY CARDS -->
-      <p>{{ marketValues }}</p>
       <div class="buy-cards">
         <div v-for="(card, index) in itemsOnSale" :key="index">
           <CollectorsCard
@@ -17,7 +18,9 @@
       </div>
 
       <div>
-        <div class="buttons" v-for="(p, index) in placement" :key="index">
+
+        <!-- GAMLA BOTTLE PLACEMENT - KNAPPAR
+        <div class="buttons" v-for="(p, index) in placement" :key="'original' + index">
           <button
             v-if="p.playerId===null"
             :disabled="cannotAfford(p.cost)"
@@ -27,22 +30,26 @@
           <div v-if="p.playerId !== null">
             {{p.playerId}}
           </div>
+        </div> -->
 
+<div class="bottlePlacements">
+        <div v-for="(p, index) in placement" :key="'bp' + index">
+          <input type="image"
+                 v-if="p.playerId===null"
+                 :disabled="cannotAfford(p.cost)"
+                 @click="placeBottle(p)"
+                 src='/images/bottle_placement.png' >
+          <p class="buttonText"> ${{p.cost}} </p>
+          <div v-if="p.playerId !== null">
+            {{p.playerId}}
+          </div>
         </div>
       </div>
 
-      <div class="box pink">
-          <div class="box arrow">pilar</div>
-          <div class="box bottlePink">flaskor</div>
-          <div class="box pinks">enfärg</div>
-          <div class="box pinkInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
-          <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-          </div>
+
       </div>
 
-
-
-    </body>
+    </div>
 
 
 </template>
@@ -115,10 +122,14 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .buy-cards, .buttons {
+
+   .bottlePlacements {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 130px);
+    grid-template-columns: repeat(auto-fill, 200px);
   }
+
+
+/* HÄR LÅG buy-cards */
 
   .pink{
     grid-area: topp;

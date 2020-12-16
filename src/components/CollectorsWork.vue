@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h2>{{ labels.startAuction }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+      <h2>{{ labels.startWork }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
 
 <!--BUY CARDS -->
 <!--       <div class="buy-cards">

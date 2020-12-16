@@ -4,7 +4,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 <template>
   <div class= "playerContainer">
     <div class = "playerHeader">
-      <h1>{{labels.playerInfo}}</h1>
+      <h1>{{labels.playerInfo}} {{playerId}}</h1>
       <p><img class= "playerSymbol" src='/images/coin100px.png' alt="coin symbol"> X {{player.money}}</p>
       <p><img class= "playerSymbol" src='/images/future_income100px.png' alt="income symbol"> X {{player.income}}</p>
       <p>Total bottles: {{player.totalBottles}}</p>
@@ -16,7 +16,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
     <div class="playerslots Yhand" >
       <h2>Your hand</h2>
-        <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(chosenAction, card)" :key="'hand'+ index"/>
+        <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
     </div>
 
 
@@ -46,10 +46,13 @@ export default {
   props: {            //HÄR ÄR ALLA v-binds FRÅN ELEMENTET I Collectors.vue
     labels: Object,  //specify what kind of object
     player: Object,
+    playerId: String,
     //NÅNTING MED WORK?
   },
   methods: {
-
+    chooseAction(card){
+      this.$emit('chooseAction', card);
+    },
   }
 }
 

@@ -115,7 +115,16 @@
 
   <CollectorsPlayerBoard v-if="players[playerId]"
   :labels="labels"
-  :player="players[playerId]"/>
+  :player="players[playerId]"
+  :playerId="playerId"/>
+
+  <!--Object.keys(this.players) ger en array med alla playerid -->
+
+  <CollectorsPlayerBoard v-for='(data, id) in players' :key='id'
+  :labels= "labels"
+  :player= "data"
+  :playerId= "id"
+  @chooseAction= "chooseAction($event)"/>
 
 </div>
 
@@ -495,7 +504,7 @@ main {
   user-select: none;
   display: grid;
   grid-gap: 1em;
-  grid-template-columns: 60vw 40vw;
+  grid-template-columns: 60% 40%;
   grid-template-rows: 1fr;
   grid-template-areas:
   "gameBoard playerBoard";
@@ -577,14 +586,14 @@ PLAYER BOARD                          */
 
 .horizontalBuyCards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 260px);
+  grid-template-columns: repeat(auto-fill, 30%);
 }
 
 /* ========================= */
 /* PLACE BOTTLE BUTTON */
 
-.bottlePlacements {
-
+.bottlePlacement {
+  width: 7vw;
 }
 
 .horizontalPlacement {
@@ -599,7 +608,7 @@ PLAYER BOARD                          */
   margin: 1em;
   border-radius: 0.3em;
   box-shadow: 0.2em 0.2em 0.3em #787975;
-  width: 100%;
+  width: 20%;
 }
 
 .buttons {
@@ -640,35 +649,6 @@ PLAYER BOARD                          */
   transform: scale(1)translate(-25%,0);
   z-index: 1;
 }
-
-/* ========================= */
-/* DRAW CARD BUTTON */
-.imgButton {
-  border: solid thin #787975;
-  margin: 1em;
-  border-radius: 10px;
-  box-shadow: 2px 2px 3px #787975;
-  width: 10%;
-}
-
-.imgButton:hover {
-  box-shadow: inset 2px 2px 3px #787975;
-  cursor: pointer;
-}
-.imgButton:focus {
-  outline: none;
-}
-.buttonText, .buttonImg {
-  margin: 0;
-  padding: 0;
-}
-.buttonText {
-  font-size: 2em;
-  font-weight: bold;
-  color: #3c3c3b;
-}
-
-/* ========================= */
 
 footer {
   margin-top: 5em auto;

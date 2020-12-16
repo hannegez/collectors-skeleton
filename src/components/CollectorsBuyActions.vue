@@ -3,7 +3,6 @@
 
       <div>
         <h2>{{ labels.buyCard }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
-
         <p>{{ marketValues }}</p>
     </div>
 

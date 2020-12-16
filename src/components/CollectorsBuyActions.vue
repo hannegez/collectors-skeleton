@@ -1,65 +1,65 @@
 <template>
+  <div>
+
+    <div class="marketHeader">
+      <h2>{{ labels.buyCard }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+
+      <p>{{ marketValues }}</p>
+    </div>
+
+    <div class="buyCards horizontalBuyCards">
+      <div v-for="(card, index) in itemsOnSale" :key="index">
+        <CollectorsCard
+        :card="card"
+        :availableAction="card.available"
+        @doAction="buyCard(card)"/>
+        {{ cardCost(card) }}
+      </div>
+    </div>
+
     <div>
 
-      <div class="marketHeader">
-        <h2>{{ labels.buyCard }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
-
-        <p>{{ marketValues }}</p>
-    </div>
-
-      <div class="buyCards horizontalBuyCards">
-        <div v-for="(card, index) in itemsOnSale" :key="index">
-          <CollectorsCard
-            :card="card"
-            :availableAction="card.available"
-            @doAction="buyCard(card)"/>
-          {{ cardCost(card) }}
-        </div>
-      </div>
-
-      <div>
-
-        <!-- GAMLA BOTTLE PLACEMENT - KNAPPAR
-        <div class="buttons" v-for="(p, index) in placement" :key="'original' + index">
-          <button
-            v-if="p.playerId===null"
-            :disabled="cannotAfford(p.cost)"
-            @click="placeBottle(p)" >
-            ${{p.cost}}
-          </button>
-          <div v-if="p.playerId !== null">
-            {{p.playerId}}
-          </div>
-        </div> -->
+      <!-- GAMLA BOTTLE PLACEMENT - KNAPPAR
+      <div class="buttons" v-for="(p, index) in placement" :key="'original' + index">
+      <button
+      v-if="p.playerId===null"
+      :disabled="cannotAfford(p.cost)"
+      @click="placeBottle(p)" >
+      ${{p.cost}}
+    </button>
+    <div v-if="p.playerId !== null">
+    {{p.playerId}}
+  </div>
+</div> -->
 
 <div class="bottlePlacements horizontalPlacement">
-        <div v-for="(p, index) in placement" :key="'bp' + index">
-          <input type="image"
-                 v-if="p.playerId===null"
-                 :disabled="cannotAfford(p.cost)"
-                 @click="placeBottle(p)"
-                 src='/images/bottle_placement.png' >
-          <p class="buttonText"> ${{p.cost}} </p>
-          <div v-if="p.playerId !== null">
-            {{p.playerId}}
-          </div>
-        </div>
-      </div>
-
-
-      </div>
-
+  <div v-for="(p, index) in placement" :key="'bp' + index">
+    <input type="image"
+    v-if="p.playerId===null"
+    :disabled="cannotAfford(p.cost)"
+    @click="placeBottle(p)"
+    src='/images/bottle_placement.png' >
+    <p class="buttonText"> ${{p.cost}} </p>
+    <div v-if="p.playerId !== null">
+      {{p.playerId}}
     </div>
+  </div>
+</div>
+
+
+</div>
+
+</div>
 
 
 </template>
 <!--<div class="box pink">
-    <div class="box arrow">pilar</div>
-    <div class="box bottlePink">flaskor</div>
-    <div class="box pinks">enfärg</div>
-    <div class="box pinkInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
-    <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-    </div>
+<div class="box arrow">pilar</div>
+<div class="box bottlePink">flaskor</div>
+<div class="box pinks">enfärg</div>
+<div class="box pinkInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
+<span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+</div>
 </div> -->
 
 <script>
@@ -83,7 +83,7 @@ export default {
       let minCost = 100;
       for(let key in this.marketValues) {
         if (cost + this.marketValues[key] < minCost)
-          minCost = cost + this.marketValues[key]
+        minCost = cost + this.marketValues[key]
       }
       return (this.player.money < minCost);
     },
@@ -123,49 +123,49 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
-   /* .bottlePlacements {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 200px);
-  } */
+/* .bottlePlacements {
+display: grid;
+grid-template-columns: repeat(auto-fill, 200px);
+} */
 
 
 /* HÄR LÅG buy-cards */
 
-  .pink{
-    grid-area: topp;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr ;
-    grid-template-areas:
-      " a a a a a g"
-      " b b b b b c ";
-  }
-  .arrow{
-    grid-area: a;
-    background: url('/images/pilrosa.PNG' ) ;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-  }
-  .bottlePink{
-    grid-area: b;
-    background: url('/images/rosaflaska.PNG' )  ;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+.pink{
+  grid-area: topp;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr ;
+  grid-template-areas:
+  " a a a a a g"
+  " b b b b b c ";
+}
+.arrow{
+  grid-area: a;
+  background: url('/images/pilrosa.PNG' ) ;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.bottlePink{
+  grid-area: b;
+  background: url('/images/rosaflaska.PNG' )  ;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 
-  }
-  .pinks{
-    grid-area: c;
-    background: url('/images/rosa.PNG' ) ;
-    background-repeat: no-repeat; /* gör att endast en syns men vill att en ska synas per grid*/
-    background-size: 100% 100%;
+}
+.pinks{
+  grid-area: c;
+  background: url('/images/rosa.PNG' ) ;
+  background-repeat: no-repeat; /* gör att endast en syns men vill att en ska synas per grid*/
+  background-size: 100% 100%;
 
-  }
-  .pinkInfo{
-    grid-area: g;
-    background: url('/images/buyItem.PNG' ) ;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-  }
+}
+.pinkInfo{
+  grid-area: g;
+  background: url('/images/buyItem.PNG' ) ;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
 
 
 

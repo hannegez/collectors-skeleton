@@ -1,61 +1,61 @@
 <template>
-    <div class="startAuction">
-      <div class="auctionHeader">
-        <h2>{{ labels.startAuction }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
-      </div>
-
-<!--BUY CARDS -->
-      <div class="buyCards">
-        <div v-for="(card, index) in auctionCards" :key="index">
-          <CollectorsCard
-            :card="card"
-            :availableAction="card.available"
-            @doAction="chooseAction(card)"/>
-            <!-- {{ cardCost(card) }} -->
-        </div>
-      </div>
-
-
-      <!-- <div>
-        <div class="buttons" v-for="(p, index) in placement" :key="index">
-          <button
-            v-if="p.playerId===null"
-            :disabled="cannotAfford(p.cost)"
-            @click="placeBottle(p)" >
-            ${{p.cost}}
-          </button>
-          <div v-if="p.playerId !== null">
-            {{p.playerId}}
-          </div>
-        </div>
-      </div> -->
-
-      <div class="bottlePlacements">
-              <div v-for="(p, index) in placement" :key="'bp' + index">
-                <input type="image"
-                       v-if="p.playerId===null"
-                       :disabled="cannotAfford(p.cost)"
-                       @click="placeBottle(p)"
-                       src='/images/bottle_placement.png' >
-                <p class="buttonText"> ${{p.cost}} </p>
-                <div v-if="p.playerId !== null">
-                  {{p.playerId}}
-                </div>
-              </div>
-            </div>
-
-      <h2>{{ labels.auctionSpot }}</h2> <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
-      <div class="buy-cards">
-        <div v-for="(card, index) in auctionSpot" :key="index">
-          <CollectorsCard
-            :card="card"
-            :availableAction="card.available"
-            @doAction="startAuction(card)"/>
-            <!-- {{ cardCost(card) }} -->
-        </div>
-      </div>
-
+  <div class="startAuction">
+    <div class="auctionHeader">
+      <h2>{{ labels.startAuction }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
     </div>
+
+    <!--BUY CARDS -->
+    <div class="buyCards">
+      <div v-for="(card, index) in auctionCards" :key="index">
+        <CollectorsCard
+        :card="card"
+        :availableAction="card.available"
+        @doAction="chooseAction(card)"/>
+        <!-- {{ cardCost(card) }} -->
+      </div>
+    </div>
+
+
+    <!-- <div>
+    <div class="buttons" v-for="(p, index) in placement" :key="index">
+    <button
+    v-if="p.playerId===null"
+    :disabled="cannotAfford(p.cost)"
+    @click="placeBottle(p)" >
+    ${{p.cost}}
+  </button>
+  <div v-if="p.playerId !== null">
+  {{p.playerId}}
+</div>
+</div>
+</div> -->
+
+<div class="bottlePlacements">
+  <div v-for="(p, index) in placement" :key="'bp' + index">
+    <input type="image"
+    v-if="p.playerId===null"
+    :disabled="cannotAfford(p.cost)"
+    @click="placeBottle(p)"
+    src='/images/bottle_placement.png' >
+    <p class="buttonText"> ${{p.cost}} </p>
+    <div v-if="p.playerId !== null">
+      {{p.playerId}}
+    </div>
+  </div>
+</div>
+
+<h2>{{ labels.auctionSpot }}</h2> <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
+<div class="buy-cards">
+  <div v-for="(card, index) in auctionSpot" :key="index">
+    <CollectorsCard
+    :card="card"
+    :availableAction="card.available"
+    @doAction="startAuction(card)"/>
+    <!-- {{ cardCost(card) }} -->
+  </div>
+</div>
+
+</div>
 
 </template>
 
@@ -81,8 +81,8 @@ export default {
   methods: {
     cannotAfford: function (cost) {
       let minCost = 100;
-        if (cost < minCost)
-          minCost = cost;
+      if (cost < minCost)
+      minCost = cost;
       return (this.player.money < minCost);
     },
 
@@ -136,8 +136,8 @@ export default {
 .bottlePlacements{grid-area: bottlePlacements;}
 .auctionHeader{grid-area: auctionHeader;}
 
-  /* .buy-cards, .buttons {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 130px);
-  } */
+/* .buy-cards, .buttons {
+display: grid;
+grid-template-columns: repeat(auto-fill, 130px);
+} */
 </style>

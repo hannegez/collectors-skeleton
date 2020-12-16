@@ -7,13 +7,15 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
     <div class = "playerHeader">
       <h1>PLAYER INFO</h1>
-      <img class= "playerSymbol" src='/images/coin100px.png' alt="">
-      X {{player.money}}
+      <p><img class= "playerSymbol" src='/images/coin100px.png' alt="coin symbol"> X {{player.money}}</p>
+      <p><img class= "playerSymbol" src='/images/future_income100px.png' alt="income symbol"> X {{player.income}}</p>
+      <p>Total bottles: {{player.totalBottles}}</p>
+      <p>Bottles left: {{player.bottlesLeft}}</p>
+
 
       <br>
       <button @click="player.money += 1">
         <h2>FAKE MONEY</h2>
-        fake more money
       </button>
     </div>
 
@@ -68,12 +70,16 @@ export default {
   grid-gap: 1em;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 20% 20% 20%;
+  grid-template-rows: 40% 20% 20% 20%;
   grid-template-areas:
   "playerHeader playerHeader playerHeader"
   "items items items"
   "skill skill skill"
   "hand hand hand";
+}
+
+.playerHeader {
+  grid-area: playerHeader;
 }
 
 .Yhand {
@@ -88,9 +94,7 @@ export default {
   grid-area: items;
 }
 
-.playerHeader {
-  grid-area: playerHeader;
-}
+
 
 .playerSymbol{
   width: 20%;

@@ -116,8 +116,10 @@ Data.prototype.joinGame = function (roomId, playerId) {
                                  points: 0,
                                  skills: [],
                                  items: [],
-                                 income: [],
-                                 secret: [] };
+                                 income: 0,
+                                 secret: [],
+                                 totalBottles: 2, //ska ökas med en när man skaffar en bottle-skill
+                                 bottlesLeft: 2}; //ska minska med en varje gång man gör ett drag, när allas är 0 ändras quarter
       return true;
     }
     console.log("Player", playerId, "was declined due to player limit");
@@ -328,14 +330,25 @@ Data.prototype.gainSkill = function (roomId, playerId, card, cost) {
     }
     room.players[playerId].skills.push(...c);
     room.players[playerId].money -= cost;
+    //kalla på skillmetod som vi skapar nedan this.skillHappening(card);
+    if (card.skill === 'bottle') {
+      room.players[playerId].totalBottles += 1;
+      room.players[playerId].bottlesLeft += 1;
+    }
 
   }
 }
+
+/*Här kan vi skapa en skillmetod som hanterar olika skills
+Data.prototype.skillHappening = function (card) {
+
+} */
 
 Data.prototype.placeBottle = function (roomId, playerId, action, cost) {
   let room = this.rooms[roomId];
   if (typeof room !== 'undefined') {
     let activePlacement = [];
+    room.players[playerId].bottlesLeft -= 1;
     if (action === "buy") {
       activePlacement = room.buyPlacement;
     }
@@ -393,6 +406,7 @@ Data.prototype.placeWorkBottle = function (roomId, playerId, cost, workAction) {
           else if (workAction === 5) {
             console.log("workaction 5");
             this.drawCard(roomId, playerId);
+            room.players[playerId].income += 1; //har här gjort om income till integer
             //you must draw one card from the deck to your hand and place
             // one card from your hand face down next to your player board
             // on its right side

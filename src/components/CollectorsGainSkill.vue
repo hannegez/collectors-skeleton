@@ -25,9 +25,6 @@
         </div>
       </div>
 
-<<<<<<< HEAD
-
-=======
       <div>
               <div v-for="(p, index) in placement" :key="'bp' + index">
                 <input type="image"
@@ -41,7 +38,6 @@
                 </div>
               </div>
             </div>
->>>>>>> f3355c8add6278f4190b7e1542cf94cda889782b
 
     </div>
 

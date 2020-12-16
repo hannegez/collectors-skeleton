@@ -129,43 +129,6 @@ export default {
   }
 
 
-/* HÄR LÅG buy-cards */
-
-  .pink{
-    grid-area: topp;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr ;
-    grid-template-areas:
-      " a a a a a g"
-      " b b b b b c ";
-  }
-  .arrow{
-    grid-area: a;
-    background: url('/images/pilrosa.PNG' ) ;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-  }
-  .bottlePink{
-    grid-area: b;
-    background: url('/images/rosaflaska.PNG' )  ;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-
-  }
-  .pinks{
-    grid-area: c;
-    background: url('/images/rosa.PNG' ) ;
-    background-repeat: no-repeat; /* gör att endast en syns men vill att en ska synas per grid*/
-    background-size: 100% 100%;
-
-  }
-  .pinkInfo{
-    grid-area: g;
-    background: url('/images/buyItem.PNG' ) ;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-  }
 
 
 

@@ -17,6 +17,7 @@
           @buyCard="buyCard($event)"
           @placeBottle="placeBottle('buy', $event)"/>
 
+
           <p>buyPlacement: {{buyPlacement}}</p>
           <p>chosenPlacementCost: {{chosenPlacementCost}}</p>
         </div>
@@ -39,6 +40,7 @@
             :placement="workPlacement"
             @startWork="startWork($event)"
             @placeWorkBottle="placeWorkBottle( $event)"/>
+            <img src="/images/workInfo.PNG" alt="">
           </div>
 
           <div class="auction pool">
@@ -55,6 +57,7 @@
 
             <div class="market pool">
               <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
+
               <CollectorsRaiseValue v-if="players[playerId]"
               :labels="labels"
               :player="players[playerId]"
@@ -65,9 +68,29 @@
               :placement="marketPlacement"
               @raiseValue="raiseValue($event)"
               @placeBottle="placeBottle('market', $event)"/>
+
+              <img src="/images/raiseValue.PNG" alt="">
             </div>
+
           </div>
 
+          <div class="player board">
+
+          <div id="drawCard" class="buttons">
+            <p class="buttonText">{{ labels.draw }}</p>
+            <input type="image" @click="drawCard" class="imgButton" alt="Login"
+            src='/images/card_backside300px.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
+          </div>
+
+          <CollectorsPlayerBoard v-if="players[playerId]"
+          :labels="labels"
+          :player="players[playerId]"/>
+
+          </div>
+
+
+
+<!--
           <div class="player board">
             <h1>PLAYER INFO</h1>
             <p>Players: {{players}}</p>
@@ -96,10 +119,10 @@
             <div id="drawCard" class="buttons">
               <p class="buttonText">{{ labels.draw }}</p>
               <input type="image" @click="drawCard" class="imgButton" alt="Login"
-              src='/images/card_backside300px.png' value="Draw card">    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
+              src='/images/card_backside300px.png' value="Draw card">     NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY
             </div>
 
-          </div>
+          </div> -->
 
 
 
@@ -128,8 +151,6 @@
           Se css längre ned / -->
 
 
-
-
       </footer>
     </div>
   </template>
@@ -144,12 +165,13 @@
   <script>
   /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "[iI]gnored" }]*/
 
-  import CollectorsCard from '@/components/CollectorsCard.vue'
+//  import CollectorsCard from '@/components/CollectorsCard.vue'
   import CollectorsBuyActions from '@/components/CollectorsBuyActions.vue'
   import CollectorsGainSkill from '@/components/CollectorsGainSkill.vue'
   import CollectorsRaiseValue from '@/components/CollectorsRaiseValue.vue'
   import CollectorsStartAuction from '@/components/CollectorsStartAuction.vue'
   import CollectorsStartWork from '@/components/CollectorsWork.vue'
+  import CollectorsPlayerBoard from '@/components/PlayerBoard.vue'
 
   //import PlayerBoard from '@/components/PlayerBoard.vue'   /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
 
@@ -157,12 +179,13 @@
   export default {
     name: 'Collectors',
     components: {
-      CollectorsCard,
+      //CollectorsCard,
       CollectorsBuyActions,
       CollectorsGainSkill,
       CollectorsRaiseValue,
       CollectorsStartAuction,
       CollectorsStartWork,
+      CollectorsPlayerBoard
       //  PlayerBoard,                                /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/                                                                                                                                                           /*HÄÄÄÄÄÄÄÄÄÄR*/
     },
     data: function () {
@@ -458,6 +481,7 @@ methods: {
 <!-- style scoped är bara för filen, utan scoped gäller det allt -->
 <style>
 /*Här ligger gridsen, uppdelade genom att placera de små gridsen i den stora. De små ska flyttas till respektive komponent. /Dani*/
+/*info om att centrera saker https://philipwalton.github.io/solved-by-flexbox/demos/vertical-centering/*/
 #wrapper {
   color: #000;
   padding: 1em;
@@ -492,6 +516,9 @@ footer a {
 footer a:visited {
   color:ivory;
 }
+/* =====================================
+    PlayerBoard (GRID)                 */
+
 
 /* =====================================
     GAME BOARD (GRID)                 */
@@ -537,7 +564,7 @@ footer a:visited {
 
 .player {
   grid-area: playerBoard;
-  background-color: #f2f2f2;
+  background-color: pink;
 }
 
 /* ========================= */
@@ -700,146 +727,6 @@ footer a:visited {
   }
 
 
-  .container {
-    display: grid;
-    height: 1000px;
-    width: 1200px;
-    padding-left: 200px;
-    padding-bottom: 200px;
-    grid-template-columns: 1fr 1fr 1fr ;
-    grid-template-rows: 1fr 2fr 2fr 1fr ;
-    grid-template-areas:
-    "topp topp topp"
-    "lside mside rside "
-    "lside mside rside "
-    "bottoms bottoms bottoms" ;
-  }
-  .green {
-    grid-area: lside;
-    background: #dfeccc;
-  }
-  .yellow {
-    grid-area: mside;
-    background: #f5f2cc;
-  }
-  .beige{
-    grid-area: rside;
-    background: #f5f1e2;
-  }
-
-
-  .blue{
-    grid-area: bottoms;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr ;
-    grid-template-areas:
-    " d d d d d f"
-    " e e e e e h ";
-  }
-
-  .bottleBlue{
-    grid-area: d;
-
-    background: url('/images/blaflaska.PNG' ) ;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-  }
-
-  .char{
-    grid-area: e;
-    background: url('/images/pilbla.PNG' ) ;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-  }
-
-  .blues{
-    grid-area: h;
-    background: url('/images/bla.PNG' ) ;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-  }
-
-  .blueInfo{
-    grid-area: f;
-    background: url('/images/raiseValue.PNG' ) ;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-
-  }
-
-  .green{
-    grid-area: lside;
-    display: grid;
-    grid-template-columns: 1fr 1fr ;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-
-    grid-template-areas:
-    " i j "
-    " k l "
-    " k l "
-    " k l "
-    " k l "
-    " k l ";
-  }
-  .arrowGreen{
-    grid-area: k;
-    background: url('/images/pilgron.PNG' ) ;
-    background-repeat: no-repeat;
-    background-size: 30% 95%;
-
-  }
-  .bottleGreen{
-    grid-area: l;
-    background: url('/images/gronflaska.PNG' )  ;
-
-    background-repeat: no-repeat;
-    background-size: 100% 95%;
-
-  }
-  .greens{
-    grid-area: i;
-    background: url('/images/gron.PNG' ) ;
-    background-repeat: no-repeat;
-    background-size: 110% 100%;
-
-  }
-  .greenInfo{
-    grid-area: j;
-    background: url('/images/gainSkill.PNG' ) ;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-  }
-
-
-  .yellow{
-    grid-area: mside;
-    display: grid;
-    grid-template-columns: 1fr 1fr ;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-
-    grid-template-areas:
-    " m m "
-    " m m "
-    " n n "
-    " n n "
-    " n n "
-    " n n ";
-  }
-  .yellowInfo{
-    grid-area: m;
-    background: url('/images/workInfo.PNG' ) ;
-    background-size: 100% 100%;
-  }
-
-  .bottleYellow{
-    grid-area: n;
-    background: url('/images/gulflaska.PNG' )  ;
-
-    background-repeat: no-repeat;
-    background-size: 100% 95%;
-
-  }
 
 
   @media screen and (max-width: 800px) {

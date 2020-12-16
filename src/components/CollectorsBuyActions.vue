@@ -1,10 +1,8 @@
 <template>
-  <div>
+  <div class="buyItem">
 
-    <div class="marketHeader">
-      <h2>{{ labels.buyCard }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
-
-      <p>{{ marketValues }}</p>
+    <div class="itemHeader">
+      <h1>{{ labels.buyItem }}</h1>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
     </div>
 
     <div class="buyCards horizontalBuyCards">
@@ -122,15 +120,6 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-
-/* .bottlePlacements {
-display: grid;
-grid-template-columns: repeat(auto-fill, 200px);
-} */
-
-
-/* HÄR LÅG buy-cards */
-
 .pink{
   grid-area: topp;
   display: grid;
@@ -166,10 +155,4 @@ grid-template-columns: repeat(auto-fill, 200px);
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
-
-
-
-
-
-
 </style>

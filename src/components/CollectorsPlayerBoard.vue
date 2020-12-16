@@ -3,17 +3,12 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
 <template>
   <div class= "playerContainer">
-
-
     <div class = "playerHeader">
-      <h1>PLAYER INFO</h1>
+      <h1>{{labels.playerInfo}}</h1>
       <p><img class= "playerSymbol" src='/images/coin100px.png' alt="coin symbol"> X {{player.money}}</p>
       <p><img class= "playerSymbol" src='/images/future_income100px.png' alt="income symbol"> X {{player.income}}</p>
       <p>Total bottles: {{player.totalBottles}}</p>
       <p>Bottles left: {{player.bottlesLeft}}</p>
-
-
-      <br>
       <button @click="player.money += 1">
         <h2>FAKE MONEY</h2>
       </button>
@@ -21,7 +16,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
     <div class="playerslots Yhand" >
       <h2>Your hand</h2>
-      <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(chosenAction, card)" :key="'hand'+ index"/>
+        <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(chosenAction, card)" :key="'hand'+ index"/>
     </div>
 
 
@@ -63,6 +58,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+/* =====================================
+    PLAYER BOARD (GRID)                 */
+
 .playerContainer {
   background-color: #ececec;
   width: 100%;
@@ -78,28 +76,24 @@ export default {
   "hand hand hand";
 }
 
+.playerHeader, .Yitems, .Yskills, .Yhand { padding: 2em; }
+
 .playerHeader {
   grid-area: playerHeader;
 }
-
+.Yitems {
+  grid-area: items;
+}
+.Yskills {
+  grid-area: skill;
+}
 .Yhand {
   grid-area: hand;
 }
 
-.Yskills {
-  grid-area: skill;
-}
-
-.Yitems {
-  grid-area: items;
-}
-
-
-
 .playerSymbol{
   width: 20%;
 }
-
 
 .playerslots {
   display: grid;

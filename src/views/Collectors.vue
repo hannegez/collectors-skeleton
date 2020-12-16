@@ -7,7 +7,6 @@
     <main>
       <div class="game board">
         <div class="item pool">
-          <h1>Items</h1>
           <CollectorsBuyActions v-if="players[playerId]"
           :labels="labels"
           :player="players[playerId]"
@@ -496,10 +495,15 @@ main {
   user-select: none;
   display: grid;
   grid-gap: 1em;
-  grid-template-columns: 1fr 20%;
+  grid-template-columns: 60vw 40vw;
   grid-template-rows: 1fr;
   grid-template-areas:
   "gameBoard playerBoard";
+}
+
+p {
+  font-size: 1.2em;
+  font-weight: bold;
 }
 
 footer {
@@ -513,9 +517,8 @@ footer a {
 footer a:visited {
   color:ivory;
 }
-/* =====================================
-PlayerBoard (GRID)                 */
 
+.game, .player { padding: 1em; }
 
 /* =====================================
 GAME BOARD (GRID)                 */
@@ -524,15 +527,15 @@ GAME BOARD (GRID)                 */
   grid-area: gameBoard;
   grid-gap: 1em;
   display: grid;
-  grid-template-columns: 15% 15% 25%;
-  grid-template-rows: 30% 55% 20%;
+  grid-template-columns: 25% 25% 50%;
+  grid-template-rows: 30% 45% 25%;
   grid-template-areas:
   "itemPool itemPool itemPool"
   "skillPool workPool auctionPool"
   "skillPool marketPool marketPool";
 }
 
-.item, .skill, .work, .auction, .market{padding: 3em;}
+.item, .skill, .work, .auction, .market{padding: 1em;}
 
 .item {
   grid-area: itemPool;
@@ -559,11 +562,11 @@ GAME BOARD (GRID)                 */
   background-color: #D0DCF2;
 }
 
-/* ====================================== */
+/* =====================================
+PLAYER BOARD                          */
 
 .player {
   grid-area: playerBoard;
-  background-color: pink;
 }
 
 /* ========================= */
@@ -572,9 +575,9 @@ GAME BOARD (GRID)                 */
 .buyCards, .buttons {
 }
 
-.horizontalBuyCards{
+.horizontalBuyCards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 400px);
+  grid-template-columns: repeat(auto-fill, 260px);
 }
 
 /* ========================= */
@@ -584,9 +587,9 @@ GAME BOARD (GRID)                 */
 
 }
 
-.horizontalPlacement{
+.horizontalPlacement {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-columns: repeat(auto-fill, 170px);
 }
 
 /* ========================= */
@@ -622,7 +625,6 @@ GAME BOARD (GRID)                 */
 
 /* ========================= */
 
-
 .cardslots {
   display: grid;
   grid-template-columns: repeat(auto-fill, 130px);
@@ -639,20 +641,6 @@ GAME BOARD (GRID)                 */
   z-index: 1;
 }
 
-/*DANIS GREJER*/
-/*allt för popup*/
-
-header {
-  user-select: none;
-  /*  position: fixed; */
-  width:100%;
-  pointer-events: none;
-}
-main {
-  user-select: none;
-}
-
-/*hitta hit, karro*/
 /* ========================= */
 /* DRAW CARD BUTTON */
 .imgButton {

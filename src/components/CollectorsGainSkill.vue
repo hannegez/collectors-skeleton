@@ -1,7 +1,7 @@
 <template>
   <div class="gainSkill">
     <div class="gainSkillHeader">
-      <h2>{{ labels.gainSkill }}</h2>
+      <h1>{{ labels.gainSkill }}</h1>
     </div>
 
     <div class="buyCards">

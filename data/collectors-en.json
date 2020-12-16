@@ -2,10 +2,12 @@
 	"draw": "Draw card",
 	"invite": "Invite other players with this link:",
 	"endTurn": "End turn",
-	"buyCard": "Buy a card",
+	"buyItem": "Buy an item",
 	"gainSkill": "Gain a skill",
 	"raiseValue": "Raise value",
 	"startAuction": "Start auction",
 	"auctionSpot": "Card open for bidding",
-	"startWork": "Go to work"
+	"startWork": "Go to work",
+	"marketValues": "Current market values",
+	"playerInfo": "Player info"
 }

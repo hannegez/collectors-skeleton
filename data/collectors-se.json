@@ -2,10 +2,12 @@
 	"draw": "Dra kort",
 	"invite": "Bjud in andra spelare med den här länken:",
 	"endTurn": "Avsluta runda",
-	"buyCard": "Köp ett kort",
+	"buyItem": "Köp ett item",
 	"gainSkill": "Skaffa en färdighet",
 	"raiseValue": "Höj värdet",
 	"startAuction": "Starta en auktion",
 	"auctionSpot": "Kort öppet för budgivning",
-	"startWork": "Gå till jobbet"
+	"startWork": "Gå till jobbet",
+	"marketValues": "Marknadvärden",
+	"playerInfo": "Information om spelare"
 }

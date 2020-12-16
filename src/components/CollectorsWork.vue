@@ -37,11 +37,6 @@ knappnummer {{p.workAction}}
 <div v-if="p.playerId !== null">
 {{p.playerId}}
 </div>-->
-<<<<<<< HEAD
-</div>
-</div>
-=======
->>>>>>> 7aec91ca215b66d3016df5b96054afbacc220a73
 
 
 <div class="bottlePlacements">

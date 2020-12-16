@@ -121,7 +121,7 @@
 
 
 
-<!--    <div class="popup" style= "position:relative; left:0; top:0em;">
+<!--<div class="popup" style= "position:relative; left:0; top:0em;">
 <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
 <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
 </div>
@@ -745,8 +745,6 @@ footer a:visited {
 .popup .show {
   display: block;
 }
-
-
 
 
 @media screen and (max-width: 800px) {

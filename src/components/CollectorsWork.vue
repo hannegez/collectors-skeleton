@@ -34,9 +34,9 @@ knappnummer {{p.workAction}}
 </button>
 <div v-if="p.playerId !== null">
 {{p.playerId}}
-</div>
-</div>
 </div>-->
+</div>
+</div>
 
 <div class="bottlePlacements">
   <div v-for="(p, index) in placement" :key="'bp' + index">
@@ -53,7 +53,6 @@ knappnummer {{p.workAction}}
 </div>
 
 
-
 <!--börjar här -->
 <h2>{{ labels.workSpot }}</h2> <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
 <!--      <div class="buy-cards">
@@ -64,7 +63,7 @@ knappnummer {{p.workAction}}
 @doAction="startWork(card)"/>
 
 </div>
-</div>  -->
+</div>-->
 
 </div>
 

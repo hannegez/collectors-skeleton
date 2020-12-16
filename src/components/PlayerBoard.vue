@@ -1,32 +1,38 @@
 <!-- här testar jag att skapa player board, har även infogat player_board.png i images
-    copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
+copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
 <template>
   <div class= "playerContainer">
-    <h1>PLAYER INFO</h1>
-    {{player}}
 
-    <h2>Your hand</h2>
+
+    <div class = "playerHeader">
+      <h1>PLAYER INFO</h1>
+      <img class= "playerSymbol" src='/images/coin100px.png' alt="">
+      X {{player.money}}
+
+      <br>
+      <button @click="player.money += 1">
+        <h2>FAKE MONEY</h2>
+        fake more money
+      </button>
+    </div>
+
     <div class="playerslots Yhand" >
+      <h2>Your hand</h2>
       <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(chosenAction, card)" :key="'hand'+ index"/>
     </div>
 
-    <h2>Your items </h2>
+
     <div class="playerslots Yitems">
+      <h2>Your items </h2>
       <CollectorsCard v-for="(card, index) in player.items" :card="card" :key="'item'+ index" />
     </div>
 
-    <h2>Your skills</h2>
+
     <div class="playerslots Yskills">
+      <h2>Your skills</h2>
       <CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
     </div>
-
-    <h2>FAKE MONEY</h2>
-    <button @click="player.money += 1">
-      fake more money
-    </button>
-
-
 
   </div>
 
@@ -56,30 +62,40 @@ export default {
 <style scoped>
 
 .playerContainer {
-    grid-gap: 1em;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas:
-    "items items items"
-    "skill skill skill"
-    "hand hand hand";
+  background-color: #ececec;
+  width: 100%;
+  height: 50%;
+  grid-gap: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 20% 20% 20%;
+  grid-template-areas:
+  "playerHeader playerHeader playerHeader"
+  "items items items"
+  "skill skill skill"
+  "hand hand hand";
 }
 
 .Yhand {
   grid-area: hand;
-  color: blue;
 }
 
 .Yskills {
   grid-area: skill;
-  color: green;
 }
 
 .Yitems {
   grid-area: items;
-  color: yellow;
 }
+
+.playerHeader {
+  grid-area: playerHeader;
+}
+
+.playerSymbol{
+  width: 20%;
+}
+
 
 .playerslots {
   display: grid;

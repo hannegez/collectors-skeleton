@@ -90,42 +90,6 @@
 
 
 
-<!--
-          <div class="player board">
-            <h1>PLAYER INFO</h1>
-            <p>Players: {{players}}</p>
-            <p>marketValues: {{marketValues}}</p>
-
-            <h2>Your hand</h2>
-            <div class="cardslots" v-if="players[playerId]">
-              <CollectorsCard v-for="(card, index) in players[playerId].hand" :card="card" :availableAction="card.available" @doAction="chooseAction(chosenAction, card)" :key="index"/>
-            </div>
-
-            <h2>Your items </h2>
-            <div class="cardslots" v-if="players[playerId]">
-              <CollectorsCard v-for="(card, index) in players[playerId].items" :card="card" :key="index"/>
-            </div>
-
-            <h2>Your skills</h2>
-            <div class="cardslots" v-if="players[playerId]">
-              <CollectorsCard v-for="(card, index) in players[playerId].skills" :card="card" :key="index"/>
-            </div>
-
-            <h2>FAKE MONEY</h2>
-            <button v-if="players[playerId]" @click="players[playerId].money += 1">
-              fake more money
-            </button>
-
-            <div id="drawCard" class="buttons">
-              <p class="buttonText">{{ labels.draw }}</p>
-              <input type="image" @click="drawCard" class="imgButton" alt="Login"
-              src='/images/card_backside300px.png' value="Draw card">     NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY
-            </div>
-
-          </div> -->
-
-
-
       <div class="popup" style= "position:relative; left:0; top:0em;">
         <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
         <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
@@ -570,7 +534,7 @@ footer a:visited {
 /* ========================= */
 /* BUY CARD BUTTON */
 
-.buy-cards, .buttons {
+.buy-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, 250px);
 }
@@ -582,8 +546,13 @@ footer a:visited {
   margin: 1em;
   border-radius: 0.3em;
   box-shadow: 0.2em 0.2em 0.3em #787975;
-  width: 10%;
+  width: 100%;
 }
+
+.buttons {
+  width: 100%;
+}
+
 .imgButton:hover {
   box-shadow: inset 0.2em 0.2em 0.3em #787975;
   cursor: pointer;
@@ -625,7 +594,7 @@ footer a:visited {
 
   header {
     user-select: none;
-    position: fixed;
+  /*  position: fixed; */
     width:100%;
     pointer-events: none;
   }
@@ -643,6 +612,7 @@ footer a:visited {
     box-shadow: 2px 2px 3px #787975;
     width: 10%;
   }
+
   .imgButton:hover {
     box-shadow: inset 2px 2px 3px #787975;
     cursor: pointer;

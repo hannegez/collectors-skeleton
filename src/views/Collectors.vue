@@ -579,29 +579,14 @@ export default {
     " k l "
     " k l ";
 }
+
 .arrowGreen{
   grid-area: k;
   background: url('/images/pilgron.PNG' ) ;
   background-repeat: no-repeat;
   background-size: 30% 95%;
+}
 
-  #collectors-board {
-    display: grid;
-    grid-gap: 0;
-    grid-template-columns: 1fr 1fr;
-
-    grid-template-areas:
-      "game-board middle-boards player-boards";
-
-  }
-
-  #wrapper {
-    color: black;
-  }
-
-  #left-board { grid-area: game-board; }
-  #right-board { grid-area: player-boards; }
-  #middle-board {grid-area: middle-boards }
 
 
   header {

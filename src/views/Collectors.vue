@@ -82,6 +82,7 @@
             src='/images/card_backside300px.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
           </div>
 
+<!-- lägg till       v-for="(card, index) in skillsOnSale" fast ändra -->
           <CollectorsPlayerBoard v-if="players[playerId]"
           :labels="labels"
           :player="players[playerId]"/>

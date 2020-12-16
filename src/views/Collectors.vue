@@ -164,6 +164,7 @@ import CollectorsGainSkill from '@/components/CollectorsGainSkill.vue'
 import CollectorsRaiseValue from '@/components/CollectorsRaiseValue.vue'
 import CollectorsStartAuction from '@/components/CollectorsStartAuction.vue'
 import CollectorsStartWork from '@/components/CollectorsWork.vue'
+import CollectorsPlayerBoard from '@/components/CollectorsPlayerBoard.vue'
 
 //import PlayerBoard from '@/components/PlayerBoard.vue'   /*TESTAR HÄR ATT FÅ IN PLAYER BOARD*/
 

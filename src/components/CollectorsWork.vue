@@ -20,6 +20,8 @@
 <div class="buttons" v-for="(p, index) in placement" :key="index">-->
       <div>
         <div class="buttons" v-for="(p, index) in placement" :key="index">
+        </div>
+        </div>
 <!--          ${{p.cost}}
 ${{p.workAction}}
 {{p}}
@@ -34,9 +36,8 @@ knappnummer {{p.workAction}}
 </button>
 <div v-if="p.playerId !== null">
 {{p.playerId}}
-</div>
-</div>
 </div>-->
+
 
 <div class="bottlePlacements">
   <div v-for="(p, index) in placement" :key="'bp' + index">

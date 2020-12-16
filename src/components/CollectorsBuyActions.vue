@@ -1,7 +1,7 @@
 <template>
     <div>
 
-      <div>
+      <div class="marketHeader">
         <h2>{{ labels.buyCard }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
 
         <p>{{ marketValues }}</p>

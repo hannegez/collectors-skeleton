@@ -1,6 +1,8 @@
 <template>
     <div>
-      <h2>{{ labels.startWork }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+<div class="workHeader">
+      <h2>{{ labels.startWork }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->  
+</div>
 
 <!--BUY CARDS -->
 <!--       <div class="buy-cards">

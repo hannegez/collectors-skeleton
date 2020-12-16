@@ -1,6 +1,8 @@
 <template>
     <div>
+<div class="raiseValueHeader">
       <h2>{{ labels.raiseValue }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+</div>
 
 <!--BUY CARDS raiseValueOnSale borttagen for now-->
       <!-- <div class="buy-cards">

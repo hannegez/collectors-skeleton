@@ -125,10 +125,10 @@ export default {
 .startAuction{
   grid-gap: 1em;
   display: grid;
-  grid-template-columns: 1fr 1fr;
   grid-template-rows: 10% 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-areas:
-  "auctionHeader buyCards"
+  "auctionHeader auctionHeader"
   "bottlePlacements buyCards";
 }
 

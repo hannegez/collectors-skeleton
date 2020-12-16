@@ -1,9 +1,11 @@
 <template>
-    <div>
-      <h2>{{ labels.startAuction }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+    <div class="startAuction">
+      <div class="auctionHeader">
+        <h2>{{ labels.startAuction }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+      </div>
 
 <!--BUY CARDS -->
-      <div class="buy-cards">
+      <div class="buyCards">
         <div v-for="(card, index) in auctionCards" :key="index">
           <CollectorsCard
             :card="card"
@@ -14,7 +16,7 @@
       </div>
 
 
-      <div>
+      <!-- <div>
         <div class="buttons" v-for="(p, index) in placement" :key="index">
           <button
             v-if="p.playerId===null"
@@ -26,7 +28,21 @@
             {{p.playerId}}
           </div>
         </div>
-      </div>
+      </div> -->
+
+      <div class="bottlePlacements">
+              <div v-for="(p, index) in placement" :key="'bp' + index">
+                <input type="image"
+                       v-if="p.playerId===null"
+                       :disabled="cannotAfford(p.cost)"
+                       @click="placeBottle(p)"
+                       src='/images/bottle_placement.png' >
+                <p class="buttonText"> ${{p.cost}} </p>
+                <div v-if="p.playerId !== null">
+                  {{p.playerId}}
+                </div>
+              </div>
+            </div>
 
       <h2>{{ labels.auctionSpot }}</h2> <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
       <div class="buy-cards">
@@ -105,9 +121,23 @@ export default {
 
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .buy-cards, .buttons {
+<style>
+.startAuction{
+  grid-gap: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 10% 1fr;
+  grid-template-areas:
+  "auctionHeader buyCards"
+  "bottlePlacements buyCards";
+}
+
+.buyCards{grid-area: buyCards;}
+.bottlePlacements{grid-area: bottlePlacements;}
+.auctionHeader{grid-area: auctionHeader;}
+
+  /* .buy-cards, .buttons {
     display: grid;
     grid-template-columns: repeat(auto-fill, 130px);
-  }
+  } */
 </style>

@@ -520,13 +520,15 @@ footer a:visited {
   grid-area: gameBoard;
   grid-gap: 1em;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 15% 15% 25%;
+  grid-template-rows: 30% 55% 20%;
   grid-template-areas:
   "itemPool itemPool itemPool"
   "skillPool workPool auctionPool"
   "skillPool marketPool marketPool";
 }
+
+.item, .skill, .work, .auction, .market{padding: 3em;}
 
 .item {
   grid-area: itemPool;
@@ -563,9 +565,24 @@ footer a:visited {
 /* ========================= */
 /* BUY CARD BUTTON */
 
-.buy-cards, .buttons {
+.buyCards, .buttons {
+}
+
+.horizontalBuyCards{
   display: grid;
-  grid-template-columns: repeat(auto-fill, 250px);
+  grid-template-columns: repeat(auto-fill, 400px);
+}
+
+/* ========================= */
+/* PLACE BOTTLE BUTTON */
+
+.bottlePlacements {
+
+}
+
+.horizontalPlacement{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
 }
 
 /* ========================= */

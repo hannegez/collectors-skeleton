@@ -13,7 +13,7 @@
         </div>
       </div> -->
 
-      <div>
+      <!-- <div>
         <div class="buttons" v-for="(p, index) in placement" :key="index">
           <button
             v-if="p.playerId===null"
@@ -26,10 +26,24 @@
           </div>
 
         </div>
-      </div>
+      </div> -->
+
+      <div class="bottlePlacements horizontalPlacement">
+              <div v-for="(p, index) in placement" :key="'bp' + index">
+                <input type="image"
+                       v-if="p.playerId===null"
+                       :disabled="cannotAfford(p.cost)"
+                       @click="placeBottle(p)"
+                       src='/images/bottle_placement.png' >
+                <p class="buttonText"> ${{p.cost}} </p>
+                <div v-if="p.playerId !== null">
+                  {{p.playerId}}
+                </div>
+              </div>
+            </div>
 
       <h2>MARKET</h2> <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
-      <div class="buy-cards">
+      <div class="buyCards horizontalBuyCards">
         <div v-for="(card, index) in market" :key="index">
           <CollectorsCard
             :card="card"
@@ -137,9 +151,9 @@ export default {
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .buy-cards, .buttons {
+<style>
+  /* .buy-cards, .buttons {
     display: grid;
     grid-template-columns: repeat(auto-fill, 130px);
-  }
+  } */
 </style>

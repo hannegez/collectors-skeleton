@@ -1,8 +1,10 @@
 <template>
-    <div>
-      <h2>{{ labels.gainSkill }}</h2>
+    <div class="gainSkill">
+      <div class="gainSkillHead">
+        <h2>{{ labels.gainSkill }}</h2>        
+      </div>
 
-      <div class="gain-skill">
+      <div class="buyCards">
         <div v-for="(card, index) in skillsOnSale" :key="index">
           <CollectorsCard
             :card="card"
@@ -11,7 +13,7 @@
         </div>
       </div>
 
-      <div>
+      <!-- <div>
         <div class="buttons" v-for="(p, index) in placement" :key="index">
           <button
             v-if="p.playerId===null"
@@ -23,9 +25,9 @@
             {{p.playerId}}
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <div>
+      <div class="bottlePlacements">
               <div v-for="(p, index) in placement" :key="'bp' + index">
                 <input type="image"
                        v-if="p.playerId===null"
@@ -94,13 +96,21 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .gain-skill, .buttons {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 130px);
-  }
+<style>
 
+.gainSkill{
+  grid-gap: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 10% 1fr;
+  grid-template-areas:
+  "gainSkillHead bottlePlacements"
+  "buyCards bottlePlacements";
+}
 
+.buyCards{grid-area: buyCards;}
+.bottlePlacements{grid-area: bottlePlacements;}
+.gainSkillHead{grid-area: gainSkillHead;}
 
   .green{
     grid-area: lside;

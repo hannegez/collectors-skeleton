@@ -79,11 +79,7 @@
           <div id="drawCard" class="buttons">
             <p class="buttonText">{{ labels.draw }}</p>
             <input type="image" @click="drawCard" class="imgButton" alt="Login"
-<<<<<<< HEAD
             src='/images/card_backside300px.png' value="Draw card" height="200px" width="200px">    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
-=======
-            src='/images/card_backside300px.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
->>>>>>> af1839af418df52fb0fe3adf495737139537878e
           </div>
 
           <CollectorsPlayerBoard v-if="players[playerId]"

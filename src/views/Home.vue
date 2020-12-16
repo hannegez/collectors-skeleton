@@ -71,6 +71,10 @@ export default {
 </script>
 
 <style scoped>
+   p {
+   font-size: 1em;
+    font-weight: normal;
+  }
   .center {
     display: flex;
     align-items: center;

@@ -31,8 +31,8 @@ export default {
   .card {
     color:red;
     user-select: none;
-    width:250px;
-    height:350px;
+    width: 250px;
+    height: 350px;
     background-image: url('/images/collectors-cards.png');
     border-radius: 10px;
   }

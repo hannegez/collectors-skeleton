@@ -7,10 +7,11 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
     <div class = "playerHeader">
       <h1>PLAYER INFO</h1>
-      <img class= "playerSymbol" src='/images/coin100px.png' alt=""> X {{player.money}}
+      <p><img class= "playerSymbol" src='/images/coin100px.png' alt="coin symbol"> X {{player.money}}</p>
+      <p><img class= "playerSymbol" src='/images/future_income100px.png' alt="income symbol"> X {{player.income}}</p>
       <p>Total bottles: {{player.totalBottles}}</p>
       <p>Bottles left: {{player.bottlesLeft}}</p>
-      <p>Future income: {{player.income}}</p>
+
 
       <br>
       <button @click="player.money += 1">

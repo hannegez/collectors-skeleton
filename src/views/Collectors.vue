@@ -443,9 +443,9 @@ methods: {
       );
     },
 
-
-
 }
+
+};
 </script>
 <!--  /*getInfo: function(){
     console.log("bajs");

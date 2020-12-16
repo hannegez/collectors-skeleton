@@ -73,9 +73,23 @@
             </div>
 
           </div>
+
+          <div class="player board">
+
+
+
+          <div id="drawCard" class="buttons">
+            <p class="buttonText">{{ labels.draw }}</p>
+            <input type="image" @click="drawCard" class="imgButton" alt="Login"
+            src='/images/card_backside300px.png' value="Draw card">    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
+          </div>
+
           <CollectorsPlayerBoard v-if="players[playerId]"
           :labels="labels"
           :player="players[playerId]"/>
+
+          </div>
+
 
 
 <!--
@@ -497,6 +511,9 @@ footer a {
 footer a:visited {
   color:ivory;
 }
+/* =====================================
+    PlayerBoard (GRID)                 */
+
 
 /* =====================================
     GAME BOARD (GRID)                 */

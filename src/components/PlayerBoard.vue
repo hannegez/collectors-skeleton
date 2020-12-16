@@ -4,6 +4,7 @@
 <template>
   <div class="player board">
     <h1>PLAYER INFO</h1>
+    {{player}}
 
     <h2>Your hand</h2>
     <div class="cardslots" >
@@ -25,11 +26,7 @@
       fake more money
     </button>
 
-    <div id="drawCard" class="buttons">
-      <p class="buttonText">{{ labels.draw }}</p>
-      <input type="image" @click="drawCard" class="imgButton" alt="Login"
-      src='/images/card_backside300px.png' value="Draw card">    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
-    </div>
+
 
   </div>
 
@@ -37,6 +34,7 @@
 
 <script>
 import CollectorsCard from '@/components/CollectorsCard.vue'
+
 export default {
   name: 'CollectorsPlayerBoard',
   components: {

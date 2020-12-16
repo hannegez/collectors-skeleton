@@ -154,4 +154,11 @@ export default {
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
+/*<style scoped>
+  .gain-skill, .buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 130px);
+  }*/
+
+
 </style>

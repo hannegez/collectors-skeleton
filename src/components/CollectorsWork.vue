@@ -14,10 +14,12 @@
 
   </div>
 </div> -->
-
-<!-- gör om till objekt och skicka med kostnad och action samt ändra i placement. -->
+<!--  HEAD
+ gör om till objekt och skicka med kostnad och action samt ändra i placement. -->
 <!--      <div>
 <div class="buttons" v-for="(p, index) in placement" :key="index">-->
+      <div>
+        <div class="buttons" v-for="(p, index) in placement" :key="index">
 <!--          ${{p.cost}}
 ${{p.workAction}}
 {{p}}
@@ -77,8 +79,6 @@ export default {
     labels: Object,  //specify what kind of object
     player: Object,
     skillsOnSale: Array,
-    itemsOnSale: Array,
-    marketValues: Object,
     placement: Array
     //NÅNTING MED WORK?
   },

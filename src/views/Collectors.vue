@@ -76,12 +76,10 @@
 
           <div class="player board">
 
-
-
           <div id="drawCard" class="buttons">
             <p class="buttonText">{{ labels.draw }}</p>
             <input type="image" @click="drawCard" class="imgButton" alt="Login"
-            src='/images/card_backside300px.png' value="Draw card">    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
+            src='/images/card_backside300px.png' value="Draw card" height="200px" width="200px">    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
           </div>
 
           <CollectorsPlayerBoard v-if="players[playerId]"
@@ -559,7 +557,7 @@ footer a:visited {
 
 .player {
   grid-area: playerBoard;
-  background-color: #f2f2f2;
+  background-color: pink;
 }
 
 /* ========================= */

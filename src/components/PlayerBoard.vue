@@ -2,7 +2,7 @@
     copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
 <template>
-  <div class="player board">
+  <div >
     <h1>PLAYER INFO</h1>
     {{player}}
 

@@ -7,6 +7,12 @@
     <main>
       <div class="game board">
         <div class="item pool">
+          <div class="popup" style= "position:relative; left:0em; top:0em;">
+          <img src='/images/buyItem.PNG' alt="" width="20%" @click="getInfo($event, 'item')" >
+          <span class="popuptext" id="myItemPopup"  style= "position:relative; left:3em; top:-11em;">
+            Buy item används för att köpa objekt
+          </span>
+          </div>
           <CollectorsBuyActions v-if="players[playerId]"
           :labels="labels"
           :player="players[playerId]"
@@ -22,6 +28,13 @@
         </div>
 
         <div class="skill pool">
+          <div class="popup" style= "position:relative; left:0em; top:0em;">
+          <img src='/images/gainSkill.PNG' alt="" width="50%" @click="getInfo($event, 'skill')" >
+          <span class="popuptext" id="mySkillPopup"  style= "position:relative; left:3em; top:-11em;">
+            Gain skill används för att köpa skills
+          </span>
+          </div>
+
           <CollectorsGainSkill v-if="players[playerId]"
           :labels="labels"
           :player="players[playerId]"
@@ -43,6 +56,13 @@
       </div>-->
 
       <div class="work pool">
+        <div class="popup" style= "position:relative; left:0em; top:0em;">
+        <img src='/images/workInfo.PNG' alt="" width="80%" @click="getInfo($event,'work')" >
+        <span class="popuptext" id="myWorkPopup"  style= "position:relative; left:3em; top:-11em;">
+          work kan användas bla bla bla
+        </span>
+        </div>
+
         <CollectorsStartWork v-if="players[playerId]"
         :labels="labels"
         :player="players[playerId]"
@@ -50,10 +70,16 @@
         :placement="workPlacement"
         @startWork="startWork($event)"
         @placeWorkBottle="placeWorkBottle( $event)"/>
-        <img src="/images/workInfo.PNG" alt="">
       </div>
 
       <div class="auction pool">
+        <div class="popup" style= "position:relative; left:0em; top:0em;">
+        <img src='/images/startAuction.png' alt="" width="30%" @click="getInfo($event,'auction')" >
+        <span class="popuptext" id="myAuctionPopup"  style= "position:relative; left:3em; top:-11em;">
+          Auction används för det här o de här
+        </span>
+        </div>
+
         <CollectorsStartAuction v-if="players[playerId]"
         :labels="labels"
         :player="players[playerId]"
@@ -63,6 +89,8 @@
         :placement="auctionPlacement"
         @chooseAction="chooseAction(chosenAction, $event)"
         @placeBottle="placeBottle('auction', $event)"/>
+
+
       </div>
 
       <!--        HEAD
@@ -89,8 +117,8 @@
   <div class="market pool">
     <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
     <div class="popup" style= "position:relative; left:0em; top:0em;">
-    <img src='/images/raiseValue.PNG' alt="" width="80em" @click="getInfo($event)" >
-    <span class="popuptext" id="myPopup"  style= "position:relative; left:3em; top:-9em;">
+    <img src='/images/raiseValue.PNG' alt="" width="20%" @click="getInfo($event,'market')" >
+    <span class="popuptext" id="myMarketPopup"  style= "position:relative; left:3em; top:-11em;">
       raise value används för att yada yada yada
     </span>
     </div>
@@ -136,13 +164,6 @@
 
 
 
-<!--    <div class="popup" style= "position:relative; left:0; top:0em;">
-<img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
-<span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-</div>
-
-</main>-->
-
 
 
 </main>
@@ -151,18 +172,6 @@
   HEJ HÄR ÄR FOOTER
 
 
-  <!-- Här provade jag att lägga in en klickbar bild som skulle ge info när man tryckte på den. Det ska fungera men placeringen av inforutan är skev, men vi kan avvakta med detta /dani -->
-  <!--    <div class="popup" style= "position:relative; left:0; top:0em;">
-  <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
-  <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-</div>-->
-
-<!-- Här vill jag lägga in ett grid med uppdelade grids inuti, se Style längre ned.
-i collectors.vue ska det finnas en grid som sammanställer mer detaljerade grid i respektive komponent ex från buy actions. Detta har jag dock inte fått till..
-Från Mikael:
-1. Att lägga ett element i en komponent betyder att du också flyttar över relevant CSS till komponenten. Föräldrakomponenten behöver då inte bry sig om denna alls. Så flytta allt som har med “pink” att göra till komponenten.
-
-Se css längre ned / -->
 
 </footer>
 </div>
@@ -466,8 +475,31 @@ buyCard: function (card) {
   }
 );
 },
-  getInfo: function(){
-  //console.log("bajs");
+  getInfo: function(p, string){
+  if (string === 'work') {
+    var popupwork = document.getElementById("myWorkPopup");
+    popupwork.classList.toggle("show");
+  }
+  else if (string === 'auction') {
+    var popupauction = document.getElementById("myAuctionPopup");
+    popupauction.classList.toggle("show");
+
+  }
+  else if (string === 'market') {
+    var popupmarket = document.getElementById("myMarketPopup");
+    popupmarket.classList.toggle("show");
+  }
+  else if (string === 'skill') {
+    var popupskill = document.getElementById("mySkillPopup");
+    popupskill.classList.toggle("show");
+  }
+  else if (string === 'item') {
+    var popupitem = document.getElementById("myItemPopup");
+    popupitem.classList.toggle("show");
+  }
+
+
+
   var popup = document.getElementById("myPopup");
   popup.classList.toggle("show");
   },

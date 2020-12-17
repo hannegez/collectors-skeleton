@@ -6,6 +6,7 @@
     </div>
     
 
+
     <div class="bottlePlacements horizontalPlacement">
       <div v-for="(p, index) in placement" :key="'bp' + index">
         <input class="bottlePlacement"

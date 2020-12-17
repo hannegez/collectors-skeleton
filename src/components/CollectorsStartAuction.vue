@@ -32,7 +32,8 @@
 
 <div class="bottlePlacements">
   <div v-for="(p, index) in placement" :key="'bp' + index">
-    <input type="image"
+    <input class="bottlePlacement"
+    type="image"
     v-if="p.playerId===null"
     :disabled="cannotAfford(p.cost)"
     @click="placeBottle(p)"

@@ -7,7 +7,8 @@
 
     <div class="bottlePlacements">
       <div v-for="(p, index) in placement" :key="'bp' + index">
-        <input type="image"
+        <input class="bottlePlacement"
+        type="image"
         v-if="p.playerId===null"
         :disabled="cannotAfford(p.cost)"
         @click="placeWorkBottle(p)"
@@ -66,6 +67,7 @@ export default {
 
 .workInfo {
   margin-left: 3em;
+  width: 7vw;
 }
 
 </style>

@@ -67,6 +67,12 @@
 
   <div class="market pool">
     <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
+    <div class="popup" style= "position:relative; left:0em; top:0em;">
+    <img src='/images/raiseValue.PNG' alt="" width="80em" @click="getInfo($event)" >
+    <span class="popuptext" id="myPopup"  style= "position:relative; left:3em; top:-9em;">
+      raise value används för att yada yada yada
+    </span>
+    </div>
 
     <CollectorsRaiseValue v-if="players[playerId]"
     :labels="labels"
@@ -79,7 +85,7 @@
     @raiseValue="raiseValue($event)"
     @placeBottle="placeBottle('market', $event)"/>
 
-    <img src="/images/raiseValue.PNG" alt="">
+
   </div>
 
 </div>
@@ -94,7 +100,16 @@
 
   <CollectorsPlayerBoard v-if="players[playerId]"
   :labels="labels"
-  :player="players[playerId]"/>
+  :player="players[playerId]"
+  :playerId="playerId"/>
+
+  <!--Object.keys(this.players) ger en array med alla playerid -->
+
+  <CollectorsPlayerBoard v-for='(data, id) in players' :key='id'
+  :labels= "labels"
+  :player= "data"
+  :playerId= "id"
+  @chooseAction= "chooseAction($event)"/>
 
 </div>
 
@@ -418,6 +433,11 @@ buyCard: function (card) {
   }
 );
 },
+  getInfo: function(){
+  //console.log("bajs");
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+  },
 
 raiseValue: function (card) {
   console.log("raiseValue", card);
@@ -465,7 +485,7 @@ main {
   user-select: none;
   display: grid;
   grid-gap: 1em;
-  grid-template-columns: 60vw 40vw;
+  grid-template-columns: 60% 40%;
   grid-template-rows: 1fr;
   grid-template-areas:
   "gameBoard playerBoard";
@@ -547,14 +567,14 @@ PLAYER BOARD                          */
 
 .horizontalBuyCards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 260px);
+  grid-template-columns: repeat(auto-fill, 30%);
 }
 
 /* ========================= */
 /* PLACE BOTTLE BUTTON */
 
-.bottlePlacements {
-
+.bottlePlacement {
+  width: 7vw;
 }
 
 .horizontalPlacement {
@@ -570,7 +590,7 @@ PLAYER BOARD                          */
   margin: 1em;
   border-radius: 0.3em;
   box-shadow: 0.2em 0.2em 0.3em #787975;
-  width: 100%;
+  width: 20%;
 }
 
 .buttons {
@@ -612,35 +632,6 @@ PLAYER BOARD                          */
   z-index: 1;
 }
 
-/* ========================= */
-/* DRAW CARD BUTTON */
-.imgButton {
-  border: solid thin #787975;
-  margin: 1em;
-  border-radius: 10px;
-  box-shadow: 2px 2px 3px #787975;
-  width: 10%;
-}
-
-.imgButton:hover {
-  box-shadow: inset 2px 2px 3px #787975;
-  cursor: pointer;
-}
-.imgButton:focus {
-  outline: none;
-}
-.buttonText, .buttonImg {
-  margin: 0;
-  padding: 0;
-}
-.buttonText {
-  font-size: 2em;
-  font-weight: bold;
-  color: #3c3c3b;
-}
-
-/* ========================= */
-
 footer {
   margin-top: 5em auto;
 }
@@ -666,26 +657,24 @@ footer a:visited {
   transform: scale(1)translate(-25%,0);
   z-index: 1;
 }
-/*allt för popup*/
+/*popup rutan som kommer upp */
 
 .popuptext {
   position: absolute;
   display: none;
   cursor: pointer;
-
   user-select: none;
-
-
   width: 160px;
-  background-color: pink;
+  background-color: white;
   color: black;
   text-align: center;
   border-radius: 6px;
   padding: 8px 0;
-
   z-index: 1;
-
   margin-left: -80px;
+  border-color: grey;
+  border-width: 1px;
+  border-style:solid;
 }
 
 
@@ -697,7 +686,7 @@ footer a:visited {
   margin-left: -5px;
   border-width: 10px;
   border-style: solid;
-  border-color: pink transparent transparent transparent;
+  border-color: grey transparent transparent transparent;
 }
 
 

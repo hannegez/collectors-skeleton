@@ -88,6 +88,12 @@
 
   <div class="market pool">
     <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
+    <div class="popup" style= "position:relative; left:0em; top:0em;">
+    <img src='/images/raiseValue.PNG' alt="" width="80em" @click="getInfo($event)" >
+    <span class="popuptext" id="myPopup"  style= "position:relative; left:3em; top:-9em;">
+      raise value används för att yada yada yada
+    </span>
+    </div>
 
     <CollectorsRaiseValue v-if="players[playerId]"
     :labels="labels"
@@ -100,7 +106,7 @@
     @raiseValue="raiseValue($event)"
     @placeBottle="placeBottle('market', $event)"/>
 
-    <img src="/images/raiseValue.PNG" alt="">
+
   </div>
 
 </div>
@@ -460,6 +466,11 @@ buyCard: function (card) {
   }
 );
 },
+  getInfo: function(){
+  //console.log("bajs");
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+  },
 
 raiseValue: function (card) {
   console.log("raiseValue", card);
@@ -675,26 +686,24 @@ footer a:visited {
   transform: scale(1)translate(-25%,0);
   z-index: 1;
 }
-/*allt för popup*/
+/*popup rutan som kommer upp */
 
 .popuptext {
   position: absolute;
   display: none;
   cursor: pointer;
-
   user-select: none;
-
-
   width: 160px;
-  background-color: pink;
+  background-color: white;
   color: black;
   text-align: center;
   border-radius: 6px;
   padding: 8px 0;
-
   z-index: 1;
-
   margin-left: -80px;
+  border-color: grey;
+  border-width: 1px;
+  border-style:solid;
 }
 
 
@@ -706,7 +715,7 @@ footer a:visited {
   margin-left: -5px;
   border-width: 10px;
   border-style: solid;
-  border-color: pink transparent transparent transparent;
+  border-color: grey transparent transparent transparent;
 }
 
 

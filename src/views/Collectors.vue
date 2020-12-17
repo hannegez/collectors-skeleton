@@ -1,12 +1,21 @@
 <template>
   <div id="wrapper">
     <header>
-      HEJ HÄR ÄR HEADER
+      WELCOME TO RICH COLLECTOR
     </header>
 
     <main>
       <div class="game board">
         <div class="item pool">
+
+
+
+          <!-- Här provade jag att lägga in en klickbar bild som skulle ge info när man tryckte på den. Det ska fungera men placeringen av inforutan är skev, men vi kan avvakta med detta /dani -->
+          <!--    <div class="popup" style= "position:relative; left:0; top:0em;">
+          <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
+          <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
+        </div>-->
+
           <CollectorsBuyActions v-if="players[playerId]"
           :labels="labels"
           :player="players[playerId]"
@@ -31,16 +40,6 @@
           @placeBottle="placeBottle('skill', $event)"/>
         </div>
 
-        <!--  HEAD
-        <div class="work pool">
-        <CollectorsStartWork v-if="players[playerId]"
-        :labels="labels"
-        :player="players[playerId]"
-        :marketValues="marketValues"
-        :placement="workPlacement"
-        @startWork="startWork($event)"
-        @placeWorkBottle="placeWorkBottle( $event)"/>
-      </div>-->
 
       <div class="work pool">
         <CollectorsStartWork v-if="players[playerId]"
@@ -65,26 +64,6 @@
         @placeBottle="placeBottle('auction', $event)"/>
       </div>
 
-      <!--        HEAD
-      <div class="market pool">-->
-      <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
-      <!--  <CollectorsRaiseValue v-if="players[playerId]"
-      :labels="labels"
-      :player="players[playerId]"
-      :market="market"
-      :marketValues="marketValues"
-      :auctionCards="auctionCards"
-      :skillsOnSale="skillsOnSale"
-      :placement="marketPlacement"
-      @raiseValue="raiseValue($event)"
-      @placeBottle="placeBottle('market', $event)"/>
-    </div>
-  </div>
-
-  <div class="player board">
-  <h1>PLAYER INFO</h1>
-  <p>Players: {{players}}</p>
-  <p>marketValues: {{marketValues}}</p>-->
 
   <div class="market pool">
     <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
@@ -121,26 +100,13 @@
 
 
 
-<!--    <div class="popup" style= "position:relative; left:0; top:0em;">
-<img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
-<span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-</div>
-
-</main>-->
-
-
-
 </main>
 
 <footer>
   HEJ HÄR ÄR FOOTER
 
 
-  <!-- Här provade jag att lägga in en klickbar bild som skulle ge info när man tryckte på den. Det ska fungera men placeringen av inforutan är skev, men vi kan avvakta med detta /dani -->
-  <!--    <div class="popup" style= "position:relative; left:0; top:0em;">
-  <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
-  <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-</div>-->
+
 
 <!-- Här vill jag lägga in ett grid med uppdelade grids inuti, se Style längre ned.
 i collectors.vue ska det finnas en grid som sammanställer mer detaljerade grid i respektive komponent ex från buy actions. Detta har jag dock inte fått till..
@@ -332,6 +298,7 @@ export default {
   }.bind(this)
 );
 
+
 this.$store.state.socket.on('collectorsSkillGained',
 function(d) {
   console.log(d.playerId, "gained a skill");
@@ -488,8 +455,11 @@ header {
   position: fixed;
   width:100%;
   pointer-events: none; */
-  border: solid thin #000;
+  border: solid thick #000;
+  font-size: 300%;
+  background-color: gold;
 }
+
 
 main {
   user-select: none;
@@ -591,6 +561,7 @@ PLAYER BOARD                          */
   display: grid;
   grid-template-columns: repeat(auto-fill, 170px);
 }
+
 
 /* ========================= */
 /* DRAW CARD BUTTON */

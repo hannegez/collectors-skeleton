@@ -1,61 +1,76 @@
 <template>
-    <div>
-      <h2>{{ labels.raiseValue }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
-
-<!--BUY CARDS raiseValueOnSale borttagen for now-->
-      <!-- <div class="buy-cards">
-        <div  v-for="(card, index) in skillsOnSale" :key="index">
-          <CollectorsCard
-            :card="card"
-            :availableAction="card.available"
-            @doAction="raiseValue(card)"/>
-          {{ cardCost(card) }}
-        </div>
-      </div> -->
-
-      <div>
-        <div class="buttons" v-for="(p, index) in placement" :key="index">
-          <button
-            v-if="p.playerId===null"
-            :disabled="cannotAfford(p.cost)"
-            @click="placeBottle(p)" >
-            ${{p.cost}}
-          </button>
-          <div v-if="p.playerId !== null">
-            {{p.playerId}}
-          </div>
-
-        </div>
-      </div>
-
-      <h2>MARKET</h2> <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
-      <div class="buy-cards">
-        <div v-for="(card, index) in market" :key="index">
-          <CollectorsCard
-            :card="card"
-            :availableAction="card.available"
-            @doAction="raiseValue(card)"/>
-            <!-- {{ cardCost(card) }} -->
-        </div>
-      </div>
+  <div class="raiseValue">
+    <div class="raiseValueHeader">
+      <h1>{{ labels.raiseValue }}</h1>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
 
     </div>
+    
+
+
+    <div class="bottlePlacements horizontalPlacement">
+      <div v-for="(p, index) in placement" :key="'bp' + index">
+        <input class="bottlePlacement"
+        type="image"
+        v-if="p.playerId===null"
+        :disabled="cannotAfford(p.cost)"
+        @click="placeBottle(p)"
+        src='/images/bottle_placement.png' >
+        <p class="buttonText"> ${{p.cost}} </p>
+        <div v-if="p.playerId !== null">
+          {{p.playerId}}
+        </div>
+      </div>
+    </div>
+
+    <div class="marketValues">
+      <div class="marketValue">
+        <p>{{marketValues.fastaval}}</p>
+        <img class="valueSymbol" src='/images/fastaval_symbol.png'>
+</div>
+<div class="marketValue">
+        <p>{{marketValues.figures}}</p>
+        <img class="valueSymbol" src='/images/figures_symbol.png'>
+      </div>
+      <div class="marketValue">
+        <p>{{marketValues.music}}</p>
+        <img class="valueSymbol" src='/images/music_symbol.png'>
+      </div>
+      <div class="marketValue">
+        <p>{{marketValues.movie}}</p>
+        <img class="valueSymbol" src='/images/movie_symbol.png'>
+      </div>
+      <div class="marketValue">
+        <p>{{marketValues.technology}}</p>
+        <img class="valueSymbol" src='/images/technology_symbol.png'>
+    </div>
+  </div>
+</div>
+
+  <!-- OBS: alla kort som lagts till i market, detta ska ej synas i slutet, men låter det vara kvar tillfälligt -->
+  <!-- <div class="buyCards horizontalBuyCards">
+  <div v-for="(card, index) in market" :key="index">
+  <CollectorsCard
+  :card="card"
+  :availableAction="card.available"
+  @doAction="raiseValue(card)"/>
+  {{ cardCost(card) }}
+</div> -->
 
 </template>
 
 <script>
-import CollectorsCard from '@/components/CollectorsCard.vue'
+//import CollectorsCard from '@/components/CollectorsCard.vue'
 export default {
   name: 'CollectorsRaiseValue',
   components: {
-    CollectorsCard
+    //  CollectorsCard
   },
   props: {            //HÄR ÄR ALLA v-binds FRÅN ELEMENTET I Collectors.vue
     labels: Object,  //specify what kind of object
     player: Object,
-  //itemsOnSale: Array,
+    //itemsOnSale: Array,
     auctionCards: Array,
-  //  raiseValueOnSale: Array,
+    //  raiseValueOnSale: Array,
     market: Array,
     skillsOnSale: Array,
     marketValues: Object,
@@ -67,7 +82,7 @@ export default {
       let minCost = 100;
       for(let key in this.marketValues) {
         if (cost + this.marketValues[key] < minCost)
-          minCost = cost + this.marketValues[key]
+        minCost = cost + this.marketValues[key]
       }
       return (this.player.money < minCost);
     },
@@ -80,7 +95,7 @@ export default {
     },
 
     setAvailable: function (card) {
-        this.$set(card, "available", true);
+      this.$set(card, "available", true);
     },
 
     //byt ut till setavailable --> gain skill..
@@ -137,9 +152,12 @@ export default {
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .buy-cards, .buttons {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 130px);
-  }
+<style>
+.marketValues {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 20%);
+}
+.valueSymbol {
+  width: 7vw;
+}
 </style>

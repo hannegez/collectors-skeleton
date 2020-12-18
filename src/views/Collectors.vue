@@ -1,7 +1,7 @@
 <template>
   <div id="wrapper">
     <header>
-      HEJ HÄR ÄR HEADER
+      WELCOME TO RICH COLLECTOR
     </header>
 
     <main>
@@ -11,6 +11,7 @@
           <img src='/images/buyItem.PNG' alt="" width="15%" @click="getInfo($event, 'item')" >
           <span class="popuptext" id="myItemPopup"  style= "position:relative; left:3em; top:-11em;">
             Buy item används för att köpa objekt
+
           </span>
           </div> -->
           <CollectorsBuyActions v-if="players[playerId]"
@@ -32,6 +33,7 @@
           <img src='/images/gainSkill.PNG' alt="" width="50%" @click="getInfo($event, 'skill')" >
           <span class="popuptext" id="mySkillPopup"  style= "position:relative; left:3em; top:-11em;">
             Gain skill används för att köpa skills
+            <img src='/images/skills_info.png' alt="" width="200%">
           </span>
           </div> -->
 
@@ -44,16 +46,6 @@
           @placeBottle="placeBottle('skill', $event)"/>
         </div>
 
-        <!--  HEAD
-        <div class="work pool">
-        <CollectorsStartWork v-if="players[playerId]"
-        :labels="labels"
-        :player="players[playerId]"
-        :marketValues="marketValues"
-        :placement="workPlacement"
-        @startWork="startWork($event)"
-        @placeWorkBottle="placeWorkBottle( $event)"/>
-      </div>-->
 
       <div class="work pool">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
@@ -93,32 +85,12 @@
 
       </div>
 
-      <!--        HEAD
-      <div class="market pool">-->
-      <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
-      <!--  <CollectorsRaiseValue v-if="players[playerId]"
-      :labels="labels"
-      :player="players[playerId]"
-      :market="market"
-      :marketValues="marketValues"
-      :auctionCards="auctionCards"
-      :skillsOnSale="skillsOnSale"
-      :placement="marketPlacement"
-      @raiseValue="raiseValue($event)"
-      @placeBottle="placeBottle('market', $event)"/>
-    </div>
-  </div>
-
-  <div class="player board">
-  <h1>PLAYER INFO</h1>
-  <p>Players: {{players}}</p>
-  <p>marketValues: {{marketValues}}</p>-->
 
   <div class="market pool">
     <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
     <div class="popup" style= "position:relative; left:0em; top:0em;">
-    <img src='/images/raiseValue.PNG' alt="" width="20%" @click="getInfo($event,'market')" >
-    <span class="popuptext" id="myMarketPopup"  style= "position:relative; left:3em; top:-11em;">
+    <img src='/images/infoknapp_rv.png' alt="" width="80em" @click="getInfo($event)" >
+    <span class="popuptext" id="myPopup"  style= "position:relative; left:3em; top:-9em;">
       raise value används för att yada yada yada
     </span>
     </div>
@@ -353,6 +325,7 @@ export default {
   }.bind(this)
 );
 
+
 this.$store.state.socket.on('collectorsSkillGained',
 function(d) {
   console.log(d.playerId, "gained a skill");
@@ -537,8 +510,11 @@ header {
   position: fixed;
   width:100%;
   pointer-events: none; */
-  border: solid thin #000;
+  border: solid thick #000;
+  font-size: 300%;
+  background-color: gold;
 }
+
 
 main {
   user-select: none;
@@ -643,6 +619,7 @@ PLAYER BOARD                          */
   grid-template-columns: repeat(auto-fill, 90px);
 }
 
+
 /* ========================= */
 /* DRAW CARD BUTTON */
 .imgButton {
@@ -724,7 +701,7 @@ footer a:visited {
   display: none;
   cursor: pointer;
   user-select: none;
-  width: 160px;
+  width: auto; /* 160px; */
   background-color: white;
   color: black;
   text-align: center;

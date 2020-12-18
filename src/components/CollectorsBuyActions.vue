@@ -11,6 +11,8 @@
       </div>
     </div>
 
+
+
     <div class="buyCards horizontalBuyCards">
       <div v-for="(card, index) in itemsOnSale" :key="index">
         <CollectorsCard
@@ -23,18 +25,6 @@
 
     <div>
 
-      <!-- GAMLA BOTTLE PLACEMENT - KNAPPAR
-      <div class="buttons" v-for="(p, index) in placement" :key="'original' + index">
-      <button
-      v-if="p.playerId===null"
-      :disabled="cannotAfford(p.cost)"
-      @click="placeBottle(p)" >
-      ${{p.cost}}
-    </button>
-    <div v-if="p.playerId !== null">
-    {{p.playerId}}
-  </div>
-</div> -->
 
 <div class="bottlePlacements horizontalPlacement">
   <div v-for="(p, index) in placement" :key="'bp' + index">

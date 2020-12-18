@@ -9,6 +9,7 @@
       <img src='/images/gainSkill.PNG' alt="" width="50%" @click="getInfo($event, 'skill')" >
       <span class="popuptext" id="mySkillPopup"  style= "position:relative; left:3em; top:-11em;">
         Gain skill används för att köpa skills
+        <img src='/images/skills_info.png'> <!-- Maja har lagt till-->
       </span>
       </div>
     </div>
@@ -111,7 +112,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 
 .gainSkill{
   grid-gap: 1em;
@@ -171,11 +172,5 @@ export default {
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
-/*<style scoped>
-  .gain-skill, .buttons {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 130px);
-  }*/
-
 
 </style>

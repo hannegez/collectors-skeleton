@@ -88,9 +88,22 @@ export default {
 
     placeWorkBottle: function (p) {
       this.$emit('placeWorkBottle', p); //emitta hela p.
+      this.highlightAvailableCards(p.workAction); //HJÄLP 18/12
     },
     setAvailable: function (card) {
       this.$set(card, "available", true);
+    },
+    //HJÄLP 18/12
+    highlightAvailableCards: function (workAction)  {
+      console.log("vår workaction: ", workAction);
+      if (workAction === 5) {
+        console.log("inne i hightligh if-satsen");
+        for (let i = 0; i < this.player.hand.length; i += 1) {
+          console.log("inne i hightlight for-loopen");
+          this.setAvailable(this.player.hand[i]);
+          console.log("Hand ska highlightas");
+        }
+      }
     },
     startWork: function (card) {//skicka placerin/textsträng till startWork ex actiion
       console.log("startWork 1" + card);

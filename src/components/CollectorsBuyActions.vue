@@ -5,11 +5,7 @@
       <h1>{{ labels.buyItem }}</h1>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
     </div>
 
-    <div id="drawCard" class="popup" style="position:relative; left:0; top:0em;">
-      <p class="buttonText">Info</p>
-      <input type="image" @click="showInfoItem" class="imgButton" alt="Login"
-      src='/images/coin100px.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
-    </div>
+
 
     <div class="buyCards horizontalBuyCards">
       <div v-for="(card, index) in itemsOnSale" :key="index">
@@ -65,18 +61,6 @@ export default {
     //NÅNTING MED WORK?
   },
   methods: {
-    showInfoItem: function() {
-      console.log("hej här är popup");
-      var popup = document.getElementById("myPopup");
-      popup.classList.toggle("show");
-      popup.style.left=event.clientX - event.target.getBoundingClientRect().x +"px";
-      popup.style.top=event.clientY - event.target.getBoundingClientRect().y - 70+"px"  ;
-      console.log(popup.style, event.clientX, event.clientY);
-    },
-
-
-
-
     cannotAfford: function (cost) {
       let minCost = 100;
       for(let key in this.marketValues) {
@@ -120,43 +104,6 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.popup .show {
-  display: block;
-}
-
-.popuptext {
-  position: absolute;
-  display: none;
-  cursor: pointer;
-
-  user-select: none;
-
-
-  width: 160px;
-  background-color: pink;
-  color: black;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
-
-  z-index: 1;
-
-  margin-left: -80px;
-}
-
-
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 10px;
-  border-style: solid;
-  border-color: pink transparent transparent transparent;
-}
-
-/* SLUT PÅ POPUP*/
 .pink{
   grid-area: topp;
   display: grid;

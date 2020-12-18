@@ -7,24 +7,13 @@
     <main>
       <div class="game board">
         <div class="item pool">
-<<<<<<< HEAD
-
-
-
-          <!-- Här provade jag att lägga in en klickbar bild som skulle ge info när man tryckte på den. Det ska fungera men placeringen av inforutan är skev, men vi kan avvakta med detta /dani -->
-          <!--    <div class="popup" style= "position:relative; left:0; top:0em;">
-          <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
-          <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-        </div>-->
-
-=======
           <div class="popup" style= "position:relative; left:0em; top:0em;">
           <img src='/images/buyItem.PNG' alt="" width="20%" @click="getInfo($event, 'item')" >
           <span class="popuptext" id="myItemPopup"  style= "position:relative; left:3em; top:-11em;">
             Buy item används för att köpa objekt
+
           </span>
           </div>
->>>>>>> 31f5a48c3be9f6b3c8f4575a7c441f1cfbe93d11
           <CollectorsBuyActions v-if="players[playerId]"
           :labels="labels"
           :player="players[playerId]"
@@ -44,6 +33,7 @@
           <img src='/images/gainSkill.PNG' alt="" width="50%" @click="getInfo($event, 'skill')" >
           <span class="popuptext" id="mySkillPopup"  style= "position:relative; left:3em; top:-11em;">
             Gain skill används för att köpa skills
+            <img src='/images/skills_info.png' alt="" width="200%">
           </span>
           </div>
 
@@ -99,13 +89,8 @@
   <div class="market pool">
     <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
     <div class="popup" style= "position:relative; left:0em; top:0em;">
-<<<<<<< HEAD
     <img src='/images/infoknapp_rv.png' alt="" width="80em" @click="getInfo($event)" >
     <span class="popuptext" id="myPopup"  style= "position:relative; left:3em; top:-9em;">
-=======
-    <img src='/images/raiseValue.PNG' alt="" width="20%" @click="getInfo($event,'market')" >
-    <span class="popuptext" id="myMarketPopup"  style= "position:relative; left:3em; top:-11em;">
->>>>>>> 31f5a48c3be9f6b3c8f4575a7c441f1cfbe93d11
       raise value används för att yada yada yada
     </span>
     </div>
@@ -150,27 +135,12 @@
 </div>
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 31f5a48c3be9f6b3c8f4575a7c441f1cfbe93d11
 </main>
 
 <footer>
   HEJ HÄR ÄR FOOTER
 
 
-<<<<<<< HEAD
-
-
-<!-- Här vill jag lägga in ett grid med uppdelade grids inuti, se Style längre ned.
-i collectors.vue ska det finnas en grid som sammanställer mer detaljerade grid i respektive komponent ex från buy actions. Detta har jag dock inte fått till..
-Från Mikael:
-1. Att lägga ett element i en komponent betyder att du också flyttar över relevant CSS till komponenten. Föräldrakomponenten behöver då inte bry sig om denna alls. Så flytta allt som har med “pink” att göra till komponenten.
-
-Se css längre ned / -->
-=======
->>>>>>> 31f5a48c3be9f6b3c8f4575a7c441f1cfbe93d11
 
 </footer>
 </div>
@@ -729,7 +699,7 @@ footer a:visited {
   display: none;
   cursor: pointer;
   user-select: none;
-  width: 160px;
+  width: auto; /* 160px; */
   background-color: white;
   color: black;
   text-align: center;

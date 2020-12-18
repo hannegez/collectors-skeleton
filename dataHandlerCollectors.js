@@ -116,7 +116,8 @@ Data.prototype.joinGame = function (roomId, playerId) {
                                  points: 0,
                                  skills: [],
                                  items: [],
-                                 income: 0,
+                                 income: [],
+                                 futureIncome: 0, //ska sättas till längden av income när man väljer work som resulterar i income
                                  secret: [],
                                  totalBottles: 2, //ska ökas med en när man skaffar en bottle-skill
                                  bottlesLeft: 2}; //ska minska med en varje gång man gör ett drag, när allas är 0 ändras quarter
@@ -406,7 +407,8 @@ Data.prototype.placeWorkBottle = function (roomId, playerId, cost, workAction) {
           else if (workAction === 5) {
             console.log("workaction 5");
             this.drawCard(roomId, playerId);
-            room.players[playerId].income += 1; //har här gjort om income till integer
+
+            //room.players[playerId].income PUSHA hit och sen skapa en futureIncome-variabel som är längden på income-arrayen
             //you must draw one card from the deck to your hand and place
             // one card from your hand face down next to your player board
             // on its right side

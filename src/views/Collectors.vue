@@ -147,10 +147,11 @@
     src='/images/card_backside300px.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
   </div>
 
-  <CollectorsPlayerBoard v-if="players[playerId]"
+
+  <!-- <CollectorsPlayerBoard v-if="players[playerId]"
   :labels="labels"
   :player="players[playerId]"
-  :playerId="playerId"/>
+  :playerId="playerId"/> -->
 
   <!--Object.keys(this.players) ger en array med alla playerid -->
 

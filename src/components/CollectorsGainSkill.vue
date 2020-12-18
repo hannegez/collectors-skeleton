@@ -9,6 +9,7 @@
       <img src='/images/gainSkill.PNG' alt="" width="50%" @click="getInfo($event, 'skill')" >
       <span class="popuptext" id="mySkillPopup"  style= "position:relative; left:3em; top:-11em;">
         Gain skill används för att köpa skills
+        <img src='/images/skills_info.png'> <!-- Maja har lagt till-->
       </span>
       </div>
     </div>

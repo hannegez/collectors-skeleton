@@ -5,7 +5,7 @@
     </div>
 
     <div class="buyCards">
-      <div v-for="(card, index) in skillsOnSale" :key="index">
+      <div v-for="(card, index) in reversedSkills" :key="index">
         <CollectorsCard
         :card="card"
         :availableAction="card.available"
@@ -29,7 +29,8 @@
 
 <div class="bottlePlacements">
   <div v-for="(p, index) in placement" :key="'bp' + index">
-    <input type="image"
+    <input class="bottlePlacement"
+    type="image"
     v-if="p.playerId===null"
     :disabled="cannotAfford(p.cost)"
     @click="placeBottle(p)"
@@ -60,6 +61,11 @@ export default {
     placement: Array,
     chosenAction: String
     //NÅNTING MED WORK?
+  },
+  computed: {
+    reversedSkills: function() {
+      return [...this.skillsOnSale].reverse();
+    }
   },
   methods: {
     cannotAfford: function (cost) {

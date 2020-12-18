@@ -7,6 +7,12 @@
     <main>
       <div class="game board">
         <div class="item pool">
+          <div class="popup" style= "position:relative; left:0em; top:0em;">
+          <img src='/images/buyItem.PNG' alt="" width="20%" @click="getInfo($event, 'item')" >
+          <span class="popuptext" id="myItemPopup"  style= "position:relative; left:3em; top:-11em;">
+            Buy item används för att köpa objekt
+          </span>
+          </div>
           <CollectorsBuyActions v-if="players[playerId]"
           :labels="labels"
           :player="players[playerId]"
@@ -22,6 +28,13 @@
         </div>
 
         <div class="skill pool">
+          <div class="popup" style= "position:relative; left:0em; top:0em;">
+          <img src='/images/gainSkill.PNG' alt="" width="50%" @click="getInfo($event, 'skill')" >
+          <span class="popuptext" id="mySkillPopup"  style= "position:relative; left:3em; top:-11em;">
+            Gain skill används för att köpa skills
+          </span>
+          </div>
+
           <CollectorsGainSkill v-if="players[playerId]"
           :labels="labels"
           :player="players[playerId]"
@@ -43,6 +56,13 @@
       </div>-->
 
       <div class="work pool">
+        <div class="popup" style= "position:relative; left:0em; top:0em;">
+        <img src='/images/workInfo.PNG' alt="" width="80%" @click="getInfo($event,'work')" >
+        <span class="popuptext" id="myWorkPopup"  style= "position:relative; left:3em; top:-11em;">
+          work kan användas bla bla bla
+        </span>
+        </div>
+
         <CollectorsStartWork v-if="players[playerId]"
         :labels="labels"
         :player="players[playerId]"
@@ -50,10 +70,16 @@
         :placement="workPlacement"
         @startWork="startWork($event)"
         @placeWorkBottle="placeWorkBottle( $event)"/>
-        <img src="/images/workInfo.PNG" alt="">
       </div>
 
       <div class="auction pool">
+        <div class="popup" style= "position:relative; left:0em; top:0em;">
+        <img src='/images/startAuction.png' alt="" width="30%" @click="getInfo($event,'auction')" >
+        <span class="popuptext" id="myAuctionPopup"  style= "position:relative; left:3em; top:-11em;">
+          Auction används för det här o de här
+        </span>
+        </div>
+
         <CollectorsStartAuction v-if="players[playerId]"
         :labels="labels"
         :player="players[playerId]"
@@ -63,6 +89,8 @@
         :placement="auctionPlacement"
         @chooseAction="chooseAction(chosenAction, $event)"
         @placeBottle="placeBottle('auction', $event)"/>
+
+
       </div>
 
       <!--        HEAD
@@ -88,6 +116,12 @@
 
   <div class="market pool">
     <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
+    <div class="popup" style= "position:relative; left:0em; top:0em;">
+    <img src='/images/raiseValue.PNG' alt="" width="20%" @click="getInfo($event,'market')" >
+    <span class="popuptext" id="myMarketPopup"  style= "position:relative; left:3em; top:-11em;">
+      raise value används för att yada yada yada
+    </span>
+    </div>
 
     <CollectorsRaiseValue v-if="players[playerId]"
     :labels="labels"
@@ -100,7 +134,7 @@
     @raiseValue="raiseValue($event)"
     @placeBottle="placeBottle('market', $event)"/>
 
-    <img src="/images/raiseValue.PNG" alt="">
+
   </div>
 
 </div>
@@ -115,18 +149,23 @@
 
   <CollectorsPlayerBoard v-if="players[playerId]"
   :labels="labels"
-  :player="players[playerId]"/>
+  :player="players[playerId]"
+  :playerId="playerId"/>
 
-</div>
+  <!--Object.keys(this.players) ger en array med alla playerid -->
 
-
+  <CollectorsPlayerBoard v-for='(data, id) in players' :key='id'
+  :labels= "labels"
+  :player= "data"
+  :playerId= "id"
+  @chooseAction= "chooseAction($event)"/>
 
 <!--<div class="popup" style= "position:relative; left:0; top:0em;">
 <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
 <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
 </div>
 
-</main>-->
+
 
 
 
@@ -136,18 +175,6 @@
   HEJ HÄR ÄR FOOTER
 
 
-  <!-- Här provade jag att lägga in en klickbar bild som skulle ge info när man tryckte på den. Det ska fungera men placeringen av inforutan är skev, men vi kan avvakta med detta /dani -->
-  <!--    <div class="popup" style= "position:relative; left:0; top:0em;">
-  <img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
-  <span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-</div>-->
-
-<!-- Här vill jag lägga in ett grid med uppdelade grids inuti, se Style längre ned.
-i collectors.vue ska det finnas en grid som sammanställer mer detaljerade grid i respektive komponent ex från buy actions. Detta har jag dock inte fått till..
-Från Mikael:
-1. Att lägga ett element i en komponent betyder att du också flyttar över relevant CSS till komponenten. Föräldrakomponenten behöver då inte bry sig om denna alls. Så flytta allt som har med “pink” att göra till komponenten.
-
-Se css längre ned / -->
 
 </footer>
 </div>
@@ -451,6 +478,34 @@ buyCard: function (card) {
   }
 );
 },
+  getInfo: function(p, string){
+  if (string === 'work') {
+    var popupwork = document.getElementById("myWorkPopup");
+    popupwork.classList.toggle("show");
+  }
+  else if (string === 'auction') {
+    var popupauction = document.getElementById("myAuctionPopup");
+    popupauction.classList.toggle("show");
+
+  }
+  else if (string === 'market') {
+    var popupmarket = document.getElementById("myMarketPopup");
+    popupmarket.classList.toggle("show");
+  }
+  else if (string === 'skill') {
+    var popupskill = document.getElementById("mySkillPopup");
+    popupskill.classList.toggle("show");
+  }
+  else if (string === 'item') {
+    var popupitem = document.getElementById("myItemPopup");
+    popupitem.classList.toggle("show");
+  }
+
+
+
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+  },
 
 raiseValue: function (card) {
   console.log("raiseValue", card);
@@ -495,7 +550,7 @@ main {
   user-select: none;
   display: grid;
   grid-gap: 1em;
-  grid-template-columns: 60vw 40vw;
+  grid-template-columns: 60% 40%;
   grid-template-rows: 1fr;
   grid-template-areas:
   "gameBoard playerBoard";
@@ -577,14 +632,14 @@ PLAYER BOARD                          */
 
 .horizontalBuyCards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 260px);
+  grid-template-columns: repeat(auto-fill, 30%);
 }
 
 /* ========================= */
 /* PLACE BOTTLE BUTTON */
 
-.bottlePlacements {
-
+.bottlePlacement {
+  width: 7vw;
 }
 
 .horizontalPlacement {
@@ -599,7 +654,7 @@ PLAYER BOARD                          */
   margin: 1em;
   border-radius: 0.3em;
   box-shadow: 0.2em 0.2em 0.3em #787975;
-  width: 100%;
+  width: 20%;
 }
 
 .buttons {
@@ -641,35 +696,6 @@ PLAYER BOARD                          */
   z-index: 1;
 }
 
-/* ========================= */
-/* DRAW CARD BUTTON */
-.imgButton {
-  border: solid thin #787975;
-  margin: 1em;
-  border-radius: 10px;
-  box-shadow: 2px 2px 3px #787975;
-  width: 10%;
-}
-
-.imgButton:hover {
-  box-shadow: inset 2px 2px 3px #787975;
-  cursor: pointer;
-}
-.imgButton:focus {
-  outline: none;
-}
-.buttonText, .buttonImg {
-  margin: 0;
-  padding: 0;
-}
-.buttonText {
-  font-size: 2em;
-  font-weight: bold;
-  color: #3c3c3b;
-}
-
-/* ========================= */
-
 footer {
   margin-top: 5em auto;
 }
@@ -695,26 +721,24 @@ footer a:visited {
   transform: scale(1)translate(-25%,0);
   z-index: 1;
 }
-/*allt för popup*/
+/*popup rutan som kommer upp */
 
 .popuptext {
   position: absolute;
   display: none;
   cursor: pointer;
-
   user-select: none;
-
-
   width: 160px;
-  background-color: pink;
+  background-color: white;
   color: black;
   text-align: center;
   border-radius: 6px;
   padding: 8px 0;
-
   z-index: 1;
-
   margin-left: -80px;
+  border-color: grey;
+  border-width: 1px;
+  border-style:solid;
 }
 
 
@@ -726,7 +750,7 @@ footer a:visited {
   margin-left: -5px;
   border-width: 10px;
   border-style: solid;
-  border-color: pink transparent transparent transparent;
+  border-color: grey transparent transparent transparent;
 }
 
 

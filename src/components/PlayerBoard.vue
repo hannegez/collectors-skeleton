@@ -3,20 +3,23 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
 <template>
   <div class= "playerContainer">
+
+
     <div class = "playerHeader">
-      <h1>{{labels.playerInfo}} {{playerId}}</h1>
-      <p><img class= "playerSymbol" src='/images/coin100px.png' alt="coin symbol"> X {{player.money}}</p>
-      <p><img class= "playerSymbol" src='/images/future_income100px.png' alt="income symbol"> X {{player.income}}</p>
-      <p>Total bottles: {{player.totalBottles}}</p>
-      <p>Bottles left: {{player.bottlesLeft}}</p>
+      <h1>PLAYER INFO</h1>
+      <img class= "playerSymbol" src='/images/coin100px.png' alt="">
+      X {{player.money}}
+
+      <br>
       <button @click="player.money += 1">
         <h2>FAKE MONEY</h2>
+        fake more money
       </button>
     </div>
 
     <div class="playerslots Yhand" >
       <h2>Your hand</h2>
-        <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
+      <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(chosenAction, card)" :key="'hand'+ index"/>
     </div>
 
 
@@ -46,13 +49,10 @@ export default {
   props: {            //HÄR ÄR ALLA v-binds FRÅN ELEMENTET I Collectors.vue
     labels: Object,  //specify what kind of object
     player: Object,
-    playerId: String,
     //NÅNTING MED WORK?
   },
   methods: {
-    chooseAction(card){
-      this.$emit('chooseAction', card);
-    },
+
   }
 }
 
@@ -61,9 +61,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-/* =====================================
-    PLAYER BOARD (GRID)                 */
-
 .playerContainer {
   background-color: #ececec;
   width: 100%;
@@ -71,7 +68,7 @@ export default {
   grid-gap: 1em;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 40% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20%;
   grid-template-areas:
   "playerHeader playerHeader playerHeader"
   "items items items"
@@ -79,24 +76,26 @@ export default {
   "hand hand hand";
 }
 
-.playerHeader, .Yitems, .Yskills, .Yhand { padding: 2em; }
+.Yhand {
+  grid-area: hand;
+}
 
-.playerHeader {
-  grid-area: playerHeader;
-}
-.Yitems {
-  grid-area: items;
-}
 .Yskills {
   grid-area: skill;
 }
-.Yhand {
-  grid-area: hand;
+
+.Yitems {
+  grid-area: items;
+}
+
+.playerHeader {
+  grid-area: playerHeader;
 }
 
 .playerSymbol{
   width: 20%;
 }
+
 
 .playerslots {
   display: grid;

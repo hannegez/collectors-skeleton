@@ -46,7 +46,6 @@ export default {
 
     placeWorkBottle: function (p) {
       this.$emit('placeWorkBottle', p); //emitta hela p.
-      this.highlightAvailableCards(p.workAction); //HJÄLP 18/12
     },
     setAvailable: function (card) {
       this.$set(card, "available", true);
@@ -75,7 +74,7 @@ export default {
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 
 .workInfo {
   margin-left: 3em;

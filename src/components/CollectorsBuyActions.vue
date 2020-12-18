@@ -106,7 +106,7 @@ export default {
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 .buyItem{
   grid-gap: 4%;
   display: grid;

@@ -9,6 +9,7 @@
       <img src='/images/gainSkill.PNG' alt="" width="70%" @click="$emit('getInfo')" >
       <span class="popuptext" id="mySkillPopup"  style= "left:2em; top:-3em;">
         Gain skill används för att köpa skills
+        <img src='/images/skills_info.png'> <!-- Maja har lagt till-->
       </span>
       </div>
     </div>
@@ -111,7 +112,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 
 .gainSkill{
   grid-gap: 1em;

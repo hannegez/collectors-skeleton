@@ -1,7 +1,7 @@
 <template>
   <div id="wrapper">
     <header>
-      HEJ HÄR ÄR HEADER
+      WELCOME TO RICH COLLECTORS
     </header>
 
     <main>
@@ -160,7 +160,7 @@
   :labels= "labels"
   :player= "data"
   :playerId= "id"
-  @chooseAction= "chooseAction($event)"/>
+  @chooseAction= "chooseAction(chosenAction, $event)"/>
 
 </div>
 
@@ -254,7 +254,7 @@ export default {
           console.log(newP, oldP)
           for (let p in this.players) {
             for(let c = 0; c < this.players[p].hand.length; c += 1) {
-              if (typeof this.players[p].hand[c].item !== "undefined")
+              if (typeof this.players[p].hand[c].item !== "undefined" && !(this.players[p].hand[c].available))
               this.$set(this.players[p].hand[c], "available", false);
             }
 
@@ -305,6 +305,13 @@ export default {
             this.players= d.players;
             this.placements = d.placements;
             this.workPlacement = d.placements.workPlacement;
+            for(let c = 0; c < this.players[this.playerId].hand.length; c += 1) {
+              if (typeof this.players[this.playerId].hand[c].item !== "undefined") {
+                console.log("före: ", this.players[this.playerId].hand[c].available);
+                this.$set(this.players[this.playerId].hand[c], "available", true);
+                console.log("efter: ", this.players[this.playerId].hand[c].available);
+              }
+            }
 
           }.bind(this));
 

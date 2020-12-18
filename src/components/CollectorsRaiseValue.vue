@@ -1,8 +1,14 @@
 <template>
   <div class="raiseValue">
     <div class="raiseValueHeader">
-      <h1>{{ labels.raiseValue }}</h1>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+      <h3>{{ labels.raiseValue }}</h3>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
 
+      <div class="popup" style= "position:relative; left:0em; top:0em;">
+      <img src='/images/infoknapp_rv.png' alt="" width="70%" @click="$emit('getInfo')" >
+      <span class="popuptext" id="myMarketPopup"  style= "left:3em; top:-3em;">
+        raise value används för att yada yada yada
+      </span>
+      </div>
     </div>
 
     <div class="bottlePlacements horizontalPlacement">
@@ -150,12 +156,27 @@ export default {
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+
+.raiseValue{
+  grid-gap: 1em;
+  display: grid;
+  grid-template-rows: 40% 60%;
+  grid-template-columns: 10% 90%;
+  grid-template-areas:
+  "raiseValueHeader marketValues"
+  "raiseValueHeader bottlePlacements";
+}
+
+.buyCards{grid-area: buyCards;}
+.bottlePlacements{grid-area: bottlePlacements;}
+.raiseValueHeader{grid-area: raiseValueHeader;}
+
 .marketValues {
   display: grid;
   grid-template-columns: repeat(auto-fill, 20%);
 }
 .valueSymbol {
-  width: 7vw;
+  width: 4vw;
 }
 </style>

@@ -17,52 +17,10 @@
         <div v-if="p.playerId !== null">
           {{p.playerId}}
         </div>
-        </div>
-<!--          ${{p.cost}}
-${{p.workAction}}
-{{p}}
-{{index}} -->
-<!--          <button
-v-if="p.playerId===null"
-:disabled="cannotAfford(p.cost)"
-@click="placeWorkBottle(p)" >
-kostnad ${{p.cost}}
-knappnummer {{p.workAction}}
-
-</button>
-<div v-if="p.playerId !== null">
-{{p.playerId}}
-</div>-->
-
-
-<div class="bottlePlacements">
-  <div v-for="(p, index) in placement" :key="'bp' + index">
-    <input type="image"
-    v-if="p.playerId===null"
-    :disabled="cannotAfford(p.cost)"
-    @click="placeWorkBottle(p)"
-    src='/images/bottle_placement.png' >
-    <p class="buttonText"> ${{p.cost}} </p>
-    <div v-if="p.playerId !== null">
-      {{p.playerId}}
+      </div>
     </div>
+    
   </div>
-</div>
-
-
-<!--börjar här -->
-<h2>{{ labels.workSpot }}</h2> <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
-<!--      <div class="buy-cards">
-<div v-for="(card, index) in auctionSpot" :key="index">
-<CollectorsCard
-:card="card"
-:availableAction="card.available"
-@doAction="startWork(card)"/>
-
-</div>-->
-</div>
-
-</div>
 
 </template>
 

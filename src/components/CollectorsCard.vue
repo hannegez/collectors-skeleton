@@ -15,7 +15,7 @@ export default {
   /*BJÖRN CARLSSON*/
   data: function() {
    return{
-     scalefactor: window.innerWidth/5000   // Här dyker en skalning upp - det är faktiskt här och inte i collectors.vue som det sker. Se även ovan där kortens koordinater bestäms.
+     scalefactor: window.innerWidth/5500   // Här dyker en skalning upp - det är faktiskt här och inte i collectors.vue som det sker. Se även ovan där kortens koordinater bestäms.
    }
   },
   props: {
@@ -32,7 +32,7 @@ export default {
   /*BJÖRN CARLSSON*/
   mounted() {
  window.addEventListener('resize', () => {
-   this.scalefactor = window.innerWidth/5000
+   this.scalefactor = window.innerWidth/5500
    })
  },
 }

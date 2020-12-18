@@ -1,8 +1,29 @@
+<!-- Daniella har varit här och ändrat i griden --> 
+
 <template>
   <div class="startAuction">
     <div class="auctionHeader">
       <h2>{{ labels.startAuction }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
     </div>
+
+    <div class="auctionInfo">
+      <div class="popup" style= "position:relative; left:0em; top:0em;">
+      <img src='/images/startAuction.png' alt="" width="50%" @click="$emit('getInfo')" >
+      <span class="popuptext" id="myAuctionPopup"  style= "left:2em; top:-3em;">
+        Auction används för det här o de här
+      <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
+      </span>
+      </div>
+    </div>
+
+
+    <!--
+   <div class="popup" style= "position:relative; left:0em; top:0em;">
+   <img src='/images/startAuction.png' alt="" width="20%" @click="getInfo($event,'auction')" >
+   <span class="popuptext" id="myAuctionPopup"  style= "position:relative; left:3em; top:-11em;">
+     Auction används för det här o de här
+   </span>
+ </div> -->
 
     <!--BUY CARDS -->
     <div class="buyCards">
@@ -131,16 +152,21 @@ export default {
 .startAuction{
   grid-gap: 1em;
   display: grid;
-  grid-template-rows: 10% 1fr;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 20% 10% 20%;
+  grid-template-columns: 50% 50%;
   grid-template-areas:
-  "auctionHeader auctionHeader"
+  "auctionHeader auctionInfo"
+  "bottlePlacements buyCards"
   "bottlePlacements buyCards";
 }
 
 .buyCards{grid-area: buyCards;}
 .bottlePlacements{grid-area: bottlePlacements;}
 .auctionHeader{grid-area: auctionHeader;}
+.auctionInfo{grid-area: auctionInfo}
+
+
+
 
 /* .buy-cards, .buttons {
 display: grid;

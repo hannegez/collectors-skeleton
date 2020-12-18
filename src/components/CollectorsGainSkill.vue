@@ -9,7 +9,7 @@
       <img src='/images/gainSkill.PNG' alt="" width="70%" @click="$emit('getInfo')" >
       <span class="popuptext" id="mySkillPopup"  style= "left:2em; top:-3em;">
         Gain skill används för att köpa skills
-        <img src='/images/skills_info.png'> <!-- Maja har lagt till-->
+      <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
       </span>
       </div>
     </div>
@@ -117,11 +117,11 @@ export default {
 .gainSkill{
   grid-gap: 1em;
   display: grid;
-  grid-template-rows: 10% 10% 80%;
+  grid-template-rows: 20% 10% 80%;
   grid-template-columns: 50% 50%;
   grid-template-areas:
-  "gainSkillHeader gainSkillHeader"
-  "buyCards gainSkillInfo"
+  "gainSkillHeader gainSkillInfo"
+  "buyCards bottlePlacements"
   "buyCards bottlePlacements";
 }
 

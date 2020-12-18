@@ -4,6 +4,25 @@
       <h2>{{ labels.startWork }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
     </div>
 
+    <div class="workInfo">
+      <div class="popup" style= "position:relative; left:0em; top:0em;">
+      <img src='/images/workInfo.PNG' alt="" width="70%" @click="$emit('getInfo')" >
+      <span class="popuptext" id="myWorkPopup"  style= "left:2em; top:-3em;">
+        work kan användas bla bla bla
+      <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
+      </span>
+      </div>
+    </div>
+    <!--<div class="popup" style= "position:relative; left:0em; top:0em;">
+    <img src='/images/workInfo.PNG' alt="" width="80%" @click="getInfo($event,'work')" >
+    <span class="popuptext" id="myWorkPopup"  style= "position:relative; left:3em; top:-11em;">
+      work kan användas bla bla bla
+    </span>
+  </div> -->
+
+
+  <!-- här måste bilderna ändras från mynt /dani -->
+
     <div class="bottlePlacements">
       <div v-for="(p, index) in placement" :key="'bp' + index">
         <input class="bottlePlacement"
@@ -80,5 +99,24 @@ export default {
   margin-left: 3em;
   width: 7vw;
 }
+
+.startWork{
+  grid-gap: 1em;
+  display: grid;
+  grid-template-rows: 1% 10% 10%;
+  grid-template-columns: 50% 50%;
+  grid-template-areas:
+  "gainWorkHeader workInfo"
+  "bottlePlacements bottlePlacements"
+  "bottlePlacements bottlePlacements";
+}
+
+
+.bottlePlacements{grid-area: bottlePlacements;}
+.workHeader{grid-area: gainWorkHeader;}
+.workInfo{grid-area: workInfo;}
+
+
+
 
 </style>

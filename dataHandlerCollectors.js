@@ -378,7 +378,7 @@ Data.prototype.placeWorkBottle = function (roomId, playerId, cost, workAction) {
   let room = this.rooms[roomId];
   if (typeof room !== 'undefined') {
     let activePlacement = room.workPlacement;
-
+    room.players[playerId].bottlesLeft -= 1;
 
     for(let i = 0; i < activePlacement.length; i += 1) {
         if( activePlacement[i].workAction === workAction &&
@@ -386,29 +386,35 @@ Data.prototype.placeWorkBottle = function (roomId, playerId, cost, workAction) {
           activePlacement[i].playerId = playerId;
           //lägg till if satser / metod med if satser.
           if (workAction === 1){
-            console.log("workaction 1");
+            console.log("workaction 1: 1 bottle recycled");
             room.players[playerId].money -= cost; // olika för olika rounds
+            room.players[playerId].totalBottles -= 1; //4th quarter
           }
           else if (workAction === 2) {
-            console.log("workaction 2");
-            room.players[playerId].money -= cost; //ska lägga till 1
+            console.log("workaction 2: 1 bottle recycled");
+            room.players[playerId].money -= cost;
+            room.players[playerId].totalBottles -= 1;
           }
           else if (workAction === 3) {//tar upp två kort när knapp 3 trycks på
-            console.log("workaction 3");
+            console.log("workaction 3: 2 cards added to your hand");
             this.drawCard(roomId, playerId);
             this.drawCard(roomId, playerId);
             room.players[playerId].money -= cost; //ska dra bort 1 coin
           }
           else if (workAction === 4) {
-            console.log("workaction 4");
+            console.log("workaction 4: 1 card added to your hand and you are now the first player (ska addas sen)");
             this.drawCard(roomId, playerId);
             //add 1st player token
           }
           else if (workAction === 5) {
-            console.log("workaction 5");
+            console.log("workaction 5: 1 card added to your hand, now choose 1 card from your hand to discard as future income ");
             this.drawCard(roomId, playerId);
 
-            //room.players[playerId].income PUSHA hit och sen skapa en futureIncome-variabel som är längden på income-arrayen
+            //chansning
+            //HJÄLP 18/12
+            //this.chooseIncomeCard(rommId, playerId);
+
+            //room.players[playerId].income PUSHA hit
             //you must draw one card from the deck to your hand and place
             // one card from your hand face down next to your player board
             // on its right side
@@ -420,6 +426,7 @@ Data.prototype.placeWorkBottle = function (roomId, playerId, cost, workAction) {
     }
   }
 }
+
 
 
 

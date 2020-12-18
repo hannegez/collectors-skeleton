@@ -1,18 +1,19 @@
 <template>
   <div id="wrapper">
     <header>
-      HEJ HÄR ÄR HEADER
+      WELCOME TO RICH COLLECTORS
     </header>
 
     <main>
       <div class="game board">
         <div class="item pool">
-          <div class="popup" style= "position:relative; left:0em; top:0em;">
-          <img src='/images/buyItem.PNG' alt="" width="20%" @click="getInfo($event, 'item')" >
+          <!-- <div class="popup" style= "position:relative; left:25em; top:0em;">
+          <img src='/images/buyItem.PNG' alt="" width="15%" @click="getInfo($event, 'item')" >
           <span class="popuptext" id="myItemPopup"  style= "position:relative; left:3em; top:-11em;">
             Buy item används för att köpa objekt
+
           </span>
-          </div>
+          </div> -->
           <CollectorsBuyActions v-if="players[playerId]"
           :labels="labels"
           :player="players[playerId]"
@@ -28,12 +29,13 @@
         </div>
 
         <div class="skill pool">
-          <div class="popup" style= "position:relative; left:0em; top:0em;">
+          <!-- <div class="popup" style= "position:relative; left:0em; top:0em;">
           <img src='/images/gainSkill.PNG' alt="" width="50%" @click="getInfo($event, 'skill')" >
           <span class="popuptext" id="mySkillPopup"  style= "position:relative; left:3em; top:-11em;">
             Gain skill används för att köpa skills
+            <img src='/images/skills_info.png' alt="" width="200%">
           </span>
-          </div>
+          </div> -->
 
           <CollectorsGainSkill v-if="players[playerId]"
           :labels="labels"
@@ -44,16 +46,6 @@
           @placeBottle="placeBottle('skill', $event)"/>
         </div>
 
-        <!--  HEAD
-        <div class="work pool">
-        <CollectorsStartWork v-if="players[playerId]"
-        :labels="labels"
-        :player="players[playerId]"
-        :marketValues="marketValues"
-        :placement="workPlacement"
-        @startWork="startWork($event)"
-        @placeWorkBottle="placeWorkBottle( $event)"/>
-      </div>-->
 
       <div class="work pool">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
@@ -93,32 +85,12 @@
 
       </div>
 
-      <!--        HEAD
-      <div class="market pool">-->
-      <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
-      <!--  <CollectorsRaiseValue v-if="players[playerId]"
-      :labels="labels"
-      :player="players[playerId]"
-      :market="market"
-      :marketValues="marketValues"
-      :auctionCards="auctionCards"
-      :skillsOnSale="skillsOnSale"
-      :placement="marketPlacement"
-      @raiseValue="raiseValue($event)"
-      @placeBottle="placeBottle('market', $event)"/>
-    </div>
-  </div>
-
-  <div class="player board">
-  <h1>PLAYER INFO</h1>
-  <p>Players: {{players}}</p>
-  <p>marketValues: {{marketValues}}</p>-->
 
   <div class="market pool">
     <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
     <div class="popup" style= "position:relative; left:0em; top:0em;">
-    <img src='/images/raiseValue.PNG' alt="" width="20%" @click="getInfo($event,'market')" >
-    <span class="popuptext" id="myMarketPopup"  style= "position:relative; left:3em; top:-11em;">
+    <img src='/images/infoknapp_rv.png' alt="" width="80em" @click="getInfo($event, 'market')" >
+    <span class="popuptext" id="myMarketPopup"  style= "position:relative; left:3em; top:-9em;">
       raise value används för att yada yada yada
     </span>
     </div>
@@ -147,7 +119,6 @@
     src='/images/card_backside300px.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
   </div>
 
-
   <!-- <CollectorsPlayerBoard v-if="players[playerId]"
   :labels="labels"
   :player="players[playerId]"
@@ -159,19 +130,9 @@
   :labels= "labels"
   :player= "data"
   :playerId= "id"
-  @chooseAction= "chooseAction($event)"/>
+  @chooseAction= "chooseAction(chosenAction, $event)"/>
 
-
-
-<!--ta bort? merge, 165-169
-
-<div class="popup" style= "position:relative; left:0; top:0em;">
-<img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
-<span class="popuptext" id="myPopup"> buy action gör det här och det här</span>-->
 </div>
-
-
-
 
 
 </main>
@@ -263,7 +224,7 @@ export default {
           console.log(newP, oldP)
           for (let p in this.players) {
             for(let c = 0; c < this.players[p].hand.length; c += 1) {
-              if (typeof this.players[p].hand[c].item !== "undefined")
+              if (typeof this.players[p].hand[c].item !== "undefined" && !(this.players[p].hand[c].available))
               this.$set(this.players[p].hand[c], "available", false);
             }
 
@@ -314,6 +275,13 @@ export default {
             this.players= d.players;
             this.placements = d.placements;
             this.workPlacement = d.placements.workPlacement;
+            for(let c = 0; c < this.players[this.playerId].hand.length; c += 1) {
+              if (typeof this.players[this.playerId].hand[c].item !== "undefined") {
+                console.log("före: ", this.players[this.playerId].hand[c].available);
+                this.$set(this.players[this.playerId].hand[c], "available", true);
+                console.log("efter: ", this.players[this.playerId].hand[c].available);
+              }
+            }
 
           }.bind(this));
 
@@ -363,6 +331,7 @@ export default {
     this.auctionSpot = d.auctionSpot; //TEST ???
   }.bind(this)
 );
+
 
 this.$store.state.socket.on('collectorsSkillGained',
 function(d) {
@@ -548,15 +517,18 @@ header {
   position: fixed;
   width:100%;
   pointer-events: none; */
-  border: solid thin #000;
+  border: solid thick #000;
+  font-size: 300%;
+  background-color: gold;
 }
+
 
 main {
   user-select: none;
   display: grid;
   grid-gap: 1em;
-  grid-template-columns: 60% 40%;
-  grid-template-rows: 1fr;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: 150vh;
   grid-template-areas:
   "gameBoard playerBoard";
 }
@@ -588,7 +560,7 @@ GAME BOARD (GRID)                 */
   grid-gap: 1em;
   display: grid;
   grid-template-columns: 25% 25% 50%;
-  grid-template-rows: 30% 45% 25%;
+  grid-template-rows: 15% 30% 15%;
   grid-template-areas:
   "itemPool itemPool itemPool"
   "skillPool workPool auctionPool"
@@ -637,20 +609,21 @@ PLAYER BOARD                          */
 
 .horizontalBuyCards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 30%);
+  grid-template-columns: repeat(auto-fill, 10vw);
 }
 
 /* ========================= */
 /* PLACE BOTTLE BUTTON */
 
 .bottlePlacement {
-  width: 7vw;
+  width: 3vw;
 }
 
 .horizontalPlacement {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 170px);
+  grid-template-columns: repeat(auto-fill, 90px);
 }
+
 
 /* ========================= */
 /* DRAW CARD BUTTON */
@@ -678,7 +651,7 @@ PLAYER BOARD                          */
   padding: 0;
 }
 .buttonText {
-  font-size: 2em;
+  font-size: 1em;
   font-weight: bold;
   color: #3c3c3b;
 }
@@ -733,7 +706,7 @@ footer a:visited {
   display: none;
   cursor: pointer;
   user-select: none;
-  width: 160px;
+  width: auto; /* 160px; */
   background-color: white;
   color: black;
   text-align: center;

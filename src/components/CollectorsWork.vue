@@ -1,27 +1,8 @@
 <template>
-  <div>
+  <div class="startWork">
     <div class="workHeader">
       <h2>{{ labels.startWork }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
     </div>
-
-  <!-- merge ta bort? 7-24   HEAD -->
-        <!--BUY CARDS -->
-        <!--       <div class="buy-cards">
-        <div v-for="(card, index) in auctionCards" :key="index">
-        <CollectorsCard
-        :card="card"
-        :availableAction="card.available"
-        @doAction="startWork(card)"/>
-
-      </div>
-    </div>-->
-    <!--  HEAD
-     gör om till objekt och skicka med kostnad och action samt ändra i placement. -->
-    <!--      <div>
-    <div class="buttons" v-for="(p, index) in placement" :key="index">-->
-        <!--  <div>
-            <div class="buttons" v-for="(p, index) in placement" :key="index">
-    ======= -->
 
     <div class="bottlePlacements">
       <div v-for="(p, index) in placement" :key="'bp' + index">
@@ -111,6 +92,18 @@ export default {
     setAvailable: function (card) {
       this.$set(card, "available", true);
     },
+    //HJÄLP 18/12
+    highlightAvailableCards: function (workAction)  {
+      console.log("vår workaction: ", workAction);
+      if (workAction === 5) {
+        console.log("inne i hightligh if-satsen");
+        for (let i = 0; i < this.player.hand.length; i += 1) {
+          console.log("inne i hightlight for-loopen");
+          this.setAvailable(this.player.hand[i]);
+          console.log("Hand ska highlightas");
+        }
+      }
+    },
     startWork: function (card) {//skicka placerin/textsträng till startWork ex actiion
       console.log("startWork 1" + card);
       if (card.available) {
@@ -123,13 +116,7 @@ export default {
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-
-/* ta bort? merge, 128-132 HEAD */
-/* .buy-cards, .buttons {
-display: grid;
-grid-template-columns: repeat(auto-fill, 130px);
-} */
+<style scoped>
 
 .workInfo {
   margin-left: 3em;

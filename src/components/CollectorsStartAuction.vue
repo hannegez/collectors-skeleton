@@ -127,7 +127,7 @@ export default {
 
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 .startAuction{
   grid-gap: 1em;
   display: grid;

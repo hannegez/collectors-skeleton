@@ -1,7 +1,17 @@
 <template>
   <div class="gainSkill">
     <div class="gainSkillHeader">
-      <h1>{{ labels.gainSkill }}</h1>
+      <h3>{{ labels.gainSkill }}</h3>
+    </div>
+
+    <div class="gainSkillInfo">
+      <div class="popup" style= "position:relative; left:0em; top:0em;">
+      <img src='/images/gainSkill.PNG' alt="" width="50%" @click="getInfo($event, 'skill')" >
+      <span class="popuptext" id="mySkillPopup"  style= "position:relative; left:3em; top:-11em;">
+        Gain skill används för att köpa skills
+        <img src='/images/skills_info.png'> <!-- Maja har lagt till-->
+      </span>
+      </div>
     </div>
 
     <div class="buyCards">
@@ -118,21 +128,23 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 
 .gainSkill{
   grid-gap: 1em;
   display: grid;
-  grid-template-rows: 10% 1fr;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 10% 10% 1fr%;
+  grid-template-columns: 50% 50%;
   grid-template-areas:
   "gainSkillHeader gainSkillHeader"
+  "buyCards gainSkillInfo"
   "buyCards bottlePlacements";
 }
 
 .buyCards{grid-area: buyCards;}
 .bottlePlacements{grid-area: bottlePlacements;}
 .gainSkillHeader{grid-area: gainSkillHeader;}
+.gainSkillInfo{grid-area: gainSkillInfo;}
 
 .green{
   grid-area: lside;
@@ -176,11 +188,5 @@ export default {
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
-/*<style scoped>
-  .gain-skill, .buttons {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 130px);
-  }*/
-
 
 </style>

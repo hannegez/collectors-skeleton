@@ -14,7 +14,7 @@
         @doAction="startWork(card)"/>
 
       </div>
-    </div> -->
+    </div>-->
     <!--  HEAD
      gör om till objekt och skicka med kostnad och action samt ändra i placement. -->
     <!--      <div>
@@ -78,8 +78,8 @@ knappnummer {{p.workAction}}
 :availableAction="card.available"
 @doAction="startWork(card)"/>
 
-</div>
 </div>-->
+</div>
 
 </div>
 

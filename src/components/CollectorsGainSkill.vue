@@ -1,7 +1,16 @@
 <template>
   <div class="gainSkill">
     <div class="gainSkillHeader">
-      <h1>{{ labels.gainSkill }}</h1>
+      <h3>{{ labels.gainSkill }}</h3>
+    </div>
+
+    <div class="gainSkillInfo">
+      <div class="popup" style= "position:relative; left:0em; top:0em;">
+      <img src='/images/gainSkill.PNG' alt="" width="50%" @click="getInfo($event, 'skill')" >
+      <span class="popuptext" id="mySkillPopup"  style= "position:relative; left:3em; top:-11em;">
+        Gain skill används för att köpa skills
+      </span>
+      </div>
     </div>
 
     <div class="buyCards">
@@ -107,16 +116,18 @@ export default {
 .gainSkill{
   grid-gap: 1em;
   display: grid;
-  grid-template-rows: 10% 1fr;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 10% 10% 1fr%;
+  grid-template-columns: 50% 50%;
   grid-template-areas:
   "gainSkillHeader gainSkillHeader"
+  "buyCards gainSkillInfo"
   "buyCards bottlePlacements";
 }
 
 .buyCards{grid-area: buyCards;}
 .bottlePlacements{grid-area: bottlePlacements;}
 .gainSkillHeader{grid-area: gainSkillHeader;}
+.gainSkillInfo{grid-area: gainSkillInfo;}
 
 .green{
   grid-area: lside;

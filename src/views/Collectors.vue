@@ -7,13 +7,13 @@
     <main>
       <div class="game board">
         <div class="item pool">
-          <div class="popup" style= "position:relative; left:0em; top:0em;">
-          <img src='/images/buyItem.PNG' alt="" width="20%" @click="getInfo($event, 'item')" >
+          <!-- <div class="popup" style= "position:relative; left:25em; top:0em;">
+          <img src='/images/buyItem.PNG' alt="" width="15%" @click="getInfo($event, 'item')" >
           <span class="popuptext" id="myItemPopup"  style= "position:relative; left:3em; top:-11em;">
             Buy item används för att köpa objekt
 
           </span>
-          </div>
+          </div> -->
           <CollectorsBuyActions v-if="players[playerId]"
           :labels="labels"
           :player="players[playerId]"
@@ -29,13 +29,13 @@
         </div>
 
         <div class="skill pool">
-          <div class="popup" style= "position:relative; left:0em; top:0em;">
+          <!-- <div class="popup" style= "position:relative; left:0em; top:0em;">
           <img src='/images/gainSkill.PNG' alt="" width="50%" @click="getInfo($event, 'skill')" >
           <span class="popuptext" id="mySkillPopup"  style= "position:relative; left:3em; top:-11em;">
             Gain skill används för att köpa skills
             <img src='/images/skills_info.png' alt="" width="200%">
           </span>
-          </div>
+          </div> -->
 
           <CollectorsGainSkill v-if="players[playerId]"
           :labels="labels"
@@ -119,10 +119,10 @@
     src='/images/card_backside300px.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
   </div>
 
-  <CollectorsPlayerBoard v-if="players[playerId]"
+  <!-- <CollectorsPlayerBoard v-if="players[playerId]"
   :labels="labels"
   :player="players[playerId]"
-  :playerId="playerId"/>
+  :playerId="playerId"/> -->
 
   <!--Object.keys(this.players) ger en array med alla playerid -->
 
@@ -520,8 +520,8 @@ main {
   user-select: none;
   display: grid;
   grid-gap: 1em;
-  grid-template-columns: 60% 40%;
-  grid-template-rows: 1fr;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: 150vh;
   grid-template-areas:
   "gameBoard playerBoard";
 }
@@ -553,7 +553,7 @@ GAME BOARD (GRID)                 */
   grid-gap: 1em;
   display: grid;
   grid-template-columns: 25% 25% 50%;
-  grid-template-rows: 30% 45% 25%;
+  grid-template-rows: 15% 30% 15%;
   grid-template-areas:
   "itemPool itemPool itemPool"
   "skillPool workPool auctionPool"
@@ -602,19 +602,19 @@ PLAYER BOARD                          */
 
 .horizontalBuyCards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 30%);
+  grid-template-columns: repeat(auto-fill, 10vw);
 }
 
 /* ========================= */
 /* PLACE BOTTLE BUTTON */
 
 .bottlePlacement {
-  width: 7vw;
+  width: 3vw;
 }
 
 .horizontalPlacement {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 170px);
+  grid-template-columns: repeat(auto-fill, 90px);
 }
 
 
@@ -644,7 +644,7 @@ PLAYER BOARD                          */
   padding: 0;
 }
 .buttonText {
-  font-size: 2em;
+  font-size: 1em;
   font-weight: bold;
   color: #3c3c3b;
 }

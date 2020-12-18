@@ -4,8 +4,6 @@
       <h1>{{ labels.raiseValue }}</h1>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
 
     </div>
-    
-
 
     <div class="bottlePlacements horizontalPlacement">
       <div v-for="(p, index) in placement" :key="'bp' + index">

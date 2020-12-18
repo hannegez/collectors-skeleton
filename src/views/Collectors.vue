@@ -1,7 +1,7 @@
 <template>
   <div id="wrapper">
     <header>
-      WELCOME TO RICH COLLECTOR
+      HEJ HÄR ÄR HEADER
     </header>
 
     <main>
@@ -11,7 +11,6 @@
           <img src='/images/buyItem.PNG' alt="" width="15%" @click="getInfo($event, 'item')" >
           <span class="popuptext" id="myItemPopup"  style= "position:relative; left:3em; top:-11em;">
             Buy item används för att köpa objekt
-
           </span>
           </div> -->
           <CollectorsBuyActions v-if="players[playerId]"
@@ -21,7 +20,8 @@
           :marketValues="marketValues"
           :placement="buyPlacement"
           @buyCard="buyCard($event)"
-          @placeBottle="placeBottle('buy', $event)"/>
+          @placeBottle="placeBottle('buy', $event)"
+          @getInfo="getInfo('item')"/>
 
 
           <p>buyPlacement: {{buyPlacement}}</p>
@@ -33,7 +33,6 @@
           <img src='/images/gainSkill.PNG' alt="" width="50%" @click="getInfo($event, 'skill')" >
           <span class="popuptext" id="mySkillPopup"  style= "position:relative; left:3em; top:-11em;">
             Gain skill används för att köpa skills
-            <img src='/images/skills_info.png' alt="" width="200%">
           </span>
           </div> -->
 
@@ -43,9 +42,20 @@
           :skillsOnSale="skillsOnSale"
           :placement="skillPlacement"
           @chooseAction="chooseAction(chosenAction, $event)"
-          @placeBottle="placeBottle('skill', $event)"/>
+          @placeBottle="placeBottle('skill', $event)"
+          @getInfo="getInfo('skill')"/>
         </div>
 
+        <!--  HEAD
+        <div class="work pool">
+        <CollectorsStartWork v-if="players[playerId]"
+        :labels="labels"
+        :player="players[playerId]"
+        :marketValues="marketValues"
+        :placement="workPlacement"
+        @startWork="startWork($event)"
+        @placeWorkBottle="placeWorkBottle( $event)"/>
+      </div>-->
 
       <div class="work pool">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
@@ -66,7 +76,7 @@
 
       <div class="auction pool">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
-        <img src='/images/startAuction.png' alt="" width="30%" @click="getInfo($event,'auction')" >
+        <img src='/images/startAuction.png' alt="" width="20%" @click="getInfo($event,'auction')" >
         <span class="popuptext" id="myAuctionPopup"  style= "position:relative; left:3em; top:-11em;">
           Auction används för det här o de här
         </span>
@@ -85,15 +95,35 @@
 
       </div>
 
+      <!--        HEAD
+      <div class="market pool">-->
+      <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
+      <!--  <CollectorsRaiseValue v-if="players[playerId]"
+      :labels="labels"
+      :player="players[playerId]"
+      :market="market"
+      :marketValues="marketValues"
+      :auctionCards="auctionCards"
+      :skillsOnSale="skillsOnSale"
+      :placement="marketPlacement"
+      @raiseValue="raiseValue($event)"
+      @placeBottle="placeBottle('market', $event)"/>
+    </div>
+  </div>
+
+  <div class="player board">
+  <h1>PLAYER INFO</h1>
+  <p>Players: {{players}}</p>
+  <p>marketValues: {{marketValues}}</p>-->
 
   <div class="market pool">
     <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
-    <div class="popup" style= "position:relative; left:0em; top:0em;">
-    <img src='/images/infoknapp_rv.png' alt="" width="80em" @click="getInfo($event)" >
-    <span class="popuptext" id="myPopup"  style= "position:relative; left:3em; top:-9em;">
+    <!-- <div class="popup" style= "position:relative; left:0em; top:0em;">
+    <img src='/images/raiseValue.PNG' alt="" width="20%" @click="getInfo($event,'market')" >
+    <span class="popuptext" id="myMarketPopup"  style= "position:relative; left:3em; top:-11em;">
       raise value används för att yada yada yada
     </span>
-    </div>
+    </div> -->
 
     <CollectorsRaiseValue v-if="players[playerId]"
     :labels="labels"
@@ -104,8 +134,8 @@
     :skillsOnSale="skillsOnSale"
     :placement="marketPlacement"
     @raiseValue="raiseValue($event)"
-    @placeBottle="placeBottle('market', $event)"/>
-
+    @placeBottle="placeBottle('market', $event)"
+    @getInfo="getInfo('market')"/>
 
   </div>
 
@@ -325,7 +355,6 @@ export default {
   }.bind(this)
 );
 
-
 this.$store.state.socket.on('collectorsSkillGained',
 function(d) {
   console.log(d.playerId, "gained a skill");
@@ -445,7 +474,7 @@ buyCard: function (card) {
   }
 );
 },
-  getInfo: function(p, string){
+  getInfo: function(string){
   if (string === 'work') {
     var popupwork = document.getElementById("myWorkPopup");
     popupwork.classList.toggle("show");
@@ -510,11 +539,8 @@ header {
   position: fixed;
   width:100%;
   pointer-events: none; */
-  border: solid thick #000;
-  font-size: 300%;
-  background-color: gold;
+  border: solid thin #000;
 }
-
 
 main {
   user-select: none;
@@ -598,8 +624,11 @@ PLAYER BOARD                          */
 /* BUY CARD BUTTON */
 
 .buyCards, .buttons {
+}
+
+.buyCards{
   display: grid;
-  grid-template-columns: repeat(auto-fill, 10vw);
+  grid-template-columns: repeat(auto-fill, 15vw);
 }
 
 .horizontalBuyCards {
@@ -616,9 +645,8 @@ PLAYER BOARD                          */
 
 .horizontalPlacement {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 90px);
+  grid-template-columns: repeat(auto-fill, 20%);
 }
-
 
 /* ========================= */
 /* DRAW CARD BUTTON */
@@ -649,6 +677,15 @@ PLAYER BOARD                          */
   font-size: 1em;
   font-weight: bold;
   color: #3c3c3b;
+  background-color: white;
+  border-radius: 1em;
+  position: relative;
+  left: -0.5em;
+  top: -0.25em;
+  border: 1px solid black;
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-block;
 }
 
 /* ========================= */
@@ -701,7 +738,7 @@ footer a:visited {
   display: none;
   cursor: pointer;
   user-select: none;
-  width: auto; /* 160px; */
+  width: 160px;
   background-color: white;
   color: black;
   text-align: center;

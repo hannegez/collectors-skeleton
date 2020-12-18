@@ -4,14 +4,12 @@
     <div class="buyItemHeader">
       <h3>{{ labels.buyItem }}</h3>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
       <div class="popup" style= "position:relative; left:0em; top:0em;">
-      <img src='/images/buyItem.PNG' alt="" width="80%" @click="getInfo($event, 'item')" >
-      <span class="popuptext" id="myItemPopup"  style= "position:relative; left:3em; top:-11em;">
+      <img src='/images/buyItem.PNG' alt="" width="60%" @click="$emit('getInfo')" >
+      <span class="popuptext" id="myItemPopup"  style= "left:2em; top:-3em;">
         Buy item används för att köpa objekt
       </span>
       </div>
     </div>
-
-
 
     <div class="buyCards horizontalBuyCards">
       <div v-for="(card, index) in itemsOnSale" :key="index">
@@ -34,7 +32,7 @@
     :disabled="cannotAfford(p.cost)"
     @click="placeBottle(p)"
     src='/images/bottle_placement.png' >
-    <p class="buttonText"> ${{p.cost}} </p>
+    <span class="buttonText"> ${{p.cost}} </span>
     <div v-if="p.playerId !== null">
       {{p.playerId}}
     </div>
@@ -110,9 +108,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .buyItem{
-  grid-gap: 1em;
+  grid-gap: 4%;
   display: grid;
-  grid-template-rows: 50% 50%;
+  grid-template-rows: 48% 48%;
   grid-template-columns: 80% 20%;
   grid-template-areas:
   "buyCards buyItemHeader"
@@ -123,39 +121,4 @@ export default {
 .bottlePlacements{grid-area: bottlePlacements;}
 .buyItemHeader{grid-area: buyItemHeader;}
 
-.pink{
-  grid-area: topp;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr ;
-  grid-template-areas:
-  " a a a a a g"
-  " b b b b b c ";
-}
-.arrow{
-  grid-area: a;
-  background: url('/images/pilrosa.PNG' ) ;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-.bottlePink{
-  grid-area: b;
-  background: url('/images/rosaflaska.PNG' )  ;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-
-}
-.pinks{
-  grid-area: c;
-  background: url('/images/rosa.PNG' ) ;
-  background-repeat: no-repeat; /* gör att endast en syns men vill att en ska synas per grid*/
-  background-size: 100% 100%;
-
-}
-.pinkInfo{
-  grid-area: g;
-  background: url('/images/buyItem.PNG' ) ;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
 </style>

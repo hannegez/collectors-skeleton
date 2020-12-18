@@ -48,10 +48,6 @@
 
 
 </template>
-<<<<<<< HEAD
-
-=======
->>>>>>> 701b8764038b5a77b7e3eb059eb8ab71d9a1860a
 
 <script>
 import CollectorsCard from '@/components/CollectorsCard.vue'

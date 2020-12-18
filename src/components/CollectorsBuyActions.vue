@@ -1,8 +1,14 @@
 <template>
   <div class="buyItem">
 
-    <div class="itemHeader">
-      <h1>{{ labels.buyItem }}</h1>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+    <div class="buyItemHeader">
+      <h3>{{ labels.buyItem }}</h3>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+      <div class="popup" style= "position:relative; left:0em; top:0em;">
+      <img src='/images/buyItem.PNG' alt="" width="80%" @click="getInfo($event, 'item')" >
+      <span class="popuptext" id="myItemPopup"  style= "position:relative; left:3em; top:-11em;">
+        Buy item används för att köpa objekt
+      </span>
+      </div>
     </div>
 
     <div class="buyCards horizontalBuyCards">
@@ -11,7 +17,7 @@
         :card="card"
         :availableAction="card.available"
         @doAction="buyCard(card)"/>
-        {{ cardCost(card) }}
+        <!-- {{ cardCost(card) }} -->
       </div>
     </div>
 
@@ -113,6 +119,20 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.buyItem{
+  grid-gap: 1em;
+  display: grid;
+  grid-template-rows: 50% 50%;
+  grid-template-columns: 80% 20%;
+  grid-template-areas:
+  "buyCards buyItemHeader"
+  "bottlePlacements buyItemHeader";
+}
+
+.buyCards{grid-area: buyCards;}
+.bottlePlacements{grid-area: bottlePlacements;}
+.buyItemHeader{grid-area: buyItemHeader;}
+
 .pink{
   grid-area: topp;
   display: grid;

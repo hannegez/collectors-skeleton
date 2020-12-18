@@ -1,7 +1,7 @@
 <template>
   <div id="wrapper">
     <header>
-      WELCOME TO RICH COLLECTOR
+      WELCOME TO RICH COLLECTORS
     </header>
 
     <main>

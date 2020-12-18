@@ -89,7 +89,7 @@
   <div class="market pool">
     <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
     <div class="popup" style= "position:relative; left:0em; top:0em;">
-    <img src='/images/raiseValue.PNG' alt="" width="80em" @click="getInfo($event, 'market')" >
+    <img src='/images/infoknapp_rv.png' alt="" width="80em" @click="getInfo($event, 'market')" >
     <span class="popuptext" id="myMarketPopup"  style= "position:relative; left:3em; top:-9em;">
       raise value används för att yada yada yada
     </span>
@@ -130,7 +130,7 @@
   :labels= "labels"
   :player= "data"
   :playerId= "id"
-  @chooseAction= "chooseAction($event)"/>
+  @chooseAction= "chooseAction(chosenAction, $event)"/>
 
 </div>
 
@@ -224,7 +224,7 @@ export default {
           console.log(newP, oldP)
           for (let p in this.players) {
             for(let c = 0; c < this.players[p].hand.length; c += 1) {
-              if (typeof this.players[p].hand[c].item !== "undefined")
+              if (typeof this.players[p].hand[c].item !== "undefined" && !(this.players[p].hand[c].available))
               this.$set(this.players[p].hand[c], "available", false);
             }
 
@@ -275,6 +275,13 @@ export default {
             this.players= d.players;
             this.placements = d.placements;
             this.workPlacement = d.placements.workPlacement;
+            for(let c = 0; c < this.players[this.playerId].hand.length; c += 1) {
+              if (typeof this.players[this.playerId].hand[c].item !== "undefined") {
+                console.log("före: ", this.players[this.playerId].hand[c].available);
+                this.$set(this.players[this.playerId].hand[c], "available", true);
+                console.log("efter: ", this.players[this.playerId].hand[c].available);
+              }
+            }
 
           }.bind(this));
 

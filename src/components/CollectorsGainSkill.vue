@@ -6,7 +6,7 @@
 
     <div class="gainSkillInfo">
       <div class="popup" style= "position:relative; left:0em; top:0em;">
-      <img src='/images/gainSkill.PNG' alt="" width="50%" @click="getInfo($event, 'skill')" >
+      <img src='/images/gainSkill.PNG' alt="" width="100%" @click="getInfo($event, 'skill')" >
       <span class="popuptext" id="mySkillPopup"  style= "position:relative; left:3em; top:-11em;">
         Gain skill används för att köpa skills
       </span>
@@ -116,7 +116,7 @@ export default {
 .gainSkill{
   grid-gap: 1em;
   display: grid;
-  grid-template-rows: 10% 10% 1fr%;
+  grid-template-rows: 10% 10% 80%;
   grid-template-columns: 50% 50%;
   grid-template-areas:
   "gainSkillHeader gainSkillHeader"

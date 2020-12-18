@@ -622,6 +622,8 @@ PLAYER BOARD                          */
 /* BUY CARD BUTTON */
 
 .buyCards, .buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 10vw);
 }
 
 .horizontalBuyCards {

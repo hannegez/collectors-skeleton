@@ -147,10 +147,11 @@
     src='/images/card_backside300px.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
   </div>
 
-  <CollectorsPlayerBoard v-if="players[playerId]"
+
+  <!-- <CollectorsPlayerBoard v-if="players[playerId]"
   :labels="labels"
   :player="players[playerId]"
-  :playerId="playerId"/>
+  :playerId="playerId"/> -->
 
   <!--Object.keys(this.players) ger en array med alla playerid -->
 
@@ -160,6 +161,13 @@
   :playerId= "id"
   @chooseAction= "chooseAction($event)"/>
 
+
+
+<!--ta bort? merge, 165-169
+
+<div class="popup" style= "position:relative; left:0; top:0em;">
+<img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
+<span class="popuptext" id="myPopup"> buy action gör det här och det här</span>-->
 </div>
 
 
@@ -754,8 +762,6 @@ footer a:visited {
 .popup .show {
   display: block;
 }
-
-
 
 
 @media screen and (max-width: 800px) {

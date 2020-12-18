@@ -6,7 +6,7 @@
 
     <!--BUY CARDS -->
     <div class="buyCards">
-      <div v-for="(card, index) in auctionCards" :key="index">
+      <div v-for="(card, index) in reverseAuctionCards" :key="index">
         <CollectorsCard
         :card="card"
         :availableAction="card.available"
@@ -78,6 +78,11 @@ export default {
     placement: Array,
     chosenAction: String
     //NÅNTING MED WORK?
+  },
+  computed: {
+    reverseAuctionCards: function() {
+      return [...this.auctionCards].reverse();
+    }
   },
   methods: {
     cannotAfford: function (cost) {

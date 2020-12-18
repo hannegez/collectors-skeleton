@@ -89,8 +89,8 @@
   <div class="market pool">
     <!--:raiseValueOnSale="raiseValueOnSale" tagit bort från nedan-->
     <div class="popup" style= "position:relative; left:0em; top:0em;">
-    <img src='/images/infoknapp_rv.png' alt="" width="80em" @click="getInfo($event)" >
-    <span class="popuptext" id="myPopup"  style= "position:relative; left:3em; top:-9em;">
+    <img src='/images/raiseValue.PNG' alt="" width="80em" @click="getInfo($event, 'market')" >
+    <span class="popuptext" id="myMarketPopup"  style= "position:relative; left:3em; top:-9em;">
       raise value används för att yada yada yada
     </span>
     </div>

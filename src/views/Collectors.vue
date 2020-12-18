@@ -160,13 +160,6 @@
   :playerId= "id"
   @chooseAction= "chooseAction($event)"/>
 
-
-
-<!--ta bort? merge, 165-169
-
-<div class="popup" style= "position:relative; left:0; top:0em;">
-<img src='/images/actions.PNG' alt="" width="300" height="60" @click="getInfo($event)" >
-<span class="popuptext" id="myPopup"> buy action gör det här och det här</span>-->
 </div>
 
 

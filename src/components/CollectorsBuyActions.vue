@@ -52,14 +52,6 @@
 
 
 </template>
-<!--<div class="box pink">
-<div class="box arrow">pilar</div>
-<div class="box bottlePink">flaskor</div>
-<div class="box pinks">enfärg</div>
-<div class="box pinkInfo" style= "position:relative; left:0; top:0em;" @click="getInfo($event)">
-<span class="popuptext" id="myPopup"> buy action gör det här och det här</span>
-</div>
-</div> -->
 
 <script>
 import CollectorsCard from '@/components/CollectorsCard.vue'

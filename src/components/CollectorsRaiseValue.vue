@@ -166,7 +166,7 @@ export default {
 <style>
 
 .raiseValue{
-  grid-gap: 1em;
+  grid-gap: 2%;
   display: grid;
   grid-template-rows: 50% 50%;
   grid-template-columns: 15% 85%;
@@ -188,6 +188,6 @@ export default {
   grid-template-columns: repeat(auto-fill, 15%);
 }
 .valueSymbol {
-  width: 4vw;
+  width: 3.5vw;
 }
 </style>

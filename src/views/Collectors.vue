@@ -647,7 +647,7 @@ PLAYER BOARD                          */
 /* PLACE BOTTLE BUTTON */
 
 .bottlePlacement {
-  width: 3vw;
+  width: 2.5vw;
 }
 
 .horizontalPlacement {

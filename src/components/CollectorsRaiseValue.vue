@@ -159,9 +159,9 @@ export default {
 <style>
 
 .raiseValue{
-  grid-gap: 1em;
+  grid-gap: 2%;
   display: grid;
-  grid-template-rows: 40% 60%;
+  grid-template-rows: 32% 66%;
   grid-template-columns: 10% 90%;
   grid-template-areas:
   "raiseValueHeader marketValues"
@@ -177,6 +177,6 @@ export default {
   grid-template-columns: repeat(auto-fill, 20%);
 }
 .valueSymbol {
-  width: 4vw;
+  width: 3.5vw;
 }
 </style>

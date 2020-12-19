@@ -7,8 +7,8 @@
     </div>
 
     <div class="auctionInfo">
-      <div class="popup" style= "position:relative; left:0em; top:0em;">
-      <img src='/images/startAuction.png' alt="" width="40%" @click="$emit('getInfo')" >
+      <div class="popup" style= "position:relative; left:7em; top:0em;">
+      <img src='/images/startAuction.png' alt="" width="45%"  @click="$emit('getInfo')" >
       <span class="popuptext" id="myAuctionPopup"  style= "left:2em; top:-3em;">
         Auction används för det här o de här
       <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
@@ -49,6 +49,7 @@
  <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
 <div class="auctionCards horizontalPlacement">
   <p>{{ labels.auctionSpot }}</p>
+  <br>
   <div v-for="(card, index) in auctionSpot" :key="index">
     <CollectorsCard
     :card="card"
@@ -149,8 +150,7 @@ export default {
   font-size: 1.4em;
   padding-top: 0.9em;
   padding-left: 1em;}
-.auctionInfo{grid-area: auctionInfo;
-margin-left: 25%;}
+.auctionInfo{grid-area: auctionInfo;}
 .auctionCards{grid-area: auctionCards}
 
 

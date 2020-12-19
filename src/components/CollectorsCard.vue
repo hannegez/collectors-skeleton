@@ -32,7 +32,7 @@ export default {
   /*BJÖRN CARLSSON*/
   mounted() {
  window.addEventListener('resize', () => {
-   this.scalefactor = window.innerWidth/5500
+   this.scalefactor = window.innerWidth/5500 //ändrar storlek kort
    })
  },
 }

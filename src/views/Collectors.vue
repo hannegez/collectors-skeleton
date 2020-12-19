@@ -58,12 +58,12 @@
       </div>-->
 
       <div class="work pool">
-        <div class="popup" style= "position:relative; left:0em; top:0em;">
+        <!--<div class="popup" style= "position:relative; left:0em; top:0em;">
         <img src='/images/workInfo.PNG' alt="" width="80%" @click="getInfo($event,'work')" >
         <span class="popuptext" id="myWorkPopup"  style= "position:relative; left:3em; top:-11em;">
           work kan användas bla bla bla
         </span>
-        </div>
+      </div> -->
 
         <CollectorsStartWork v-if="players[playerId]"
         :labels="labels"
@@ -71,16 +71,18 @@
         :marketValues="marketValues"
         :placement="workPlacement"
         @startWork="startWork($event)"
-        @placeWorkBottle="placeWorkBottle( $event)"/>
+        @placeWorkBottle="placeWorkBottle( $event)"
+        @getInfo="getInfo('work')"/>
       </div>
 
-      <div class="auction pool">
+       <div class="auction pool">
+         <!--
         <div class="popup" style= "position:relative; left:0em; top:0em;">
         <img src='/images/startAuction.png' alt="" width="20%" @click="getInfo($event,'auction')" >
         <span class="popuptext" id="myAuctionPopup"  style= "position:relative; left:3em; top:-11em;">
           Auction används för det här o de här
         </span>
-        </div>
+      </div> -->
 
         <CollectorsStartAuction v-if="players[playerId]"
         :labels="labels"
@@ -90,7 +92,8 @@
         :marketValues="marketValues"
         :placement="auctionPlacement"
         @chooseAction="chooseAction(chosenAction, $event)"
-        @placeBottle="placeBottle('auction', $event)"/>
+        @placeBottle="placeBottle('auction', $event)"
+        @getInfo="getInfo('auction')"/>
 
 
       </div>
@@ -652,7 +655,7 @@ PLAYER BOARD                          */
 
 .horizontalPlacement {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 20%);
+  grid-template-columns: repeat(auto-fill, 19%);
 }
 
 /* ========================= */

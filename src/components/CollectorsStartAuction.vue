@@ -1,11 +1,25 @@
+<!-- Daniella har varit här och ändrat i griden -->
+
 <template>
   <div class="startAuction">
     <div class="auctionHeader">
-      <h2>{{ labels.startAuction }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+      {{ labels.startAuction }}      <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
     </div>
 
+    <div class="auctionInfo">
+      <div class="popup" style= "position:relative; left:7em; top:0em;">
+      <img src='/images/startAuction.png' alt="" width="45%"  @click="$emit('getInfo')" >
+      <span class="popuptext" id="myAuctionPopup"  style= "left:2em; top:-3em;">
+        Auction används för det här o de här
+      <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
+      </span>
+      </div>
+    </div>
+
+
+
     <!--BUY CARDS -->
-    <div class="buyCards">
+    <div class="buyCards horizontalPlacement">
       <div v-for="(card, index) in reverseAuctionCards" :key="index">
         <CollectorsCard
         :card="card"
@@ -16,21 +30,8 @@
     </div>
 
 
-    <!-- <div>
-    <div class="buttons" v-for="(p, index) in placement" :key="index">
-    <button
-    v-if="p.playerId===null"
-    :disabled="cannotAfford(p.cost)"
-    @click="placeBottle(p)" >
-    ${{p.cost}}
-  </button>
-  <div v-if="p.playerId !== null">
-  {{p.playerId}}
-</div>
-</div>
-</div> -->
 
-<div class="bottlePlacements">
+<div class="bottlePlacements horizontalPlacement">
   <div v-for="(p, index) in placement" :key="'bp' + index">
     <input class="bottlePlacement"
     type="image"
@@ -45,8 +46,10 @@
   </div>
 </div>
 
-<h2>{{ labels.auctionSpot }}</h2> <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
-<div class="buy-cards">
+ <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
+<div class="auctionCards horizontalPlacement">
+  <p>{{ labels.auctionSpot }}</p>
+  <br>
   <div v-for="(card, index) in auctionSpot" :key="index">
     <CollectorsCard
     :card="card"
@@ -131,16 +134,27 @@ export default {
 .startAuction{
   grid-gap: 1em;
   display: grid;
-  grid-template-rows: 10% 1fr;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 35% 25% 25%;
+  grid-template-columns: 50% 50%;
   grid-template-areas:
-  "auctionHeader auctionHeader"
-  "bottlePlacements buyCards";
+  "auctionHeader auctionInfo"
+  "bottlePlacements buyCards"
+  "auctionCards buyCards";
 }
 
 .buyCards{grid-area: buyCards;}
-.bottlePlacements{grid-area: bottlePlacements;}
-.auctionHeader{grid-area: auctionHeader;}
+.bottlePlacements{grid-area: bottlePlacements;
+}
+.auctionHeader{grid-area: auctionHeader;
+  font-weight: bold;
+  font-size: 1.4em;
+  padding-top: 0.9em;
+  padding-left: 1em;}
+.auctionInfo{grid-area: auctionInfo;}
+.auctionCards{grid-area: auctionCards}
+
+
+
 
 /* .buy-cards, .buttons {
 display: grid;

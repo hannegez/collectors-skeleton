@@ -3,12 +3,15 @@
 
     <div class="buyItemHeader">
       <h3>{{ labels.buyItem }}</h3>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+
+      <div class="buyInfo">
       <div class="popup" style= "position:relative; left:0em; top:0em;">
       <img src='/images/buyItem.PNG' alt="" width="60%" @click="$emit('getInfo')" >
       <span class="popuptext" id="myItemPopup"  style= "left:2em; top:-3em;">
         Buy item används för att köpa objekt
       </span>
       </div>
+    </div>
     </div>
 
     <div class="buyCards horizontalBuyCards">
@@ -108,17 +111,18 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .buyItem{
-  grid-gap: 4%;
+  grid-gap: 5%;
   display: grid;
   grid-template-rows: 48% 48%;
   grid-template-columns: 80% 20%;
   grid-template-areas:
   "buyCards buyItemHeader"
-  "bottlePlacements buyItemHeader";
+  "bottlePlacements buyInfo";
 }
 
 .buyCards{grid-area: buyCards;}
 .bottlePlacements{grid-area: bottlePlacements;}
 .buyItemHeader{grid-area: buyItemHeader;}
+.buyInfo{grid-area: buyInfo;}
 
 </style>

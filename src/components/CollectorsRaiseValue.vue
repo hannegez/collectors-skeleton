@@ -1,5 +1,5 @@
 
-<!-- Daniella har varit här och ändrat i griden --> 
+<!-- Daniella har varit här och ändrat i griden -->
 
 <template>
   <div class="raiseValue">
@@ -169,7 +169,7 @@ export default {
   grid-gap: 1em;
   display: grid;
   grid-template-rows: 50% 50%;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 15% 85%;
   grid-template-areas:
     "raiseValueInfo marketValues"
     "raiseValueHeader bottlePlacements";

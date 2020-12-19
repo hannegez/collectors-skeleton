@@ -655,7 +655,7 @@ PLAYER BOARD                          */
 
 .horizontalPlacement {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 20%);
+  grid-template-columns: repeat(auto-fill, 19%);
 }
 
 /* ========================= */

@@ -1,7 +1,7 @@
 <template>
   <div class="gainSkill">
     <div class="gainSkillHeader">
-      <h3>{{ labels.gainSkill }}</h3>
+      {{ labels.gainSkill }}
     </div>
 
     <div class="gainSkillInfo">
@@ -117,17 +117,20 @@ export default {
 .gainSkill{
   grid-gap: 1em;
   display: grid;
-  grid-template-rows: 20% 10% 80%;
+  grid-template-rows: 1% 25% 10%;
   grid-template-columns: 50% 50%;
   grid-template-areas:
   "gainSkillHeader gainSkillInfo"
-  "buyCards bottlePlacements"
+  "buyCards gainSkillInfo"
   "buyCards bottlePlacements";
 }
 
 .buyCards{grid-area: buyCards;}
 .bottlePlacements{grid-area: bottlePlacements;}
-.gainSkillHeader{grid-area: gainSkillHeader;}
+.gainSkillHeader{grid-area: gainSkillHeader;
+  font-weight: bold;
+  font-size: 1.2em;
+  padding-top: 0;}
 .gainSkillInfo{grid-area: gainSkillInfo;}
 
 </style>

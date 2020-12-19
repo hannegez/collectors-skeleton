@@ -1,12 +1,12 @@
 <template>
   <div class="gainSkill">
     <div class="gainSkillHeader">
-      {{ labels.gainSkill }}
+      <!-- {{ labels.gainSkill }} behövs ej längre pga infoknappar -->
     </div>
 
     <div class="gainSkillInfo">
       <div class="popup" style= "position:relative; left:0em; top:0em;">
-      <img src='/images/gainSkill.PNG' alt="" width="70%" @click="$emit('getInfo')" >
+      <img src='/images/gainSkill.PNG' alt="Gain skill" width="70%" @click="$emit('getInfo')" >
       <span class="popuptext" id="mySkillPopup"  style= "left:2em; top:-3em;">
         Gain skill används för att köpa skills
       <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->

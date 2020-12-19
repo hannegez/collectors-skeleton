@@ -1,6 +1,7 @@
 <!-- här har vi själva korten -->
 
 <template>
+<!-- cred till BJÖRN CARLSSON -->
     <div v-if="card.x>0" :class="['card', {'available-to-choose': availableAction}]" :style="{'zoom':scalefactor,'background-position': (-(card.x-1)*250)+'px ' + (-(card.y-1)*350)+'px'}" @click="doAction">
 
       {{card.item}}
@@ -12,7 +13,7 @@
 <script>
 export default {
   name: 'CollectorsCard',
-  /*BJÖRN CARLSSON*/
+  /*cred till BJÖRN CARLSSON*/
   data: function() {
    return{
      scalefactor: window.innerWidth/5500   // Här dyker en skalning upp - det är faktiskt här och inte i collectors.vue som det sker. Se även ovan där kortens koordinater bestäms.
@@ -29,7 +30,7 @@ export default {
     }
     }
   },
-  /*BJÖRN CARLSSON*/
+  /*cred till BJÖRN CARLSSON*/
   mounted() {
  window.addEventListener('resize', () => {
    this.scalefactor = window.innerWidth/5500 //ändrar storlek kort

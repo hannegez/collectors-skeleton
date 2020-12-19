@@ -89,6 +89,10 @@ export default {
   "hand hand";
 }
 
+p {
+  margin: 1em;
+}
+
 .playerHeader, .Yitems, .Yskills, .Yhand { padding: 0em; }
 
 .playerHeader {

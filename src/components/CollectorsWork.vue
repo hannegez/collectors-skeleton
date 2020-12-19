@@ -1,12 +1,12 @@
 <template>
   <div class="startWork">
     <div class="workHeader" >
-      {{ labels.startWork }}     <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+    <!--  {{ labels.startWork }}     behövs ej längre pga infoknappar-->
     </div>
 
     <div class="workInfo">
       <div class="popup" style= "position:relative; left:0em; top:0em;">
-      <img src='/images/workInfo.PNG' alt="" width="70%" @click="$emit('getInfo')" >
+      <img src='/images/workInfo.PNG' alt="Work" width="70%" @click="$emit('getInfo')" >
       <span class="popuptext" id="myWorkPopup"  style= "left:2em; top:-3em;">
         work kan användas bla bla bla
       <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
@@ -32,15 +32,15 @@
         @click="placeWorkBottle(p)"
         src='/images/bottle_placement.png' >
 
-
-
-
         <p class="buttonText"> ${{p.cost}} </p>
+
         <div v-if="p.playerId !== null">
           {{p.playerId}}
         </div>
+
       </div>
     </div>
+
     <div class="workImages">
       <br>
       <img src="/images/work_recycle.png" alt="" width="25%">

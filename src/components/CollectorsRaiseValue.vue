@@ -4,13 +4,13 @@
 <template>
   <div class="raiseValue">
     <div class="raiseValueHeader">
-      <h3>{{ labels.raiseValue }}</h3>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+      <!-- <h3>{{ labels.raiseValue }}</h3>      behövs ej längre pga infoknappar -->
     </div>
 
     <div class="raiseValueInfo">
 
       <div class="popup" style= "position:relative; left:0em; top:0em;">
-      <img src='/images/infoknapp_rv.png' alt="" width="70%" @click="$emit('getInfo')" >
+      <img src='/images/infoknapp_rv.png' alt="Raise value" width="70%" @click="$emit('getInfo')" >
       <span class="popuptext" id="myMarketPopup"  style= "left:3em; top:-3em;">
         raise value används för att yada yada yada
       </span>

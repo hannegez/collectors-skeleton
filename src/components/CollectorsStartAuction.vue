@@ -3,12 +3,12 @@
 <template>
   <div class="startAuction">
     <div class="auctionHeader">
-      {{ labels.startAuction }}      <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+    <!--  {{ labels.startAuction }}      behövs ej längre pga infoknappar -->
     </div>
 
     <div class="auctionInfo">
       <div class="popup" style= "position:relative; left:7em; top:0em;">
-      <img src='/images/startAuction.png' alt="" width="45%"  @click="$emit('getInfo')" >
+      <img src='/images/startAuction.png' alt="Start auction" width="45%"  @click="$emit('getInfo')" >
       <span class="popuptext" id="myAuctionPopup"  style= "left:2em; top:-3em;">
         Auction används för det här o de här
       <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
@@ -48,7 +48,7 @@
 
  <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
 <div class="auctionCards horizontalPlacement">
-  <p>{{ labels.auctionSpot }}</p>
+  <h2>{{ labels.auctionSpot }}</h2>
   <br>
   <div v-for="(card, index) in auctionSpot" :key="index">
     <CollectorsCard

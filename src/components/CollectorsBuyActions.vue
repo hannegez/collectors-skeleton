@@ -2,11 +2,11 @@
   <div class="buyItem">
 
     <div class="buyItemHeader">
-      <h3>{{ labels.buyItem }}</h3>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+    <!--  <h3>{{ labels.buyItem }}</h3>       behövs ej längre pga infoknapparna -->
 
       <div class="buyInfo">
       <div class="popup" style= "position:relative; left:0em; top:0em;">
-      <img src='/images/buyItem.PNG' alt="" width="60%" @click="$emit('getInfo')" >
+      <img src='/images/buyItem.PNG' alt="Buy Item" width="60%" @click="$emit('getInfo')" >
       <span class="popuptext" id="myItemPopup"  style= "left:2em; top:-3em;">
         Buy item används för att köpa objekt
       </span>

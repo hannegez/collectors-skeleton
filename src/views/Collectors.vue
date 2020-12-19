@@ -7,12 +7,6 @@
     <main>
       <div class="game board">
         <div class="item pool">
-          <!-- <div class="popup" style= "position:relative; left:25em; top:0em;">
-          <img src='/images/buyItem.PNG' alt="" width="15%" @click="getInfo($event, 'item')" >
-          <span class="popuptext" id="myItemPopup"  style= "position:relative; left:3em; top:-11em;">
-            Buy item används för att köpa objekt
-          </span>
-          </div> -->
           <CollectorsBuyActions v-if="players[playerId]"
           :labels="labels"
           :player="players[playerId]"
@@ -22,20 +16,9 @@
           @buyCard="buyCard($event)"
           @placeBottle="placeBottle('buy', $event)"
           @getInfo="getInfo('item')"/>
-
-
-          <p>buyPlacement: {{buyPlacement}}</p>
-          <p>chosenPlacementCost: {{chosenPlacementCost}}</p>
         </div>
 
         <div class="skill pool">
-          <!-- <div class="popup" style= "position:relative; left:0em; top:0em;">
-          <img src='/images/gainSkill.PNG' alt="" width="50%" @click="getInfo($event, 'skill')" >
-          <span class="popuptext" id="mySkillPopup"  style= "position:relative; left:3em; top:-11em;">
-            Gain skill används för att köpa skills
-          </span>
-          </div> -->
-
           <CollectorsGainSkill v-if="players[playerId]"
           :labels="labels"
           :player="players[playerId]"
@@ -46,25 +29,7 @@
           @getInfo="getInfo('skill')"/>
         </div>
 
-        <!--  HEAD
-        <div class="work pool">
-        <CollectorsStartWork v-if="players[playerId]"
-        :labels="labels"
-        :player="players[playerId]"
-        :marketValues="marketValues"
-        :placement="workPlacement"
-        @startWork="startWork($event)"
-        @placeWorkBottle="placeWorkBottle( $event)"/>
-      </div>-->
-
       <div class="work pool">
-        <!--<div class="popup" style= "position:relative; left:0em; top:0em;">
-        <img src='/images/workInfo.PNG' alt="" width="80%" @click="getInfo($event,'work')" >
-        <span class="popuptext" id="myWorkPopup"  style= "position:relative; left:3em; top:-11em;">
-          work kan användas bla bla bla
-        </span>
-      </div> -->
-
         <CollectorsStartWork v-if="players[playerId]"
         :labels="labels"
         :player="players[playerId]"
@@ -76,14 +41,6 @@
       </div>
 
        <div class="auction pool">
-         <!--
-        <div class="popup" style= "position:relative; left:0em; top:0em;">
-        <img src='/images/startAuction.png' alt="" width="20%" @click="getInfo($event,'auction')" >
-        <span class="popuptext" id="myAuctionPopup"  style= "position:relative; left:3em; top:-11em;">
-          Auction används för det här o de här
-        </span>
-      </div> -->
-
         <CollectorsStartAuction v-if="players[playerId]"
         :labels="labels"
         :player="players[playerId]"

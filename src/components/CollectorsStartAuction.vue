@@ -2,15 +2,15 @@
 
 <template>
   <div class="startAuction">
-    <div class="auctionHeader">
-    <!--  {{ labels.startAuction }}      behövs ej längre pga infoknappar -->
-    </div>
+    <!--<div class="auctionHeader">
+      {{ labels.startAuction }}      behövs ej längre pga infoknappar
+    </div>-->
 
     <div class="auctionInfo">
       <div class="popup" style= "position:relative; left:7em; top:0em;">
       <img src='/images/startAuction.png' alt="Start auction" width="45%"  @click="$emit('getInfo')" >
       <span class="popuptext" id="myAuctionPopup"  style= "left:2em; top:-3em;">
-        
+
         {{ labels.auctionInfo }}
 
 
@@ -140,21 +140,25 @@ export default {
   grid-template-rows: 35% 25% 25%;
   grid-template-columns: 50% 50%;
   grid-template-areas:
-  "auctionHeader auctionInfo"
-  "bottlePlacements buyCards"
+  "bottlePlacements auctionInfo"
+  "auctionCards buyCards"
   "auctionCards buyCards";
 }
 
-.buyCards{grid-area: buyCards;}
+.buyCards{grid-area: buyCards;
+padding-top: 2.5em;}
 .bottlePlacements{grid-area: bottlePlacements;
+  padding-top: 3em;
 }
+/*
 .auctionHeader{grid-area: auctionHeader;
   font-weight: bold;
   font-size: 1.4em;
   padding-top: 0.9em;
-  padding-left: 1em;}
+  padding-left: 1em;} */
 .auctionInfo{grid-area: auctionInfo;}
-.auctionCards{grid-area: auctionCards}
+.auctionCards{grid-area: auctionCards;
+padding-top: 2em;}
 
 
 

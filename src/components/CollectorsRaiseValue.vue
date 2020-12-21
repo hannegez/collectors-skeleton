@@ -12,7 +12,7 @@
       <div class="popup" style= "position:relative; left:0em; top:0em;">
       <img src='/images/infoknapp_rv.png' alt="Raise value" width="70%" @click="$emit('getInfo')" >
       <span class="popuptext" id="myMarketPopup"  style= "left:3em; top:-3em;">
-        raise value används för att yada yada yada
+        {{ labels.valueInfo }}
       </span>
       </div>
     </div>

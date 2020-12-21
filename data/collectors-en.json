@@ -9,5 +9,11 @@
 	"auctionSpot": "Card open for bidding",
 	"startWork": "Go to work",
 	"marketValues": "Current market values",
-	"playerInfo": "Player "
+	"playerInfo": "Player ",
+	"itemInfo":"Buy item works like this",
+	"skillInfo":"Skill works like this",
+	"auctionInfo":"Auction works like this",
+	"valueInfo":" Value works like this",
+	"workInfo":" Work works like this"
+
 }

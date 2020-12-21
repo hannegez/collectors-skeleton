@@ -8,7 +8,7 @@
       <div class="popup" style= "position:relative; left:0em; top:0em;">
       <img src='/images/workInfo.PNG' alt="Work" width="70%" @click="$emit('getInfo')" >
       <span class="popuptext" id="myWorkPopup"  style= "left:2em; top:-3em;">
-        work kan användas bla bla bla
+        {{ labels.workInfo }}
       <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
       </span>
       </div>

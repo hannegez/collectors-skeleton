@@ -10,7 +10,10 @@
       <div class="popup" style= "position:relative; left:7em; top:0em;">
       <img src='/images/startAuction.png' alt="Start auction" width="45%"  @click="$emit('getInfo')" >
       <span class="popuptext" id="myAuctionPopup"  style= "left:2em; top:-3em;">
-        Auction används för det här o de här
+        
+        {{ labels.auctionInfo }}
+
+
       <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
       </span>
       </div>

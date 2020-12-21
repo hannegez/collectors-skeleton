@@ -9,5 +9,10 @@
 	"auctionSpot": "Kort öppet för budgivning",
 	"startWork": "Gå till jobbet",
 	"marketValues": "Marknadvärden",
-	"playerInfo": "Information om spelare"
+	"playerInfo": "Information om spelare",
+	"itemInfo":"köp sak fungerar såhär",
+	"skillInfo":" kompetens fungerar såhär",
+	"auctionInfo":" auktion fungerar såhär",
+	"valueInfo":" öka värde fungerar såhär",
+	"workInfo":" arbete fungerar såhär"
 }

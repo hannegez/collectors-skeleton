@@ -411,32 +411,27 @@ buyCard: function (card) {
 );
 },
   getInfo: function(string){
-  if (string === 'work') {
-    var popupwork = document.getElementById("myWorkPopup");
-    popupwork.classList.toggle("show");
-  }
-  else if (string === 'auction') {
-    var popupauction = document.getElementById("myAuctionPopup");
-    popupauction.classList.toggle("show");
+    if (string === 'work') {
+      var popupwork = document.getElementById("myWorkPopup");
+      popupwork.classList.toggle("show");
+    }
+    else if (string === 'auction') {
+      var popupauction = document.getElementById("myAuctionPopup");
+      popupauction.classList.toggle("show");
 
-  }
-  else if (string === 'market') {
-    var popupmarket = document.getElementById("myMarketPopup");
-    popupmarket.classList.toggle("show");
-  }
-  else if (string === 'skill') {
-    var popupskill = document.getElementById("mySkillPopup");
-    popupskill.classList.toggle("show");
-  }
-  else if (string === 'item') {
-    var popupitem = document.getElementById("myItemPopup");
-    popupitem.classList.toggle("show");
-  }
-
-
-
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
+    }
+    else if (string === 'market') {
+      var popupmarket = document.getElementById("myMarketPopup");
+      popupmarket.classList.toggle("show");
+    }
+    else if (string === 'skill') {
+      var popupskill = document.getElementById("mySkillPopup");
+      popupskill.classList.toggle("show");
+    }
+    else if (string === 'item') {
+      var popupitem = document.getElementById("myItemPopup");
+      popupitem.classList.toggle("show");
+    }
   },
 
 raiseValue: function (card) {
@@ -734,18 +729,19 @@ footer a:visited {
   border-color: grey;
   border-width: 1px;
   border-style:solid;
+  /*overflow-y: scroll; / kan skrolla*/
 }
 
 
 .popup .popuptext::after {
   content: "";
   position: absolute;
-  top: 100%;
+  /*top: 100%;
   left: 50%;
   margin-left: -5px;
   border-width: 10px;
   border-style: solid;
-  border-color: grey transparent transparent transparent;
+  color: white;*/
 }
 
 

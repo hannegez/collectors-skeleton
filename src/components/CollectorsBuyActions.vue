@@ -7,8 +7,8 @@
       <div class="buyInfo">
       <div class="popup" style= "position:relative; left:0em; top:0em;">
       <img src='/images/buyItem.PNG' alt="Buy Item" width="60%" @click="$emit('getInfo')" >
-      <span class="popuptext" id="myItemPopup"  style= "left:2em; top:-3em;">
-        
+      <span class="popuptext" id="myItemPopup"  style= "left:10em; top:-3em;">
+
         {{ labels.itemInfo }}
       </span>
       </div>

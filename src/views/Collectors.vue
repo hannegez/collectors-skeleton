@@ -718,8 +718,8 @@ footer a:visited {
   display: none;
   cursor: pointer;
   user-select: none;
-  width: 160px;
-  background-color: white;
+  width: 20em;
+  background-color: #f3f3f3;
   color: black;
   text-align: center;
   border-radius: 6px;

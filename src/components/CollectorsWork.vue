@@ -127,12 +127,9 @@ export default {
 }
 
 
-.bottlePlacements{grid-area: bottlePlacements;}
-.workHeader{
-grid-area: gainWorkHeader;
-font-weight: bold;
-font-size: 1.2em;
-padding-top: 1em;}
+.bottlePlacements{grid-area: bottlePlacements;
+margin-top: 2em;}
+.workHeader{grid-area: gainWorkHeader;}
 .workInfo{grid-area: workInfo;}
 .workImages{grid-area: workImages;}
 

@@ -14,5 +14,7 @@
 	"skillInfo":" kompetens fungerar såhär",
 	"auctionInfo":" auktion fungerar såhär",
 	"valueInfo":" öka värde fungerar såhär",
-	"workInfo":" arbete fungerar såhär"
+	"workInfo":" arbete fungerar såhär",
+	"nextQuarter": "Nästa kvartal",
+	"rules": "Hur spelar man?"
 }

@@ -2,11 +2,12 @@
   <div id="wrapper">
     <header>
       <div id="startInfo">
-        <button>How to play?</button>
+        <button class="buttons">How to play? {{ this.labels.rules }}</button>
+        <button class="buttons">Next quarter {{ this.labels.nextQuarter }}</button>
       </div>
 
-      <div id="drawCard" class="buttons">
-        <p id="drawCardText">{{ labels.draw }}:</p>
+      <div id="drawCard">
+        <p id="drawCardText">{{ this.labels.draw }}:</p>
         <input type="image" @click="drawCard" id="drawCardButton" alt="Login"
         src='/images/card_backside300px.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
       </div>
@@ -42,67 +43,67 @@
           @getInfo="getInfo('skill')"/>
         </div>
 
-      <div class="work pool">
-        <CollectorsStartWork v-if="players[playerId]"
-        :labels="labels"
-        :player="players[playerId]"
-        :marketValues="marketValues"
-        :placement="workPlacement"
-        @startWork="startWork($event)"
-        @placeWorkBottle="placeWorkBottle( $event)"
-        @getInfo="getInfo('work')"/>
+        <div class="work pool">
+          <CollectorsStartWork v-if="players[playerId]"
+          :labels="labels"
+          :player="players[playerId]"
+          :marketValues="marketValues"
+          :placement="workPlacement"
+          @startWork="startWork($event)"
+          @placeWorkBottle="placeWorkBottle( $event)"
+          @getInfo="getInfo('work')"/>
+        </div>
+
+        <div class="auction pool">
+          <CollectorsStartAuction v-if="players[playerId]"
+          :labels="labels"
+          :player="players[playerId]"
+          :auctionCards="auctionCards"
+          :auctionSpot = "auctionSpot"
+          :marketValues="marketValues"
+          :placement="auctionPlacement"
+          @chooseAction="chooseAction(chosenAction, $event)"
+          @placeBottle="placeBottle('auction', $event)"
+          @getInfo="getInfo('auction')"/>
+        </div>
+
+        <div class="market pool">
+          <CollectorsRaiseValue v-if="players[playerId]"
+          :labels="labels"
+          :player="players[playerId]"
+          :market="market"
+          :marketValues="marketValues"
+          :auctionCards="auctionCards"
+          :skillsOnSale="skillsOnSale"
+          :placement="marketPlacement"
+          @raiseValue="raiseValue($event)"
+          @placeBottle="placeBottle('market', $event)"
+          @getInfo="getInfo('market')"/>
+        </div>
+
       </div>
 
-       <div class="auction pool">
-        <CollectorsStartAuction v-if="players[playerId]"
-        :labels="labels"
-        :player="players[playerId]"
-        :auctionCards="auctionCards"
-        :auctionSpot = "auctionSpot"
-        :marketValues="marketValues"
-        :placement="auctionPlacement"
-        @chooseAction="chooseAction(chosenAction, $event)"
-        @placeBottle="placeBottle('auction', $event)"
-        @getInfo="getInfo('auction')"/>
+      <div class="player board">
+
+        <!--Object.keys(this.players) ger en array med alla playerid -->
+        <CollectorsPlayerBoard v-for='(data, id) in players' :key='id'
+        :labels= "labels"
+        :player= "data"
+        :playerId= "id"
+        @chooseAction= "chooseAction(chosenAction, $event)"/>
+
       </div>
 
-  <div class="market pool">
-    <CollectorsRaiseValue v-if="players[playerId]"
-    :labels="labels"
-    :player="players[playerId]"
-    :market="market"
-    :marketValues="marketValues"
-    :auctionCards="auctionCards"
-    :skillsOnSale="skillsOnSale"
-    :placement="marketPlacement"
-    @raiseValue="raiseValue($event)"
-    @placeBottle="placeBottle('market', $event)"
-    @getInfo="getInfo('market')"/>
+
+    </main>
+
+    <footer>
+      HEJ HÄR ÄR FOOTER
+
+
+
+    </footer>
   </div>
-
-</div>
-
-<div class="player board">
-
-  <!--Object.keys(this.players) ger en array med alla playerid -->
-  <CollectorsPlayerBoard v-for='(data, id) in players' :key='id'
-  :labels= "labels"
-  :player= "data"
-  :playerId= "id"
-  @chooseAction= "chooseAction(chosenAction, $event)"/>
-
-</div>
-
-
-</main>
-
-<footer>
-  HEJ HÄR ÄR FOOTER
-
-
-
-</footer>
-</div>
 </template>
 
 
@@ -410,29 +411,29 @@ buyCard: function (card) {
   }
 );
 },
-  getInfo: function(string){
-    if (string === 'work') {
-      var popupwork = document.getElementById("myWorkPopup");
-      popupwork.classList.toggle("show");
-    }
-    else if (string === 'auction') {
-      var popupauction = document.getElementById("myAuctionPopup");
-      popupauction.classList.toggle("show");
+getInfo: function(string){
+  if (string === 'work') {
+    var popupwork = document.getElementById("myWorkPopup");
+    popupwork.classList.toggle("show");
+  }
+  else if (string === 'auction') {
+    var popupauction = document.getElementById("myAuctionPopup");
+    popupauction.classList.toggle("show");
 
-    }
-    else if (string === 'market') {
-      var popupmarket = document.getElementById("myMarketPopup");
-      popupmarket.classList.toggle("show");
-    }
-    else if (string === 'skill') {
-      var popupskill = document.getElementById("mySkillPopup");
-      popupskill.classList.toggle("show");
-    }
-    else if (string === 'item') {
-      var popupitem = document.getElementById("myItemPopup");
-      popupitem.classList.toggle("show");
-    }
-  },
+  }
+  else if (string === 'market') {
+    var popupmarket = document.getElementById("myMarketPopup");
+    popupmarket.classList.toggle("show");
+  }
+  else if (string === 'skill') {
+    var popupskill = document.getElementById("mySkillPopup");
+    popupskill.classList.toggle("show");
+  }
+  else if (string === 'item') {
+    var popupitem = document.getElementById("myItemPopup");
+    popupitem.classList.toggle("show");
+  }
+},
 
 raiseValue: function (card) {
   console.log("raiseValue", card);
@@ -485,9 +486,9 @@ h2, h3 {
 
 header {
   display: grid;
-  grid-template-columns: 15% 55% 30%;
+  grid-template-columns: 30% 40% 30%;
   grid-template-areas:
-    "startInfo welcome drawCard";
+  "startInfo welcome drawCard";
   padding-left: 1em;
   margin: 0;
   align-items: center;
@@ -495,17 +496,42 @@ header {
   grid-area: header;
 }
 
-#startInfo { grid-area: startInfo; }
+#startInfo {
+  grid-area: startInfo;
+  display: flex;
+}
 #welcome { grid-area: welcome; }
 #drawCard { grid-area: drawCard; }
 
-/* ========================= */
-/* DRAW CARD BUTTON */
+/* =========================
+BUTTONS                    */
+
+.buttons {
+  width: 100%;
+  color: #292929;
+  font-size: 1em;
+  font-weight: bold;
+  background: #FAC84C;
+  border: solid thin #787975;
+  border-radius: 0.3em;
+  padding: 0.6em;
+  margin: 3%;
+  box-shadow: 2px 2px 3px #787975;
+}
+
+.buttons:hover, .drawCardButton:hover {
+  cursor: pointer;
+}
+
+.buttons:hover {
+  box-shadow: inset 2px 2px 3px #787975;
+}
+
 #drawCard {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
-    "drawCardText drawCardButton";
+  "drawCardText drawCardButton";
 }
 
 #drawCardText {
@@ -520,14 +546,10 @@ header {
   width: 20%;
 }
 
-.buttons {
-  width: 100%;
-}
-
 .drawCardButton:hover {
   box-shadow: inset 0.2em 0.2em 0.3em #787975;
-  cursor: pointer;
 }
+
 .drawCardButton:focus {
   outline: none;
 }
@@ -647,8 +669,8 @@ PLAYER BOARD                          */
 
 
 /* .buttonText, .buttonImg {          //TROR EJ DETTA ÄR NÖDVÄNDIGT LÄNGRE
-  margin: 0;
-  padding: 0;
+margin: 0;
+padding: 0;
 } */
 .buttonText {
   padding: 0.05em;

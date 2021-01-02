@@ -3,7 +3,10 @@
     <div id="welcome-info">
       <h1>Welcome to Rich Collectors!</h1>
       <p> Collect items and become the richest player.</p>
-      <p> Choose number of players:
+      <button class="buttons homeButton" v-on:click="getPlayers()">How to play?</button>  <!-- Här händer nått annat än @click="setupCollectors(i+1, 'en')", kanske en setupTutorial?? -->
+
+      <h2> Choose number of players: </h2>
+      <p>
         <input type="radio" id="twoPlayers" name="choosePlayers" value="2" checked>
         <label for="twoPlayers">2</label>
         <input type="radio" id="threePlayers" name="choosePlayers" value="3">
@@ -11,29 +14,18 @@
         <input type="radio" id="fourPlayers" name="choosePlayers" value="4">
         <label for="fourPlayers">4</label>
       </p>
-      <p> Choose language:
+      <h2> Choose language: </h2>
+      <p>
         <input type="radio" id="english" name="chooseLanguage" value="en" checked>
         <label for="english">English</label>
         <input type="radio" id="svenska" name="chooseLanguage" value="se">
         <label for="svenska">Svenska</label>
       </p>
 
-        <button v-on:click="setupCollectors(getPlayers(), getLanguage())">Play game</button>
-        <button v-on:click="getPlayers()">Tutorial mode</button>  <!-- Här händer nått annat än @click="setupCollectors(i+1, 'en')", kanske en setupTutorial?? -->
-
-<!-- DETTA KAN VI NU TA BORT PGA ERSATT MED PLAY GAME-KNAPP, OCH BEHÖVER VI ENS EN SVENSK VERSION.... ?
-      <ul>
-        <li v-for="i in 3" :key="i">
-          <a @click="setupCollectors(i+1, 'en')">Set up a game of Collectors for {{i+1}} players</a>.
-        </li>
-      </ul>
-
-      <ul>
-        <li v-for="i in 3" :key="i">
-          <a @click="setupCollectors(i+1, 'se')">Spela Collectors med {{i+1}} spelare</a>.
-        </li>
-      </ul>
--->
+      <div id="homeButtons">
+        <button class="buttons homeButton" v-on:click="setupCollectors(getPlayers(), getLanguage())">Play game</button>
+        <button class="buttons homeButton" v-on:click="getPlayers()">Tutorial mode</button>  <!-- Här händer nått annat än @click="setupCollectors(i+1, 'en')", kanske en setupTutorial?? -->
+      </div>
 
     </div>
   </div>
@@ -55,7 +47,7 @@ export default {
     },
     getLanguage: function() {
       const lang = document.querySelector('input[name=chooseLanguage]:checked').value;
-    //  console.log(lang);
+      //  console.log(lang);
       console.log(typeof(lang));
       return lang;
     },
@@ -64,17 +56,21 @@ export default {
       this.$store.commit('SETUP_GAME', {roomId: this.$store.state.roomId,
         playerCount: playerCount,
         lang: lang });
-      this.$router.push("/room/" + this.$store.state.roomId);
-    },
+        this.$router.push("/room/" + this.$store.state.roomId);
+      },
+    }
   }
-}
-</script>
+  </script>
 
-<style scoped>
-   p {
-   font-size: 1em;
-    font-weight: normal;
+  <style scoped>
+  #welcome-info {
+    background: #DFECCC;
+    border-radius: 10px;
+    color: #292929;
+    padding: 2em;
+    box-shadow: 0 6px 5px 0 #C6C6C5;
   }
+
   .center {
     display: flex;
     align-items: center;
@@ -83,33 +79,29 @@ export default {
     padding: 1em;
   }
 
-#welcome-info {
-  background: #DFECCC;
-  border-radius: 10px;
-  color: #292929;
-  padding: 2em;
-  box-shadow: 0 6px 5px 0 #C6C6C5;
-}
+  h2 {
+    font-size: 1.2em;
+    margin: 0.4em 0;
+  }
 
-button {
-  color: #292929;
-  font-size: 1.2em;
-  font-weight: bold;
-  background: #9BC658;
-  border: solid thin #787975;
-  border-radius: 5px;
-  padding: 1em;
-  margin: 5%;
-  box-shadow: 2px 2px 3px #787975;
-}
+  p {
+    font-size: 1em;
+    font-weight: normal;
+  }
 
-button:hover {
-  box-shadow: inset 2px 2px 3px #787975;
-  cursor: pointer;
-}
+  /*  ======================================================
+   BUTTONS PÅ HOME-SIDAN
+   OBS: Övrig (allmän) style ligger i Collectors.VUE    */
 
-/*OM VI VILL HA NÄR KNAPPEN ÄR NEDTRYCKT
-button:focus {
-} */
+  #homeButtons {
+    margin: 5% 0;
+  }
 
-</style>
+  .homeButton {
+    font-size: 1.2em;
+    background: #9BC658;
+  }
+
+/* ======================================================= */
+
+  </style>

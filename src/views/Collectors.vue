@@ -23,8 +23,8 @@
 
 
       <div class="info right">
-        <p>
-          här kan vi skriva ut allt som sker i spelet!
+        <p class="gameLog">
+          {{ this.labels.startLog }}
         </p>
 
         <!-- <p id="drawCardText">{{ this.labels.draw }}:</p> -->
@@ -277,7 +277,7 @@ export default {
 
         this.$store.state.socket.on('collectorsCardBought',
         function(d) {
-          console.log(d.playerId, "bought a card");
+          document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} bought an item!`;
           this.players = d.players;
           this.itemsOnSale = d.itemsOnSale;
         }.bind(this)
@@ -285,7 +285,7 @@ export default {
 
       this.$store.state.socket.on('collectorsValueRaised',
       function(d) {
-        console.log(d.playerId, "raised a value");
+        document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} raised a value!`;
         this.players = d.players;
         //        this.raiseValueOnSale = d.raiseValueOnSale;
         this.skillsOnSale = d.skillsOnSale;
@@ -297,7 +297,7 @@ export default {
 
     this.$store.state.socket.on('collectorsAuctionStarted',
     function(d) {
-      console.log(d.playerId, "started an auction");
+      document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started an auction!`;
       this.players = d.players;
       this.auctionCards = d.auctionCards;
       this.auctionSpot = d.auctionSpot; //TEST ???
@@ -305,7 +305,7 @@ export default {
   );
   this.$store.state.socket.on('collectorsWorkStarted',
   function(d) {
-    console.log(d.playerId, "started Work");
+    document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
     this.players = d.players;
     this.auctionCards = d.auctionCards;
     this.auctionSpot = d.auctionSpot; //TEST ???
@@ -314,7 +314,7 @@ export default {
 
 this.$store.state.socket.on('collectorsSkillGained',
 function(d) {
-  console.log(d.playerId, "gained a skill");
+  document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} gained a skill!`;
   this.players = d.players;
   this.skillsOnSale = d.skillsOnSale;
 }.bind(this)
@@ -323,7 +323,6 @@ function(d) {
 
 methods: {
   chooseAction(action, card){
-    console.log("action utskrift", action);
     if (action === "buy") {
       this.buyCard(card);
     }
@@ -389,7 +388,7 @@ drawCard: function () {                                  /* NÄR MAN DRAR KORT �
 );
 },
 gainSkill: function (card) {
-  console.log("gainSkill", card);
+  /*console.log("gainSkill", card);     //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('collectorsGainSkill', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -400,7 +399,7 @@ gainSkill: function (card) {
 },
 
 startAuction: function (card) {
-  console.log("startAuction", card);
+  /*console.log("startAuction", card);    //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('CollectorsStartAuction', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -410,7 +409,7 @@ startAuction: function (card) {
 );
 },
 startWork: function (card) {
-  console.log("startWork", card);
+  /*console.log("startWork", card);   //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('CollectorsStartWork', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -422,7 +421,7 @@ startWork: function (card) {
 },
 
 buyCard: function (card) {
-  console.log("buyCard", card);
+  /*console.log("buyCard", card);   //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('collectorsBuyCard', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -460,7 +459,7 @@ getHowToInfo:function(){
 },
 
 raiseValue: function (card) {
-  console.log("raiseValue", card);
+  /*console.log("raiseValue", card);    //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('collectorsRaiseValue', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -532,8 +531,12 @@ header {
 .right {
   grid-area: rightInfo;
   display: flex;
+  font-weight: bold;
 }
 
+.gameLog {
+  color: red;
+}
 
 /* =========================
 BUTTONS                    */

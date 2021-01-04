@@ -16,5 +16,6 @@
 	"valueInfo":" When executing this action, you must place cards in the market pool equal to the number of seals on your action space (one or two cards). You may place cards from your hand, from the card in the lowest position in the skill pool, or from the lowest card in the auction pool.",
 	"workInfo":" In the work area, you perform actions to increase your income, recycle bottles, draw cards and become the first player. If you place your bottle in the uppermost action space (on the quarter tile), you must place two cards from your hand into the future income. If you place your bottle on the first action space, you must discard the placed bottle, this means that the bottle is lost and cannot be used in a future round. Note that the action space can be taken any number of times during the same quarter since it will always be empty. If you place your bottle on the second space, you get to draw two cards from the deck. If you place your bottle on the third space, you get to draw one card and you take the first player token. If you place your bottle on the fourth space, you must draw one card from the deck and place one card from your hand to the future income.",
 	"nextQuarter": "Next quarter",
-	"rules": "How to play?"
+	"rules": "How to play?",
+	"startLog": "Let's start playing!" 
 }

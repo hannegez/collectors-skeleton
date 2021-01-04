@@ -5,12 +5,8 @@
         <h1>Welcome to Rich Collectors</h1>
       </div>
 
-      <div id="startInfo">
+      <div class="info left">
         <button class="buttons">{{ this.labels.rules }}</button>
-
-
-
-
         <button class="buttons"> {{ this.labels.nextQuarter }}</button>
       </div>
 
@@ -27,13 +23,15 @@
 
 
 
+      <div class="info right">
+        <p>
+          {{ labels.invite }}
+          <input type="text" :value="publicPath + $route.path" @click="selectAll" readonly="readonly">
+        </p>
 
-
-
-      <div id="drawCard">
         <!-- <p id="drawCardText">{{ this.labels.draw }}:</p> -->
         <input type="image" @click="drawCard" id="drawCardButton" alt="Login"
-        src='/images/card_backside300px.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
+        src='/images/card_backside_flipped.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
 
         <!-- <button class="buttons" @click="player.money += 1">
           Fake money
@@ -512,7 +510,7 @@ header {
   display: grid;
   grid-template-columns: 30% 40% 30%;
   grid-template-areas:
-  "startInfo welcome drawCard";
+  "leftInfo welcome rightInfo";
   padding-left: 1em;
   margin: 0;
   align-items: center;
@@ -520,12 +518,21 @@ header {
   grid-area: header;
 }
 
-#startInfo {
-  grid-area: startInfo;
+.info {
+  display: flex;
+  align-items: flex-end;
+  padding: 0 5%;
+}
+
+.left { grid-area: leftInfo; }
+
+#welcome { grid-area: welcome; }
+
+.right {
+  grid-area: rightInfo;
   display: flex;
 }
-#welcome { grid-area: welcome; }
-#drawCard { grid-area: drawCard; }
+
 
 /* =========================
 BUTTONS                    */
@@ -565,7 +572,6 @@ BUTTONS                    */
   font-size: 1.2em;
   background: #e63b2b;
   margin: 5% 0;
-
 }
 
 .closeButton:hover, .drawCardButton:hover {
@@ -576,24 +582,11 @@ BUTTONS                    */
   box-shadow: inset 2px 2px 3px #787975;
 }
 
-#drawCard {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-  "drawCardText drawCardButton";
-}
-
-#drawCardText {
-  grid-area: drawCardText;
-} */
-
 #drawCardButton {
-  grid-area: drawCardButton;
-  border: solid thin #787975;
   border-radius: 0.3em;
   box-shadow: 0.2em 0.2em 0.3em #787975;
-  width: 13%;
-  text-align: center;
+  width: 20%;
+  margin-left: 5%;
 }
 
 .drawCardButton:hover {
@@ -635,7 +628,7 @@ footer a:visited {
   color:ivory;
 }
 
-.game, .player { padding: 1em; }
+.board { padding: 0.2em 1em 1em 1em; }
 
 /* =====================================
 GAME BOARD (GRID)                 */

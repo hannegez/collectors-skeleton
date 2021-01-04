@@ -9,11 +9,14 @@
       <img src='/images/gainSkill.PNG' alt="Gain skill" width="70%" @click="$emit('getInfo')" >
       <span class="popuptext" id="mySkillPopup"  style= "left:10em; top:-3em;">
         {{ labels.skillInfo }}
+
         <br>
         <img src='/images/skills_info1.PNG' width="300em">
         <img src='/images/skills_info2.PNG' width="300em">
         <img src='/images/skills_info3.PNG' width="300em">
       <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
+      <br>
+      <button class="closeButton"  @click="$emit('getInfo')">close</button>
       </span>
       </div>
     </div>

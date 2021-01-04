@@ -7,8 +7,8 @@
     <div class="workInfo">
       <div class="popup" style= "position:relative; left:0em; top:0em;">
       <img src='/images/workInfo.PNG' alt="Work" width="70%" @click="$emit('getInfo')" >
-      <span class="popuptext" id="myWorkPopup"  style= "left:2em; top:-3em;">
-        work kan användas bla bla bla
+      <span class="popuptext" id="myWorkPopup"  style= "left:10em; top:-3em;">
+        {{ labels.workInfo }}
       <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
       </span>
       </div>
@@ -127,12 +127,9 @@ export default {
 }
 
 
-.bottlePlacements{grid-area: bottlePlacements;}
-.workHeader{
-grid-area: gainWorkHeader;
-font-weight: bold;
-font-size: 1.2em;
-padding-top: 1em;}
+.bottlePlacements{grid-area: bottlePlacements;
+margin-top: 2em;}
+.workHeader{grid-area: gainWorkHeader;}
 .workInfo{grid-area: workInfo;}
 .workImages{grid-area: workImages;}
 

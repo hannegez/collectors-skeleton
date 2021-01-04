@@ -7,8 +7,12 @@
     <div class="gainSkillInfo">
       <div class="popup" style= "position:relative; left:0em; top:0em;">
       <img src='/images/gainSkill.PNG' alt="Gain skill" width="70%" @click="$emit('getInfo')" >
-      <span class="popuptext" id="mySkillPopup"  style= "left:2em; top:-3em;">
-        Gain skill används för att köpa skills
+      <span class="popuptext" id="mySkillPopup"  style= "left:10em; top:-3em;">
+        {{ labels.skillInfo }}
+        <br>
+        <img src='/images/skills_info1.PNG' width="300em">
+        <img src='/images/skills_info2.PNG' width="300em">
+        <img src='/images/skills_info3.PNG' width="300em">
       <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
       </span>
       </div>

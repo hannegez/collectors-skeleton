@@ -1,8 +1,27 @@
 <template>
   <div class="startWork">
-    <div class="workHeader">
-      <h2>{{ labels.startWork }}</h2>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+    <div class="workHeader" >
+    <!--  {{ labels.startWork }}     behövs ej längre pga infoknappar-->
     </div>
+
+    <div class="workInfo">
+      <div class="popup" style= "position:relative; left:0em; top:0em;">
+      <img src='/images/workInfo.PNG' alt="Work" width="70%" @click="$emit('getInfo')" >
+      <span class="popuptext" id="myWorkPopup"  style= "left:10em; top:-3em;">
+        {{ labels.workInfo }}
+      <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
+      </span>
+      </div>
+    </div>
+    <!--<div class="popup" style= "position:relative; left:0em; top:0em;">
+    <img src='/images/workInfo.PNG' alt="" width="80%" @click="getInfo($event,'work')" >
+    <span class="popuptext" id="myWorkPopup"  style= "position:relative; left:3em; top:-11em;">
+      work kan användas bla bla bla
+    </span>
+  </div> -->
+
+
+  <!-- har ändrat bilderna från coin till bilderna som ska va, första bilden vet jag ej hur vi ska göra /dani -->
 
     <div class="bottlePlacements">
       <div v-for="(p, index) in placement" :key="'bp' + index">
@@ -12,57 +31,29 @@
         :disabled="cannotAfford(p.cost)"
         @click="placeWorkBottle(p)"
         src='/images/bottle_placement.png' >
-        <img class="workInfo" src='/images/coin100px.png'>
+
         <p class="buttonText"> ${{p.cost}} </p>
+
         <div v-if="p.playerId !== null">
           {{p.playerId}}
         </div>
-        </div>
-<!--          ${{p.cost}}
-${{p.workAction}}
-{{p}}
-{{index}} -->
-<!--          <button
-v-if="p.playerId===null"
-:disabled="cannotAfford(p.cost)"
-@click="placeWorkBottle(p)" >
-kostnad ${{p.cost}}
-knappnummer {{p.workAction}}
 
-</button>
-<div v-if="p.playerId !== null">
-{{p.playerId}}
-</div>-->
+      </div>
+    </div>
 
-
-<div class="bottlePlacements">
-  <div v-for="(p, index) in placement" :key="'bp' + index">
-    <input type="image"
-    v-if="p.playerId===null"
-    :disabled="cannotAfford(p.cost)"
-    @click="placeWorkBottle(p)"
-    src='/images/bottle_placement.png' >
-    <p class="buttonText"> ${{p.cost}} </p>
-    <div v-if="p.playerId !== null">
-      {{p.playerId}}
+    <div class="workImages">
+      <br>
+      <img src="/images/work_recycle.png" alt="" width="25%">
+      <br>
+      <img src="/images/work_recycle.png" alt="" width="25%">
+        <br>
+      <img src="/images/work_gainTwo.png" alt="" height="36%">
+        <br>
+      <img src="/images/work_firstPlayer.png" alt="" height="36%">
+        <br>
+      <img src="/images/work_futureIncome.png" alt="" height="36%">
     </div>
   </div>
-</div>
-
-
-<!--börjar här -->
-<h2>{{ labels.workSpot }}</h2> <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
-<!--      <div class="buy-cards">
-<div v-for="(card, index) in auctionSpot" :key="index">
-<CollectorsCard
-:card="card"
-:availableAction="card.available"
-@doAction="startWork(card)"/>
-
-</div>-->
-</div>
-
-</div>
 
 </template>
 
@@ -118,9 +109,33 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.workInfo {
+.workInfos {
   margin-left: 3em;
   width: 7vw;
 }
+
+.startWork{
+  grid-gap: 0em;
+  display: grid;
+
+  grid-template-rows: 10% 10% 10%;
+  grid-template-columns: 40% 60%;
+  grid-template-areas:
+  "gainWorkHeader workInfo"
+  "bottlePlacements workImages"
+  "bottlePlacements workImages";
+}
+
+
+.bottlePlacements{grid-area: bottlePlacements;
+margin-top: 2em;}
+.workHeader{grid-area: gainWorkHeader;}
+.workInfo{grid-area: workInfo;}
+.workImages{grid-area: workImages;}
+
+
+
+
+
 
 </style>

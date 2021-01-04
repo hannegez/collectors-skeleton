@@ -3,12 +3,20 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
 <template>
   <div class= "playerContainer">
+
     <div class = "playerHeader">
       <h1>{{labels.playerInfo}} {{playerId}}</h1>
-      <p><img class= "playerSymbol" src='/images/coin100px.png' alt="coin symbol"> X {{player.money}}</p>
-      <p><img class= "playerSymbol" src='/images/future_income100px.png' alt="income symbol"> X {{player.income}}</p>
+      </div>
+
+      <p><img class= "coinSymbol" src='/images/coin100px.png' alt="coin symbol" width="27%"> X {{player.money}}</p>
+
+      <p><img class= "futureSymbol" src='/images/future_income100px.png' alt="income symbol" width="30%"> X {{player.income}}</p>
+
+      <div class="textbottles">
+
       <p>Total bottles: {{player.totalBottles}}</p>
       <p>Bottles left: {{player.bottlesLeft}}</p>
+
       <button @click="player.money += 1">
         <h2>FAKE MONEY</h2>
       </button>
@@ -70,19 +78,36 @@ export default {
   height: 50%;
   grid-gap: 1em;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 40% 20% 20% 20%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 5% 10% 20% 15% 15% 15%;
   grid-template-areas:
-  "playerHeader playerHeader playerHeader"
-  "items items items"
-  "skill skill skill"
-  "hand hand hand";
+  "playerHeader playerHeader"
+  "coinSymbol futureSymbol"
+  "textbottles textbottles"
+  "items items "
+  "skill skill"
+  "hand hand";
 }
 
-.playerHeader, .Yitems, .Yskills, .Yhand { padding: 2em; }
+p {
+  margin: 1em;
+}
+
+.playerHeader, .Yitems, .Yskills, .Yhand { padding: 0em; }
 
 .playerHeader {
   grid-area: playerHeader;
+}
+.coinSymbol{
+    grid-area: coinSymbol;
+}
+.futureSymbol{
+    grid-area: futureSymbol;
+}
+
+.textbottles{
+  grid-area: textbottles;
+
 }
 .Yitems {
   grid-area: items;
@@ -94,9 +119,7 @@ export default {
   grid-area: hand;
 }
 
-.playerSymbol{
-  width: 20%;
-}
+
 
 .playerslots {
   display: grid;

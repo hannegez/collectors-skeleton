@@ -1,15 +1,19 @@
 <template>
   <div class="gainSkill">
     <div class="gainSkillHeader">
-      <h3>{{ labels.gainSkill }}</h3>
+      <!-- {{ labels.gainSkill }} behövs ej längre pga infoknappar -->
     </div>
 
     <div class="gainSkillInfo">
       <div class="popup" style= "position:relative; left:0em; top:0em;">
-      <img src='/images/gainSkill.PNG' alt="" width="50%" @click="getInfo($event, 'skill')" >
-      <span class="popuptext" id="mySkillPopup"  style= "position:relative; left:3em; top:-11em;">
-        Gain skill används för att köpa skills
-        <img src='/images/skills_info.png'> <!-- Maja har lagt till-->
+      <img src='/images/gainSkill.PNG' alt="Gain skill" width="70%" @click="$emit('getInfo')" >
+      <span class="popuptext" id="mySkillPopup"  style= "left:10em; top:-3em;">
+        {{ labels.skillInfo }}
+        <br>
+        <img src='/images/skills_info1.PNG' width="300em">
+        <img src='/images/skills_info2.PNG' width="300em">
+        <img src='/images/skills_info3.PNG' width="300em">
+      <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
       </span>
       </div>
     </div>
@@ -104,60 +108,20 @@ export default {
 .gainSkill{
   grid-gap: 1em;
   display: grid;
-  grid-template-rows: 10% 10% 1fr%;
+  grid-template-rows: 1% 25% 10%;
   grid-template-columns: 50% 50%;
   grid-template-areas:
-  "gainSkillHeader gainSkillHeader"
+  "gainSkillHeader gainSkillInfo"
   "buyCards gainSkillInfo"
   "buyCards bottlePlacements";
 }
 
 .buyCards{grid-area: buyCards;}
 .bottlePlacements{grid-area: bottlePlacements;}
-.gainSkillHeader{grid-area: gainSkillHeader;}
+.gainSkillHeader{grid-area: gainSkillHeader;
+  font-weight: bold;
+  font-size: 1.2em;
+  padding-top: 0;}
 .gainSkillInfo{grid-area: gainSkillInfo;}
-
-.green{
-  grid-area: lside;
-  display: grid;
-  grid-template-columns: 1fr 1fr ;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-
-  grid-template-areas:
-  " i j "
-  " k l "
-  " k l "
-  " k l "
-  " k l "
-  " k l ";
-}
-.arrowGreen{
-  grid-area: k;
-  background: url('/images/pilgron.PNG' ) ;
-  background-repeat: no-repeat;
-  background-size: 30% 95%;
-
-}
-.bottleGreen{
-  grid-area: l;
-  background: url('/images/gronflaska.PNG' )  ;
-
-  background-repeat: no-repeat;
-  background-size: 100% 95%;
-
-}
-.greens{
-  grid-area: i;
-  background: url('/images/gron.PNG' ) ;
-  background-repeat: no-repeat; /* gör att endast en syns men vill att en ska synas per grid*/
-  background-size: 110% 100%;
-
-}
-.greenInfo{
-  grid-area: j;
-  background: url('/images/gainSkill.PNG' ) ;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
 
 </style>

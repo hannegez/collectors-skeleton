@@ -23,19 +23,6 @@
       </div>
     </div>
 
-    <!-- <div>
-    <div class="buttons" v-for="(p, index) in placement" :key="index">
-    <button
-    v-if="p.playerId===null"
-    :disabled="cannotAfford(p.cost)"
-    @click="placeBottle(p)" >
-    ${{p.cost}}
-  </button>
-  <div v-if="p.playerId !== null">
-  {{p.playerId}}
-</div>
-</div>
-</div> -->
 
 <div class="bottlePlacements">
   <div v-for="(p, index) in placement" :key="'bp' + index">

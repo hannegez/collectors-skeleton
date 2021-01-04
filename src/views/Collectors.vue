@@ -7,8 +7,28 @@
 
       <div id="startInfo">
         <button class="buttons">{{ this.labels.rules }}</button>
+
+
+
+
         <button class="buttons"> {{ this.labels.nextQuarter }}</button>
       </div>
+
+      <!--
+      <button class="buttons homeButton" v-on:click="getHowToInfo()">How to play?</button>
+      <div class="popupInfo" style= "position:relative; left:0em; top:0em;">
+      <span class="popupHowToInfoText" id="myHowToInfoPopup"  style= "left:0em; top:-30em;">
+        <embed src="/images/rules_collectors.pdf" width="2000em" height="950em"/>
+        <br>
+        <button class="closeButton" v-on:click="getHowToInfo()" >close</button>
+      </span>
+      </div>
+    -->
+
+
+
+
+
 
       <div id="drawCard">
         <!-- <p id="drawCardText">{{ this.labels.draw }}:</p> -->
@@ -531,7 +551,32 @@ BUTTONS                    */
   box-shadow: inset 2px 2px 3px #787975;
 }
 
-/* #drawCard {
+.closeButton {
+  width: 30%;
+  color: #292929;
+  font-size: 1em;
+  font-weight: bold;
+  background: #FAC84C;
+  border: solid thin #787975;
+  border-radius: 0.3em;
+  padding: 0.6em;
+  margin: 3%;
+  box-shadow: 2px 2px 3px #787975;
+  font-size: 1.2em;
+  background: #e63b2b;
+  margin: 5% 0;
+
+}
+
+.closeButton:hover, .drawCardButton:hover {
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  box-shadow: inset 2px 2px 3px #787975;
+}
+
+#drawCard {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:

@@ -10,10 +10,12 @@
     <div class="raiseValueInfo">
 
       <div class="popup" style= "position:relative; left:0em; top:0em;">
-        <img src='/images/infoknapp_rv.png' alt="Raise value" width="70%" @click="$emit('getInfo')" >
-        <span class="popuptext" id="myMarketPopup"  style= "left:10em; top:-3em;">
-          {{ labels.valueInfo }}
-        </span>
+      <img src='/images/infoknapp_rv.png' alt="Raise value" width="70%" @click="$emit('getInfo')" >
+      <span class="popuptext" id="myMarketPopup"  style= "left:10em; top:-3em;">
+        {{ labels.valueInfo }}
+        <br>
+        <button class="closeButton"  @click="$emit('getInfo')">close</button>
+      </span>
       </div>
     </div>
 

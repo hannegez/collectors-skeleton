@@ -24,8 +24,7 @@
 
       <div class="info right">
         <p>
-          {{ labels.invite }}
-          <input type="text" :value="publicPath + $route.path" @click="selectAll" readonly="readonly">
+          här kan vi skriva ut allt som sker i spelet!
         </p>
 
         <!-- <p id="drawCardText">{{ this.labels.draw }}:</p> -->
@@ -119,10 +118,10 @@
     </main>
 
     <footer>
-      HEJ HÄR ÄR FOOTER
-
-
-
+      <p>
+        {{ labels.invite }}
+        <input type="text" :value="publicPath + $route.path" @click="selectAll" readonly="readonly">
+      </p>
     </footer>
   </div>
 </template>
@@ -618,7 +617,6 @@ p, span {
 
 footer {
   margin-top: 5em auto;
-  background: brown;
 }
 footer a {
   text-decoration: none;

@@ -1,21 +1,25 @@
 <template>
   <div id="wrapper">
     <header>
+      <div id="welcome">
+        <h1>Welcome to Rich Collectors</h1>
+      </div>
+
       <div id="startInfo">
         <button class="buttons">{{ this.labels.rules }}</button>
         <button class="buttons"> {{ this.labels.nextQuarter }}</button>
       </div>
 
       <div id="drawCard">
-        <p id="drawCardText">{{ this.labels.draw }}:</p>
+        <!-- <p id="drawCardText">{{ this.labels.draw }}:</p> -->
         <input type="image" @click="drawCard" id="drawCardButton" alt="Login"
         src='/images/card_backside300px.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
-      </div>
 
-      <div id="welcome">
-        <h1>Welcome to Rich Collectors</h1>
-      </div>
+        <!-- <button class="buttons" @click="player.money += 1">
+          Fake money
+        </button> -->
 
+      </div>
     </header>
 
     <main>
@@ -527,7 +531,7 @@ BUTTONS                    */
   box-shadow: inset 2px 2px 3px #787975;
 }
 
-#drawCard {
+/* #drawCard {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
@@ -536,14 +540,15 @@ BUTTONS                    */
 
 #drawCardText {
   grid-area: drawCardText;
-}
+} */
 
 #drawCardButton {
   grid-area: drawCardButton;
   border: solid thin #787975;
   border-radius: 0.3em;
   box-shadow: 0.2em 0.2em 0.3em #787975;
-  width: 20%;
+  width: 13%;
+  text-align: center;
 }
 
 .drawCardButton:hover {
@@ -568,9 +573,8 @@ main {
 
 
 
-p {
+p, span {
   font-size: 1em;
-  font-weight: bold;
   margin: 0;
 }
 

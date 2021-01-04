@@ -7,43 +7,46 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
     <div class = "playerHeader">
       <h1>{{labels.playerInfo}} {{playerId}}</h1>
 
+<!--  OBS: dessa itemsymboler och counters vill vi egentligen lösa med en for-loop och lagra counters i ett objekt
+      istället så att vi kan komma åt dem på ett snyggare sätt. Men vi fick det inte att funka och gjorde denna
+      tillfälliga och "osnygga" lösningen så länge. -->
       <div class="itemCounters">
         <div class="itemCounter">
-          <span>hej</span>
           <img class="itemSymbol" src='/images/item_fastaval.png'>
+          <span> {{ player.itemCounter[0] }} </span>
         </div>
         <div class="itemCounter">
-          <span>hej</span>
           <img class="itemSymbol" src='/images/item_figures.png'>
+          <span> {{ player.itemCounter[1] }} </span>
         </div>
         <div class="itemCounter">
-          <span>hej</span>
           <img class="itemSymbol" src='/images/item_music.png'>
+          <span> {{ player.itemCounter[2] }} </span>
         </div>
         <div class="itemCounter">
-          <span>hej</span>
           <img class="itemSymbol" src='/images/item_movie.png'>
+          <span> {{ player.itemCounter[3] }} </span>
         </div>
         <div class="itemCounter">
-          <span>hej</span>
           <img class="itemSymbol" src='/images/item_technology.png'>
+          <span> {{ player.itemCounter[4] }} </span>
         </div>
       </div>
 
+
     </div>
 
-      <p><img class= "coinSymbol" src='/images/coin100px.png' alt="coin symbol" width="27%"> X {{player.money}}</p>
+      <p><img class= "coinSymbol" src='/images/coin100px.png' alt="coin symbol" width="27%"> {{player.money}}</p>
 
-      <p><img class= "futureSymbol" src='/images/future_income100px.png' alt="income symbol" width="27%"> X {{player.futureIncome}}</p>
+      <p><img class= "futureSymbol" src='/images/future_income100px.png' alt="income symbol" width="27%"> {{player.futureIncome}}</p>
 
       <div class="textbottles">
 
       <p>Total bottles: {{player.totalBottles}}</p>
       <p>Bottles left: {{player.bottlesLeft}}</p>
 
-      <button @click="player.money += 1">
-        <h2>FAKE MONEY</h2>
-      </button>
+
+
     </div>
     <div class="categoryHand">
       <h2>Your hand</h2>
@@ -110,7 +113,7 @@ export default {
   grid-gap: 1em;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 5% 10% 20% 15% 15% 15%;
+  grid-template-rows: 10% 10% 20% 15% 15% 15%;
   grid-template-areas:
   "playerHeader playerHeader"
   "coinSymbol futureSymbol"
@@ -132,10 +135,12 @@ p {
 
 .itemCounters {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 15%);
+  grid-template-columns: repeat(auto-fill, 20%);
+  text-align: center;
 }
+
 .itemSymbol {
-  width: 50%;
+  width: 65%;
 }
 
 .coinSymbol{

@@ -116,11 +116,12 @@ Data.prototype.joinGame = function (roomId, playerId) {
                                  points: 0,
                                  skills: [],
                                  items: [],
-                                 itemCounter: { 'fastaval' : 0,
+                        /*         itemCounter: { 'fastaval' : 0,
                                                 'figures' : 0,
                                                 'music' : 0,
                                                 'movie' : 0,
-                                                'technology' : 0 }, //fastaval, figures, music, movie, technology
+                                                'technology' : 0 }, //LYCKADES INTE MED DETTA FÖRST /KARRO */
+                                 itemCounter: [0,0,0,0,0], //FÖRENKLING: fastaval, figures, music, movie, technology, /KARRO
                                  income: [],
                                  futureIncome: 0, //ska sättas till längden av income när man väljer work som resulterar i income
                                  secret: [],

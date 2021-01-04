@@ -17,7 +17,7 @@
         </div>
 
         <button class="buttons"> {{ this.labels.nextQuarter }}</button>
-        
+
       </div>
 
 
@@ -104,10 +104,10 @@
 
       </div>
 
-      <div class="player board">
+      <div class="players board">
 
         <!--Object.keys(this.players) ger en array med alla playerid -->
-        <CollectorsPlayerBoard v-for='(data, id) in players' :key='id'
+        <CollectorsPlayerBoard class="player" v-for='(data, id) in players' :key='id'
         :labels= "labels"
         :player= "data"
         :playerId= "id"
@@ -514,7 +514,6 @@ header {
   grid-template-columns: 30% 40% 30%;
   grid-template-areas:
   "leftInfo welcome rightInfo";
-  padding-left: 1em;
   margin: 0;
   align-items: center;
   text-align: center;
@@ -612,8 +611,6 @@ main {
   "gameBoard playerBoard";
 }
 
-
-
 p, span {
   font-size: 1em;
   margin: 0;
@@ -631,16 +628,16 @@ footer a:visited {
   color:ivory;
 }
 
-.board { padding: 0.2em 1em 1em 1em; }
+.board { padding: 0.2em; }
 
 /* =====================================
 GAME BOARD (GRID)                 */
 
 .game {
   grid-area: gameBoard;
-  grid-gap: 0.5em;
+  grid-gap: 0.5%;
   display: grid;
-  grid-template-columns: 25% 25% 50%;
+  grid-template-columns: 25% 25% 49%;
   grid-template-rows: 15% 30% 15%;
   grid-template-areas:
   "itemPool itemPool itemPool"
@@ -678,8 +675,14 @@ GAME BOARD (GRID)                 */
 /* =====================================
 PLAYER BOARD                          */
 
-.player {
+.players {
   grid-area: playerBoard;
+}
+
+.player {
+  border: solid medium #4E4E4E;
+  margin: 0 0 0.2em 0;
+  padding: 0.5em;
 }
 
 /* ========================= */

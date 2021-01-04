@@ -108,9 +108,9 @@ export default {
 
 .playerContainer {
   background-color: #ececec;
-  width: 100%;
+  width: 90%;
   height: 50%;
-  grid-gap: 1em;
+  grid-gap: 1%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 10% 10% 20% 15% 15% 15%;

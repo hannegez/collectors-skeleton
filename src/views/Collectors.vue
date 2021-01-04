@@ -606,9 +606,8 @@ main {
   display: grid;
   grid-gap: 0.5em;
   grid-template-columns: 70% 30%;
-  grid-template-rows: 20px 150vh;
+  grid-template-rows: 150vh;
   grid-template-areas:
-  "header header"
   "gameBoard playerBoard";
 }
 

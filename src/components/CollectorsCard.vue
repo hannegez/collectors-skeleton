@@ -53,13 +53,13 @@ export default {
   .available-to-choose {
     animation: jiggle 1s ease-in-out;
     animation-iteration-count:infinite;
-    box-shadow: 0 0 20px yellow;
+    box-shadow: 0 0 40px Yellow;
     cursor: pointer;
   }
   @keyframes jiggle {
-    0% {transform:rotate(0.5deg);}
-    50% {transform:rotate(-0.5deg);}
-    100% {transform:rotate(0.5deg);}
+    0% {transform:rotate(2deg);}
+    50% {transform:rotate(-2deg);}
+    100% {transform:rotate(2deg);}
   }
 
 

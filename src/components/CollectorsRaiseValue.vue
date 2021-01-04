@@ -10,12 +10,19 @@
     <div class="raiseValueInfo">
 
       <div class="popup" style= "position:relative; left:0em; top:0em;">
+<<<<<<< HEAD
       <img src='/images/infoknapp_rv.png' alt="Raise value" width="70%" @click="$emit('getInfo')" >
       <span class="popuptext" id="myMarketPopup"  style= "left:10em; top:-3em;">
         {{ labels.valueInfo }}
         <br>
         <button class="closeButton"  @click="$emit('getInfo')">close</button>
       </span>
+=======
+        <img src='/images/infoknapp_rv.png' alt="Raise value" width="70%" @click="$emit('getInfo')" >
+        <span class="popuptext" id="myMarketPopup"  style= "left:10em; top:-3em;">
+          {{ labels.valueInfo }}
+        </span>
+>>>>>>> b7d5e3c3c2479364ee25d9dd8d50e891d77db75b
       </div>
     </div>
 
@@ -39,8 +46,8 @@
       <div class="marketValue">
         <span>{{marketValues.fastaval}}</span>
         <img class="valueSymbol" src='/images/fastaval_symbol.png'>
-</div>
-<div class="marketValue">
+      </div>
+      <div class="marketValue">
         <span>{{marketValues.figures}}</span>
         <img class="valueSymbol" src='/images/figures_symbol.png'>
       </div>
@@ -55,9 +62,9 @@
       <div class="marketValue">
         <span>{{marketValues.technology}}</span>
         <img class="valueSymbol" src='/images/technology_symbol.png'>
+      </div>
     </div>
   </div>
-</div>
 
   <!-- OBS: alla kort som lagts till i market, detta ska ej synas i slutet, men låter det vara kvar tillfälligt -->
   <!-- <div class="buyCards horizontalBuyCards">
@@ -122,16 +129,6 @@ export default {
     },
 
     highlightAvailableCards: function (cost=100) {
-      /* för alla kort i raiseValueOnSale ska motsvarade kort i skillsOnSale,
-      auctionCards och player.hand highlightas */
-
-      //GÅ IGENOM skillsOnSale AUCTIONCARDS OCH PLAYER HAnd och sätt available på de som ska vara det
-      //NÄSTA STEG: ta bort raiseValueOnSale
-
-      //    for (let i = 0; i < this.raiseValueOnSale.length; i += 1) {
-      //    this.checkAvailable(this.raiseValueOnSale[i], cost);
-      //  }
-      //Denna ovan ska bort, ska lägga till första element i auction och i skill.
 
       //  highlightAvailableCards: function () {
       for (let i = 0; i < this.auctionCards.length; i += 1) {
@@ -173,9 +170,9 @@ export default {
   grid-template-rows: 50% 50%;
   grid-template-columns: 15% 85%;
   grid-template-areas:
-    "raiseValueInfo marketValues"
-    "raiseValueHeader bottlePlacements";
-/*  grid-template-areas:
+  "raiseValueInfo marketValues"
+  "raiseValueHeader bottlePlacements";
+  /*  grid-template-areas:
   "raiseValueHeader marketValues"
   "raiseValueHeader bottlePlacements";*/
 }

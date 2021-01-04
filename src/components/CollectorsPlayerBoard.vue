@@ -6,11 +6,35 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
     <div class = "playerHeader">
       <h1>{{labels.playerInfo}} {{playerId}}</h1>
+
+      <div class="itemCounters">
+        <div class="itemCounter">
+          <span>hej</span>
+          <img class="itemSymbol" src='/images/item_fastaval.png'>
+        </div>
+        <div class="itemCounter">
+          <span>hej</span>
+          <img class="itemSymbol" src='/images/item_figures.png'>
+        </div>
+        <div class="itemCounter">
+          <span>hej</span>
+          <img class="itemSymbol" src='/images/item_music.png'>
+        </div>
+        <div class="itemCounter">
+          <span>hej</span>
+          <img class="itemSymbol" src='/images/item_movie.png'>
+        </div>
+        <div class="itemCounter">
+          <span>hej</span>
+          <img class="itemSymbol" src='/images/item_technology.png'>
+        </div>
       </div>
+
+    </div>
 
       <p><img class= "coinSymbol" src='/images/coin100px.png' alt="coin symbol" width="27%"> X {{player.money}}</p>
 
-      <p><img class= "futureSymbol" src='/images/future_income100px.png' alt="income symbol" width="30%"> X {{player.income}}</p>
+      <p><img class= "futureSymbol" src='/images/future_income100px.png' alt="income symbol" width="27%"> X {{player.futureIncome}}</p>
 
       <div class="textbottles">
 
@@ -105,6 +129,15 @@ p {
 .playerHeader {
   grid-area: playerHeader;
 }
+
+.itemCounters {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 15%);
+}
+.itemSymbol {
+  width: 50%;
+}
+
 .coinSymbol{
     grid-area: coinSymbol;
 }
@@ -135,8 +168,6 @@ p {
 .categoryItems{
   grid-area: categoryItems;
 }
-
-
 
 .playerslots {
   display: grid;

@@ -116,6 +116,11 @@ Data.prototype.joinGame = function (roomId, playerId) {
                                  points: 0,
                                  skills: [],
                                  items: [],
+                                 itemCounter: { 'fastaval' : 0,
+                                                'figures' : 0,
+                                                'music' : 0,
+                                                'movie' : 0,
+                                                'technology' : 0 }, //fastaval, figures, music, movie, technology
                                  income: [],
                                  futureIncome: 0, //ska sättas till längden av income när man väljer work som resulterar i income
                                  secret: [],
@@ -186,6 +191,8 @@ Data.prototype.buyCard = function (roomId, playerId, card, cost) {
 
   }
 }
+
+
 
 /* moves card from raiseValueOnSale to market */
 Data.prototype.raiseValue = function (roomId, playerId, card, cost) {
@@ -427,10 +434,6 @@ Data.prototype.placeWorkBottle = function (roomId, playerId, cost, workAction) {
   }
 }
 
-
-
-
-
 /* returns the hand of the player */
 Data.prototype.getCards = function (roomId, playerId) {
   let room = this.rooms[roomId];
@@ -461,15 +464,6 @@ Data.prototype.getItemsOnSale = function(roomId){
   }
   else return [];
 }
-
-//RAISEVALUEONSALE
-// Data.prototype.getRaiseValueOnSale = function(roomId){
-//   let room = this.rooms[roomId];
-//   if (typeof room !== 'undefined') {
-//     return room.raiseValueOnSale;
-//   }
-//   else return [];
-// }
 
 Data.prototype.getMarketValues = function(roomId){
   let room = this.rooms[roomId];
@@ -519,7 +513,5 @@ Data.prototype.getAuctionSpot = function(roomId){
   }
   else return [];
 }
-
-//LÄGG TILL FUNKTION FÖR WORK-GREJERNA
 
 module.exports = Data;

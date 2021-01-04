@@ -2,28 +2,18 @@
   <div id="wrapper">
     <header>
       <div id="startInfo">
-        <button class="buttons">{{ this.labels.rules }}</button>
+        <button class="buttons">{{ this.labels.nextQuarter }}</button>
 
-
-
-
-        <button class="buttons"> {{ this.labels.nextQuarter }}</button>
+        <button class="buttons homeButton" v-on:click="getHowToInfo()"> {{ this.labels.rules }} </button>
+        <div class="popup" style= "position:relative; left:0em; top:0em;">
+        <span class="popupHowToInfoText" id="myHowToInfoPopup"  style= "left:0em; top:0em;">
+          <!-- <a href="/images/rules_collectors.pdf" >Click here to open rules</a> -->
+          <embed src="/images/rules_collectors.pdf" width="2000em" height="950em"/>
+          <br>
+          <button class="closeButton" v-on:click="getHowToInfo()" >close</button>
+        </span>
+        </div>
       </div>
-
-      <!--
-      <button class="buttons homeButton" v-on:click="getHowToInfo()">How to play?</button>
-      <div class="popupInfo" style= "position:relative; left:0em; top:0em;">
-      <span class="popupHowToInfoText" id="myHowToInfoPopup"  style= "left:0em; top:-30em;">
-        <embed src="/images/rules_collectors.pdf" width="2000em" height="950em"/>
-        <br>
-        <button class="closeButton" v-on:click="getHowToInfo()" >close</button>
-      </span>
-      </div>
-    -->
-
-
-
-
 
 
       <div id="drawCard">
@@ -454,6 +444,10 @@ getInfo: function(string){
     popupitem.classList.toggle("show");
   }
 },
+getHowToInfo:function(){
+      var popupwork = document.getElementById("myHowToInfoPopup");
+      popupwork.classList.toggle("show");
+},
 
 raiseValue: function (card) {
   console.log("raiseValue", card);
@@ -802,12 +796,6 @@ footer a:visited {
 .popup .popuptext::after {
   content: "";
   position: absolute;
-  /*top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 10px;
-  border-style: solid;
-  color: white;*/
 }
 .popup:hover {
   cursor: pointer;
@@ -817,6 +805,31 @@ footer a:visited {
 .popup .show {
   display: block;
 }
+
+/* ==========HJÄLP Dåligt kodad få ihop popuptext klasserna snyggt==================== */
+.popupHowToInfoText {
+  position: absolute;
+  display: none;
+  cursor: pointer;
+  user-select: none;
+  background-color: #f3f3f3; /*bakgrund popup*/
+  color: black; /*textfärg popup*/
+  text-align: center;
+  border-radius: 0px;
+  padding: 20px 20px;  /*padding popup*/
+  z-index: 1;
+  margin-left: -37em;
+  border-color: grey;
+  border-width: 1px;
+  border-style:solid;
+  overflow-y: scroll;
+}
+
+
+
+
+
+
 
 
 @media screen and (max-width: 800px) {

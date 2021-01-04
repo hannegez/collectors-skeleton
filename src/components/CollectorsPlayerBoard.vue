@@ -10,7 +10,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
       <p><img class= "coinSymbol" src='/images/coin100px.png' alt="coin symbol" width="27%"> X {{player.money}}</p>
 
-      <p><img class= "futureSymbol" src='/images/future_income100px.png' alt="income symbol" width="30%"> X {{player.income}}</p>
+      <p><img class= "futureSymbol" src='/images/future_income100px.png' alt="income symbol" width="27%"> X {{player.futureIncome}}</p>
 
       <div class="textbottles">
 

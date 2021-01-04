@@ -1,15 +1,22 @@
+
+<!-- Daniella har varit här och ändrat i griden -->
+
 <template>
   <div class="raiseValue">
     <div class="raiseValueHeader">
-      <h3>{{ labels.raiseValue }}</h3>       <!-- DET SOM STÅR HÄR FINNS I DATAMAPPEN -->
+      <!-- <h3>{{ labels.raiseValue }}</h3>      behövs ej längre pga infoknappar -->
+    </div>
+
+    <div class="raiseValueInfo">
 
       <div class="popup" style= "position:relative; left:0em; top:0em;">
-      <img src='/images/raiseValue.PNG' alt="" width="70%" @click="$emit('getInfo')" >
-      <span class="popuptext" id="myMarketPopup"  style= "left:3em; top:-3em;">
-        raise value används för att yada yada yada
+      <img src='/images/infoknapp_rv.png' alt="Raise value" width="70%" @click="$emit('getInfo')" >
+      <span class="popuptext" id="myMarketPopup"  style= "left:10em; top:-3em;">
+        {{ labels.valueInfo }}
       </span>
       </div>
     </div>
+
 
     <div class="bottlePlacements horizontalPlacement">
       <div v-for="(p, index) in placement" :key="'bp' + index">
@@ -28,23 +35,23 @@
 
     <div class="marketValues">
       <div class="marketValue">
-        <p>{{marketValues.fastaval}}</p>
+        <span>{{marketValues.fastaval}}</span>
         <img class="valueSymbol" src='/images/fastaval_symbol.png'>
 </div>
 <div class="marketValue">
-        <p>{{marketValues.figures}}</p>
+        <span>{{marketValues.figures}}</span>
         <img class="valueSymbol" src='/images/figures_symbol.png'>
       </div>
       <div class="marketValue">
-        <p>{{marketValues.music}}</p>
+        <span>{{marketValues.music}}</span>
         <img class="valueSymbol" src='/images/music_symbol.png'>
       </div>
       <div class="marketValue">
-        <p>{{marketValues.movie}}</p>
+        <span>{{marketValues.movie}}</span>
         <img class="valueSymbol" src='/images/movie_symbol.png'>
       </div>
       <div class="marketValue">
-        <p>{{marketValues.technology}}</p>
+        <span>{{marketValues.technology}}</span>
         <img class="valueSymbol" src='/images/technology_symbol.png'>
     </div>
   </div>
@@ -159,24 +166,28 @@ export default {
 <style>
 
 .raiseValue{
-  grid-gap: 1em;
+  grid-gap: 2%;
   display: grid;
-  grid-template-rows: 40% 60%;
-  grid-template-columns: 10% 90%;
+  grid-template-rows: 50% 50%;
+  grid-template-columns: 15% 85%;
   grid-template-areas:
+    "raiseValueInfo marketValues"
+    "raiseValueHeader bottlePlacements";
+/*  grid-template-areas:
   "raiseValueHeader marketValues"
-  "raiseValueHeader bottlePlacements";
+  "raiseValueHeader bottlePlacements";*/
 }
 
 .buyCards{grid-area: buyCards;}
 .bottlePlacements{grid-area: bottlePlacements;}
 .raiseValueHeader{grid-area: raiseValueHeader;}
+.raiseValueInfo{grid-area: raiseValueInfo}
 
 .marketValues {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 20%);
+  grid-template-columns: repeat(auto-fill, 15%);
 }
 .valueSymbol {
-  width: 4vw;
+  width: 3.5vw;
 }
 </style>

@@ -4,17 +4,15 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 <template>
   <div class= "playerContainer">
 
-
     <div class = "playerHeader">
-      <h1>PLAYER INFO</h1>
+
       <img class= "playerSymbol" src='/images/coin100px.png' alt="">
       X {{player.money}}
 
-      <br>
       <button @click="player.money += 1">
         <h2>FAKE MONEY</h2>
-        fake more money
       </button>
+
     </div>
 
     <div class="playerslots Yhand" >

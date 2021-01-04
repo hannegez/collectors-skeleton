@@ -2,8 +2,8 @@
   <div id="wrapper">
     <header>
       <div id="startInfo">
-        <button class="buttons">How to play? {{ this.labels.rules }}</button>
-        <button class="buttons">Next quarter {{ this.labels.nextQuarter }}</button>
+        <button class="buttons">{{ this.labels.rules }}</button>
+        <button class="buttons"> {{ this.labels.nextQuarter }}</button>
       </div>
 
       <div id="drawCard">
@@ -764,6 +764,9 @@ footer a:visited {
   border-width: 10px;
   border-style: solid;
   color: white;*/
+}
+.popup:hover {
+  cursor: pointer;
 }
 
 

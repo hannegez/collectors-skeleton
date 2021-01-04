@@ -21,21 +21,28 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
         <h2>FAKE MONEY</h2>
       </button>
     </div>
-
-    <div class="playerslots Yhand" >
+    <div class="categoryHand">
       <h2>Your hand</h2>
+    </div>
+    <div class="playerslots Yhand" >
+
         <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
     </div>
 
+    <div class="categoryItems">
+      <h2>Your items </h2>
+    </div>
 
     <div class="playerslots Yitems">
-      <h2>Your items </h2>
+
       <CollectorsCard v-for="(card, index) in player.items" :card="card" :key="'item'+ index" />
+    </div>
+    <div class="categorySkill">
+      <h2>Your skills</h2>
     </div>
 
 
     <div class="playerslots Yskills">
-      <h2>Your skills</h2>
       <CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
     </div>
 
@@ -84,9 +91,9 @@ export default {
   "playerHeader playerHeader"
   "coinSymbol futureSymbol"
   "textbottles textbottles"
-  "items items "
-  "skill skill"
-  "hand hand";
+  "categoryItems items "
+  "categorySkill skill"
+  "categoryHand hand";
 }
 
 p {
@@ -119,12 +126,22 @@ p {
   grid-area: hand;
 }
 
+.categoryHand{
+  grid-area: categoryHand;
+}
+.categorySkill{
+  grid-area: categorySkill;
+}
+.categoryItems{
+  grid-area: categoryItems;
+}
+
 
 
 .playerslots {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 130px);
-  grid-template-rows: repeat(auto-fill, 180px);
+  grid-template-columns: repeat(auto-fill, 17px);
+  grid-template-rows: repeat(10px, 180px);
 }
 .playerslots div {
   transform: scale(0.5)translate(-50%,-50%);

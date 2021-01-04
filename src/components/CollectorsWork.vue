@@ -6,7 +6,7 @@
 
     <div class="workInfo">
       <div class="popup" style= "position:relative; left:0em; top:0em;">
-      <img src='/images/workInfo.PNG' alt="Work" width="70%" @click="$emit('getInfo')" >
+      <img src='/images/workInfo.PNG' alt="Work" width="70%" @click="$emit('getInfo')"  >
       <span class="popuptext" id="myWorkPopup"  style= "left:10em; top:-3em;">
         {{ labels.workInfo }}
       <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->

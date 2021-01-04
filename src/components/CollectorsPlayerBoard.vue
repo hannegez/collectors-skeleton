@@ -33,20 +33,54 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
         </div>
       </div>
 
+      <div class="clickToSee">
+        <div class="yourSkills playerSymbols">
+          <div class="popup" style= "position:relative; left:0em; top:0em;">
+          <img src='/images/your_skills.png' alt="See your skills" width="20%" @click="$emit('getInfo')" >
+          <span class="popuptext" id="myMarketPopup"  style= "left:10em; top:-3em;">
+            {{ labels.valueInfo }}
+            <br>
+            <button class="closeButton"  @click="$emit('getInfo')">close</button>
+          </span>
+          </div>
+          <span>
+            {{ player.skills.length }}
+          </span>
+        </div>
+
+        <div class="yourHand playerSymbols">
+          <div class="popup" style= "position:relative; left:0em; top:0em;">
+          <img src='/images/your_hand.png' alt="See your hand" width="50%" @click="$emit('getInfo')" >
+          <span class="popuptext" id="myMarketPopup"  style= "left:10em; top:-3em;">
+            {{ labels.valueInfo }}
+            <br>
+            <button class="closeButton"  @click="$emit('getInfo')">close</button>
+          </span>
+          </div>
+          <span>
+            {{ player.hand.length }}
+          </span>
+        </div>
+
+      <div class="yourCoins playerSymbols">
+        <img src='/images/coin100px.png' alt="coin symbol" width="50%"><span>{{player.money}}</span>
+      </div>
+
+      <div class="yourIncome playerSymbols">
+        <img  src='/images/future_income100px.png' alt="income symbol" width="60%"><span> {{player.futureIncome}}</span>
+      </div>
+
+      <div class="yourBottles playerSymbols">
+        <img src='/images/bottle_placement.png' alt="bottle symbol" width="50%"><span>{{player.money}}</span>
+      </div>
 
     </div>
-
-      <p><img class= "coinSymbol" src='/images/coin100px.png' alt="coin symbol" width="27%"> {{player.money}}</p>
-
-      <p><img class= "futureSymbol" src='/images/future_income100px.png' alt="income symbol" width="27%"> {{player.futureIncome}}</p>
+  </div>
 
       <div class="textbottles">
 
       <p>Total bottles: {{player.totalBottles}}</p>
       <p>Bottles left: {{player.bottlesLeft}}</p>
-
-
-
     </div>
     <div class="categoryHand">
       <h2>Your hand</h2>
@@ -113,10 +147,9 @@ export default {
   grid-gap: 1%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 10% 10% 20% 15% 15% 15%;
+  grid-template-rows: 30% 15% 15% 15% 15%;
   grid-template-areas:
   "playerHeader playerHeader"
-  "coinSymbol futureSymbol"
   "textbottles textbottles"
   "categoryItems items "
   "categorySkill skill"
@@ -143,11 +176,8 @@ p {
   width: 65%;
 }
 
-.coinSymbol{
-    grid-area: coinSymbol;
-}
-.futureSymbol{
-    grid-area: futureSymbol;
+.clickToSee {
+  display: flex;
 }
 
 .textbottles{

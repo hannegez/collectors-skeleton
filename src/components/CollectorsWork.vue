@@ -75,7 +75,7 @@ export default {
     setAvailable: function (card) {
       this.$set(card, "available", true);
     },
-    //HJÄLP 18/12
+    //HJÄLP 18/12 DEN här verkar inte göra något mn bör göra något
     highlightAvailableCards: function (workAction)  {
       console.log("vår workaction: ", workAction);
       if (workAction === 5) {

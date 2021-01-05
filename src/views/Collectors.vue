@@ -10,7 +10,7 @@
         <div class="popup" style= "position:relative; left:0em; top:0em;">
         <span class="popupHowToInfoText" id="myHowToInfoPopup"  style= "left:0em; top:0em;">
           <!-- <a href="/images/rules_collectors.pdf" >Click here to open rules</a> -->
-          <embed src="/images/rules_collectors.pdf" width="2000em" height="950em"/>
+          <embed src="/images/rules_collectors.pdf" width="1800em" height="950em"/>
           <br>
           <button class="closeButton" v-on:click="getHowToInfo()" >close</button>
         </span>
@@ -192,12 +192,13 @@ export default {
           auctionSpot: [], // TEST??
 
           //NÅTT LIKNANDE SOM OVAN FAST FÖR WORK?
-
+          workAction: 0,
           playerid: 0
         }
       },
       computed: {
         playerId: function() { return this.$store.state.playerId}
+        //workAction: function() { return this.$store.state.workAction}
       },
       watch: {
         players: function(newP, oldP) {
@@ -240,6 +241,8 @@ export default {
             this.marketPlacement = d.placements.marketPlacement;
             this.auctionPlacement = d.placements.auctionPlacement;
             this.workPlacement = d.placements.workPlacement;
+        //    this.workAction = d.placements.workPlacement.workAction;
+        //    console.log("HÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄR" + this.workAction);
           }.bind(this));
 
           this.$store.state.socket.on('collectorsBottlePlaced',
@@ -255,15 +258,20 @@ export default {
             this.players= d.players;
             this.placements = d.placements;
             this.workPlacement = d.placements.workPlacement;
-            for(let c = 0; c < this.players[this.playerId].hand.length; c += 1) {
-              if (typeof this.players[this.playerId].hand[c].item !== "undefined") {
-                console.log("före: ", this.players[this.playerId].hand[c].available);
+
+            //GÖR ATT HANDEN LYSER UPP NÄR MAN TRYCKER PÅ 5TE KNAPPEN, GER FELMEDDELANDE LÖS
+            for(let c = 0; c < this.players[this.playerId].hand.length; c += 1 ) {
+              if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 5 ) {
+                //console.log("före: ", this.players[this.playerId].hand[c].available);
                 this.$set(this.players[this.playerId].hand[c], "available", true);
-                console.log("efter: ", this.players[this.playerId].hand[c].available);
+                //console.log("efter: ", this.players[this.playerId].hand[c].available);
               }
             }
 
+
           }.bind(this));
+
+
 
           this.$store.state.socket.on('collectorsPointsUpdated', (d) => this.points = d );
 
@@ -303,12 +311,13 @@ export default {
       this.auctionSpot = d.auctionSpot; //TEST ???
     }.bind(this)
   );
+  //HÄÄR SKA FUTURE INCOME LÄGGAS IN!!!!!!!
   this.$store.state.socket.on('collectorsWorkStarted',
   function(d) {
     document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
     this.players = d.players;
-    this.auctionCards = d.auctionCards;
-    this.auctionSpot = d.auctionSpot; //TEST ???
+  //  this.auctionCards = d.auctionCards;
+  //  this.auctionSpot = d.auctionSpot; //TEST ???
   }.bind(this)
 );
 
@@ -828,11 +837,10 @@ footer a:visited {
   border-radius: 0px;
   padding: 20px 20px;  /*padding popup*/
   z-index: 1;
-  margin-left: -37em;
+  margin-left: 0em;
   border-color: grey;
   border-width: 1px;
   border-style:solid;
-  overflow-y: scroll;
 }
 
 

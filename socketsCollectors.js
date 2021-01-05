@@ -26,6 +26,7 @@ function sockets(io, socket, data) {
              //NÅTT MED WORK
              placements: data.getPlacements(d.roomId)
 
+
            }
          );
        }
@@ -102,7 +103,7 @@ function sockets(io, socket, data) {
       //console.log("hääär" + d.workAction + d.cost + d.playerId); //FRÅGA varför kopplas d.workAction till cost
       io.to(d.roomId).emit('collectorsWorkBottlePlaced', {             //OBJEKTET SOM SKICKAS SOM 2:A PARAMETER ÄR DET SOM KALLAS FÖR d I
         players: data.getPlayers(d.roomId),
-        placements: data.getPlacements(d.roomId)
+        placements: data.getPlacements(d.roomId) //workAction finns med här
       }
       );
       });

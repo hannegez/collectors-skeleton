@@ -12,6 +12,8 @@
       <span class="popuptext" id="myAuctionPopup"  style= "left:10em; top:-3em;">
 
         {{ labels.auctionInfo }}
+        <br>
+        <button class="closeButton"  @click="$emit('getInfo')">close</button>
 
 
       <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->

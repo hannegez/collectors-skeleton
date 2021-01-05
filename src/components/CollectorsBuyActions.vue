@@ -10,6 +10,8 @@
       <span class="popuptext" id="myItemPopup"  style= "left:10em; top:-3em;">
 
         {{ labels.itemInfo }}
+        <br>
+        <button class="closeButton"  @click="$emit('getInfo')">close</button>
       </span>
       </div>
     </div>

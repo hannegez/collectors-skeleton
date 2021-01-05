@@ -9,11 +9,14 @@
       <img src='/images/gainSkill.PNG' alt="Gain skill" width="70%" @click="$emit('getInfo')" >
       <span class="popuptext" id="mySkillPopup"  style= "left:10em; top:-3em;">
         {{ labels.skillInfo }}
+
         <br>
         <img src='/images/skills_info1.PNG' width="300em">
         <img src='/images/skills_info2.PNG' width="300em">
         <img src='/images/skills_info3.PNG' width="300em">
       <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
+      <br>
+      <button class="closeButton"  @click="$emit('getInfo')">close</button>
       </span>
       </div>
     </div>
@@ -95,6 +98,22 @@ export default {
         this.highlightAvailableCards()
       }
     },
+
+    // chooseAction(action, card){
+    //   console.log("action utskrift", action);
+    // if (action === "skill") {
+    //     this.gainSkill(card);
+    //   }
+    //
+    //   else if (action === "market") {
+    //     this.raiseValue(card);
+    //   }
+    //   /* HÄR LÄGGER VI SEN TILL workPlacement: */
+    //   else if (action === "work") {
+    //     this.startWork(card); /*måste ändras*/
+    //   //  work(card);
+    //   }
+
     chooseAction(card){
       this.$emit('chooseAction', card);
     },

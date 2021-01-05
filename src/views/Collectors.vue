@@ -1,21 +1,41 @@
 <template>
   <div id="wrapper">
     <header>
-      <div id="startInfo">
-        <button class="buttons">How to play? {{ this.labels.rules }}</button>
-        <button class="buttons">Next quarter {{ this.labels.nextQuarter }}</button>
-      </div>
-
-      <div id="drawCard">
-        <p id="drawCardText">{{ this.labels.draw }}:</p>
-        <input type="image" @click="drawCard" id="drawCardButton" alt="Login"
-        src='/images/card_backside300px.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
-      </div>
-
       <div id="welcome">
         <h1>Welcome to Rich Collectors</h1>
       </div>
 
+      <div class="info left">
+        <button class="buttons homeButton" v-on:click="getHowToInfo()"> {{ this.labels.rules }} </button>
+        <div class="popup" style= "position:relative; left:0em; top:0em;">
+        <span class="popupHowToInfoText" id="myHowToInfoPopup"  style= "left:0em; top:0em;">
+          <!-- <a href="/images/rules_collectors.pdf" >Click here to open rules</a> -->
+          <embed src="/images/rules_collectors.pdf" width="2000em" height="950em"/>
+          <br>
+          <button class="closeButton" v-on:click="getHowToInfo()" >close</button>
+        </span>
+        </div>
+
+        <button class="buttons"> {{ this.labels.nextQuarter }}</button>
+
+      </div>
+
+
+
+      <div class="info right">
+        <p class="gameLog">
+          {{ this.labels.startLog }}
+        </p>
+
+        <!-- <p id="drawCardText">{{ this.labels.draw }}:</p> -->
+        <input type="image" @click="drawCard" id="drawCardButton" alt="Login"
+        src='/images/card_backside_flipped.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
+
+        <!-- <button class="buttons" @click="player.money += 1">
+          Fake money
+        </button> -->
+
+      </div>
     </header>
 
     <main>
@@ -83,10 +103,10 @@
 
       </div>
 
-      <div class="player board">
+      <div class="players board">
 
         <!--Object.keys(this.players) ger en array med alla playerid -->
-        <CollectorsPlayerBoard v-for='(data, id) in players' :key='id'
+        <CollectorsPlayerBoard class="player" v-for='(data, id) in players' :key='id'
         :labels= "labels"
         :player= "data"
         :playerId= "id"
@@ -98,10 +118,10 @@
     </main>
 
     <footer>
-      HEJ HÄR ÄR FOOTER
-
-
-
+      <p>
+        {{ labels.invite }}
+        <input type="text" :value="publicPath + $route.path" @click="selectAll" readonly="readonly">
+      </p>
     </footer>
   </div>
 </template>
@@ -257,7 +277,7 @@ export default {
 
         this.$store.state.socket.on('collectorsCardBought',
         function(d) {
-          console.log(d.playerId, "bought a card");
+          document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} bought an item!`;
           this.players = d.players;
           this.itemsOnSale = d.itemsOnSale;
         }.bind(this)
@@ -265,7 +285,7 @@ export default {
 
       this.$store.state.socket.on('collectorsValueRaised',
       function(d) {
-        console.log(d.playerId, "raised a value");
+        document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} raised a value!`;
         this.players = d.players;
         //        this.raiseValueOnSale = d.raiseValueOnSale;
         this.skillsOnSale = d.skillsOnSale;
@@ -277,7 +297,7 @@ export default {
 
     this.$store.state.socket.on('collectorsAuctionStarted',
     function(d) {
-      console.log(d.playerId, "started an auction");
+      document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started an auction!`;
       this.players = d.players;
       this.auctionCards = d.auctionCards;
       this.auctionSpot = d.auctionSpot; //TEST ???
@@ -285,7 +305,7 @@ export default {
   );
   this.$store.state.socket.on('collectorsWorkStarted',
   function(d) {
-    console.log(d.playerId, "started Work");
+    document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
     this.players = d.players;
     this.auctionCards = d.auctionCards;
     this.auctionSpot = d.auctionSpot; //TEST ???
@@ -294,7 +314,7 @@ export default {
 
 this.$store.state.socket.on('collectorsSkillGained',
 function(d) {
-  console.log(d.playerId, "gained a skill");
+  document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} gained a skill!`;
   this.players = d.players;
   this.skillsOnSale = d.skillsOnSale;
 }.bind(this)
@@ -303,7 +323,6 @@ function(d) {
 
 methods: {
   chooseAction(action, card){
-    console.log("action utskrift", action);
     if (action === "buy") {
       this.buyCard(card);
     }
@@ -369,7 +388,7 @@ drawCard: function () {                                  /* NÄR MAN DRAR KORT �
 );
 },
 gainSkill: function (card) {
-  console.log("gainSkill", card);
+  /*console.log("gainSkill", card);     //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('collectorsGainSkill', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -380,7 +399,7 @@ gainSkill: function (card) {
 },
 
 startAuction: function (card) {
-  console.log("startAuction", card);
+  /*console.log("startAuction", card);    //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('CollectorsStartAuction', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -390,7 +409,7 @@ startAuction: function (card) {
 );
 },
 startWork: function (card) {
-  console.log("startWork", card);
+  /*console.log("startWork", card);   //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('CollectorsStartWork', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -402,7 +421,7 @@ startWork: function (card) {
 },
 
 buyCard: function (card) {
-  console.log("buyCard", card);
+  /*console.log("buyCard", card);   //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('collectorsBuyCard', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -434,9 +453,13 @@ getInfo: function(string){
     popupitem.classList.toggle("show");
   }
 },
+getHowToInfo:function(){
+      var popupwork = document.getElementById("myHowToInfoPopup");
+      popupwork.classList.toggle("show");
+},
 
 raiseValue: function (card) {
-  console.log("raiseValue", card);
+  /*console.log("raiseValue", card);    //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('collectorsRaiseValue', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -488,20 +511,32 @@ header {
   display: grid;
   grid-template-columns: 30% 40% 30%;
   grid-template-areas:
-  "startInfo welcome drawCard";
-  padding-left: 1em;
+  "leftInfo welcome rightInfo";
   margin: 0;
   align-items: center;
   text-align: center;
   grid-area: header;
 }
 
-#startInfo {
-  grid-area: startInfo;
+.info {
   display: flex;
+  align-items: flex-end;
+  padding: 0 5%;
 }
+
+.left { grid-area: leftInfo; }
+
 #welcome { grid-area: welcome; }
-#drawCard { grid-area: drawCard; }
+
+.right {
+  grid-area: rightInfo;
+  display: flex;
+  font-weight: bold;
+}
+
+.gameLog {
+  color: red;
+}
 
 /* =========================
 BUTTONS                    */
@@ -527,23 +562,35 @@ BUTTONS                    */
   box-shadow: inset 2px 2px 3px #787975;
 }
 
-#drawCard {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-  "drawCardText drawCardButton";
+.closeButton {
+  width: 30%;
+  color: #292929;
+  font-size: 1em;
+  font-weight: bold;
+  background: #FAC84C;
+  border: solid thin #787975;
+  border-radius: 0.3em;
+  padding: 0.6em;
+  margin: 3%;
+  box-shadow: 2px 2px 3px #787975;
+  font-size: 1.2em;
+  background: #e63b2b;
+  margin: 5% 0;
 }
 
-#drawCardText {
-  grid-area: drawCardText;
+.closeButton:hover, .drawCardButton:hover {
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  box-shadow: inset 2px 2px 3px #787975;
 }
 
 #drawCardButton {
-  grid-area: drawCardButton;
-  border: solid thin #787975;
   border-radius: 0.3em;
   box-shadow: 0.2em 0.2em 0.3em #787975;
   width: 20%;
+  margin-left: 5%;
 }
 
 .drawCardButton:hover {
@@ -561,23 +608,18 @@ main {
   display: grid;
   grid-gap: 0.5em;
   grid-template-columns: 70% 30%;
-  grid-template-rows: 20px 150vh;
+  grid-template-rows: 150vh;
   grid-template-areas:
-  "header header"
   "gameBoard playerBoard";
 }
 
-
-
-p {
+p, span {
   font-size: 1em;
-  font-weight: bold;
   margin: 0;
 }
 
 footer {
   margin-top: 5em auto;
-  background: brown;
 }
 footer a {
   text-decoration: none;
@@ -587,16 +629,16 @@ footer a:visited {
   color:ivory;
 }
 
-.game, .player { padding: 1em; }
+.board { padding: 0.2em; }
 
 /* =====================================
 GAME BOARD (GRID)                 */
 
 .game {
   grid-area: gameBoard;
-  grid-gap: 0.5em;
+  grid-gap: 0.5%;
   display: grid;
-  grid-template-columns: 25% 25% 50%;
+  grid-template-columns: 25% 25% 49%;
   grid-template-rows: 15% 30% 15%;
   grid-template-areas:
   "itemPool itemPool itemPool"
@@ -634,8 +676,14 @@ GAME BOARD (GRID)                 */
 /* =====================================
 PLAYER BOARD                          */
 
-.player {
+.players {
   grid-area: playerBoard;
+}
+
+.player {
+  border: solid medium #4E4E4E;
+  margin: 0 0 0.2em 0;
+  padding: 0.5em;
 }
 
 /* ========================= */
@@ -758,17 +806,33 @@ footer a:visited {
 .popup .popuptext::after {
   content: "";
   position: absolute;
-  /*top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 10px;
-  border-style: solid;
-  color: white;*/
+}
+.popup:hover {
+  cursor: pointer;
 }
 
 
 .popup .show {
   display: block;
+}
+
+/* ==========HJÄLP Dåligt kodad få ihop popuptext klasserna snyggt==================== */
+.popupHowToInfoText {
+  position: absolute;
+  display: none;
+  cursor: pointer;
+  user-select: none;
+  background-color: #f3f3f3; /*bakgrund popup*/
+  color: black; /*textfärg popup*/
+  text-align: center;
+  border-radius: 0px;
+  padding: 20px 20px;  /*padding popup*/
+  z-index: 1;
+  margin-left: -37em;
+  border-color: grey;
+  border-width: 1px;
+  border-style:solid;
+  overflow-y: scroll;
 }
 
 

@@ -1,6 +1,6 @@
 {
 	"draw": "Dra kort",
-	"invite": "Bjud in andra spelare med den här länken:",
+	"invite": "Bjud in andra spelare med denna länk:",
 	"endTurn": "Avsluta runda",
 	"buyItem": "Köp ett item",
 	"gainSkill": "Skaffa en färdighet",
@@ -16,5 +16,6 @@
 	"valueInfo":" öka värde fungerar såhär",
 	"workInfo":" arbete fungerar såhär",
 	"nextQuarter": "Nästa kvartal",
-	"rules": "Hur spelar man?"
+	"rules": "Hur spelar man?",
+	"startLog": "Låt oss börja spela!"
 }

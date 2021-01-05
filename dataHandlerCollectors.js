@@ -190,6 +190,24 @@ Data.prototype.buyCard = function (roomId, playerId, card, cost) {
     room.players[playerId].items.push(...c);
     room.players[playerId].money -= cost;
 
+    //ÄVEN HÄR EN JÄTTEFUL LÖSNING PÅ ITEMCOUNTER!
+    if ( card.item === 'fastaval' ) {
+      room.players[playerId].itemCounter[0] ++;
+    }
+    else if ( card.item === 'figures' ) {
+      room.players[playerId].itemCounter[1] ++;
+    }
+    else if ( card.item === 'music' ) {
+      room.players[playerId].itemCounter[2] ++;
+    }
+    else if ( card.item === 'movie' ) {
+      room.players[playerId].itemCounter[3] ++;
+    }
+    else if ( card.item === 'technology' ) {
+      room.players[playerId].itemCounter[4] ++;
+    }
+
+
   }
 }
 

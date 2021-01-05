@@ -4,131 +4,133 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 <template>
   <div class= "playerContainer">
 
-    <div class = "playerHeader">
+    <div id="playerName">
       <h1>{{labels.playerInfo}} {{playerId}}</h1>
+    </div>
 
-      <!--  OBS: dessa itemsymboler och counters vill vi egentligen lösa med en for-loop och lagra counters i ett objekt
-      istället så att vi kan komma åt dem på ett snyggare sätt. Men vi fick det inte att funka och gjorde denna
-      tillfälliga och "osnygga" lösningen så länge. -->
-      <div class="itemCounters">
-        <div class="itemCounter">
-          <img class="itemSymbol" src='/images/item_fastaval.png'>
-          <span> {{ player.itemCounter[0] }} </span>
-        </div>
-        <div class="itemCounter">
-          <img class="itemSymbol" src='/images/item_figures.png'>
-          <span> {{ player.itemCounter[1] }} </span>
-        </div>
-        <div class="itemCounter">
-          <img class="itemSymbol" src='/images/item_music.png'>
-          <span> {{ player.itemCounter[2] }} </span>
-        </div>
-        <div class="itemCounter">
-          <img class="itemSymbol" src='/images/item_movie.png'>
-          <span> {{ player.itemCounter[3] }} </span>
-        </div>
-        <div class="itemCounter">
-          <img class="itemSymbol" src='/images/item_technology.png'>
-          <span> {{ player.itemCounter[4] }} </span>
-        </div>
+    <!--  OBS: dessa itemsymboler och counters vill vi egentligen lösa med en for-loop och lagra counters i ett objekt
+    istället så att vi kan komma åt dem på ett snyggare sätt. Men vi fick det inte att funka och gjorde denna
+    tillfälliga och "osnygga" lösningen så länge. -->
+    <div class="itemCounters">
+      <div class="itemCounter">
+        <img class="itemSymbol" src='/images/item_fastaval.png'>
+        <span> {{ player.itemCounter[0] }} </span>
       </div>
+      <div class="itemCounter">
+        <img class="itemSymbol" src='/images/item_figures.png'>
+        <span> {{ player.itemCounter[1] }} </span>
+      </div>
+      <div class="itemCounter">
+        <img class="itemSymbol" src='/images/item_music.png'>
+        <span> {{ player.itemCounter[2] }} </span>
+      </div>
+      <div class="itemCounter">
+        <img class="itemSymbol" src='/images/item_movie.png'>
+        <span> {{ player.itemCounter[3] }} </span>
+      </div>
+      <div class="itemCounter">
+        <img class="itemSymbol" src='/images/item_technology.png'>
+        <span> {{ player.itemCounter[4] }} </span>
+      </div>
+    </div>
 
-      <div class="clickToSee">
-
-        <div class="yourSkills playerSymbols">
-          <div class="popup" style= "position:relative; left:0em; top:0em;">
-            <img src='/images/your_skills.png' alt="See your skills" width="20%" @click='getYourInfo("yourSkills")' >
-            <div class="popuptext" id="yourSkillsPopup" style= "left:10em; top:-3em;">
-              <h2>{{ labels.yourSkills }}</h2>
-              <div class="playerslots Yskills">
-                <CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
-              </div>
-              <br>
-              <button class="closeButton"  @click='getYourInfo("yourSkills")'>close</button>
+    <div class="clickToSee">
+      <div class="yourSkills playerSymbols">
+        <div class="popup" style= "position:relative; left:0em; top:0em;">
+          <img src='/images/your_skills.png' alt="See your skills" width="20%" @click='getYourInfo("yourSkills")' >
+          <div class="popuptext" id="yourSkillsPopup" style= "left:10em; top:-3em;">
+            <h2>{{ labels.yourSkills }}</h2>
+            <div class="playerslots Yskills">
+              <CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
             </div>
+            <br>
+            <button class="closeButton"  @click='getYourInfo("yourSkills")'>close</button>
           </div>
-          <span>
-            {{ player.skills.length }}
-          </span>
         </div>
-
-        <div class="yourHand playerSymbols">
-          <div class="popup" style= "position:relative; left:0em; top:0em;">
-            <img src='/images/your_hand.png' alt="See your hand" width="50%" @click='getYourInfo("yourHand")' >
-            <span class="popuptext" id="yourHandPopup"  style= "left:10em; top:-3em;">
-              <h2>{{ labels.yourHand }}</h2>
-              <div class="playerslots Yhand" >
-                <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
-              </div>
-              <br>
-              <button class="closeButton"  @click='getYourInfo("yourHand")'>close</button>
-            </span>
-          </div>
-          <span>
-            {{ player.hand.length }}
-          </span>
-        </div>
-
-        <div class="yourBottles playerSymbols">
-          <div class="popup" style= "position:relative; left:0em; top:0em;">
-            <img src='/images/bottle_placement.png' alt="See complete bottle info" width="50%" @click='getYourInfo("yourBottles")' >
-            <span class="popuptext" id="yourBottlesPopup"  style= "left:10em; top:-3em;">
-              <h2>{{ labels.yourBottles }}</h2>
-              <div class="textbottles">
-                <p>{{ labels.totalBottles }} {{ player.totalBottles}}</p>
-                <p>{{ labels.bottlesLeft }} {{ player.bottlesLeft}}</p>
-              </div>
-              <img src='/images/bottlemenu.png' width="90%">
-              <p>{{ labels.bottleInfo }}</p>
-              <br>
-              <button class="closeButton"  @click='getYourInfo("yourBottles")'>close</button>
-            </span>
-          </div>
-          <span>
-            {{ player.bottlesLeft }}
-          </span>
-        </div>
-
-        <div class="yourCoins playerSymbols">
-          <img src='/images/coin100px.png' alt="coin symbol" width="50%"><span>{{player.money}}</span>
-        </div>
-
-        <div class="yourIncome playerSymbols">
-          <img  src='/images/future_income100px.png' alt="income symbol" width="60%"><span> {{player.futureIncome}}</span>
-        </div>
-
-
+        <span>
+          {{ player.skills.length }}
+        </span>
       </div>
+
+      <div class="yourHand playerSymbols">
+        <div class="popup" style= "position:relative; left:0em; top:0em;">
+          <img src='/images/your_hand.png' alt="See your hand" width="50%" @click='getYourInfo("yourHand")' >
+          <span class="popuptext" id="yourHandPopup"  style= "left:10em; top:-3em;">
+            <h2>{{ labels.yourHand }}</h2>
+            <div class="playerslots Yhand" >
+              <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
+            </div>
+            <br>
+            <button class="closeButton"  @click='getYourInfo("yourHand")'>close</button>
+          </span>
+        </div>
+        <span>
+          {{ player.hand.length }}
+        </span>
+      </div>
+
+      <div class="yourBottles playerSymbols">
+        <div class="popup" style= "position:relative; left:0em; top:0em;">
+          <img src='/images/bottle_placement.png' alt="See complete bottle info" width="50%" @click='getYourInfo("yourBottles")' >
+          <span class="popuptext" id="yourBottlesPopup"  style= "left:10em; top:-3em;">
+            <h2>{{ labels.yourBottles }}</h2>
+            <div class="textbottles">
+              <p>{{ labels.totalBottles }} {{ player.totalBottles}}</p>
+              <p>{{ labels.bottlesLeft }} {{ player.bottlesLeft}}</p>
+            </div>
+            <img src='/images/bottlemenu.png' width="90%">
+            <p>{{ labels.bottleInfo }}</p>
+            <br>
+            <button class="closeButton"  @click='getYourInfo("yourBottles")'>close</button>
+          </span>
+        </div>
+        <span>
+          {{ player.bottlesLeft }}
+        </span>
+      </div>
+
+    </div>
+
+      <div id="yourMoneySymbols">
+        <div class="yourCoins moneySymbols">
+          <img src='/images/coin100px.png' alt="coin symbol" width="30%"><span>{{player.money}}</span>
+        </div>
+
+        <div class="yourIncome moneySymbols">
+          <img src='/images/future_income100px.png' alt="income symbol" width="30%"><span> {{player.futureIncome}}</span>
+        </div>
+      </div>
+
     </div>
 
 
-        <!-- DETTA KAN TAS BORT OM VI ÄR OK MED ITEMCOUNTERN, SKILLPOPUP OCH HANDPOPUP
+    <!-- DETTA KAN TAS BORT OM VI ÄR OK MED ITEMCOUNTERN, SKILLPOPUP OCH HANDPOPUP
     <div class="categoryHand">
-      <h2>Your hand</h2>
-    </div>
-    <div class="playerslots Yhand" >
-
-      <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
-    </div>
-
-    <div class="categoryItems">
-    <h2>Your items </h2>
+    <h2>Your hand</h2>
   </div>
+  <div class="playerslots Yhand" >
 
-  <div class="playerslots Yitems">
+  <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
+</div>
 
-  <CollectorsCard v-for="(card, index) in player.items" :card="card" :key="'item'+ index" />
+<div class="categoryItems">
+<h2>Your items </h2>
+</div>
+
+<div class="playerslots Yitems">
+
+<CollectorsCard v-for="(card, index) in player.items" :card="card" :key="'item'+ index" />
 </div>
 
 <div class="categorySkill">
-  <h2>Your skills</h2>
+<h2>Your skills</h2>
 </div>
 
 <div class="playerslots Yskills">
-  <CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
-</div> -->
-
+<CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
 </div>
+</div>-->
+
 
 </template>
 
@@ -198,30 +200,26 @@ PLAYER BOARD (GRID)                 */
 .playerContainer {
   background-color: #ececec;
   width: 90%;
-  height: 50%;
-  grid-gap: 1%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 30% 15% 15% 15%;
+  grid-gap: 0.5em;
+  grid-template-columns: 70% 30%;
   grid-template-areas:
-  "playerHeader playerHeader"
-  "textbottles textbottles"
-  /*  "categoryItems items " */
-  "categorySkill skill"
-  "categoryHand hand";
+    "playerName playerName"
+    "itemCounters itemCounters"
+    "clickToSee yourMoneySymbols";
 }
+
+#playerName { grid-area: playerName; }
+#yourMoneySymbols { grid-area: yourMoneySymbols; }
 
 p {
   margin: 1em;
 }
 
-.playerHeader, .Yitems, .Yskills, .Yhand { padding: 0em; }
-
-.playerHeader {
-  grid-area: playerHeader;
-}
+.Yitems, .Yskills, .Yhand { padding: 0em; }
 
 .itemCounters {
+  grid-area: itemCounters;
   display: grid;
   grid-template-columns: repeat(auto-fill, 20%);
   text-align: center;
@@ -233,30 +231,7 @@ p {
 
 .clickToSee {
   display: flex;
-}
-
-.textbottles{
-  grid-area: textbottles;
-
-}
-.Yitems {
-  grid-area: items;
-}
-.Yskills {
-  grid-area: skill;
-}
-.Yhand {
-  grid-area: hand;
-}
-
-.categoryHand{
-  grid-area: categoryHand;
-}
-.categorySkill{
-  grid-area: categorySkill;
-}
-.categoryItems{
-  grid-area: categoryItems;
+  grid-area: clickToSee;
 }
 
 .playerslots {

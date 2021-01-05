@@ -301,9 +301,9 @@ Data.prototype.startAuction = function (roomId, playerId, card, cost) {
 Data.prototype.startWork = function (roomId, playerId, cost, workAction) { // bör läggas till workAction?
   let room = this.rooms[roomId];
   if (typeof room !== 'undefined') {
-    console.log(workAction + "är i data.prototype.startwork i datahandler minskar pengar?");
+    console.log(workAction + "Går in här när workaction === 5");
 
-    room.players[playerId].money -= cost;  //fungerar ok !
+    room.players[playerId].money -= cost;  
 
   }
 }

@@ -34,10 +34,11 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
       </div>
 
       <div class="clickToSee">
+
         <div class="yourSkills playerSymbols">
           <div class="popup" style= "position:relative; left:0em; top:0em;">
-          <img src='/images/your_skills.png' alt="See your skills" width="20%" @click="$emit('getInfo')" >
-          <span class="popuptext" id="myMarketPopup"  style= "left:10em; top:-3em;">
+          <img src='/images/your_skills.png' alt="See your skills" width="20%" @click='getYourInfo("klick på yourSkills")' >
+          <span class="popuptext" id="yourSkillsPopup" style= "left:10em; top:-3em;">
             {{ labels.valueInfo }}
             <br>
             <button class="closeButton"  @click="$emit('getInfo')">close</button>
@@ -71,7 +72,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
       </div>
 
       <div class="yourBottles playerSymbols">
-        <img src='/images/bottle_placement.png' alt="bottle symbol" width="50%"><span>{{player.money}}</span>
+        <img src='/images/bottle_placement.png' alt="bottle symbol" width="50%"><span>{{player.bottlesLeft}}</span>
       </div>
 
     </div>
@@ -90,6 +91,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
         <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
     </div>
 
+    <!-- DETTA KAN TAS BORT OM VI ÄR OK MED ITEMCOUNTERN HÖGST UPP
     <div class="categoryItems">
       <h2>Your items </h2>
     </div>
@@ -97,7 +99,9 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
     <div class="playerslots Yitems">
 
       <CollectorsCard v-for="(card, index) in player.items" :card="card" :key="'item'+ index" />
-    </div>
+    </div> -->
+
+
     <div class="categorySkill">
       <h2>Your skills</h2>
     </div>
@@ -129,6 +133,35 @@ export default {
     chooseAction(card){
       this.$emit('chooseAction', card);
     },
+    getYourInfo: function(string){
+      console.log("inne i getYourInfo", string);
+      if (string=="klick på yourSkills") {
+        console.log("inne i if-satsen");
+        document.getElementById("yourSkillsPopup").classList.toggle("show");
+      }
+
+      // if (string === 'work') {
+      //   var popupwork = document.getElementById("myWorkPopup");
+      //   popupwork.classList.toggle("show");
+      // }
+      // else if (string === 'auction') {
+      //   var popupauction = document.getElementById("myAuctionPopup");
+      //   popupauction.classList.toggle("show");
+      //
+      // }
+      // else if (string === 'market') {
+      //   var popupmarket = document.getElementById("myMarketPopup");
+      //   popupmarket.classList.toggle("show");
+      // }
+      // else if (string === 'skill') {
+      //   var popupskill = document.getElementById("mySkillPopup");
+      //   popupskill.classList.toggle("show");
+      // }
+      // else if (string === 'item') {
+      //   var popupitem = document.getElementById("myItemPopup");
+      //   popupitem.classList.toggle("show");
+      // }
+    },
   }
 }
 
@@ -147,11 +180,11 @@ export default {
   grid-gap: 1%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 30% 15% 15% 15% 15%;
+  grid-template-rows: 30% 15% 15% 15%;
   grid-template-areas:
   "playerHeader playerHeader"
   "textbottles textbottles"
-  "categoryItems items "
+/*  "categoryItems items " */
   "categorySkill skill"
   "categoryHand hand";
 }

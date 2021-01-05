@@ -14,15 +14,6 @@
       </span>
       </div>
     </div>
-    <!--<div class="popup" style= "position:relative; left:0em; top:0em;">
-    <img src='/images/workInfo.PNG' alt="" width="80%" @click="getInfo($event,'work')" >
-    <span class="popuptext" id="myWorkPopup"  style= "position:relative; left:3em; top:-11em;">
-      work kan användas bla bla bla
-    </span>
-  </div> -->
-
-
-  <!-- har ändrat bilderna från coin till bilderna som ska va, första bilden vet jag ej hur vi ska göra /dani -->
 
     <div class="bottlePlacements">
       <div v-for="(p, index) in placement" :key="'bp' + index">

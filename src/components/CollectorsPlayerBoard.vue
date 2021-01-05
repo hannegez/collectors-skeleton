@@ -7,7 +7,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
     <div class = "playerHeader">
       <h1>{{labels.playerInfo}} {{playerId}}</h1>
 
-<!--  OBS: dessa itemsymboler och counters vill vi egentligen lösa med en for-loop och lagra counters i ett objekt
+      <!--  OBS: dessa itemsymboler och counters vill vi egentligen lösa med en for-loop och lagra counters i ett objekt
       istället så att vi kan komma åt dem på ett snyggare sätt. Men vi fick det inte att funka och gjorde denna
       tillfälliga och "osnygga" lösningen så länge. -->
       <div class="itemCounters">
@@ -34,14 +34,18 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
       </div>
 
       <div class="clickToSee">
+
         <div class="yourSkills playerSymbols">
           <div class="popup" style= "position:relative; left:0em; top:0em;">
-          <img src='/images/your_skills.png' alt="See your skills" width="20%" @click="$emit('getInfo')" >
-          <span class="popuptext" id="myMarketPopup"  style= "left:10em; top:-3em;">
-            {{ labels.valueInfo }}
-            <br>
-            <button class="closeButton"  @click="$emit('getInfo')">close</button>
-          </span>
+            <img src='/images/your_skills.png' alt="See your skills" width="20%" @click='getYourInfo("yourSkills")' >
+            <div class="popuptext" id="yourSkillsPopup" style= "left:10em; top:-3em;">
+              <h2>{{ labels.yourSkills }}</h2>
+              <div class="playerslots Yskills">
+                <CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
+              </div>
+              <br>
+              <button class="closeButton"  @click='getYourInfo("yourSkills")'>close</button>
+            </div>
           </div>
           <span>
             {{ player.skills.length }}
@@ -50,64 +54,81 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
         <div class="yourHand playerSymbols">
           <div class="popup" style= "position:relative; left:0em; top:0em;">
-          <img src='/images/your_hand.png' alt="See your hand" width="50%" @click="$emit('getInfo')" >
-          <span class="popuptext" id="myMarketPopup"  style= "left:10em; top:-3em;">
-            {{ labels.valueInfo }}
-            <br>
-            <button class="closeButton"  @click="$emit('getInfo')">close</button>
-          </span>
+            <img src='/images/your_hand.png' alt="See your hand" width="50%" @click='getYourInfo("yourHand")' >
+            <span class="popuptext" id="yourHandPopup"  style= "left:10em; top:-3em;">
+              <h2>{{ labels.yourHand }}</h2>
+              <div class="playerslots Yhand" >
+                <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
+              </div>
+              <br>
+              <button class="closeButton"  @click='getYourInfo("yourHand")'>close</button>
+            </span>
           </div>
           <span>
             {{ player.hand.length }}
           </span>
         </div>
 
-      <div class="yourCoins playerSymbols">
-        <img src='/images/coin100px.png' alt="coin symbol" width="50%"><span>{{player.money}}</span>
-      </div>
+        <div class="yourBottles playerSymbols">
+          <div class="popup" style= "position:relative; left:0em; top:0em;">
+            <img src='/images/bottle_placement.png' alt="See complete bottle info" width="50%" @click='getYourInfo("yourBottles")' >
+            <span class="popuptext" id="yourBottlesPopup"  style= "left:10em; top:-3em;">
+              <h2>{{ labels.yourBottles }}</h2>
+              <div class="textbottles">
+                <p>{{ labels.totalBottles }} {{ player.totalBottles}}</p>
+                <p>{{ labels.bottlesLeft }} {{ player.bottlesLeft}}</p>
+              </div>
+              <img src='/images/bottlemenu.png' width="90%">
+              <p>{{ labels.bottleInfo }}</p>
+              <br>
+              <button class="closeButton"  @click='getYourInfo("yourBottles")'>close</button>
+            </span>
+          </div>
+          <span>
+            {{ player.bottlesLeft }}
+          </span>
+        </div>
 
-      <div class="yourIncome playerSymbols">
-        <img  src='/images/future_income100px.png' alt="income symbol" width="60%"><span> {{player.futureIncome}}</span>
-      </div>
+        <div class="yourCoins playerSymbols">
+          <img src='/images/coin100px.png' alt="coin symbol" width="50%"><span>{{player.money}}</span>
+        </div>
 
-      <div class="yourBottles playerSymbols">
-        <img src='/images/bottle_placement.png' alt="bottle symbol" width="50%"><span>{{player.money}}</span>
-      </div>
+        <div class="yourIncome playerSymbols">
+          <img  src='/images/future_income100px.png' alt="income symbol" width="60%"><span> {{player.futureIncome}}</span>
+        </div>
 
+
+      </div>
     </div>
-  </div>
 
-      <div class="textbottles">
 
-      <p>Total bottles: {{player.totalBottles}}</p>
-      <p>Bottles left: {{player.bottlesLeft}}</p>
-    </div>
+        <!-- DETTA KAN TAS BORT OM VI ÄR OK MED ITEMCOUNTERN, SKILLPOPUP OCH HANDPOPUP
     <div class="categoryHand">
       <h2>Your hand</h2>
     </div>
     <div class="playerslots Yhand" >
 
-        <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
+      <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
     </div>
 
     <div class="categoryItems">
-      <h2>Your items </h2>
-    </div>
-
-    <div class="playerslots Yitems">
-
-      <CollectorsCard v-for="(card, index) in player.items" :card="card" :key="'item'+ index" />
-    </div>
-    <div class="categorySkill">
-      <h2>Your skills</h2>
-    </div>
-
-
-    <div class="playerslots Yskills">
-      <CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
-    </div>
-
+    <h2>Your items </h2>
   </div>
+
+  <div class="playerslots Yitems">
+
+  <CollectorsCard v-for="(card, index) in player.items" :card="card" :key="'item'+ index" />
+</div>
+
+<div class="categorySkill">
+  <h2>Your skills</h2>
+</div>
+
+<div class="playerslots Yskills">
+  <CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
+</div> -->
+
+</div>
 
 </template>
 
@@ -129,6 +150,40 @@ export default {
     chooseAction(card){
       this.$emit('chooseAction', card);
     },
+    getYourInfo: function(string){
+      console.log("inne i getYourInfo", string);
+      if (string=="yourSkills") {
+        document.getElementById("yourSkillsPopup").classList.toggle("show");
+      }
+      else if (string=="yourHand") {
+        document.getElementById("yourHandPopup").classList.toggle("show");
+      }
+      else if (string=="yourBottles") {
+        document.getElementById("yourBottlesPopup").classList.toggle("show");
+      }
+
+      // if (string === 'work') {
+      //   var popupwork = document.getElementById("myWorkPopup");
+      //   popupwork.classList.toggle("show");
+      // }
+      // else if (string === 'auction') {
+      //   var popupauction = document.getElementById("myAuctionPopup");
+      //   popupauction.classList.toggle("show");
+      //
+      // }
+      // else if (string === 'market') {
+      //   var popupmarket = document.getElementById("myMarketPopup");
+      //   popupmarket.classList.toggle("show");
+      // }
+      // else if (string === 'skill') {
+      //   var popupskill = document.getElementById("mySkillPopup");
+      //   popupskill.classList.toggle("show");
+      // }
+      // else if (string === 'item') {
+      //   var popupitem = document.getElementById("myItemPopup");
+      //   popupitem.classList.toggle("show");
+      // }
+    },
   }
 }
 
@@ -138,7 +193,7 @@ export default {
 <style scoped>
 
 /* =====================================
-    PLAYER BOARD (GRID)                 */
+PLAYER BOARD (GRID)                 */
 
 .playerContainer {
   background-color: #ececec;
@@ -147,11 +202,11 @@ export default {
   grid-gap: 1%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 30% 15% 15% 15% 15%;
+  grid-template-rows: 30% 15% 15% 15%;
   grid-template-areas:
   "playerHeader playerHeader"
   "textbottles textbottles"
-  "categoryItems items "
+  /*  "categoryItems items " */
   "categorySkill skill"
   "categoryHand hand";
 }

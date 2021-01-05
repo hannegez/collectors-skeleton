@@ -342,14 +342,6 @@ methods: {
     }
   },
 
-  /*
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-  popup.style.left=event.clientX - event.target.getBoundingClientRect().x +"px";
-  popup.style.top=event.clientY - event.target.getBoundingClientRect().y - 70+"px"  ;
-  console.log(popup.style, event.clientX, event.clientY);*/
-
-
   selectAll: function (n) {
     n.target.select();
   },
@@ -472,19 +464,9 @@ raiseValue: function (card) {
 };
 
 </script>
-<!--  /*getInfo: function(){
-console.log("bajs");
-var popup = document.getElementById("myPopup");
-popup.classList.toggle("show");
-},*/-->
-
-
 
 <!-- style scoped är bara för filen, utan scoped gäller det allt -->
 <style>
-/*Här ligger gridsen, uppdelade genom att placera de små gridsen i den stora. De små ska flyttas till respektive komponent. /Dani*/
-/*info om att centrera saker https://philipwalton.github.io/solved-by-flexbox/demos/vertical-centering/*/
-
 @import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
 
 #wrapper {

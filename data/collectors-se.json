@@ -11,11 +11,17 @@
 	"marketValues": "Marknadvärden",
 	"playerInfo": "Information om spelare",
 	"itemInfo":"köp sak fungerar såhär",
-	"skillInfo":" kompetens fungerar såhär",
+	"skillInfo":" färdigheter fungerar såhär",
 	"auctionInfo":" auktion fungerar såhär",
 	"valueInfo":" öka värde fungerar såhär",
 	"workInfo":" arbete fungerar såhär",
 	"nextQuarter": "Nästa kvartal",
 	"rules": "Hur spelar man?",
-	"startLog": "Låt oss börja spela!"
+	"startLog": "Låt oss börja spela!",
+	"yourSkills": "Dina färdigheter",
+	"yourHand": "Din hand",
+	"yourBottles": "Dina flaskor",
+	"bottleInfo": "Om du har fler än 2 totalt antal flaskor när ett nytt kvartal börjar måste du välja... blabla",
+	"bottlesLeft": "Antal flaskor kvar:",
+	"totalBottles": "Totalt antal flaskor:"
 }

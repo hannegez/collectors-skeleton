@@ -13,7 +13,7 @@
           <h1>{{ this.labels.rules }}</h1>
           <embed src="/images/rules_collectors.pdf" width="1800em" height="950em"/>
           <br>
-          <button class="closeButton" v-on:click="getHowToInfo()" >close</button>
+          <button class="closeButton" v-on:click="getHowToInfo()" > {{this.labels.close}} </button>
         </span>
         </div>
 
@@ -24,10 +24,14 @@
           <h1>{{ this.labels.nextQuarter }}</h1>
           {{labels.newQuarterInfo}}
           <br>
-          <button class="buttons getButton" v-on:click="nextQuarter()" > {{this.labels.nextQuarter}} </button>
+          <br>
+          <h1>{{ this.labels.howToBottles }}</h1>
+          {{labels.howToInfo}}
+
           <button class="buttons getButton" v-on:click="nextQuarterInfo()" > {{this.labels.getCoins}} </button>
-          <button class="buttons getButton" v-on:click="nextQuarterInfo()" > {{this.labels.getCards}} </button>
-          <button class="closeButton" v-on:click="nextQuarterInfo()" >close</button>
+          <button class="buttons getButton" v-on:click="drawCard()" > {{this.labels.getCards}} </button>
+          <button class="buttons" v-on:click="nextQuarterInfo()" > {{this.labels.nextQuarterClose}} </button>
+          <button class="closeButton" v-on:click="nextQuarterInfo()" > {{this.labels.close}} </button>
         </span>
         </div>
 
@@ -644,7 +648,7 @@ BUTTONS                    */
   opacity: 1;
 }
 .getButton{
-  background-color: gold;
+  background-color: green;
 }
 
 .closeButton {

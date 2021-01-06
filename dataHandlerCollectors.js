@@ -269,6 +269,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                       'technology' : 0 }, //LYCKADES INTE MED DETTA FÖRST, VILL GÖRA LIKNANDE PÅ skillCounter /KARRO */
                       itemCounter: [0,0,0,0,0], //FÖRENKLING: fastaval, figures, music, movie, technology, /KARRO
                       skillCounter: [0,0,0,0,0,0], //FÖRENKLING: workerIncome, workerCard, bottle, auctionIncome, VP-, VP-all /KARRO
+                      skillCounter_VP: [0,0,0,0,0], //FÖRENKLING: VP-fastaval, VP-figures, VP-music, VP-movie, VP-technology, /KARRO
                       income: [],
                       futureIncome: 0, //ska sättas till längden av income när man väljer work som resulterar i income
                       secret: [],
@@ -484,6 +485,22 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                             }
                             else {                                           //Lägger nr 5 (idx 4) sist på else (kan vara olika symboler på VP-...)
                               room.players[playerId].skillCounter[4] ++;
+                              if ( card.skill === 'VP-fastaval' ) {
+                                room.players[playerId].skillCounter_VP[0] ++;
+                              }
+                              else if ( card.skill === 'VP-figures' ) {
+                                room.players[playerId].skillCounter_VP[1] ++;
+                              }
+                              else if ( card.skill === 'VP-music' ) {
+                                room.players[playerId].skillCounter_VP[2] ++;
+                              }
+                              else if ( card.skill === 'VP-movie' ) {
+                                room.players[playerId].skillCounter_VP[3] ++;
+                              }
+                              else if ( card.skill === 'VP-technology' ) {
+                                room.players[playerId].skillCounter_VP[4] ++;
+                              }
+
                             }
 
                           }

@@ -55,23 +55,23 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
         <div class="moreSkills moreSkillCounters">
           <div class="skillCounter">
             <img class="extraSkill" src='/images/skills_VP-fastaval.png'>
-            <span> {{ player.skillCounter[3] }} </span>
+            <span> {{ player.skillCounter_VP[0] }} </span>
           </div>
           <div class="skillCounter">
             <img class="extraSkill" src='/images/skills_VP-figures.png'>
-            <span> {{ player.skillCounter[3] }} </span>
+            <span> {{ player.skillCounter_VP[1] }} </span>
           </div>
           <div class="skillCounter">
             <img class="extraSkill" src='/images/skills_VP-music.png'>
-            <span> {{ player.skillCounter[3] }} </span>
+            <span> {{ player.skillCounter_VP[2] }} </span>
           </div>
           <div class="skillCounter">
             <img class="extraSkill" src='/images/skills_VP-movie.png'>
-            <span> {{ player.skillCounter[3] }} </span>
+            <span> {{ player.skillCounter_VP[3] }} </span>
           </div>
           <div class="skillCounter">
             <img class="extraSkill" src='/images/skills_VP-technology.png'>
-            <span> {{ player.skillCounter[3] }} </span>
+            <span> {{ player.skillCounter_VP[4] }} </span>
           </div>
         </div>
         <img class="skillSymbol" src='/images/skills_VP-.png'>
@@ -304,7 +304,6 @@ PLAYER BOARD (GRID)                 */
 }
 
 .moreSkills {
-  /* hide and position tooltip */
   bottom: 120%;
   right: -100%;
   width: 400%;
@@ -324,31 +323,8 @@ PLAYER BOARD (GRID)                 */
 }
 
 .hoverSkill:hover .moreSkills {
-  /* display tooltip on hover */
   opacity: 1;
 }
-
-/* .hoverSkill:before {
-  content: attr(data-text);
-  position:absolute;
-
-  right:-120%;
-  bottom:115%;
-
-  width:200px;
-  padding:10px;
-  border-radius:10px;
-  background:#ececec;
-  border: solid thin #4E4E4E;
-  color: #4E4E4E;
-  text-align:center;
-
-  display:none;
-}
-
-.hoverSkill:hover:before {
-  display:block;
-} */
 
 h2 { padding-left: 7%; }
 

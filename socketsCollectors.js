@@ -37,6 +37,11 @@ function sockets(io, socket, data) {
       data.drawCard(d.roomId, d.playerId)
     );
   });
+  socket.on('collectorsGetMoney', function(d) {
+    io.to(d.roomId).emit('collectorsGottenMoney',
+    data.getMoney(d.roomId, d.playerId)      
+  );
+});
   socket.on('collectorsGainSkill', function(d) {
     data.gainSkill(d.roomId, d.playerId, d.card, d.cost)
     io.to(d.roomId).emit('collectorsSkillGained', {

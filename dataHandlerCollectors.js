@@ -170,6 +170,20 @@ Data.prototype.drawCard = function (roomId, playerId) {
   else return [];
 }
 
+
+Data.prototype.getMoney = function (roomId, playerId) {
+  let room = this.rooms[roomId];
+  if (typeof room !== 'undefined') {
+    console.log("mera pengar tack " + room.players[playerId].money);
+    console.log("fick jag mera pengar?");
+    room.players[playerId].money ++;
+    console.log("Ja du har nu " + room.players[playerId].money);
+  /*  room.money[player] += 1; */
+  room.players[playerId].money;
+  return room.players;
+  }
+}
+
 /* moves card from itemsOnSale to a player's hand */
 Data.prototype.buyCard = function (roomId, playerId, card, cost) {
   let room = this.rooms[roomId];

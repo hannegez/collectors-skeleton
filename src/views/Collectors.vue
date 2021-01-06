@@ -16,7 +16,7 @@
         </span>
         </div>
 
-        <button class="buttons"> {{ this.labels.nextQuarter }}</button>
+        <button class="buttons" v-on:click="changeImage()"> {{ this.labels.nextQuarter }}</button>
 
       </div>
 
@@ -462,6 +462,29 @@ getInfo: function(string){
 getHowToInfo:function(){
       var popupwork = document.getElementById("myHowToInfoPopup");
       popupwork.classList.toggle("show");
+},
+changeImage: function(){
+  //  console.log("innan if " + document.getElementById("imgClickAndChange").src);
+    if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_1.PNG")
+    {
+        document.getElementById("imgClickAndChange").src = "/images/quartertile_2.PNG";
+      //  console.log("innuti if  " +document.getElementById("imgClickAndChange").src);
+    }
+    else if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_2.PNG")
+    {
+      document.getElementById("imgClickAndChange").src = "/images/quartertile_3.PNG";
+//      console.log("innuti 2 if  " +document.getElementById("imgClickAndChange").src);
+    }
+
+  else if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_3.PNG") {
+    document.getElementById("imgClickAndChange").src = "/images/quartertile_4.PNG";
+//      console.log("innuti 2 if  " +document.getElementById("imgClickAndChange").src);
+
+  }
+  else {
+      document.getElementById("imgClickAndChange").src = "/images/quartertile_1.PNG";
+    //  console.log("else   " + document.getElementById("imgClickAndChange").src);
+  }
 },
 
 raiseValue: function (card) {

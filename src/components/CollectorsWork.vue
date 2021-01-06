@@ -35,7 +35,10 @@
 
     <div class="workImages">
       <br>
-      <img src="/images/work_recycle.png" alt="" width="25%">
+      <img alt="" src="/images/quartertile_1.PNG"
+            height="65%" id="imgClickAndChange"   />
+
+
       <br>
       <img src="/images/work_recycle.png" alt="" width="25%">
         <br>
@@ -75,7 +78,7 @@ export default {
     setAvailable: function (card) {
       this.$set(card, "available", true);
     },
-    //HJÄLP 18/12 DEN här verkar inte göra något mn bör göra något
+    //HJÄLP 18/12 DEN här verkar inte göra något
     highlightAvailableCards: function (workAction)  {
       console.log("vår workaction: ", workAction);
       if (workAction === 5) {
@@ -94,7 +97,9 @@ export default {
         console.log("startWork 2" + card);
 
       }
-    }
+    },
+
+
   }
 }
 </script>
@@ -110,7 +115,7 @@ export default {
   grid-gap: 0em;
   display: grid;
 
-  grid-template-rows: 10% 10% 10%;
+  grid-template-rows: 12% 10% 10%;
   grid-template-columns: 40% 60%;
   grid-template-areas:
   "gainWorkHeader workInfo"

@@ -420,6 +420,11 @@ Data.prototype.placeWorkBottle = function (roomId, playerId, cost, workAction) {
             this.drawCard(roomId, playerId);
             //add 1st player token
           }
+          }
+          }
+          }
+          }
+
 
           Data.prototype.createDeck = function() {
             // we want a copy of the deck array, not a reference to it so we use the

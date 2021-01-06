@@ -31,6 +31,9 @@
 	"getCards": " Ta kort",
 	"close": " Stäng",
 	"howToBottles": "Hur man väljer antal kort och pengar",
-	"howToInfo":"Har du två eller färre flaskor får du ta tre mynt och ett kort. Har du tre flaskor får du välja, två mynt och ett kort eller tre mynt. Har du fyra flaskor får du välja mellan 2 mynt eller ett kort. Har du fem eller fler kort får du inget extra. "
+	"howToInfo1":"Har du två eller färre flaskor får du ta tre mynt och ett kort.",
+	"howToInfo2":"Har du tre flaskor får du välja, två mynt och ett kort eller tre mynt.",
+	"howToInfo3":"Har du fyra flaskor får du välja mellan 2 mynt eller ett kort.",
+	"howToInfo4":"Har du fem eller fler kort får du inget extra."
 
 }

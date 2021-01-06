@@ -31,5 +31,8 @@
 	"getCards": " Get a card",
 	"close": " Close",
 	"howToBottles": "How to pick money and cards",
-	"howToInfo":" If you have two or less bottles then you get to take three coins and one card. If you have three bottles you get to choose between two coins and a card or three coins. If you have four bottles you get to choose between 2 coins or one card. You do not get any extra if you have more than five bottles. "
+	"howToInfo1":"If you have two or less bottles then you get to take three coins and one card.",
+	"howToInfo2":"If you have three bottles you get to choose between two coins and a card or three coins.",
+	"howToInfo3":"If you have four bottles you get to choose between 2 coins or one card.",
+	"howToInfo4":"You do not get any extra if you have more than five bottles."
 }

@@ -133,6 +133,10 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
       <div class="yourBottles playerSymbols">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
+
+          <!-- FÖRSÖK ATT FÅ TILL BOTTLEPIC, MEN DEN HITTAR INTE PLAYER ALLS I DATA...
+              Vet dock att player.color finns och har ett värde
+          <img :src="bottlePic" alt="See complete bottle info" width="65%" @click='getYourInfo("yourBottles")' > -->
           <img src='/images/playerbottle_basic.png' alt="See complete bottle info" width="65%" @click='getYourInfo("yourBottles")' >
           <div class="popuptext" id="yourBottlesPopup"  style= "left:10em; top:-3em;">
             <h2>{{ labels.yourBottles }}</h2>
@@ -177,11 +181,16 @@ export default {
   components: {
     CollectorsCard
   },
+  // FÖRSÖK ATT FÅ TILL BOTTLEPIC
+/*  data: function () {
+    return {
+      bottlePic: '/images/bottle_' + this.player.color + '.png'
+    };
+  }, */
   props: {            //HÄR ÄR ALLA v-binds FRÅN ELEMENTET I Collectors.vue
     labels: Object,  //specify what kind of object
     player: Object,
     playerId: String,
-    //NÅNTING MED WORK?
   },
   methods: {
     chooseAction(card){

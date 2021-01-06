@@ -67,127 +67,32 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
   room.auctionSpot = [];
   room.market = [];
   room.buyPlacement = [ {cost:1, playerId: null},           //HÄR ÄNDRAR VI OM VI VILL ÄNDRA VAD SAKER KOSTAR AV NÅGON ANLEDNING
-                        {cost:1, playerId: null},
-                        {cost:2, playerId: null},
-                        {cost:2, playerId: null},
-                        {cost:3, playerId: null} ];
-  room.skillPlacement = [ {cost:0, playerId: null},
-                          {cost:0, playerId: null},
-                          {cost:0, playerId: null},
-                          {cost:1, playerId: null},
-                          {cost:1, playerId: null} ];
-  room.auctionPlacement = [ {cost:-2, playerId: null},
-                            {cost:-1, playerId: null},
-                            {cost:0, playerId: null},
-                            {cost:0, playerId: null} ];
-  room.marketPlacement = [ {cost:0, playerId: null},
-                           {cost:-2, playerId: null},
-                           {cost:0, playerId: null} ];
+    {cost:1, playerId: null},
+    {cost:2, playerId: null},
+    {cost:2, playerId: null},
+    {cost:3, playerId: null} ];
+    room.skillPlacement = [ {cost:0, playerId: null},
+      {cost:0, playerId: null},
+      {cost:0, playerId: null},
+      {cost:1, playerId: null},
+      {cost:1, playerId: null} ];
+      room.auctionPlacement = [ {cost:-2, playerId: null},
+        {cost:-1, playerId: null},
+        {cost:0, playerId: null},
+        {cost:0, playerId: null} ];
+        room.marketPlacement = [ {cost:0, playerId: null},
+          {cost:-2, playerId: null},
+          {cost:0, playerId: null} ];
 
-  /*DETTA VILL VI SEN IMPLEMENTERA MED workPlacement:*/
-  room.workPlacement = [ {cost:-3, playerId: null, workAction: 1},
-                        {cost:-1, playerId: null, workAction: 2},
-                        {cost:1, playerId: null, workAction: 3},
-                        {cost:0, playerId: null, workAction: 4},
-                        {cost:0, playerId: null, workAction: 5},]
+          /*DETTA VILL VI SEN IMPLEMENTERA MED workPlacement:*/
+          room.workPlacement = [ {cost:-3, playerId: null, workAction: 1},
+            {cost:-1, playerId: null, workAction: 2},
+            {cost:1, playerId: null, workAction: 3},
+            {cost:0, playerId: null, workAction: 4},
+            {cost:0, playerId: null, workAction: 5},]
 
-  this.rooms[roomId] = room;
-}
-
-
-
-
-
-
-
-
-
-Data.prototype.createDeck = function() {
-  // we want a copy of the deck array, not a reference to it so we use the
-  // spread operator (...) to copy the items. Note that this is a shallow copy
-  // so it is not generalizable to all copy problems
-  let deck = [...this.data[collectorsDeck]];
-  return shuffle(deck);
-}
-
-
-
-Data.prototype.getPlayers = function (id) {
-  let room = this.rooms[id]
-  if (typeof room !== 'undefined') {
-    return room.players;
-  }
-  else return {};
-}
-
-Data.prototype.updatePoints = function (roomId, player, points) {
-  let room = this.rooms[roomId]
-  if (typeof room !== 'undefined') {
-    room.points[player] += points;
-    return room.points;
-  }
-  else return {};
-}
-
-/* returns players after a new card is drawn */
-Data.prototype.drawCard = function (roomId, playerId) {
-  let room = this.rooms[roomId];
-  if (typeof room !== 'undefined') {
-    let card = room.deck.pop();
-    room.players[playerId].hand.push(card);
-    return room.players;
-  }
-  else return [];
-}
-
-/* moves card from itemsOnSale to a player's hand */
-Data.prototype.buyCard = function (roomId, playerId, card, cost) {
-  let room = this.rooms[roomId];
-  if (typeof room !== 'undefined') {
-    let c = null;
-    /// check first if the card is among the items on sale
-    for (let i = 0; i < room.itemsOnSale.length; i += 1) {
-      // since card comes from the client, it is NOT the same object (reference)
-      // so we need to compare properties for determining equality
-      if (room.itemsOnSale[i].x === card.x &&
-          room.itemsOnSale[i].y === card.y) {
-        c = room.itemsOnSale.splice(i,1, {});
-        break;
-      }
-    }
-    // ...then check if it is in the hand. It cannot be in both so it's safe
-    for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
-      // since card comes from the client, it is NOT the same object (reference)
-      // so we need to compare properties for determining equality
-      if (room.players[playerId].hand[i].x === card.x &&
-          room.players[playerId].hand[i].y === card.y) {
-        c = room.players[playerId].hand.splice(i,1);
-        break;
-      }
-    }
-    room.players[playerId].items.push(...c);
-    room.players[playerId].money -= cost;
-
-    //ÄVEN HÄR EN JÄTTEFUL LÖSNING PÅ ITEMCOUNTER!
-    if ( card.item === 'fastaval' ) {
-      room.players[playerId].itemCounter[0] ++;
-    }
-    else if ( card.item === 'figures' ) {
-      room.players[playerId].itemCounter[1] ++;
-    }
-    else if ( card.item === 'music' ) {
-      room.players[playerId].itemCounter[2] ++;
-    }
-    else if ( card.item === 'movie' ) {
-      room.players[playerId].itemCounter[3] ++;
-    }
-    else if ( card.item === 'technology' ) {
-      room.players[playerId].itemCounter[4] ++;
-    }
-
-
-  }
-}
+            this.rooms[roomId] = room;
+          }
 
 
 
@@ -196,14 +101,6 @@ Data.prototype.buyCard = function (roomId, playerId, card, cost) {
 
 
 
-
-
-
-
-
-
-
-//________________________________________________________________________________//
 
           Data.prototype.createDeck = function() {
             // we want a copy of the deck array, not a reference to it so we use the
@@ -213,38 +110,141 @@ Data.prototype.buyCard = function (roomId, playerId, card, cost) {
             return shuffle(deck);
           }
 
-          Data.prototype.joinGame = function (roomId, playerId) {
+
+
+          Data.prototype.getPlayers = function (id) {
+            let room = this.rooms[id]
+            if (typeof room !== 'undefined') {
+              return room.players;
+            }
+            else return {};
+          }
+
+          Data.prototype.updatePoints = function (roomId, player, points) {
+            let room = this.rooms[roomId]
+            if (typeof room !== 'undefined') {
+              room.points[player] += points;
+              return room.points;
+            }
+            else return {};
+          }
+
+          /* returns players after a new card is drawn */
+          Data.prototype.drawCard = function (roomId, playerId) {
             let room = this.rooms[roomId];
             if (typeof room !== 'undefined') {
-              if (typeof room.players[playerId] !== 'undefined') {
-                console.log("Player", playerId, "joined again with info", room.players[playerId]);
-                return true;
-              }
-              else if (Object.keys(room.players).length < room.playerCount) {
-                console.log("Player", playerId, "joined for the first time");
-                room.players[playerId] = { hand: [],
-                  money: 1,
-                  points: 0,
-                  skills: [],
-                  items: [],
-                  /*         itemCounter: { 'fastaval' : 0,
-                  'figures' : 0,
-                  'music' : 0,
-                  'movie' : 0,
-                  'technology' : 0 }, //LYCKADES INTE MED DETTA FÖRST, VILL GÖRA LIKNANDE PÅ skillCounter /KARRO */
-                  itemCounter: [0,0,0,0,0], //FÖRENKLING: fastaval, figures, music, movie, technology, /KARRO
-                  skillCounter: [0,0,0,0,0,0], //FÖRENKLING: workerIncome, workerCard, bottle, auctionIncome, VP-, VP-all /KARRO
-                  income: [],
-                  futureIncome: 0, //ska sättas till längden av income när man väljer work som resulterar i income
-                  secret: [],
-                  totalBottles: 2, //ska ökas med en när man skaffar en bottle-skill
-                  bottlesLeft: 2}; //ska minska med en varje gång man gör ett drag, när allas är 0 ändras quarter
-                  return true;
-                }
-                console.log("Player", playerId, "was declined due to player limit");
-              }
-              return false;
+              let card = room.deck.pop();
+              room.players[playerId].hand.push(card);
+              return room.players;
             }
+            else return [];
+          }
+
+          /* moves card from itemsOnSale to a player's hand */
+          Data.prototype.buyCard = function (roomId, playerId, card, cost) {
+            let room = this.rooms[roomId];
+            if (typeof room !== 'undefined') {
+              let c = null;
+              /// check first if the card is among the items on sale
+              for (let i = 0; i < room.itemsOnSale.length; i += 1) {
+                // since card comes from the client, it is NOT the same object (reference)
+                // so we need to compare properties for determining equality
+                if (room.itemsOnSale[i].x === card.x &&
+                  room.itemsOnSale[i].y === card.y) {
+                    c = room.itemsOnSale.splice(i,1, {});
+                    break;
+                  }
+                }
+                // ...then check if it is in the hand. It cannot be in both so it's safe
+                for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
+                  // since card comes from the client, it is NOT the same object (reference)
+                  // so we need to compare properties for determining equality
+                  if (room.players[playerId].hand[i].x === card.x &&
+                    room.players[playerId].hand[i].y === card.y) {
+                      c = room.players[playerId].hand.splice(i,1);
+                      break;
+                    }
+                  }
+                  room.players[playerId].items.push(...c);
+                  room.players[playerId].money -= cost;
+
+                  //ÄVEN HÄR EN JÄTTEFUL LÖSNING PÅ ITEMCOUNTER!
+                  if ( card.item === 'fastaval' ) {
+                    room.players[playerId].itemCounter[0] ++;
+                  }
+                  else if ( card.item === 'figures' ) {
+                    room.players[playerId].itemCounter[1] ++;
+                  }
+                  else if ( card.item === 'music' ) {
+                    room.players[playerId].itemCounter[2] ++;
+                  }
+                  else if ( card.item === 'movie' ) {
+                    room.players[playerId].itemCounter[3] ++;
+                  }
+                  else if ( card.item === 'technology' ) {
+                    room.players[playerId].itemCounter[4] ++;
+                  }
+
+
+                }
+              }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              //________________________________________________________________________________//
+
+              Data.prototype.createDeck = function() {
+                // we want a copy of the deck array, not a reference to it so we use the
+                // spread operator (...) to copy the items. Note that this is a shallow copy
+                // so it is not generalizable to all copy problems
+                let deck = [...this.data[collectorsDeck]];
+                return shuffle(deck);
+              }
+
+              Data.prototype.joinGame = function (roomId, playerId) {
+                let room = this.rooms[roomId];
+                if (typeof room !== 'undefined') {
+                  if (typeof room.players[playerId] !== 'undefined') {
+                    console.log("Player", playerId, "joined again with info", room.players[playerId]);
+                    return true;
+                  }
+                  else if (Object.keys(room.players).length < room.playerCount) {
+                    console.log("Player", playerId, "joined for the first time");
+                    room.players[playerId] = { hand: [],
+                      money: 1,
+                      points: 0,
+                      skills: [],
+                      items: [],
+                      /*         itemCounter: { 'fastaval' : 0,
+                      'figures' : 0,
+                      'music' : 0,
+                      'movie' : 0,
+                      'technology' : 0 }, //LYCKADES INTE MED DETTA FÖRST, VILL GÖRA LIKNANDE PÅ skillCounter /KARRO */
+                      itemCounter: [0,0,0,0,0], //FÖRENKLING: fastaval, figures, music, movie, technology, /KARRO
+                      skillCounter: [0,0,0,0,0,0], //FÖRENKLING: workerIncome, workerCard, bottle, auctionIncome, VP-, VP-all /KARRO
+                      income: [],
+                      futureIncome: 0, //ska sättas till längden av income när man väljer work som resulterar i income
+                      secret: [],
+                      totalBottles: 2, //ska ökas med en när man skaffar en bottle-skill
+                      bottlesLeft: 2}; //ska minska med en varje gång man gör ett drag, när allas är 0 ändras quarter
+                      return true;
+                    }
+                    console.log("Player", playerId, "was declined due to player limit");
+                  }
+                  return false;
+                }
 
 
 
@@ -341,47 +341,25 @@ Data.prototype.buyCard = function (roomId, playerId, card, cost) {
                             }
                           }
                           // lös problemet med att pengar inte dras bort
-                          Data.prototype.startWork = function (roomId, playerId, cost, workAction) { // bör läggas till workAction?
+                          Data.prototype.startWork = function (roomId, playerId, card, cost, workAction) { // bör läggas till workAction?
                             let room = this.rooms[roomId];
                             if (typeof room !== 'undefined') {
-                              console.log(workAction + "Går in här när workaction === 5");
-                              console.log("Data.prototype.startWork futureIncome: " + room.players[playerId].futureIncome );
                               room.players[playerId].futureIncome += 1;
-                              console.log("Data.prototype.startWork futureIncome: " + room.players[playerId].futureIncome );
+                              let c = null;
+                              for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
+                                if (room.players[playerId].hand[i].x === card.x &&
+                                  room.players[playerId].hand[i].y === card.y) {
+                                    c = room.players[playerId].hand.splice(i,1);
+                                    break;
+                                  }
+                                }
+                                room.market.push(...c);
 
-/*
-console.log(workAction + "Går in här när workaction === 5");
-console.log("Data.prototype.startWork futureIncome: " + room.players[playerId].futureIncome );
-room.players[playerId].futureIncome += 1;
-console.log("Data.prototype.startWork futureIncome: " + room.players[playerId].futureIncome );
-
-console.log("room.players[playerId].hand[i].x är lika med:" + room.players[playerId].hand[i].x);
-console.log("room.players[playerId].hand.length är lika med:" + room.players[playerId].hand.length);
-console.log("room.players[playerId].hand[i].y är lika med:" + room.players[playerId].hand[i].y);
-
-/*                  let c = null;
-
-
-
-
-      for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
-
-        if (room.players[playerId].hand[i].x === card.x &&
-          room.players[playerId].hand[i].y === card.y) {
-            c = room.players[playerId].hand.splice(i,1);
-            break;
-          }
-        }
-        room.market.push(...c);
-
-
-
-
-}*/
+                              }
 
 
                             }
-                          }
+
 
 
 
@@ -528,7 +506,7 @@ console.log("room.players[playerId].hand[i].y är lika med:" + room.players[play
                                   }
                                 }
 
-        //------------------------------------------------------------------------------------//
+                                //------------------------------------------------------------------------------------//
 
                                 /* returns the hand of the player */
                                 Data.prototype.getCards = function (roomId, playerId) {

@@ -219,8 +219,6 @@ Data.prototype.buyCard = function (roomId, playerId, card, cost) {
   }
 }
 
-
-
 /* moves card from raiseValueOnSale to market */
 Data.prototype.raiseValue = function (roomId, playerId, card, cost) {
   let room = this.rooms[roomId];
@@ -315,8 +313,6 @@ Data.prototype.startWork = function (roomId, playerId, cost, workAction) { // b√
 
   }
 }
-
-
 
 /* moves card from skillsOnSale to a player's hand */
 Data.prototype.gainSkill = function (roomId, playerId, card, cost) {

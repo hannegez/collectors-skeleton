@@ -17,13 +17,14 @@
         </span>
         </div>
 
-        <button class="buttons" v-on:click="nextQuarter()"> {{ this.labels.nextQuarter }}</button>
+        <button class="buttons" v-on:click="nextQuarterInfo()"> {{ this.labels.nextQuarter }}</button>
         <div class="popup" style= "position:relative; left:0em; top:0em;">
         <span class="popupNextQuarterText" id="myQuarterInfoPopup"  style= "left:0em; top:0em;">
           <!-- <a href="/images/rules_collectors.pdf" >Click here to open rules</a> -->
           <h1>{{ this.labels.nextQuarter }}</h1>
           {{labels.newQuarterInfo}}
           <br>
+          <button class="buttons getButton" v-on:click="nextQuarter()" > {{this.labels.nextQuarter}} </button>
           <button class="buttons getButton" v-on:click="nextQuarterInfo()" > {{this.labels.getCoins}} </button>
           <button class="buttons getButton" v-on:click="nextQuarterInfo()" > {{this.labels.getCards}} </button>
           <button class="closeButton" v-on:click="nextQuarterInfo()" >close</button>
@@ -488,7 +489,7 @@ nextQuarterInfo:function(){
 },
 nextQuarter:function(){
   this.changeImageNextQuarter();
-  this.nextQuarterInfo();
+  //this.nextQuarterInfo();
   //här ska saker hända!!!!! DANI
 
 
@@ -643,7 +644,7 @@ BUTTONS                    */
   opacity: 1;
 }
 .getButton{
-  background-color: green;
+  background-color: gold;
 }
 
 .closeButton {

@@ -395,7 +395,6 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
 
                               }
 
-                              console.log("Data.prototype.startWork futureIncome: " + room.players[playerId].futureIncome );
 
                               /*
                               console.log(workAction + "Går in här när workaction === 5");

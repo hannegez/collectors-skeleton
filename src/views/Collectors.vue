@@ -45,8 +45,8 @@
             <div class="getButtons">
               <p>{{ labels.getCoins }}</p>
             </div>
-            <input type="image" @click="player.money += 1" id="getMoneyButton" alt="Login"
-            src='/images/coin100pxwhite.png' value="Get Money"  >
+            <input type="image" @click="getMoney" id="getMoneyButton" alt="Login"
+        src='/images/coin100pxwhite.png' value="Get Money"  >
           </div>
 
           <div class="hoverButton hoverCard">
@@ -312,6 +312,13 @@ export default {
           }.bind(this)
         );
 
+        this.$store.state.socket.on('collectorsGottenMoney',
+        function(d) {
+          this.players = d;
+        }.bind(this)
+      );
+
+
         this.$store.state.socket.on('collectorsCardBought',
         function(d) {
           document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} bought an item!`;
@@ -414,6 +421,13 @@ drawCard: function () {                                  /* NÃ„R MAN DRAR KORT Ã
   this.$store.state.socket.emit('collectorsDrawCard', {
     roomId: this.$route.params.id,
     playerId: this.playerId
+  }
+);
+},
+getMoney: function () {
+   this.$store.state.socket.emit('collectorsGetMoney', {
+    roomId: this.$route.params.id,
+    playerId: this.playerId,
   }
 );
 },

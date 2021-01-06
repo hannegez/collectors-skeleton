@@ -36,20 +36,27 @@
 
       <div class="info right">
 
-        <!-- NY FAKE MONEY-KNAPP -->
-        <input type="image" @click="player.money += 1" id="getMoneyButton" alt="Login"
-        src='/images/coin100pxwhite.png' value="Get Money"  >
+          <div class="hoverButton hoverCoin">
+            <div class="getButtons">
+              <p>{{ labels.getCoins }}</p>
+            </div>
+            <input type="image" @click="player.money += 1" id="getMoneyButton" alt="Login"
+            src='/images/coin100pxwhite.png' value="Get Money"  >
+          </div>
 
-        <input type="image" @click="drawCard" id="drawCardButton" alt="Login"
-        src='/images/card_backside_flipped.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
+          <div class="hoverButton hoverCard">
+            <div class="getButtons">
+              <p>{{ labels.draw }}</p>
+            </div>
+            <input type="image" @click="drawCard" id="drawCardButton" alt="Login"
+            src='/images/card_backside_flipped.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
+          </div>
 
-        <!-- <button class="buttons" @click="player.money += 1">
-          Fake money
-        </button> -->
-
-        <p class="gameLog">
-          {{ this.labels.startLog }}
-        </p>
+        <div class="gameLog">
+          <p>
+            {{ this.labels.startLog }}
+          </p>
+        </div>
 
 
       </div>
@@ -562,7 +569,6 @@ header {
 
 .info {
   display: flex;
-  align-items: flex-end;
   padding: 0 5%;
 }
 
@@ -572,11 +578,18 @@ header {
 
 .right {
   grid-area: rightInfo;
-  display: flex;
+  display: grid;
+  grid-template-columns: 15% 30% 55%;
+  grid-template-areas:
+    "hoverCoin hoverCard gameLog";
   font-weight: bold;
 }
 
+.hoverCoin { grid-area: hoverCoin; }
+.hoverCard { grid-area: hoverCard; }
+
 .gameLog {
+  grid-area: gameLog;
   color: red;
   margin-left: 2%;
 }
@@ -605,6 +618,30 @@ BUTTONS                    */
   box-shadow: inset 2px 2px 3px #787975;
 }
 
+.hoverButton {
+  position:relative;
+}
+
+.getButtons {
+  padding: 5%;
+  width: 80%;
+  background-color: #f2f2f2;
+  border: solid thin #4E4E4E;
+  color: #4E4E4E;
+  font-size: 0.6em;
+  border-radius: 5px;
+  opacity: 0;
+  position: absolute;
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -ms-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+.hoverButton:hover .getButtons {
+  opacity: 1;
+}
 .getButton{
   background-color: green;
 }
@@ -645,7 +682,7 @@ BUTTONS                    */
 #drawCardButton {
   border-radius: 0.3em;
   box-shadow: 0.2em 0.2em 0.3em #787975;
-  width: 20%;
+  width: 70%;
 }
 
 /*  ===========================  */
@@ -762,11 +799,6 @@ PLAYER BOARD                          */
   margin-top: 4%;
 }
 
-
-/* .buttonText, .buttonImg {          //TROR EJ DETTA ÄR NÖDVÄNDIGT LÄNGRE
-margin: 0;
-padding: 0;
-} */
 .buttonText {
   padding: 0.05em;
   font-size: 0.9em;

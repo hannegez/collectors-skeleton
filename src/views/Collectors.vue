@@ -16,7 +16,15 @@
         </span>
         </div>
 
-        <button class="buttons" v-on:click="changeImageTest()"> {{ this.labels.nextQuarter }}</button>
+        <button class="buttons" v-on:click="nextQuarter()"> {{ this.labels.nextQuarter }}</button>
+        <div class="popup" style= "position:relative; left:0em; top:0em;">
+        <span class="popupHowToInfoText" id="myHowToInfoPopup"  style= "left:0em; top:0em;">
+          <!-- <a href="/images/rules_collectors.pdf" >Click here to open rules</a> -->
+          <embed src="/images/rules_collectors.pdf" width="1800em" height="950em"/>
+          <br>
+          <button class="closeButton" v-on:click="getHowToInfo()" >close</button>
+        </span>
+        </div>
 
       </div>
 
@@ -463,9 +471,12 @@ getHowToInfo:function(){
       var popupwork = document.getElementById("myHowToInfoPopup");
       popupwork.classList.toggle("show");
 },
-changeImageTest:function(){
+nextQuarter:function(){
   this.changeImageNextQuarter();
+  this.getHowToInfo();
   //här ska saker hända!!!!! DANI
+
+
 },
 changeImageNextQuarter: function(){
   //  console.log("innan if " + document.getElementById("imgClickAndChange").src);

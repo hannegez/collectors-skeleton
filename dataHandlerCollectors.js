@@ -85,7 +85,8 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
           {cost:0, playerId: null} ];
 
           /*DETTA VILL VI SEN IMPLEMENTERA MED workPlacement:*/
-          room.workPlacement = [ {cost:-3, playerId: null, workAction: 1},
+          room.workPlacement = [
+            {cost:-3, playerId: null, workAction: 1},
             {cost:-1, playerId: null, workAction: 2},
             {cost:1, playerId: null, workAction: 3},
             {cost:0, playerId: null, workAction: 4},

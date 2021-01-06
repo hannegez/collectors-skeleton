@@ -16,24 +16,29 @@
         </span>
         </div>
 
-        <button class="buttons"> {{ this.labels.nextQuarter }}</button>
+        <button class="buttons" v-on:click="changeImage()"> {{ this.labels.nextQuarter }}</button>
 
       </div>
 
 
 
       <div class="info right">
-        <p class="gameLog">
-          {{ this.labels.startLog }}
-        </p>
 
-        <!-- <p id="drawCardText">{{ this.labels.draw }}:</p> -->
+        <!-- NY FAKE MONEY-KNAPP -->
+        <input type="image" @click="player.money += 1" id="getMoneyButton" alt="Login"
+        src='/images/coin100pxwhite.png' value="Get Money"  >
+
         <input type="image" @click="drawCard" id="drawCardButton" alt="Login"
         src='/images/card_backside_flipped.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
 
         <!-- <button class="buttons" @click="player.money += 1">
           Fake money
         </button> -->
+
+        <p class="gameLog">
+          {{ this.labels.startLog }}
+        </p>
+
 
       </div>
     </header>
@@ -314,7 +319,7 @@ export default {
   //HÄÄR SKA FUTURE INCOME LÄGGAS IN!!!!!!!
   this.$store.state.socket.on('collectorsWorkStarted',
   function(d) {
-    document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
+    document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`; //MÅSTE FIXAS
     this.players = d.players;
   //  this.auctionCards = d.auctionCards;
   //  this.auctionSpot = d.auctionSpot; //TEST ???
@@ -458,6 +463,29 @@ getHowToInfo:function(){
       var popupwork = document.getElementById("myHowToInfoPopup");
       popupwork.classList.toggle("show");
 },
+changeImage: function(){
+  //  console.log("innan if " + document.getElementById("imgClickAndChange").src);
+    if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_1.PNG")
+    {
+        document.getElementById("imgClickAndChange").src = "/images/quartertile_2.PNG";
+      //  console.log("innuti if  " +document.getElementById("imgClickAndChange").src);
+    }
+    else if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_2.PNG")
+    {
+      document.getElementById("imgClickAndChange").src = "/images/quartertile_3.PNG";
+//      console.log("innuti 2 if  " +document.getElementById("imgClickAndChange").src);
+    }
+
+  else if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_3.PNG") {
+    document.getElementById("imgClickAndChange").src = "/images/quartertile_4.PNG";
+//      console.log("innuti 2 if  " +document.getElementById("imgClickAndChange").src);
+
+  }
+  else {
+      document.getElementById("imgClickAndChange").src = "/images/quartertile_1.PNG";
+    //  console.log("else   " + document.getElementById("imgClickAndChange").src);
+  }
+},
 
 raiseValue: function (card) {
   /*console.log("raiseValue", card);    //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
@@ -484,18 +512,18 @@ raiseValue: function (card) {
   padding: 1em;
 }
 
-h1 {
+h1, h2, h3 {
+  font-family: 'Handlee', cursive;
   margin: 0;
+}
+
+h1 {
   text-align: center;
   font-size: 1.5em;
 }
 
-h1, h2, h3 {
-  font-family: 'Handlee', cursive;
-}
-
-h2, h3 {
-  padding: 0.2em;
+h2 {
+  font-size: 1.3em;
 }
 
 header {
@@ -527,6 +555,7 @@ header {
 
 .gameLog {
   color: red;
+  margin-left: 2%;
 }
 
 /* =========================
@@ -545,7 +574,7 @@ BUTTONS                    */
   box-shadow: 2px 2px 3px #787975;
 }
 
-.buttons:hover, .drawCardButton:hover {
+.buttons:hover {
   cursor: pointer;
 }
 
@@ -577,19 +606,21 @@ BUTTONS                    */
   box-shadow: inset 2px 2px 3px #787975;
 }
 
+#drawCardButton, #getMoneyButton { margin: 2%; }
+
+#drawCardButton:hover, #getMoneyButton:hover {
+  box-shadow: inset 0.2em 0.2em 0.3em #787975;
+}
+
+#drawCardButton:focus, #getMoneyButton:focus {
+  outline: none;
+}
+
+#getMoneyButton { width: 50px; }
 #drawCardButton {
   border-radius: 0.3em;
   box-shadow: 0.2em 0.2em 0.3em #787975;
   width: 20%;
-  margin-left: 5%;
-}
-
-.drawCardButton:hover {
-  box-shadow: inset 0.2em 0.2em 0.3em #787975;
-}
-
-.drawCardButton:focus {
-  outline: none;
 }
 
 /*  ===========================  */

@@ -5,10 +5,10 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
   <div class= "playerContainer">
 
     <div id="playerName">
-      <h1>{{labels.playerInfo}} {{playerId}}</h1>
+      <h2>{{labels.playerInfo}} {{playerId}}</h2>
     </div>
 
-    <!--  OBS: dessa itemsymboler och counters vill vi egentligen lösa med en for-loop och lagra counters i ett objekt
+    <!--  OBS: dessa item/skillsymboler och counters vill vi egentligen lösa med en for-loop och lagra counters i ett objekt
     istället så att vi kan komma åt dem på ett snyggare sätt. Men vi fick det inte att funka och gjorde denna
     tillfälliga och "osnygga" lösningen så länge. -->
     <div class="itemCounters">
@@ -34,8 +34,35 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
       </div>
     </div>
 
+    <div class="skillCounters">
+      <div class="skillCounter">
+        <img class="skillSymbol" src='/images/skills_workerIncome.png'>
+        <span> {{ player.skillCounter[0] }} </span>
+      </div>
+      <div class="skillCounter">
+        <img class="skillSymbol" src='/images/skills_workerCard.png'>
+        <span> {{ player.skillCounter[1] }} </span>
+      </div>
+      <div class="skillCounter">
+        <img class="skillSymbol" src='/images/skills_bottle.png'>
+        <span> {{ player.skillCounter[2] }} </span>
+      </div>
+      <div class="skillCounter">
+        <img class="skillSymbol" src='/images/skills_auctionIncome.png'>
+        <span> {{ player.skillCounter[3] }} </span>
+      </div>
+      <div class="skillCounter">
+        <img class="skillSymbol" src='/images/skills_VP-.png'>
+        <span> {{ player.skillCounter[4] }} </span>
+      </div>
+      <div class="skillCounter">
+        <img class="skillSymbol" src='/images/skills_VP-all.png'>
+        <span> {{ player.skillCounter[5] }} </span>
+      </div>
+    </div>
+
     <div class="clickToSee">
-      <div class="yourSkills playerSymbols">
+      <!-- <div class="yourSkills playerSymbols">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
           <img src='/images/your_skills.png' alt="See your skills" width="20%" @click='getYourInfo("yourSkills")' >
           <div class="popuptext" id="yourSkillsPopup" style= "left:10em; top:-3em;">
@@ -46,33 +73,33 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
             <br>
             <button class="closeButton"  @click='getYourInfo("yourSkills")'>close</button>
           </div>
+          <span>
+            {{ player.skills.length }}
+          </span>
         </div>
-        <span>
-          {{ player.skills.length }}
-        </span>
-      </div>
+      </div> -->
 
       <div class="yourHand playerSymbols">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
-          <img src='/images/your_hand.png' alt="See your hand" width="50%" @click='getYourInfo("yourHand")' >
-          <span class="popuptext" id="yourHandPopup"  style= "left:10em; top:-3em;">
+          <img src='/images/your_hand150.png' alt="See your hand" width="65%" @click='getYourInfo("yourHand")' >
+          <div class="popuptext" id="yourHandPopup"  style= "left:10em; top:-3em;">
             <h2>{{ labels.yourHand }}</h2>
             <div class="playerslots Yhand" >
               <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
             </div>
             <br>
             <button class="closeButton"  @click='getYourInfo("yourHand")'>close</button>
+          </div>
+          <span>
+            {{ player.hand.length }}
           </span>
         </div>
-        <span>
-          {{ player.hand.length }}
-        </span>
       </div>
 
       <div class="yourBottles playerSymbols">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
-          <img src='/images/bottle_placement.png' alt="See complete bottle info" width="50%" @click='getYourInfo("yourBottles")' >
-          <span class="popuptext" id="yourBottlesPopup"  style= "left:10em; top:-3em;">
+          <img src='/images/playerbottle_basic.png' alt="See complete bottle info" width="65%" @click='getYourInfo("yourBottles")' >
+          <div class="popuptext" id="yourBottlesPopup"  style= "left:10em; top:-3em;">
             <h2>{{ labels.yourBottles }}</h2>
             <div class="textbottles">
               <p>{{ labels.totalBottles }} {{ player.totalBottles}}</p>
@@ -82,22 +109,23 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
             <p>{{ labels.bottleInfo }}</p>
             <br>
             <button class="closeButton"  @click='getYourInfo("yourBottles")'>close</button>
+          </div>
+          <span>
+            {{ player.bottlesLeft }}
           </span>
         </div>
-        <span>
-          {{ player.bottlesLeft }}
-        </span>
+
       </div>
 
     </div>
 
       <div id="yourMoneySymbols">
         <div class="yourCoins moneySymbols">
-          <img src='/images/coin100px.png' alt="coin symbol" width="30%"><span>{{player.money}}</span>
+          <img src='/images/coin100px.png' alt="coin symbol" width="60%"><span> {{player.money}}</span>
         </div>
 
         <div class="yourIncome moneySymbols">
-          <img src='/images/future_income100px.png' alt="income symbol" width="30%"><span> {{player.futureIncome}}</span>
+          <img src='/images/future_income100px.png' alt="income symbol" width="60%"><span> {{player.futureIncome}}</span>
         </div>
       </div>
 
@@ -200,38 +228,55 @@ PLAYER BOARD (GRID)                 */
 .playerContainer {
   background-color: #ececec;
   width: 90%;
+  text-align: right;
+  padding: 1% 0 5% 1%;
   display: grid;
-  grid-gap: 0.5em;
-  grid-template-columns: 70% 30%;
+  grid-gap: 5% 2.5%;
+  grid-template-columns: 40% 40% 10%;
   grid-template-areas:
-    "playerName playerName"
-    "itemCounters itemCounters"
-    "clickToSee yourMoneySymbols";
+    "playerName clickToSee yourMoneySymbols"
+    "itemCounters itemCounters itemCounters"
+    "skillCounters skillCounters skillCounters";
 }
+
+#playerName, .clickToSee { text-align: left; }
 
 #playerName { grid-area: playerName; }
 #yourMoneySymbols { grid-area: yourMoneySymbols; }
 
-p {
-  margin: 1em;
+.clickToSee {
+  display: flex;
+  grid-area: clickToSee;
 }
 
-.Yitems, .Yskills, .Yhand { padding: 0em; }
+.itemCounters, .skillCounters { display: grid; }
 
 .itemCounters {
   grid-area: itemCounters;
-  display: grid;
   grid-template-columns: repeat(auto-fill, 20%);
-  text-align: center;
+}
+
+.skillCounters {
+  grid-area: skillCounters;
+  grid-template-columns: repeat(auto-fill, 16.66%);
 }
 
 .itemSymbol {
   width: 65%;
 }
 
-.clickToSee {
-  display: flex;
-  grid-area: clickToSee;
+.skillSymbol {
+  width: 40%;
+}
+
+h2 { padding-left: 7%; }
+
+p {
+  margin: 1em;
+}
+
+span {
+  font-size: 0.8em;
 }
 
 .playerslots {

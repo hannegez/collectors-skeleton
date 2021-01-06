@@ -97,7 +97,7 @@ export default {
 
   h2 {
     font-size: 1.2em;
-    margin: 0.4em 0;
+    margin: 1em 0;
   }
 
   p {
@@ -152,13 +152,5 @@ export default {
 .popupInfo .show {
   display: block;
 }
-
-
-
-
-
-
-
-
 
   </style>

@@ -51,7 +51,29 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
         <img class="skillSymbol" src='/images/skills_auctionIncome.png'>
         <span> {{ player.skillCounter[3] }} </span>
       </div>
-      <div class="skillCounter">
+      <div class="skillCounter hoverSkill">
+        <div class="moreSkills moreSkillCounters">
+          <div class="skillCounter">
+            <img class="extraSkill" src='/images/skills_VP-fastaval.png'>
+            <span> {{ player.skillCounter_VP[0] }} </span>
+          </div>
+          <div class="skillCounter">
+            <img class="extraSkill" src='/images/skills_VP-figures.png'>
+            <span> {{ player.skillCounter_VP[1] }} </span>
+          </div>
+          <div class="skillCounter">
+            <img class="extraSkill" src='/images/skills_VP-music.png'>
+            <span> {{ player.skillCounter_VP[2] }} </span>
+          </div>
+          <div class="skillCounter">
+            <img class="extraSkill" src='/images/skills_VP-movie.png'>
+            <span> {{ player.skillCounter_VP[3] }} </span>
+          </div>
+          <div class="skillCounter">
+            <img class="extraSkill" src='/images/skills_VP-technology.png'>
+            <span> {{ player.skillCounter_VP[4] }} </span>
+          </div>
+        </div>
         <img class="skillSymbol" src='/images/skills_VP-.png'>
         <span> {{ player.skillCounter[4] }} </span>
       </div>
@@ -59,32 +81,45 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
         <img class="skillSymbol" src='/images/skills_VP-all.png'>
         <span> {{ player.skillCounter[5] }} </span>
       </div>
+
+      <!-- DETTA KAN TAS BORT OM VI ÄR OK MED ITEMCOUNTERN, SKILLPOPUP OCH HANDPOPUP
+      <div class="categoryHand">
+      <h2>Your hand</h2>
+    </div>
+    <div class="playerslots Yhand" >
+
+    <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
+  </div>
+
+   <div class="categoryItems">
+  <h2>Your items </h2>
+  </div>
+
+  <div class="playerslots Yitems">
+
+  <CollectorsCard v-for="(card, index) in player.items" :card="card" :key="'item'+ index" />
+  </div>
+
+  <div class="categorySkill">
+  <h2>Your skills</h2>
+  </div>
+
+  <div class="playerslots Yskills">
+  <CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
+  </div>
+  </div>-->
+
+
     </div>
 
     <div class="clickToSee">
-      <!-- <div class="yourSkills playerSymbols">
-        <div class="popup" style= "position:relative; left:0em; top:0em;">
-          <img src='/images/your_skills.png' alt="See your skills" width="20%" @click='getYourInfo("yourSkills")' >
-          <div class="popuptext" id="yourSkillsPopup" style= "left:10em; top:-3em;">
-            <h2>{{ labels.yourSkills }}</h2>
-            <div class="playerslots Yskills">
-              <CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
-            </div>
-            <br>
-            <button class="closeButton"  @click='getYourInfo("yourSkills")'>close</button>
-          </div>
-          <span>
-            {{ player.skills.length }}
-          </span>
-        </div>
-      </div> -->
 
       <div class="yourHand playerSymbols">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
           <img src='/images/your_hand150.png' alt="See your hand" width="65%" @click='getYourInfo("yourHand")' >
           <div class="popuptext" id="yourHandPopup"  style= "left:10em; top:-3em;">
             <h2>{{ labels.yourHand }}</h2>
-            <div class="playerslots Yhand" >
+            <div class="playerslots" >
               <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
             </div>
             <br>
@@ -130,34 +165,6 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
       </div>
 
     </div>
-
-
-    <!-- DETTA KAN TAS BORT OM VI ÄR OK MED ITEMCOUNTERN, SKILLPOPUP OCH HANDPOPUP
-    <div class="categoryHand">
-    <h2>Your hand</h2>
-  </div>
-  <div class="playerslots Yhand" >
-
-  <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
-</div>
-
-<div class="categoryItems">
-<h2>Your items </h2>
-</div>
-
-<div class="playerslots Yitems">
-
-<CollectorsCard v-for="(card, index) in player.items" :card="card" :key="'item'+ index" />
-</div>
-
-<div class="categorySkill">
-<h2>Your skills</h2>
-</div>
-
-<div class="playerslots Yskills">
-<CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
-</div>
-</div>-->
 
 
 </template>
@@ -261,12 +268,47 @@ PLAYER BOARD (GRID)                 */
   grid-template-columns: repeat(auto-fill, 16.66%);
 }
 
+.moreSkillCounters {
+  display: flex;
+}
+
 .itemSymbol {
   width: 65%;
 }
 
 .skillSymbol {
   width: 40%;
+}
+
+.extraSkill {
+  width: 55%;
+}
+
+.hoverSkill {
+  position:relative;
+}
+
+.moreSkills {
+  bottom: 120%;
+  right: -100%;
+  width: 400%;
+  height: 100%;
+  padding: 10%;
+  background-color: #fff;
+  border: solid thin #4E4E4E;
+  color: #4E4E4E;
+  border-radius: 5px;
+  opacity: 0;
+  position: absolute;
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -ms-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+.hoverSkill:hover .moreSkills {
+  opacity: 1;
 }
 
 h2 { padding-left: 7%; }

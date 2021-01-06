@@ -10,13 +10,30 @@
         <div class="popup" style= "position:relative; left:0em; top:0em;">
         <span class="popupHowToInfoText" id="myHowToInfoPopup"  style= "left:0em; top:0em;">
           <!-- <a href="/images/rules_collectors.pdf" >Click here to open rules</a> -->
+          <h1>{{ this.labels.rules }}</h1>
           <embed src="/images/rules_collectors.pdf" width="1800em" height="950em"/>
           <br>
-          <button class="closeButton" v-on:click="getHowToInfo()" >close</button>
+          <button class="closeButton" v-on:click="getHowToInfo()" > {{this.labels.close}} </button>
         </span>
         </div>
 
-        <button class="buttons" v-on:click="changeImage()"> {{ this.labels.nextQuarter }}</button>
+        <button class="buttons" v-on:click="nextQuarterInfo()"> {{ this.labels.nextQuarter }}</button>
+        <div class="popup" style= "position:relative; left:0em; top:0em;">
+        <span class="popupNextQuarterText" id="myQuarterInfoPopup"  style= "left:0em; top:0em;">
+          <!-- <a href="/images/rules_collectors.pdf" >Click here to open rules</a> -->
+          <h1>{{ this.labels.nextQuarter }}</h1>
+          {{labels.newQuarterInfo}}
+          <br>
+          <br>
+          <h1>{{ this.labels.howToBottles }}</h1>
+          {{labels.howToInfo}}
+
+          <button class="buttons getButton" v-on:click="nextQuarterInfo()" > {{this.labels.getCoins}} </button>
+          <button class="buttons getButton" v-on:click="drawCard()" > {{this.labels.getCards}} </button>
+          <button class="buttons" v-on:click="nextQuarter()" > {{this.labels.nextQuarterClose}} </button>
+          <button class="closeButton" v-on:click="nextQuarterInfo()" > {{this.labels.close}} </button>
+        </span>
+        </div>
 
       </div>
 
@@ -24,20 +41,27 @@
 
       <div class="info right">
 
-        <!-- NY FAKE MONEY-KNAPP -->
-        <input type="image" @click="getMoney" id="getMoneyButton" alt="Login"
+          <div class="hoverButton hoverCoin">
+            <div class="getButtons">
+              <p>{{ labels.getCoins }}</p>
+            </div>
+            <input type="image" @click="getMoney" id="getMoneyButton" alt="Login"
         src='/images/coin100pxwhite.png' value="Get Money"  >
+          </div>
 
-        <input type="image" @click="drawCard" id="drawCardButton" alt="Login"
-        src='/images/card_backside_flipped.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
+          <div class="hoverButton hoverCard">
+            <div class="getButtons">
+              <p>{{ labels.draw }}</p>
+            </div>
+            <input type="image" @click="drawCard" id="drawCardButton" alt="Login"
+            src='/images/card_backside_flipped.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
+          </div>
 
-        <!-- <button class="buttons" @click="player.money += 1">
-          Fake money
-        </button> -->
-
-        <p class="gameLog">
-          {{ this.labels.startLog }}
-        </p>
+        <div class="gameLog">
+          <p>
+            {{ this.labels.startLog }}
+          </p>
+        </div>
 
 
       </div>
@@ -476,7 +500,18 @@ getHowToInfo:function(){
       var popupwork = document.getElementById("myHowToInfoPopup");
       popupwork.classList.toggle("show");
 },
-changeImage: function(){
+nextQuarterInfo:function(){
+      var popupwork = document.getElementById("myQuarterInfoPopup");
+      popupwork.classList.toggle("show");
+},
+nextQuarter:function(){
+  this.changeImageNextQuarter();
+  this.nextQuarterInfo();
+  //här ska saker hända!!!!! DANI
+
+
+},
+changeImageNextQuarter: function(){
   //  console.log("innan if " + document.getElementById("imgClickAndChange").src);
     if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_1.PNG")
     {
@@ -552,7 +587,6 @@ header {
 
 .info {
   display: flex;
-  align-items: flex-end;
   padding: 0 5%;
 }
 
@@ -562,11 +596,18 @@ header {
 
 .right {
   grid-area: rightInfo;
-  display: flex;
+  display: grid;
+  grid-template-columns: 15% 30% 55%;
+  grid-template-areas:
+    "hoverCoin hoverCard gameLog";
   font-weight: bold;
 }
 
+.hoverCoin { grid-area: hoverCoin; }
+.hoverCard { grid-area: hoverCard; }
+
 .gameLog {
+  grid-area: gameLog;
   color: red;
   margin-left: 2%;
 }
@@ -595,20 +636,46 @@ BUTTONS                    */
   box-shadow: inset 2px 2px 3px #787975;
 }
 
+.hoverButton {
+  position:relative;
+}
+
+.getButtons {
+  padding: 5%;
+  width: 80%;
+  background-color: #f2f2f2;
+  border: solid thin #4E4E4E;
+  color: #4E4E4E;
+  font-size: 0.6em;
+  border-radius: 5px;
+  opacity: 0;
+  position: absolute;
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -ms-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+.hoverButton:hover .getButtons {
+  opacity: 1;
+}
+.getButton{
+  background-color: green;
+}
+
 .closeButton {
   width: 30%;
   color: #292929;
-  font-size: 1em;
   font-weight: bold;
   background: #FAC84C;
   border: solid thin #787975;
   border-radius: 0.3em;
   padding: 0.6em;
-  margin: 3%;
   box-shadow: 2px 2px 3px #787975;
   font-size: 1.2em;
   background: #e63b2b;
-  margin: 5% 0;
+  margin: 1% 0;
 }
 
 .closeButton:hover, .drawCardButton:hover {
@@ -633,7 +700,7 @@ BUTTONS                    */
 #drawCardButton {
   border-radius: 0.3em;
   box-shadow: 0.2em 0.2em 0.3em #787975;
-  width: 20%;
+  width: 70%;
 }
 
 /*  ===========================  */
@@ -750,11 +817,6 @@ PLAYER BOARD                          */
   margin-top: 4%;
 }
 
-
-/* .buttonText, .buttonImg {          //TROR EJ DETTA ÄR NÖDVÄNDIGT LÄNGRE
-margin: 0;
-padding: 0;
-} */
 .buttonText {
   padding: 0.05em;
   font-size: 0.9em;
@@ -868,6 +930,24 @@ footer a:visited {
   border-width: 1px;
   border-style:solid;
 }
+.popupNextQuarterText {
+  position: absolute;
+  display: none;
+  cursor: pointer;
+  width: 25em;
+  user-select: none;
+  background-color: #f3f3f3; /*bakgrund popup*/
+  color: black; /*textfärg popup*/
+  text-align: center;
+  border-radius: 0px;
+  padding: 20px 20px;  /*padding popup*/
+  z-index: 1;
+  margin-left: 0em;
+  border-color: grey;
+  border-width: 1px;
+  border-style:solid;
+}
+
 
 
 @media screen and (max-width: 800px) {

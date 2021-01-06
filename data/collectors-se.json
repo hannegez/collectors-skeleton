@@ -1,5 +1,6 @@
 {
 	"draw": "Dra kort",
+	"getCoins": "Hämta mynt",
 	"invite": "Bjud in andra spelare med denna länk:",
 	"endTurn": "Avsluta runda",
 	"buyItem": "Köp ett item",
@@ -16,6 +17,8 @@
 	"valueInfo":" öka värde fungerar såhär",
 	"workInfo":" arbete fungerar såhär",
 	"nextQuarter": "Nästa kvartal",
+	"nextQuarterClose": "Ändra till nästa kvartal och stäng rutan",
+	"newQuarterInfo": "Information om nästa kvartal",
 	"rules": "Hur spelar man?",
 	"startLog": "Låt oss börja spela!",
 	"yourSkills": "Dina färdigheter",
@@ -23,5 +26,11 @@
 	"yourBottles": "Dina flaskor",
 	"bottleInfo": "Om du har fler än 2 totalt antal flaskor när ett nytt kvartal börjar måste du välja... blabla",
 	"bottlesLeft": "Antal flaskor kvar:",
-	"totalBottles": "Totalt antal flaskor:"
+	"totalBottles": "Totalt antal flaskor:",
+	"getCoins": "Ta peng",
+	"getCards": " Ta kort",
+	"close": " Stäng",
+	"howToBottles": "Hur man väljer antal kort och pengar",
+	"howToInfo":"Har du två eller färre flaskor får du ta tre mynt och ett kort. Har du tre flaskor får du välja, två mynt och ett kort eller tre mynt. Har du fyra flaskor får du välja mellan 2 mynt eller ett kort. Har du fem eller fler kort får du inget extra. "
+
 }

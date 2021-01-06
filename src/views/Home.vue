@@ -11,7 +11,7 @@
         <!-- <a href="/images/rules_collectors.pdf" >Click here to open rules</a> -->
         <embed src="/images/rules_collectors.pdf" width="2000em" height="950em"/>
         <br>
-        <button class="closeButton" v-on:click="getHowToInfo()" >close</button>
+        <button class="closeButton" v-on:click="getHowToInfo()" >Close</button>
       </span>
       </div>
 
@@ -97,7 +97,7 @@ export default {
 
   h2 {
     font-size: 1.2em;
-    margin: 1em 0;
+    margin: 0.4em 0;
   }
 
   p {
@@ -152,5 +152,13 @@ export default {
 .popupInfo .show {
   display: block;
 }
+
+
+
+
+
+
+
+
 
   </style>

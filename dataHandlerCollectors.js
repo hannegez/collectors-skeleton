@@ -212,42 +212,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                 let deck = [...this.data[collectorsDeck]];
                 return shuffle(deck);
               }
-<<<<<<< HEAD
 
-              Data.prototype.joinGame = function (roomId, playerId) {
-                let room = this.rooms[roomId];
-                if (typeof room !== 'undefined') {
-                  if (typeof room.players[playerId] !== 'undefined') {
-                    console.log("Player", playerId, "joined again with info", room.players[playerId]);
-                    return true;
-                  }
-                  else if (Object.keys(room.players).length < room.playerCount) {
-                    console.log("Player", playerId, "joined for the first time");
-                    room.players[playerId] = { hand: [],
-                      money: 1,
-                      points: 0,
-                      skills: [],
-                      items: [],
-                      /*         itemCounter: { 'fastaval' : 0,
-                      'figures' : 0,
-                      'music' : 0,
-                      'movie' : 0,
-                      'technology' : 0 }, //LYCKADES INTE MED DETTA FÖRST, VILL GÖRA LIKNANDE PÅ skillCounter /KARRO */
-                      itemCounter: [0,0,0,0,0], //FÖRENKLING: fastaval, figures, music, movie, technology, /KARRO
-                      skillCounter: [0,0,0,0,0,0], //FÖRENKLING: workerIncome, workerCard, bottle, auctionIncome, VP-, VP-all /KARRO
-                      income: [],
-                      futureIncome: 0, //ska sättas till längden av income när man väljer work som resulterar i income
-                      secret: [],
-                      totalBottles: 2, //ska ökas med en när man skaffar en bottle-skill
-                      bottlesLeft: 2}; //ska minska med en varje gång man gör ett drag, när allas är 0 ändras quarter
-                      return true;
-                    }
-                    console.log("Player", playerId, "was declined due to player limit");
-                  }
-                  return false;
-                }
-=======
->>>>>>> c913092f6eec34bd4ccb26334c2bc5a899a264dc
 
               Data.prototype.joinGame = function (roomId, playerId) {
                 let room = this.rooms[roomId];
@@ -283,12 +248,46 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                 }
 
 
+              Data.prototype.joinGame = function (roomId, playerId) {
+                let room = this.rooms[roomId];
+                if (typeof room !== 'undefined') {
+                  if (typeof room.players[playerId] !== 'undefined') {
+                    console.log("Player", playerId, "joined again with info", room.players[playerId]);
+                    return true;
+                  }
+                  else if (Object.keys(room.players).length < room.playerCount) {
+                    console.log("Player", playerId, "joined for the first time");
+                    room.players[playerId] = { hand: [],
+                      money: 1,
+                      points: 0,
+                      skills: [],
+                      items: [],
+                      /*         itemCounter: { 'fastaval' : 0,
+                      'figures' : 0,
+                      'music' : 0,
+                      'movie' : 0,
+                      'technology' : 0 }, //LYCKADES INTE MED DETTA FÖRST, VILL GÖRA LIKNANDE PÅ skillCounter /KARRO */
+                      itemCounter: [0,0,0,0,0], //FÖRENKLING: fastaval, figures, music, movie, technology, /KARRO
+                      skillCounter: [0,0,0,0,0,0], //FÖRENKLING: workerIncome, workerCard, bottle, auctionIncome, VP-, VP-all /KARRO
+                      income: [],
+                      futureIncome: 0, //ska sättas till längden av income när man väljer work som resulterar i income
+                      secret: [],
+                      totalBottles: 2, //ska ökas med en när man skaffar en bottle-skill
+                      bottlesLeft: 2}; //ska minska med en varje gång man gör ett drag, när allas är 0 ändras quarter
+                      return true;
+                    }
+                    console.log("Player", playerId, "was declined due to player limit");
+                  }
+                  return false;
+                }
 
 
 
 
 
-                
+
+
+
 
 
 
@@ -381,7 +380,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                             let room = this.rooms[roomId];
                             if (typeof room !== 'undefined') {
                               room.players[playerId].futureIncome += 1;
-<<<<<<< HEAD
+
                               let c = null;
                               for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
                                 if (room.players[playerId].hand[i].x === card.x &&
@@ -393,7 +392,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                 room.market.push(...c);
 
                               }
-=======
+
                               console.log("Data.prototype.startWork futureIncome: " + room.players[playerId].futureIncome );
 
                               /*
@@ -428,8 +427,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
 
 
                       }
-                    }
->>>>>>> c913092f6eec34bd4ccb26334c2bc5a899a264dc
+
 
 
 
@@ -447,9 +445,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                               c = room.skillsOnSale.splice(i,1, {});
                               break;
                             }
-<<<<<<< HEAD
 
-=======
                           }
                           // ...then check if it is in the hand. It cannot be in both so it's safe
                           for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
@@ -468,7 +464,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                               room.players[playerId].totalBottles += 1;
                               room.players[playerId].bottlesLeft += 1;
                             }
->>>>>>> c913092f6eec34bd4ccb26334c2bc5a899a264dc
+
 
                             //ÄVEN HÄR EN JÄTTEFUL LÖSNING PÅ SKILLCOUNTER!
                             if ( card.skill === 'workerIncome' ) {
@@ -638,7 +634,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                 else return [];
                               }
 
-<<<<<<< HEAD
+
                                 //------------------------------------------------------------------------------------//
 
                                 /* returns the hand of the player */
@@ -649,12 +645,13 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                     return room.players[i].hand;
                                   }
                                   else return [];
-=======
+                                }
+
                               Data.prototype.getSkillsOnSale = function(roomId){
                                 let room = this.rooms[roomId];
                                 if (typeof room !== 'undefined') {
                                   return room.skillsOnSale;
->>>>>>> c913092f6eec34bd4ccb26334c2bc5a899a264dc
+
                                 }
                                 else return [];
                               }

@@ -314,7 +314,7 @@ export default {
   //HÄÄR SKA FUTURE INCOME LÄGGAS IN!!!!!!!
   this.$store.state.socket.on('collectorsWorkStarted',
   function(d) {
-    document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
+    document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`; //MÅSTE FIXAS
     this.players = d.players;
   //  this.auctionCards = d.auctionCards;
   //  this.auctionSpot = d.auctionSpot; //TEST ???

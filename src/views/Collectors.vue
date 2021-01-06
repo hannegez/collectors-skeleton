@@ -459,7 +459,7 @@ startAuction: function (card) {
 );
 },
 startWork: function (card) {
-  /*console.log("startWork", card);   //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
+  console.log("startWork ", card);   //GÅR ENDAST IN HÄR DÅ MAN TRYCKER PÅ ETT KORT
   this.$store.state.socket.emit('CollectorsStartWork', {
     roomId: this.$route.params.id,
     playerId: this.playerId,

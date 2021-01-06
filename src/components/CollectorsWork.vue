@@ -33,19 +33,20 @@
 
       </div>
     </div>
-
+    <!--försöker koppla till start work, sista kopplar för att kortenfinns men emit fungerar ej DANI-->
     <div class="workImages">
       <br>
-      <img alt="" src="/images/quartertile_1.PNG"
+
+      <img @click="startWork()" alt="" src="/images/quartertile_1.PNG"
             height="65%" id="imgClickAndChange"   />
 
 
       <br>
-      <img src="/images/work_recycle.png" alt="" width="25%">
+      <img @click="$emit('startWork', card)" src="/images/work_recycle.png" alt="" width="25%">
         <br>
-      <img src="/images/work_gainTwo.png" alt="" height="36%">
+      <img @click="$emit('startWork', card)" src="/images/work_gainTwo.png" alt="" height="36%">
         <br>
-      <img src="/images/work_firstPlayer.png" alt="" height="36%">
+      <img @click="$emit('startWork', card)" src="/images/work_firstPlayer.png" alt="" height="36%">
         <br>
       <img src="/images/work_futureIncome.png" alt="" height="36%">
     </div>
@@ -76,6 +77,9 @@ export default {
     placeWorkBottle: function (p) {
       this.$emit('placeWorkBottle', p); //emitta hela p.
     },
+    startWork: function () {
+      this.$emit('startWork'); //emitta hela p.
+    },
     setAvailable: function (card) {
       this.$set(card, "available", true);
     },
@@ -91,14 +95,14 @@ export default {
         }
       }
     },
-    startWork: function (card) {//skicka placerin/textsträng till startWork ex actiion
+/*    startWork: function (card) {//skicka placerin/textsträng till startWork ex actiion
       console.log("startWork 1" + card);
-      if (card.available) {
+     if (card.available) {
         this.$emit('startWork', card); //skicka placerin/textsträng till startWork ex actiion
         console.log("startWork 2" + card);
 
       }
-    },
+    }, */
 
 
   }

@@ -26,9 +26,16 @@
           <br>
           <br>
           <h1>{{ this.labels.howToBottles }}</h1>
-          {{labels.howToInfo}}
+          <br>
+          {{labels.howToInfo1}}
+          <br>
+          {{labels.howToInfo2}}
+          <br>
+          {{labels.howToInfo3}}
+          <br>
+          {{labels.howToInfo4}}
 
-          <button class="buttons getButton" v-on:click="nextQuarterInfo()" > {{this.labels.getCoins}} </button>
+          <button class="buttons getButton" v-on:click="getMoney()" > {{this.labels.getCoins}} </button>
           <button class="buttons getButton" v-on:click="drawCard()" > {{this.labels.getCards}} </button>
           <button class="buttons" v-on:click="nextQuarter()" > {{this.labels.nextQuarterClose}} </button>
           <button class="closeButton" v-on:click="nextQuarterInfo()" > {{this.labels.close}} </button>

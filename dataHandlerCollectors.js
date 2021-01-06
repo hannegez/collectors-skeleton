@@ -226,42 +226,6 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                 return shuffle(deck);
               }
 
-
-              Data.prototype.joinGame = function (roomId, playerId) {
-                let room = this.rooms[roomId];
-                if (typeof room !== 'undefined') {
-                  if (typeof room.players[playerId] !== 'undefined') {
-                    console.log("Player", playerId, "joined again with info", room.players[playerId]);
-                    return true;
-                  }
-                  else if (Object.keys(room.players).length < room.playerCount) {
-                    console.log("Player", playerId, "joined for the first time");
-                    room.players[playerId] = { hand: [],
-                      money: 1,
-                      points: 0,
-                      color: room.playerColors.splice(0, 1),
-                      skills: [],
-                      items: [],
-                      /*         itemCounter: { 'fastaval' : 0,
-                      'figures' : 0,
-                      'music' : 0,
-                      'movie' : 0,
-                      'technology' : 0 }, //LYCKADES INTE MED DETTA FÖRST, VILL GÖRA LIKNANDE PÅ skillCounter /KARRO */
-                      itemCounter: [0,0,0,0,0], //FÖRENKLING: fastaval, figures, music, movie, technology, /KARRO
-                      skillCounter: [0,0,0,0,0,0], //FÖRENKLING: workerIncome, workerCard, bottle, auctionIncome, VP-, VP-all /KARRO
-                      income: [],
-                      futureIncome: 0, //ska sättas till längden av income när man väljer work som resulterar i income
-                      secret: [],
-                      totalBottles: 2, //ska ökas med en när man skaffar en bottle-skill
-                      bottlesLeft: 2}; //ska minska med en varje gång man gör ett drag, när allas är 0 ändras quarter
-                      return true;
-                    }
-                    console.log("Player", playerId, "was declined due to player limit");
-                  }
-                  return false;
-                }
-
-
                 Data.prototype.joinGame = function (roomId, playerId) {
                   let room = this.rooms[roomId];
                   if (typeof room !== 'undefined') {
@@ -274,6 +238,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                       room.players[playerId] = { hand: [],
                         money: 1,
                         points: 0,
+                        color: room.playerColors.shift(),
                         skills: [],
                         items: [],
                         /*         itemCounter: { 'fastaval' : 0,

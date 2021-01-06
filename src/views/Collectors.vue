@@ -16,7 +16,7 @@
         </span>
         </div>
 
-        <button class="buttons" v-on:click="changeImage()"> {{ this.labels.nextQuarter }}</button>
+        <button class="buttons" v-on:click="changeImageTest()"> {{ this.labels.nextQuarter }}</button>
 
       </div>
 
@@ -463,7 +463,11 @@ getHowToInfo:function(){
       var popupwork = document.getElementById("myHowToInfoPopup");
       popupwork.classList.toggle("show");
 },
-changeImage: function(){
+changeImageTest:function(){
+  this.changeImageNextQuarter();
+  //här ska saker hända!!!!! DANI
+},
+changeImageNextQuarter: function(){
   //  console.log("innan if " + document.getElementById("imgClickAndChange").src);
     if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_1.PNG")
     {

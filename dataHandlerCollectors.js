@@ -213,6 +213,41 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                 return shuffle(deck);
               }
 
+
+              Data.prototype.joinGame = function (roomId, playerId) {
+                let room = this.rooms[roomId];
+                if (typeof room !== 'undefined') {
+                  if (typeof room.players[playerId] !== 'undefined') {
+                    console.log("Player", playerId, "joined again with info", room.players[playerId]);
+                    return true;
+                  }
+                  else if (Object.keys(room.players).length < room.playerCount) {
+                    console.log("Player", playerId, "joined for the first time");
+                    room.players[playerId] = { hand: [],
+                      money: 1,
+                      points: 0,
+                      skills: [],
+                      items: [],
+                      /*         itemCounter: { 'fastaval' : 0,
+                      'figures' : 0,
+                      'music' : 0,
+                      'movie' : 0,
+                      'technology' : 0 }, //LYCKADES INTE MED DETTA FÖRST, VILL GÖRA LIKNANDE PÅ skillCounter /KARRO */
+                      itemCounter: [0,0,0,0,0], //FÖRENKLING: fastaval, figures, music, movie, technology, /KARRO
+                      skillCounter: [0,0,0,0,0,0], //FÖRENKLING: workerIncome, workerCard, bottle, auctionIncome, VP-, VP-all /KARRO
+                      income: [],
+                      futureIncome: 0, //ska sättas till längden av income när man väljer work som resulterar i income
+                      secret: [],
+                      totalBottles: 2, //ska ökas med en när man skaffar en bottle-skill
+                      bottlesLeft: 2}; //ska minska med en varje gång man gör ett drag, när allas är 0 ändras quarter
+                      return true;
+                    }
+                    console.log("Player", playerId, "was declined due to player limit");
+                  }
+                  return false;
+                }
+
+
               Data.prototype.joinGame = function (roomId, playerId) {
                 let room = this.rooms[roomId];
                 if (typeof room !== 'undefined') {
@@ -342,12 +377,23 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                             }
                           }
                           // lös problemet med att pengar inte dras bort
-                          Data.prototype.startWork = function (roomId, playerId, cost, workAction) { // bör läggas till workAction?
+                          Data.prototype.startWork = function (roomId, playerId, card, cost, workAction) { // bör läggas till workAction?
                             let room = this.rooms[roomId];
                             if (typeof room !== 'undefined') {
-                              console.log(workAction + "Går in här när workaction === 5");
-                              console.log("Data.prototype.startWork futureIncome: " + room.players[playerId].futureIncome );
                               room.players[playerId].futureIncome += 1;
+
+                              let c = null;
+                              for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
+                                if (room.players[playerId].hand[i].x === card.x &&
+                                  room.players[playerId].hand[i].y === card.y) {
+                                    c = room.players[playerId].hand.splice(i,1);
+                                    break;
+                                  }
+                                }
+                                room.market.push(...c);
+
+                              }
+
                               console.log("Data.prototype.startWork futureIncome: " + room.players[playerId].futureIncome );
 
                               /*
@@ -382,7 +428,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
 
 
                       }
-                    }
+
 
 
 
@@ -400,6 +446,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                               c = room.skillsOnSale.splice(i,1, {});
                               break;
                             }
+
                           }
                           // ...then check if it is in the hand. It cannot be in both so it's safe
                           for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
@@ -418,6 +465,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                               room.players[playerId].totalBottles += 1;
                               room.players[playerId].bottlesLeft += 1;
                             }
+
 
                             //ÄVEN HÄR EN JÄTTEFUL LÖSNING PÅ SKILLCOUNTER!
                             if ( card.skill === 'workerIncome' ) {
@@ -603,10 +651,24 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                 else return [];
                               }
 
+
+                                //------------------------------------------------------------------------------------//
+
+                                /* returns the hand of the player */
+                                Data.prototype.getCards = function (roomId, playerId) {
+                                  let room = this.rooms[roomId];
+                                  if (typeof room !== 'undefined') {
+                                    let i = room.players.map(d => d.playerId).indexOf(playerId)
+                                    return room.players[i].hand;
+                                  }
+                                  else return [];
+                                }
+
                               Data.prototype.getSkillsOnSale = function(roomId){
                                 let room = this.rooms[roomId];
                                 if (typeof room !== 'undefined') {
                                   return room.skillsOnSale;
+
                                 }
                                 else return [];
                               }

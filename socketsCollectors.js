@@ -58,7 +58,7 @@ function sockets(io, socket, data) {
     );
   });
   socket.on('CollectorsStartWork', function(d) {
-    data.startWork(d.roomId, d.playerId, d.cost, d.workAction)
+    data.startWork(d.roomId, d.playerId, d.card, d.cost, d.workAction)
     io.to(d.roomId).emit('collectorsWorkStarted', {
         playerId: d.playerId,
         players: data.getPlayers(d.roomId),

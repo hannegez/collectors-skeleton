@@ -10,6 +10,7 @@
         <div class="popup" style= "position:relative; left:0em; top:0em;">
         <span class="popupHowToInfoText" id="myHowToInfoPopup"  style= "left:0em; top:0em;">
           <!-- <a href="/images/rules_collectors.pdf" >Click here to open rules</a> -->
+          <h1>{{ this.labels.rules }}</h1>
           <embed src="/images/rules_collectors.pdf" width="1800em" height="950em"/>
           <br>
           <button class="closeButton" v-on:click="getHowToInfo()" >close</button>
@@ -18,11 +19,14 @@
 
         <button class="buttons" v-on:click="nextQuarter()"> {{ this.labels.nextQuarter }}</button>
         <div class="popup" style= "position:relative; left:0em; top:0em;">
-        <span class="popupHowToInfoText" id="myHowToInfoPopup"  style= "left:0em; top:0em;">
+        <span class="popupNextQuarterText" id="myQuarterInfoPopup"  style= "left:0em; top:0em;">
           <!-- <a href="/images/rules_collectors.pdf" >Click here to open rules</a> -->
-          <embed src="/images/rules_collectors.pdf" width="1800em" height="950em"/>
+          <h1>{{ this.labels.nextQuarter }}</h1>
+          {{labels.newQuarterInfo}}
           <br>
-          <button class="closeButton" v-on:click="getHowToInfo()" >close</button>
+          <button class="buttons getButton" v-on:click="nextQuarterInfo()" > {{this.labels.getCoins}} </button>
+          <button class="buttons getButton" v-on:click="nextQuarterInfo()" > {{this.labels.getCards}} </button>
+          <button class="closeButton" v-on:click="nextQuarterInfo()" >close</button>
         </span>
         </div>
 
@@ -471,9 +475,13 @@ getHowToInfo:function(){
       var popupwork = document.getElementById("myHowToInfoPopup");
       popupwork.classList.toggle("show");
 },
+nextQuarterInfo:function(){
+      var popupwork = document.getElementById("myQuarterInfoPopup");
+      popupwork.classList.toggle("show");
+},
 nextQuarter:function(){
   this.changeImageNextQuarter();
-  this.getHowToInfo();
+  this.nextQuarterInfo();
   //här ska saker hända!!!!! DANI
 
 
@@ -597,20 +605,22 @@ BUTTONS                    */
   box-shadow: inset 2px 2px 3px #787975;
 }
 
+.getButton{
+  background-color: green;
+}
+
 .closeButton {
   width: 30%;
   color: #292929;
-  font-size: 1em;
   font-weight: bold;
   background: #FAC84C;
   border: solid thin #787975;
   border-radius: 0.3em;
   padding: 0.6em;
-  margin: 3%;
   box-shadow: 2px 2px 3px #787975;
   font-size: 1.2em;
   background: #e63b2b;
-  margin: 5% 0;
+  margin: 1% 0;
 }
 
 .closeButton:hover, .drawCardButton:hover {
@@ -870,6 +880,24 @@ footer a:visited {
   border-width: 1px;
   border-style:solid;
 }
+.popupNextQuarterText {
+  position: absolute;
+  display: none;
+  cursor: pointer;
+  width: 25em;
+  user-select: none;
+  background-color: #f3f3f3; /*bakgrund popup*/
+  color: black; /*textfärg popup*/
+  text-align: center;
+  border-radius: 0px;
+  padding: 20px 20px;  /*padding popup*/
+  z-index: 1;
+  margin-left: 0em;
+  border-color: grey;
+  border-width: 1px;
+  border-style:solid;
+}
+
 
 
 @media screen and (max-width: 800px) {

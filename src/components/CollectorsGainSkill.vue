@@ -8,6 +8,7 @@
       <div class="popup" style= "position:relative; left:0em; top:0em;">
       <img src='/images/gainSkill.PNG' alt="Gain skill" width="70%" @click="$emit('getInfo')" >
       <span class="popuptext" id="mySkillPopup"  style= "left:10em; top:-3em;">
+        <h1>{{ labels.gainSkill }}</h1>
         {{ labels.skillInfo }}
 
         <br>

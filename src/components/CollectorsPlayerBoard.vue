@@ -51,7 +51,29 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
         <img class="skillSymbol" src='/images/skills_auctionIncome.png'>
         <span> {{ player.skillCounter[3] }} </span>
       </div>
-      <div class="skillCounter">
+      <div class="skillCounter hoverSkill">
+        <div class="moreSkills moreSkillCounters">
+          <div class="skillCounter">
+            <img class="extraSkill" src='/images/skills_VP-fastaval.png'>
+            <span> {{ player.skillCounter[3] }} </span>
+          </div>
+          <div class="skillCounter">
+            <img class="extraSkill" src='/images/skills_VP-figures.png'>
+            <span> {{ player.skillCounter[3] }} </span>
+          </div>
+          <div class="skillCounter">
+            <img class="extraSkill" src='/images/skills_VP-music.png'>
+            <span> {{ player.skillCounter[3] }} </span>
+          </div>
+          <div class="skillCounter">
+            <img class="extraSkill" src='/images/skills_VP-movie.png'>
+            <span> {{ player.skillCounter[3] }} </span>
+          </div>
+          <div class="skillCounter">
+            <img class="extraSkill" src='/images/skills_VP-technology.png'>
+            <span> {{ player.skillCounter[3] }} </span>
+          </div>
+        </div>
         <img class="skillSymbol" src='/images/skills_VP-.png'>
         <span> {{ player.skillCounter[4] }} </span>
       </div>
@@ -261,6 +283,10 @@ PLAYER BOARD (GRID)                 */
   grid-template-columns: repeat(auto-fill, 16.66%);
 }
 
+.moreSkillCounters {
+  display: flex;
+}
+
 .itemSymbol {
   width: 65%;
 }
@@ -268,6 +294,61 @@ PLAYER BOARD (GRID)                 */
 .skillSymbol {
   width: 40%;
 }
+
+.extraSkill {
+  width: 55%;
+}
+
+.hoverSkill {
+  position:relative;
+}
+
+.moreSkills {
+  /* hide and position tooltip */
+  bottom: 120%;
+  right: -100%;
+  width: 400%;
+  height: 100%;
+  padding: 10%;
+  background-color: #fff;
+  border: solid thin #4E4E4E;
+  color: #4E4E4E;
+  border-radius: 5px;
+  opacity: 0;
+  position: absolute;
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -ms-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+.hoverSkill:hover .moreSkills {
+  /* display tooltip on hover */
+  opacity: 1;
+}
+
+/* .hoverSkill:before {
+  content: attr(data-text);
+  position:absolute;
+
+  right:-120%;
+  bottom:115%;
+
+  width:200px;
+  padding:10px;
+  border-radius:10px;
+  background:#ececec;
+  border: solid thin #4E4E4E;
+  color: #4E4E4E;
+  text-align:center;
+
+  display:none;
+}
+
+.hoverSkill:hover:before {
+  display:block;
+} */
 
 h2 { padding-left: 7%; }
 

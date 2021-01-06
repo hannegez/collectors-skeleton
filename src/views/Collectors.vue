@@ -30,7 +30,7 @@
 
           <button class="buttons getButton" v-on:click="nextQuarterInfo()" > {{this.labels.getCoins}} </button>
           <button class="buttons getButton" v-on:click="drawCard()" > {{this.labels.getCards}} </button>
-          <button class="buttons" v-on:click="nextQuarterInfo()" > {{this.labels.nextQuarterClose}} </button>
+          <button class="buttons" v-on:click="nextQuarter()" > {{this.labels.nextQuarterClose}} </button>
           <button class="closeButton" v-on:click="nextQuarterInfo()" > {{this.labels.close}} </button>
         </span>
         </div>
@@ -493,7 +493,7 @@ nextQuarterInfo:function(){
 },
 nextQuarter:function(){
   this.changeImageNextQuarter();
-  //this.nextQuarterInfo();
+  this.nextQuarterInfo();
   //här ska saker hända!!!!! DANI
 
 

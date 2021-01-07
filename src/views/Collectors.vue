@@ -568,6 +568,23 @@ raiseValue: function (card) {
   font-family: arial, verdana, sans-serif;
   color: #000;
   padding: 1em;
+  display: grid;
+  grid-template-rows: 6% 75% 5%;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+}
+
+header {
+  display: grid;
+  grid-template-columns: 30% 40% 30%;
+  grid-template-areas:
+  "leftInfo welcome rightInfo";
+  margin: 0;
+  align-items: center;
+  text-align: center;
+  grid-area: header;
 }
 
 h1, h2, h3 {
@@ -582,17 +599,6 @@ h1 {
 
 h2 {
   font-size: 1.3em;
-}
-
-header {
-  display: grid;
-  grid-template-columns: 30% 40% 30%;
-  grid-template-areas:
-  "leftInfo welcome rightInfo";
-  margin: 0;
-  align-items: center;
-  text-align: center;
-  grid-area: header;
 }
 
 .info {
@@ -723,6 +729,7 @@ BUTTONS                    */
 
 main {
   user-select: none;
+  grid-area: main;
   display: grid;
   grid-gap: 0.5em;
   grid-template-columns: 70% 30%;
@@ -738,6 +745,7 @@ p, span {
 
 footer {
   margin-top: 5em auto;
+  grid-area: footer;
 }
 footer a {
   text-decoration: none;
@@ -757,7 +765,7 @@ GAME BOARD (GRID)                 */
   grid-gap: 0.5%;
   display: grid;
   grid-template-columns: 25% 25% 49%;
-  grid-template-rows: 15% 30% 15%;
+  grid-template-rows: 20% 40% 20%;
   grid-template-areas:
   "itemPool itemPool itemPool"
   "skillPool workPool auctionPool"

@@ -117,7 +117,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
       <div class="yourHand playerSymbols">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
           <img src='/images/your_hand150.png' alt="See your hand" width="65%" @click='getYourInfo("yourHand")' >
-          <div class="popuptext" id="yourHandPopup"  style= "left:10em; top:-3em;">
+          <div class="popuptext" id="yourHandPopup"  style= "left:-45vw; top:25vh;">
             <input class="closeCross" type="image" @click="getYourInfo('yourHand')" alt="Login"
             src='/images/close.png' >
             <h2>{{ labels.yourHand }}</h2>
@@ -140,7 +140,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
               Vet dock att player.color finns och har ett värde
           <img :src="bottlePic" alt="See complete bottle info" width="65%" @click='getYourInfo("yourBottles")' > -->
           <img src='/images/playerbottle_basic.png' alt="See complete bottle info" width="65%" @click='getYourInfo("yourBottles")' >
-          <div class="popuptext" id="yourBottlesPopup"  style= "left:10em; top:-3em;">
+          <div class="popuptext" id="yourBottlesPopup"  style= "left:-50vw; top:20vh;">
             <input class="closeCross" type="image" @click="getYourInfo('yourBottles')" alt="Login"
             src='/images/close.png' >
             <h2>{{ labels.yourBottles }}</h2>

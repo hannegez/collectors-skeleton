@@ -8,9 +8,20 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
       <h2>{{labels.playerInfo}} {{playerId}}</h2>
     </div>
 
-    <!--  OBS: dessa item/skillsymboler och counters vill vi egentligen lösa med en for-loop och lagra counters i ett objekt
-    istället så att vi kan komma åt dem på ett snyggare sätt. Men vi fick det inte att funka och gjorde denna
-    tillfälliga och "osnygga" lösningen så länge. -->
+  <!-- PÅBÖRJAD SNYGGARE LÖSNING
+
+    <div class="itemCounters">
+      <div class="itemCounter">
+        <img v-for="" class="itemSymbol" src='/images/item_fastaval.png'>
+        <span> {{ player.itemCounter[0] }} </span>
+      </div>
+    </div>
+
+-->
+
+<!--  OBS: dessa item/skillsymboler och counters vill vi egentligen lösa med en for-loop och lagra counters i ett objekt
+istället så att vi kan komma åt dem på ett snyggare sätt. Men vi fick det inte att funka och gjorde denna
+tillfälliga och "osnygga" lösningen så länge. -->
     <div class="itemCounters">
       <div class="itemCounter">
         <img class="itemSymbol" src='/images/item_fastaval.png'>
@@ -82,6 +93,10 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
         <span> {{ player.skillCounter[5] }} </span>
       </div>
 
+
+      <div class="playerslots" >
+        <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
+      </div>
       <!-- DETTA KAN TAS BORT OM VI ÄR OK MED ITEMCOUNTERN, SKILLPOPUP OCH HANDPOPUP
       <div class="categoryHand">
       <h2>Your hand</h2>
@@ -107,7 +122,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
   <div class="playerslots Yskills">
   <CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
   </div>
-  </div>-->
+</div> -->
 
 
     </div>
@@ -117,7 +132,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
       <div class="yourHand playerSymbols">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
           <img src='/images/your_hand150.png' alt="See your hand" width="65%" @click='getYourInfo("yourHand")' >
-          <div class="popuptext" id="yourHandPopup"  style= "left:10em; top:-3em;">
+          <div :class="['popuptext', {show:showHand}]" style= "left:-45vw; top:25vh;"> <!--HANDLEDNING tar bort id -->
             <input class="closeCross" type="image" @click="getYourInfo('yourHand')" alt="Login"
             src='/images/close.png' >
             <h2>{{ labels.yourHand }}</h2>
@@ -135,12 +150,8 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
       <div class="yourBottles playerSymbols">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
-
-          <!-- FÖRSÖK ATT FÅ TILL BOTTLEPIC, MEN DEN HITTAR INTE PLAYER ALLS I DATA...
-              Vet dock att player.color finns och har ett värde
-          <img :src="bottlePic" alt="See complete bottle info" width="65%" @click='getYourInfo("yourBottles")' > -->
-          <img src='/images/playerbottle_basic.png' alt="See complete bottle info" width="65%" @click='getYourInfo("yourBottles")' >
-          <div class="popuptext" id="yourBottlesPopup"  style= "left:10em; top:-3em;">
+          <img :src="bottlePic" alt="See complete bottle info" width="75%" @click='getYourInfo("yourBottles")' >
+          <div class="popuptext" id="yourBottlesPopup"  style= "left:-50vw; top:20vh;">
             <input class="closeCross" type="image" @click="getYourInfo('yourBottles')" alt="Login"
             src='/images/close.png' >
             <h2>{{ labels.yourBottles }}</h2>
@@ -185,16 +196,20 @@ export default {
   components: {
     CollectorsCard
   },
-  // FÖRSÖK ATT FÅ TILL BOTTLEPIC
-/*  data: function () {
-    return {
-      bottlePic: '/images/bottle_' + this.player.color + '.png'
-    };
-  }, */
   props: {            //HÄR ÄR ALLA v-binds FRÅN ELEMENTET I Collectors.vue
     labels: Object,  //specify what kind of object
     player: Object,
     playerId: String,
+  },
+  data: function() {
+    return {
+      showHand: false
+    }
+  },
+  computed: {
+    bottlePic: function () {
+    return '/images/bottle_' + this.player.color + '.png';
+    }
   },
   methods: {
     chooseAction(card){
@@ -203,10 +218,12 @@ export default {
     getYourInfo: function(string){
       console.log("inne i getYourInfo", string);
       if (string=="yourSkills") {
-        document.getElementById("yourSkillsPopup").classList.toggle("show");
+
+        //document.getElementById("yourSkillsPopup").classList.toggle("show");
       }
       else if (string=="yourHand") {
-        document.getElementById("yourHandPopup").classList.toggle("show");
+        this.showHand = !this.showHand;
+        // document.getElementById("yourHandPopup").classList.toggle("show");
       }
       else if (string=="yourBottles") {
         document.getElementById("yourBottlesPopup").classList.toggle("show");

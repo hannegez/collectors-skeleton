@@ -37,7 +37,8 @@
           {{labels.howToInfo3}}
           <br>
           {{labels.howToInfo4}}
-
+          <br>
+          {{labels.howToInfo5}}
           <button class="buttons getButton" v-on:click="getMoney()" > {{this.labels.getCoins}} </button>
           <button class="buttons getButton" v-on:click="drawCard()" > {{this.labels.getCards}} </button>
           <button class="buttons" v-on:click="nextQuarter()" > {{this.labels.nextQuarterClose}} </button>
@@ -108,7 +109,6 @@
           :player="players[playerId]"
           :marketValues="marketValues"
           :placement="workPlacement"
-          @startWork="startWork($event)"
           @placeWorkBottle="placeWorkBottle( $event)"
           @getInfo="getInfo('work')"/>
         </div>
@@ -297,6 +297,8 @@ export default {
             this.players= d.players;
             this.placements = d.placements;
             this.workPlacement = d.placements.workPlacement;
+            
+            document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
 
             //GÖR ATT HANDEN LYSER UPP NÄR MAN TRYCKER PÅ 5TE KNAPPEN, GER FELMEDDELANDE LÖS
             for(let c = 0; c < this.players[this.playerId].hand.length; c += 1 ) {
@@ -357,6 +359,8 @@ export default {
     }.bind(this)
   );
   //HÄÄR SKA FUTURE INCOME LÄGGAS IN!!!!!!!
+
+  // DANI
   this.$store.state.socket.on('collectorsWorkStarted',
   function(d) {
     document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`; //MÅSTE FIXAS
@@ -394,6 +398,7 @@ methods: {
       this.startWork(card); /*måste ändras*/
       //  work(card);
     }
+
   },
 
   selectAll: function (n) {
@@ -462,7 +467,7 @@ startAuction: function (card) {
 );
 },
 startWork: function (card) {
-  console.log("startWork ", card);   //GÅR ENDAST IN HÄR DÅ MAN TRYCKER PÅ ETT KORT
+  //console.log("startWork ", card);   //GÅR ENDAST IN HÄR DÅ MAN TRYCKER PÅ ETT KORT
   this.$store.state.socket.emit('CollectorsStartWork', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -517,6 +522,10 @@ nextQuarterInfo:function(){
 nextQuarter:function(){
   this.changeImageNextQuarter();
   this.nextQuarterInfo();
+  //console.log("total bottles" + this.players[this.playerId].totalBottles +" bottles left" + this.players[this.playerId].bottlesLeft) +" innan";
+  this.players[this.playerId].bottlesLeft=this.players[this.playerId].totalBottles
+  //console.log("total bottles" + this.players[this.playerId].totalBottles +" bottles left" + this.players[this.playerId].bottlesLeft) +" efter";
+  //Måste göra så att flaskknapparna blir oanvända
   //här ska saker hända!!!!! DANI
 
 

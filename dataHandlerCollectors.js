@@ -374,35 +374,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                 }
 
 
-                                /*
-                                console.log(workAction + "Går in här när workaction === 5");
-                                console.log("Data.prototype.startWork futureIncome: " + room.players[playerId].futureIncome );
-                                room.players[playerId].futureIncome += 1;
-                                console.log("Data.prototype.startWork futureIncome: " + room.players[playerId].futureIncome );
 
-                                console.log("room.players[playerId].hand[i].x är lika med:" + room.players[playerId].hand[i].x);
-                                console.log("room.players[playerId].hand.length är lika med:" + room.players[playerId].hand.length);
-                                console.log("room.players[playerId].hand[i].y är lika med:" + room.players[playerId].hand[i].y);
-
-                                /*                  let c = null;
-
-
-
-
-                                for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
-
-                                if (room.players[playerId].hand[i].x === card.x &&
-                                room.players[playerId].hand[i].y === card.y) {
-                                c = room.players[playerId].hand.splice(i,1);
-                                break;
-                              }
-                            }
-                            room.market.push(...c);
-
-
-
-
-                          }*/
 
 
                         }

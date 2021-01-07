@@ -34,5 +34,6 @@
 	"howToInfo1":"If you have two or less bottles then you get to take three coins and one card.",
 	"howToInfo2":"If you have three bottles you get to choose between two coins and a card or three coins.",
 	"howToInfo3":"If you have four bottles you get to choose between 2 coins or one card.",
-	"howToInfo4":"You do not get any extra if you have more than five bottles."
+	"howToInfo4":"You do not get any extra if you have more than five bottles.",
+	"howToInfo5":"For each future income you have, take a coin"
 }

@@ -39,16 +39,16 @@
     <div class="workImages">
       <br>
 
-      <img @click="startWork()" alt="" src="/images/quartertile_1.PNG"
-            height="65%" id="imgClickAndChange"   />
+      <img  alt="" src="/images/quartertile_1.PNG"
+            height="65%" id="imgClickAndChange"   /> <!-- @click="startWork()" -->
 
 
       <br>
-      <img @click="$emit('startWork', card)" src="/images/work_recycle.png" alt="" width="25%">
+      <img  src="/images/work_recycle.png" alt="" width="25%"> <!-- @click="$emit('startWork', card)"-->
         <br>
-      <img @click="$emit('startWork', card)" src="/images/work_gainTwo.png" alt="" height="36%">
+      <img src="/images/work_gainTwo.png" alt="" height="36%"> <!-- @click="$emit('startWork', card)"-->
         <br>
-      <img @click="$emit('startWork', card)" src="/images/work_firstPlayer.png" alt="" height="36%">
+      <img  src="/images/work_firstPlayer.png" alt="" height="36%"> <!-- @click="$emit('startWork', card)"-->
         <br>
       <img src="/images/work_futureIncome.png" alt="" height="36%">
     </div>
@@ -79,9 +79,9 @@ export default {
     placeWorkBottle: function (p) {
       this.$emit('placeWorkBottle', p); //emitta hela p.
     },
-    startWork: function () {
+/*    startWork: function () {
       this.$emit('startWork'); //emitta hela p.
-    },
+    },*/
     setAvailable: function (card) {
       this.$set(card, "available", true);
     },

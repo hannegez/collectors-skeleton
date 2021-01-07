@@ -57,7 +57,7 @@ Data.prototype.getUILabels = function (roomId) {
 Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
   let room = {};
   room.players = {};
-  room.playerColors = ['#731F6D', '#4E4E4E', '#19B3A7', '#BF8F65']; //lila, grå, turkos, beige
+  room.playerColors = ['731F6D', '4E4E4E', '19B3A7', 'BF8F65']; //lila, grå, turkos, beige
   room.lang = lang;
   room.deck = this.createDeck(lang);
   room.playerCount = playerCount;

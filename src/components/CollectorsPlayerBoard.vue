@@ -81,32 +81,47 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
         <img class="skillSymbol" src='/images/skills_VP-all.png'>
         <span> {{ player.skillCounter[5] }} </span>
       </div>
+
+      <!-- DETTA KAN TAS BORT OM VI ÄR OK MED ITEMCOUNTERN, SKILLPOPUP OCH HANDPOPUP
+      <div class="categoryHand">
+      <h2>Your hand</h2>
+    </div>
+    <div class="playerslots Yhand" >
+
+    <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
+  </div>
+
+   <div class="categoryItems">
+  <h2>Your items </h2>
+  </div>
+
+  <div class="playerslots Yitems">
+
+  <CollectorsCard v-for="(card, index) in player.items" :card="card" :key="'item'+ index" />
+  </div>
+
+  <div class="categorySkill">
+  <h2>Your skills</h2>
+  </div>
+
+  <div class="playerslots Yskills">
+  <CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
+  </div>
+  </div>-->
+
+
     </div>
 
     <div class="clickToSee">
-      <!-- <div class="yourSkills playerSymbols">
-        <div class="popup" style= "position:relative; left:0em; top:0em;">
-          <img src='/images/your_skills.png' alt="See your skills" width="20%" @click='getYourInfo("yourSkills")' >
-          <div class="popuptext" id="yourSkillsPopup" style= "left:10em; top:-3em;">
-            <h2>{{ labels.yourSkills }}</h2>
-            <div class="playerslots Yskills">
-              <CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
-            </div>
-            <br>
-            <button class="closeButton"  @click='getYourInfo("yourSkills")'>close</button>
-          </div>
-          <span>
-            {{ player.skills.length }}
-          </span>
-        </div>
-      </div> -->
 
       <div class="yourHand playerSymbols">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
           <img src='/images/your_hand150.png' alt="See your hand" width="65%" @click='getYourInfo("yourHand")' >
           <div class="popuptext" id="yourHandPopup"  style= "left:10em; top:-3em;">
+            <input class="closeCross" type="image" @click="getYourInfo('yourHand')" alt="Login"
+            src='/images/close.png' >
             <h2>{{ labels.yourHand }}</h2>
-            <div class="playerslots Yhand" >
+            <div class="playerslots" >
               <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
             </div>
             <br>
@@ -120,8 +135,14 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
 
       <div class="yourBottles playerSymbols">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
+
+          <!-- FÖRSÖK ATT FÅ TILL BOTTLEPIC, MEN DEN HITTAR INTE PLAYER ALLS I DATA...
+              Vet dock att player.color finns och har ett värde
+          <img :src="bottlePic" alt="See complete bottle info" width="65%" @click='getYourInfo("yourBottles")' > -->
           <img src='/images/playerbottle_basic.png' alt="See complete bottle info" width="65%" @click='getYourInfo("yourBottles")' >
           <div class="popuptext" id="yourBottlesPopup"  style= "left:10em; top:-3em;">
+            <input class="closeCross" type="image" @click="getYourInfo('yourBottles')" alt="Login"
+            src='/images/close.png' >
             <h2>{{ labels.yourBottles }}</h2>
             <div class="textbottles">
               <p>{{ labels.totalBottles }} {{ player.totalBottles}}</p>
@@ -154,34 +175,6 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
     </div>
 
 
-    <!-- DETTA KAN TAS BORT OM VI ÄR OK MED ITEMCOUNTERN, SKILLPOPUP OCH HANDPOPUP
-    <div class="categoryHand">
-    <h2>Your hand</h2>
-  </div>
-  <div class="playerslots Yhand" >
-
-  <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
-</div>
-
-<div class="categoryItems">
-<h2>Your items </h2>
-</div>
-
-<div class="playerslots Yitems">
-
-<CollectorsCard v-for="(card, index) in player.items" :card="card" :key="'item'+ index" />
-</div>
-
-<div class="categorySkill">
-<h2>Your skills</h2>
-</div>
-
-<div class="playerslots Yskills">
-<CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
-</div>
-</div>-->
-
-
 </template>
 
 <script>
@@ -192,11 +185,16 @@ export default {
   components: {
     CollectorsCard
   },
+  // FÖRSÖK ATT FÅ TILL BOTTLEPIC
+/*  data: function () {
+    return {
+      bottlePic: '/images/bottle_' + this.player.color + '.png'
+    };
+  }, */
   props: {            //HÄR ÄR ALLA v-binds FRÅN ELEMENTET I Collectors.vue
     labels: Object,  //specify what kind of object
     player: Object,
     playerId: String,
-    //NÅNTING MED WORK?
   },
   methods: {
     chooseAction(card){

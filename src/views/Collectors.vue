@@ -10,13 +10,40 @@
         <div class="popup" style= "position:relative; left:0em; top:0em;">
         <span class="popupHowToInfoText" id="myHowToInfoPopup"  style= "left:0em; top:0em;">
           <!-- <a href="/images/rules_collectors.pdf" >Click here to open rules</a> -->
+          <input class="closeCross" type="image" @click="getHowToInfo()" alt="Login"
+          src='/images/close.png' >
+          <h1>{{ this.labels.rules }}</h1>
           <embed src="/images/rules_collectors.pdf" width="1800em" height="950em"/>
           <br>
-          <button class="closeButton" v-on:click="getHowToInfo()" >close</button>
+          <button class="closeButton" v-on:click="getHowToInfo()" >{{this.labels.close}} </button>
+
         </span>
         </div>
 
-        <button class="buttons" v-on:click="changeImageTest()"> {{ this.labels.nextQuarter }}</button>
+        <button class="buttons" v-on:click="nextQuarterInfo()"> {{ this.labels.nextQuarter }}</button>
+        <div class="popup" style= "position:relative; left:0em; top:0em;">
+        <span class="popupNextQuarterText" id="myQuarterInfoPopup"  style= "left:0em; top:0em;">
+          <!-- <a href="/images/rules_collectors.pdf" >Click here to open rules</a> -->
+          <h1>{{ this.labels.nextQuarter }}</h1>
+          {{labels.newQuarterInfo}}
+          <br>
+          <br>
+          <h1>{{ this.labels.howToBottles }}</h1>
+          <br>
+          {{labels.howToInfo1}}
+          <br>
+          {{labels.howToInfo2}}
+          <br>
+          {{labels.howToInfo3}}
+          <br>
+          {{labels.howToInfo4}}
+
+          <button class="buttons getButton" v-on:click="getMoney()" > {{this.labels.getCoins}} </button>
+          <button class="buttons getButton" v-on:click="drawCard()" > {{this.labels.getCards}} </button>
+          <button class="buttons" v-on:click="nextQuarter()" > {{this.labels.nextQuarterClose}} </button>
+          <button class="closeButton" v-on:click="nextQuarterInfo()" > {{this.labels.close}} </button>
+        </span>
+        </div>
 
       </div>
 
@@ -28,8 +55,8 @@
             <div class="getButtons">
               <p>{{ labels.getCoins }}</p>
             </div>
-            <input type="image" @click="player.money += 1" id="getMoneyButton" alt="Login"
-            src='/images/coin100pxwhite.png' value="Get Money"  >
+            <input type="image" @click="getMoney" id="getMoneyButton" alt="Login"
+        src='/images/coin100pxwhite.png' value="Get Money"  >
           </div>
 
           <div class="hoverButton hoverCard">
@@ -295,6 +322,12 @@ export default {
           }.bind(this)
         );
 
+        this.$store.state.socket.on('collectorsGottenMoney',
+        function(d) {
+          this.players = d;
+        }.bind(this)
+      );
+
         this.$store.state.socket.on('collectorsCardBought',
         function(d) {
           document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} bought an item!`;
@@ -400,6 +433,13 @@ drawCard: function () {                                  /* NÄR MAN DRAR KORT �
   }
 );
 },
+getMoney: function () {
+   this.$store.state.socket.emit('collectorsGetMoney', {
+    roomId: this.$route.params.id,
+    playerId: this.playerId,
+  }
+);
+},
 gainSkill: function (card) {
   /*console.log("gainSkill", card);     //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('collectorsGainSkill', {
@@ -470,9 +510,16 @@ getHowToInfo:function(){
       var popupwork = document.getElementById("myHowToInfoPopup");
       popupwork.classList.toggle("show");
 },
-changeImageTest:function(){
+nextQuarterInfo:function(){
+      var popupwork = document.getElementById("myQuarterInfoPopup");
+      popupwork.classList.toggle("show");
+},
+nextQuarter:function(){
   this.changeImageNextQuarter();
+  this.nextQuarterInfo();
   //här ska saker hända!!!!! DANI
+
+
 },
 changeImageNextQuarter: function(){
   //  console.log("innan if " + document.getElementById("imgClickAndChange").src);
@@ -623,21 +670,22 @@ BUTTONS                    */
 .hoverButton:hover .getButtons {
   opacity: 1;
 }
+.getButton{
+  background-color: green;
+}
 
 .closeButton {
   width: 30%;
   color: #292929;
-  font-size: 1em;
   font-weight: bold;
   background: #FAC84C;
   border: solid thin #787975;
   border-radius: 0.3em;
   padding: 0.6em;
-  margin: 3%;
   box-shadow: 2px 2px 3px #787975;
   font-size: 1.2em;
   background: #e63b2b;
-  margin: 5% 0;
+  margin: 1% 0;
 }
 
 .closeButton:hover, .drawCardButton:hover {
@@ -646,6 +694,12 @@ BUTTONS                    */
 
 .closeButton:hover {
   box-shadow: inset 2px 2px 3px #787975;
+}
+
+.closeCross {
+  float: right;
+  margin: 1% 3% 3% 3%;
+  width: 7%;
 }
 
 #drawCardButton, #getMoneyButton { margin: 2%; }
@@ -892,6 +946,24 @@ footer a:visited {
   border-width: 1px;
   border-style:solid;
 }
+.popupNextQuarterText {
+  position: absolute;
+  display: none;
+  cursor: pointer;
+  width: 25em;
+  user-select: none;
+  background-color: #f3f3f3; /*bakgrund popup*/
+  color: black; /*textfärg popup*/
+  text-align: center;
+  border-radius: 0px;
+  padding: 20px 20px;  /*padding popup*/
+  z-index: 1;
+  margin-left: 0em;
+  border-color: grey;
+  border-width: 1px;
+  border-style:solid;
+}
+
 
 
 @media screen and (max-width: 800px) {

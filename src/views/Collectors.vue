@@ -10,10 +10,13 @@
         <div class="popup" style= "position:relative; left:0em; top:0em;">
         <span class="popupHowToInfoText" id="myHowToInfoPopup"  style= "left:0em; top:0em;">
           <!-- <a href="/images/rules_collectors.pdf" >Click here to open rules</a> -->
+          <input class="closeCross" type="image" @click="getHowToInfo()" alt="Login"
+          src='/images/close.png' >
           <h1>{{ this.labels.rules }}</h1>
           <embed src="/images/rules_collectors.pdf" width="1800em" height="950em"/>
           <br>
-          <button class="closeButton" v-on:click="getHowToInfo()" > {{this.labels.close}} </button>
+          <button class="closeButton" v-on:click="getHowToInfo()" >{{this.labels.close}} </button>
+
         </span>
         </div>
 
@@ -691,6 +694,12 @@ BUTTONS                    */
 
 .closeButton:hover {
   box-shadow: inset 2px 2px 3px #787975;
+}
+
+.closeCross {
+  float: right;
+  margin: 1% 3% 3% 3%;
+  width: 7%;
 }
 
 #drawCardButton, #getMoneyButton { margin: 2%; }

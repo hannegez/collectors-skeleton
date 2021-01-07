@@ -118,6 +118,8 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
         <div class="popup" style= "position:relative; left:0em; top:0em;">
           <img src='/images/your_hand150.png' alt="See your hand" width="65%" @click='getYourInfo("yourHand")' >
           <div class="popuptext" id="yourHandPopup"  style= "left:10em; top:-3em;">
+            <input class="closeCross" type="image" @click="getYourInfo('yourHand')" alt="Login"
+            src='/images/close.png' >
             <h2>{{ labels.yourHand }}</h2>
             <div class="playerslots" >
               <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
@@ -139,6 +141,8 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
           <img :src="bottlePic" alt="See complete bottle info" width="65%" @click='getYourInfo("yourBottles")' > -->
           <img src='/images/playerbottle_basic.png' alt="See complete bottle info" width="65%" @click='getYourInfo("yourBottles")' >
           <div class="popuptext" id="yourBottlesPopup"  style= "left:10em; top:-3em;">
+            <input class="closeCross" type="image" @click="getYourInfo('yourBottles')" alt="Login"
+            src='/images/close.png' >
             <h2>{{ labels.yourBottles }}</h2>
             <div class="textbottles">
               <p>{{ labels.totalBottles }} {{ player.totalBottles}}</p>

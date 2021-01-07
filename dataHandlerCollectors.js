@@ -246,14 +246,15 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                         'music' : 0,
                         'movie' : 0,
                         'technology' : 0 }, //LYCKADES INTE MED DETTA FÖRST, VILL GÖRA LIKNANDE PÅ skillCounter /KARRO */
+                        
                         itemCounter: [0,0,0,0,0], //FÖRENKLING: fastaval, figures, music, movie, technology, /KARRO
                         skillCounter: [0,0,0,0,0,0], //FÖRENKLING: workerIncome, workerCard, bottle, auctionIncome, VP-, VP-all /KARRO
                         skillCounter_VP: [0,0,0,0,0], //FÖRENKLING: VP-fastaval, VP-figures, VP-music, VP-movie, VP-technology, /KARRO
                         income: [],
-                        futureIncome: 0, //ska sättas till längden av income när man väljer work som resulterar i income
+                        futureIncome: 0,
                         secret: [],
-                        totalBottles: 2, //ska ökas med en när man skaffar en bottle-skill
-                        bottlesLeft: 2}; //ska minska med en varje gång man gör ett drag, när allas är 0 ändras quarter
+                        totalBottles: 2,
+                        bottlesLeft: 2};
                         return true;
                       }
                       console.log("Player", playerId, "was declined due to player limit");
@@ -589,7 +590,6 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                   return { buyPlacement: room.buyPlacement,
                                     skillPlacement: room.skillPlacement,
                                     auctionPlacement: room.auctionPlacement,
-                                    //HÄR VILL VI LÄGGA TILL workPlacement
                                     workPlacement: room.workPlacement,
                                     marketPlacement: room.marketPlacement }
                                   }

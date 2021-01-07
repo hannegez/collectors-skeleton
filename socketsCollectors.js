@@ -98,12 +98,12 @@ function sockets(io, socket, data) {
   });
 
   socket.on('collectorsPlaceBottle', function(d) {
-    data.placeBottle(d.roomId, d.playerId, d.action, d.cost); //lägg till workaction i collectrs placebottle
+    data.placeBottle(d.roomId, d.playerId, d.action, d.cost);
     io.to(d.roomId).emit('collectorsBottlePlaced', data.getPlacements(d.roomId)
   );
   });
   socket.on('collectorsPlaceWorkBottle', function(d) {
-    data.placeWorkBottle(d.roomId, d.playerId, d.cost, d.workAction); //lägg till workaction i collectrs placebottle
+    data.placeWorkBottle(d.roomId, d.playerId, d.cost, d.workAction); 
     //console.log("hääär" + d.workAction + d.cost + d.playerId); //FRÅGA varför kopplas d.workAction till cost
     io.to(d.roomId).emit('collectorsWorkBottlePlaced', {             //OBJEKTET SOM SKICKAS SOM 2:A PARAMETER ÄR DET SOM KALLAS FÖR d I
       players: data.getPlayers(d.roomId),

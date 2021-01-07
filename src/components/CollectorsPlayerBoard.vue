@@ -8,9 +8,20 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
       <h2>{{labels.playerInfo}} {{playerId}}</h2>
     </div>
 
-    <!--  OBS: dessa item/skillsymboler och counters vill vi egentligen lösa med en for-loop och lagra counters i ett objekt
-    istället så att vi kan komma åt dem på ett snyggare sätt. Men vi fick det inte att funka och gjorde denna
-    tillfälliga och "osnygga" lösningen så länge. -->
+  <!-- PÅBÖRJAD SNYGGARE LÖSNING
+
+    <div class="itemCounters">
+      <div class="itemCounter">
+        <img v-for="" class="itemSymbol" src='/images/item_fastaval.png'>
+        <span> {{ player.itemCounter[0] }} </span>
+      </div>
+    </div>
+
+-->
+
+<!--  OBS: dessa item/skillsymboler och counters vill vi egentligen lösa med en for-loop och lagra counters i ett objekt
+istället så att vi kan komma åt dem på ett snyggare sätt. Men vi fick det inte att funka och gjorde denna
+tillfälliga och "osnygga" lösningen så länge. -->
     <div class="itemCounters">
       <div class="itemCounter">
         <img class="itemSymbol" src='/images/item_fastaval.png'>

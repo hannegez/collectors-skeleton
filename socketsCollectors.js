@@ -40,6 +40,11 @@ function sockets(io, socket, data) {
     data.getMoney(d.roomId, d.playerId)
   );
   });
+  socket.on('collectorsGetLaps', function(d) {
+    io.to(d.roomId).emit('collectorsGottenLaps',
+    data.getLaps(d.roomId, d.playerId)
+  );
+  });
 
   socket.on('collectorsGainSkill', function(d) {
     data.gainSkill(d.roomId, d.playerId, d.card, d.cost)
@@ -105,7 +110,7 @@ function sockets(io, socket, data) {
   );
   });
   socket.on('collectorsPlaceWorkBottle', function(d) {
-    data.placeWorkBottle(d.roomId, d.playerId, d.cost, d.workAction); 
+    data.placeWorkBottle(d.roomId, d.playerId, d.cost, d.workAction);
     //console.log("hääär" + d.workAction + d.cost + d.playerId); //FRÅGA varför kopplas d.workAction till cost
     io.to(d.roomId).emit('collectorsWorkBottlePlaced', {             //OBJEKTET SOM SKICKAS SOM 2:A PARAMETER ÄR DET SOM KALLAS FÖR d I
       players: data.getPlayers(d.roomId),

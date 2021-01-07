@@ -152,6 +152,19 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
             }
           }
 
+          Data.prototype.getLaps = function (roomId, playerId) {
+            let room = this.rooms[roomId];
+            if (typeof room !== 'undefined') {
+              room.players[playerId].whichLap ++;
+              /*  room.money[player] += 1; */
+              room.players[playerId].whichLap;
+              if (room.players[playerId].whichLap === 4){
+                room.players[playerId].whichLap=0;
+              }
+              return room.players;
+            }
+          }
+
 
           /* moves card from itemsOnSale to a player's hand */
           Data.prototype.buyCard = function (roomId, playerId, card, cost) {
@@ -246,7 +259,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                         'music' : 0,
                         'movie' : 0,
                         'technology' : 0 }, //LYCKADES INTE MED DETTA FÖRST, VILL GÖRA LIKNANDE PÅ skillCounter /KARRO */
-                        
+
                         itemCounter: [0,0,0,0,0], //FÖRENKLING: fastaval, figures, music, movie, technology, /KARRO
                         skillCounter: [0,0,0,0,0,0], //FÖRENKLING: workerIncome, workerCard, bottle, auctionIncome, VP-, VP-all /KARRO
                         skillCounter_VP: [0,0,0,0,0], //FÖRENKLING: VP-fastaval, VP-figures, VP-music, VP-movie, VP-technology, /KARRO
@@ -254,7 +267,8 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                         futureIncome: 0,
                         secret: [],
                         totalBottles: 2,
-                        bottlesLeft: 2};
+                        bottlesLeft: 2,
+                        whichLap: 0};
                         return true;
                       }
                       console.log("Player", playerId, "was declined due to player limit");
@@ -496,17 +510,35 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                               if (typeof room !== 'undefined') {
                                 let activePlacement = room.workPlacement;
                                 room.players[playerId].bottlesLeft -= 1;
+                          //      console.log("whichLap i data " + room.players[playerId].whichLap);
 
                                 for(let i = 0; i < activePlacement.length; i += 1) {
                                   if( activePlacement[i].workAction === workAction &&
                                     activePlacement[i].playerId === null ) {
                                       activePlacement[i].playerId = playerId;
-                                      //lägg till if satser / metod med if satser.
-                                      if (workAction === 1){
-                                        console.log("workaction 1: 1 bottle recycled");
+                                      if (workAction === 1 && room.players[playerId].whichLap === 0){
+                                        console.log("workaction 1: lap1: 2 on future income");
+                                        
+
+                                        room.players[playerId].bottlesLeft -= 1; //4th quarter
+                                      }
+                                      else if (workAction === 1 && room.players[playerId].whichLap === 1){
+                                        console.log("workaction 1: lap2: 1 coin 2 on future income");
+                                        room.players[playerId].money + 1; // olika för olika rounds
+                                        room.players[playerId].bottlesLeft -= 1; //4th quarter
+                                      }
+                                      else if (workAction === 1 && room.players[playerId].whichLap === 2){
+                                        console.log("workaction 1: lap3: 2 coin 2 on future income");
+                                        room.players[playerId].money + 2; // olika för olika rounds
+                                        room.players[playerId].bottlesLeft -= 1; //4th quarter
+                                      }
+                                      else if (workAction === 1 && room.players[playerId].whichLap === 3){
+                                        console.log("workaction 1: lap4: 1 bottle recycled");
                                         room.players[playerId].money -= cost; // olika för olika rounds
                                         room.players[playerId].totalBottles -= 1; //4th quarter
                                       }
+
+
                                       else if (workAction === 2) {
                                         console.log("workaction 2: 1 bottle recycled");
                                         room.players[playerId].money -= cost;
@@ -527,14 +559,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                         console.log("workaction 5: 1 card added to your hand, now choose 1 card from your hand to discard as future income ");
                                         this.drawCard(roomId, playerId);
 
-                                        //chansning
-                                        //HJÄLP 18/12
-                                        //this.chooseIncomeCard(rommId, playerId);
 
-                                        //room.players[playerId].income PUSHA hit
-                                        //you must draw one card from the deck to your hand and place
-                                        // one card from your hand face down next to your player board
-                                        // on its right side
                                       }
 
 
@@ -543,6 +568,8 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                   }
                                 }
                               }
+
+
 
                               //------------------------------------------------------------------------------------//
 

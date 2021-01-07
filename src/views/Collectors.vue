@@ -216,6 +216,7 @@ export default {
         //HÄR LÄGGER VI TILL workPlacement
         //workPlacement: [],
         chosenWorkAction: null, //bajs
+        chosenWhichLap: null,
         chosenPlacementCost: null,
         chosenAction: null,           //MAJA LA TILL DENNA
         marketValues: { fastaval: 0,
@@ -297,7 +298,7 @@ export default {
             this.players= d.players;
             this.placements = d.placements;
             this.workPlacement = d.placements.workPlacement;
-            
+
             document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
 
             //GÖR ATT HANDEN LYSER UPP NÄR MAN TRYCKER PÅ 5TE KNAPPEN, GER FELMEDDELANDE LÖS
@@ -307,6 +308,11 @@ export default {
                 this.$set(this.players[this.playerId].hand[c], "available", true);
                 //console.log("efter: ", this.players[this.playerId].hand[c].available);
               }
+          /*    if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 1 ) {
+                if (this.chosenWorkAction<3){
+                  this.$set(this.players[this.playerId].hand[c], "available", true);
+                }
+              }*/
             }
 
 
@@ -329,6 +335,11 @@ export default {
           this.players = d;
         }.bind(this)
       );
+          this.$store.state.socket.on('collectorsGottenLaps',
+          function(d) {
+            this.players = d;
+          }.bind(this)
+        );
 
         this.$store.state.socket.on('collectorsCardBought',
         function(d) {
@@ -406,6 +417,7 @@ methods: {
   },
 
   placeBottle: function (action, cost) { /* skicka till server och gör förändring där.*/
+  //  console.log(action, cost);
     this.chosenPlacementCost = cost;
     this.chosenAction = action;
     this.$store.state.socket.emit('collectorsPlaceBottle', {
@@ -421,6 +433,7 @@ placeWorkBottle: function (p) { /* skicka till server och gör förändring där
 
   this.chosenPlacementCost = p.cost;
   this.chosenAction = "work";
+  this.chosenWhichLap=p.whichLap;
   this.chosenWorkAction= p.workAction;
   this.$store.state.socket.emit('collectorsPlaceWorkBottle', {
     roomId: this.$route.params.id,
@@ -445,6 +458,14 @@ getMoney: function () {
   }
 );
 },
+getLaps: function (){
+this.$store.state.socket.emit('collectorsGetLaps', {
+ roomId: this.$route.params.id,
+ playerId: this.playerId,
+}
+);
+},
+
 gainSkill: function (card) {
   /*console.log("gainSkill", card);     //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('collectorsGainSkill', {
@@ -473,7 +494,8 @@ startWork: function (card) {
     playerId: this.playerId,
     card: card,
     cost: this.chosenPlacementCost,
-    workAction:this.chosenWorkAction
+    workAction:this.chosenWorkAction,
+    whichLap:this.chosenWhichLap
   }
 );
 },
@@ -521,12 +543,21 @@ nextQuarterInfo:function(){
 },
 nextQuarter:function(){
   this.changeImageNextQuarter();
-  this.nextQuarterInfo();
+
+//  console.log("whichLap i collectors" + this.players[this.playerId].whichLap)
+//  this.players[this.playerId].whichLap+=1;
+//  console.log("whichLap i collectors" + this.players[this.playerId].whichLap)
   //console.log("total bottles" + this.players[this.playerId].totalBottles +" bottles left" + this.players[this.playerId].bottlesLeft) +" innan";
   this.players[this.playerId].bottlesLeft=this.players[this.playerId].totalBottles
   //console.log("total bottles" + this.players[this.playerId].totalBottles +" bottles left" + this.players[this.playerId].bottlesLeft) +" efter";
   //Måste göra så att flaskknapparna blir oanvända
   //här ska saker hända!!!!! DANI
+  //this.placeBottle('auction', 1);
+//  this.players[this.playerId].whichLap += 1;
+  this.getLaps();
+  this.nextQuarterInfo();
+
+
 
 
 },

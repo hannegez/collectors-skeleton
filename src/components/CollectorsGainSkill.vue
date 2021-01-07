@@ -7,7 +7,7 @@
     <div class="gainSkillInfo">
       <div class="popup" style= "position:relative; left:0em; top:0em;">
       <img src='/images/gainSkill.PNG' alt="Gain skill" width="70%" @click="$emit('getInfo')" >
-      <span class="popuptext" id="mySkillPopup"  style= "left:10em; top:-3em;">
+      <span class="popuptext" id="mySkillPopup"  style= "left: 24vw; top:-10vh;">
         <input class="closeCross" type="image" @click="$emit('getInfo')" alt="Login"
         src='/images/close.png' >
         <h2>{{ labels.gainSkill }}</h2>
@@ -33,19 +33,6 @@
       </div>
     </div>
 
-    <!-- <div>
-    <div class="buttons" v-for="(p, index) in placement" :key="index">
-    <button
-    v-if="p.playerId===null"
-    :disabled="cannotAfford(p.cost)"
-    @click="placeBottle(p)" >
-    ${{p.cost}}
-  </button>
-  <div v-if="p.playerId !== null">
-  {{p.playerId}}
-</div>
-</div>
-</div> -->
 
 <div class="bottlePlacements">
   <div v-for="(p, index) in placement" :key="'bp' + index">

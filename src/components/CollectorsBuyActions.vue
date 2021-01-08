@@ -4,17 +4,17 @@
     <div class="buyItemHeader">
     <!--  <h3>{{ labels.buyItem }}</h3>       behövs ej längre pga infoknapparna -->
 
-      <div class="buyInfo">
+    <div class="buyInfo">
       <div class="popup" style= "position:relative; left:0em; top:0em;">
-      <img src='/images/buyItem.PNG' alt="Buy Item" width="60%" @click="$emit('getInfo')" >
-      <span class="popuptext" id="myItemPopup"  style= "left:-21vw; top:20vh;">
-        <input class="closeCross" type="image" @click="$emit('getInfo')" alt="Login"
-        src='/images/close.png' >
-        <h2>{{ labels.buyItem }}</h2>
-        {{ labels.itemInfo }}
-        <br>
-        <button class="closeButton"  @click="$emit('getInfo')">close</button>
-      </span>
+        <img src='/images/buyItem.PNG' alt="Buy Item" width="60%" @click="$emit('getInfo')" >
+        <!-- <span class="popuptext" id="myItemPopup"  style= "left:-21vw; top:20vh;">
+          <input class="closeCross" type="image" @click="$emit('getInfo')" alt="Login"
+          src='/images/close.png' >
+          <h2>{{ labels.buyItem }}</h2>
+          {{ labels.itemInfo }}
+          <br>
+          <button class="closeButton"  @click="$emit('getInfo')">close</button>
+        </span> -->
       </div>
     </div>
     </div>

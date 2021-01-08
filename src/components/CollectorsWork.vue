@@ -6,15 +6,15 @@
 
     <div class="workInfo">
       <div class="popup" style= "position:relative; left:0em; top:0em;">
-      <img src='/images/workInfo.PNG' alt="Work" width="70%" @click="$emit('getInfo')"  >
-      <span class="popuptext" id="myWorkPopup"  style= "left:10em; top:-3em;">
-        <input class="closeCross" type="image" @click="$emit('getInfo')" alt="Login"
-        src='/images/close.png' >
-        <h2>{{ labels.startWork }}</h2>
-        {{ labels.workInfo }}
-        <br>
-        <button class="closeButton"  @click="$emit('getInfo')">close</button>
-      </span>
+        <img src='/images/workInfo.PNG' alt="Work" width="70%" @click="$emit('getInfo')"  >
+        <!-- <span class="popuptext" id="myWorkPopup"  style= "left:10em; top:-3em;">
+          <input class="closeCross" type="image" @click="$emit('getInfo')" alt="Login"
+          src='/images/close.png' >
+          <h2>{{ labels.startWork }}</h2>
+          {{ labels.workInfo }}
+          <br>
+          <button class="closeButton"  @click="$emit('getInfo')">close</button>
+        </span> -->
       </div>
     </div>
 

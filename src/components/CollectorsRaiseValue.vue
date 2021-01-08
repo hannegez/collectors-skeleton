@@ -87,9 +87,7 @@ export default {
     labels: Object,  //specify what kind of object
     player: Object,
     players: Object,
-    //itemsOnSale: Array,
     auctionCards: Array,
-    //  raiseValueOnSale: Array,
     market: Array,
     skillsOnSale: Array,
     marketValues: Object,

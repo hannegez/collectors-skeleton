@@ -4,10 +4,11 @@
       <div id="welcome">
         <h1>Welcome to Rich Collectors</h1>
 
+<!-- oklart om det behöver stå nått argument i getInfo pga blir rätt oavsett, annars testa typ 'market' -->
         <CollectorsRulesPopup v-if="showRulesPopup"
         :content="rulesPopupContent"
         :labels="labels"
-        @getInfo="getInfo('market')"/>
+        @getInfo="getInfo()"/>
 
       </div>
 
@@ -527,7 +528,7 @@ buyCard: function (card) {
 getInfo: function(string){
   this.showRulesPopup = !this.showRulesPopup;
   this.rulesPopupContent = string;
-  
+
   // if (string === 'work') {
   //   var popupwork = document.getElementById("myWorkPopup");
   //   popupwork.classList.toggle("show");

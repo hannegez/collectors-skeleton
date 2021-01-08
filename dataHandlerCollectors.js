@@ -135,6 +135,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
           Data.prototype.drawCard = function (roomId, playerId) {
             let room = this.rooms[roomId];
             if (typeof room !== 'undefined') {
+              console.log("går in i draw card");
               let card = room.deck.pop();
               room.players[playerId].hand.push(card);
               return room.players;
@@ -375,6 +376,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                               let room = this.rooms[roomId];
                               if (typeof room !== 'undefined') {
                                 room.players[playerId].futureIncome += 1;
+                                console.log("går in i data.prototype.startwork");
 
                                 let c = null;
                                 for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
@@ -518,7 +520,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                       activePlacement[i].playerId = playerId;
                                       if (workAction === 1 && room.players[playerId].whichLap === 0){
                                         console.log("workaction 1: lap1: 2 on future income");
-                                        
+
 
                                         room.players[playerId].bottlesLeft -= 1; //4th quarter
                                       }

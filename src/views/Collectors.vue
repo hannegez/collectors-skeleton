@@ -299,6 +299,7 @@ export default {
             this.placements = d.placements;
             this.workPlacement = d.placements.workPlacement;
 
+
             document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
 
             //GÖR ATT HANDEN LYSER UPP NÄR MAN TRYCKER PÅ 5TE KNAPPEN, GER FELMEDDELANDE LÖS
@@ -306,13 +307,20 @@ export default {
               if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 5 ) {
                 //console.log("före: ", this.players[this.playerId].hand[c].available);
                 this.$set(this.players[this.playerId].hand[c], "available", true);
-                //console.log("efter: ", this.players[this.playerId].hand[c].available);
+                console.log(" chosenwhichlap ", this.chosenWhichLap);
+      //          console.log(" chosenworkaction ", this.chosenWorkAction);
               }
-          /*    if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 1 ) {
-                if (this.chosenWorkAction<3){
+              this.chosenWhichLap=1; //Få den att hämta chosenWhichlap
+              //få detta att fungera för workAction 1 och whichlap 0-3 TODO
+              if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 1 ) {
+                console.log(" chosenwhichlap 3", this.chosenWhichLap);
+                if (this.chosenWhichLap <= 3){
+                  console.log(" chosenwhichlap2 ", this.chosenWhichLap);
                   this.$set(this.players[this.playerId].hand[c], "available", true);
                 }
-              }*/
+                }
+
+
             }
 
 
@@ -406,6 +414,7 @@ methods: {
     }
     /* HÄR LÄGGER VI SEN TILL workPlacement: */
     else if (action === "work") {
+      console.log("går in i chooseaction");
       this.startWork(card); /*måste ändras*/
       //  work(card);
     }

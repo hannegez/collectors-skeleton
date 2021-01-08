@@ -79,16 +79,15 @@ export default {
     placeWorkBottle: function (p) {
       this.$emit('placeWorkBottle', p); //emitta hela p.
     },
-/*    startWork: function () {
-      this.$emit('startWork'); //emitta hela p.
-    },*/
+
     setAvailable: function (card) {
       this.$set(card, "available", true);
     },
     //HJÄLP 18/12 DEN här verkar inte göra något
+    /*
     highlightAvailableCards: function (workAction)  {
       console.log("vår workaction: ", workAction);
-      if (workAction === 5) {
+      if (workAction === 4) {
         console.log("inne i hightligh if-satsen");
         for (let i = 0; i < this.player.hand.length; i += 1) {
           console.log("inne i hightlight for-loopen");
@@ -96,15 +95,8 @@ export default {
           console.log("Hand ska highlightas");
         }
       }
-    },
-/*    startWork: function (card) {//skicka placerin/textsträng till startWork ex actiion
-      console.log("startWork 1" + card);
-     if (card.available) {
-        this.$emit('startWork', card); //skicka placerin/textsträng till startWork ex actiion
-        console.log("startWork 2" + card);
-
-      }
     }, */
+
 
 
   }

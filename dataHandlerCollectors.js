@@ -135,6 +135,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
           Data.prototype.drawCard = function (roomId, playerId) {
             let room = this.rooms[roomId];
             if (typeof room !== 'undefined') {
+              console.log("går in i draw card");
               let card = room.deck.pop();
               room.players[playerId].hand.push(card);
               return room.players;
@@ -384,6 +385,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                               let room = this.rooms[roomId];
                               if (typeof room !== 'undefined') {
                                 room.players[playerId].futureIncome += 1;
+                                console.log("går in i data.prototype.startwork");
 
                                 let c = null;
                                 for (let i = 0; i < room.players[playerId].hand.length; i += 1) {

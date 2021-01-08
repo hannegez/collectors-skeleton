@@ -308,21 +308,34 @@ export default {
             this.players= d.players;
             this.placements = d.placements;
             this.workPlacement = d.placements.workPlacement;
+            console.log("inne i funktionen ");
+
 
             document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
 
+
             //GÖR ATT HANDEN LYSER UPP NÄR MAN TRYCKER PÅ 5TE KNAPPEN, GER FELMEDDELANDE LÖS
             for(let c = 0; c < this.players[this.playerId].hand.length; c += 1 ) {
+              console.log("inne forloop ");
               if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 5 ) {
                 //console.log("före: ", this.players[this.playerId].hand[c].available);
+                console.log("inne första if ");
                 this.$set(this.players[this.playerId].hand[c], "available", true);
-                //console.log("efter: ", this.players[this.playerId].hand[c].available);
+
+      //          console.log(" chosenworkaction ", this.chosenWorkAction);
               }
-          /*    if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 1 ) {
-                if (this.chosenWorkAction<3){
+              //this.chosenWhichLap=1; //Få den att hämta chosenWhichlap
+              //få detta att fungera för workAction 1 och whichlap 0-3 TODO
+              if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 1 ) {
+                console.log("inne första 2 if ");
+                if (this.chosenWhichLap <= 3){
+                  console.log("inne första 3 if ");
+
                   this.$set(this.players[this.playerId].hand[c], "available", true);
                 }
-              }*/
+                }
+
+
             }
 
 
@@ -416,6 +429,7 @@ methods: {
     }
     /* HÄR LÄGGER VI SEN TILL workPlacement: */
     else if (action === "work") {
+      console.log("går in i chooseaction");
       this.startWork(card); /*måste ändras*/
       //  work(card);
     }
@@ -568,6 +582,7 @@ nextQuarter:function(){
   //this.placeBottle('auction', 1);
 //  this.players[this.playerId].whichLap += 1;
   this.getLaps();
+
   this.nextQuarterInfo();
 
 

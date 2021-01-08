@@ -15,48 +15,21 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
       </div>
     </div>
 
-    <div class="skillCounters">
+    <div class="skillCounters hoverSkill">
       <div v-for="(chosenSkill, index) in skillCounter" :key="index" class="skillCounter">
         <img class="skillSymbol" :src="chosenSkill.image" >
         <span> {{chosenSkill.value }} </span>
+
+        <div class="moreSkills moreSkillCounters">
+         <div v-for="(chosenVPSkill, index) in skillCounter_VP" :key="index" class="skillCounter hoverSkill">
+           <img class="extraSkill" :src="chosenVPSkill.image">
+           <span> {{chosenVPSkill.value }} </span>
+         </div>
+       </div>
+
       </div>
 
-        <!-- <div class="moreSkills moreSkillCounters">
-          <div v-for="(chosenVPSkill, index) in skillCounter_VP" :key="index" class="skillCounter hoverSkill">
-            <img class="extraSkill" :src="chosenVPSkill.image">
-            <span> {{chosenVPSkill.value }} </span>
-          </div>
-        </div> -->
-
     </div>
-
-      <!-- DETTA KAN TAS BORT OM VI ÄR OK MED ITEMCOUNTERN, SKILLPOPUP OCH HANDPOPUP
-      <div class="categoryHand">
-      <h2>Your hand</h2>
-    </div>
-    <div class="playerslots Yhand" >
-
-    <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
-  </div>
-
-   <div class="categoryItems">
-  <h2>Your items </h2>
-  </div>
-
-  <div class="playerslots Yitems">
-
-  <CollectorsCard v-for="(card, index) in player.items" :card="card" :key="'item'+ index" />
-  </div>
-
-  <div class="categorySkill">
-  <h2>Your skills</h2>
-  </div>
-
-  <div class="playerslots Yskills">
-  <CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
-  </div>
-  </div>-->
-
 
     <div class="clickToSee">
 
@@ -267,10 +240,10 @@ PLAYER BOARD (GRID)                 */
 
 .moreSkills {
   bottom: 120%;
-  right: -100%;
-  width: 400%;
-  height: 100%;
-  padding: 10%;
+  right: 0%;
+  width: 60%;
+  height: 90%;
+  padding: 1%;
   background-color: #fff;
   border: solid thin #4E4E4E;
   color: #4E4E4E;

@@ -24,7 +24,8 @@ function sockets(io, socket, data) {
         auctionCards: data.getAuctionCards(d.roomId),
         auctionSpot: data.getAuctionSpot(d.roomId), // TEST ???
         //NÅTT MED WORK
-        placements: data.getPlacements(d.roomId)
+        placements: data.getPlacements(d.roomId),
+        currentQuarter:data.getQuarter(d.roomId)
 
       });
       }
@@ -40,11 +41,26 @@ function sockets(io, socket, data) {
     data.getMoney(d.roomId, d.playerId)
   );
   });
-  socket.on('collectorsGetLaps', function(d) {
-    io.to(d.roomId).emit('collectorsGottenLaps',
-    data.getLaps(d.roomId, d.playerId)
-  );
+  socket.on('collectorsNextQuarter', function(d) {
+    data.nextQuarter(d.roomId)
+    io.to(d.roomId).emit('collectorsInitialize', {                //HÄR LÄR VI LÄGGA TILL/ÄNDRA VAD SOM SKA SÄNDAS UT NÄR NÅN JOINAR
+      labels: data.getUILabels(d.roomId),              //OBJEKTET SOM SKICKAS SOM 2:A PARAMETER ÄR DET SOM KALLAS FÖR d I
+      players: data.getPlayers(d.roomId),              //Collectors.vue: "this.$store.state.socket.on('collectorsInitialize',
+      itemsOnSale: data.getItemsOnSale(d.roomId),      //  function(d) { ...... "
+      marketValues: data.getMarketValues(d.roomId),
+      // raiseValueOnSale: data.getRaiseValueOnSale(d.roomId),
+      market: data.getMarket(d.roomId),
+      skillsOnSale: data.getSkillsOnSale(d.roomId),
+      auctionCards: data.getAuctionCards(d.roomId),
+      auctionSpot: data.getAuctionSpot(d.roomId), // TEST ???
+      //NÅTT MED WORK
+      placements: data.getPlacements(d.roomId),
+      currentQuarter:data.getQuarter(d.roomId)
+
+    });
+
   });
+
 
   socket.on('collectorsGainSkill', function(d) {
     data.gainSkill(d.roomId, d.playerId, d.card, d.cost)

@@ -216,7 +216,7 @@ export default {
         //HÄR LÄGGER VI TILL workPlacement
         //workPlacement: [],
         chosenWorkAction: null, //bajs
-        chosenWhichLap: null,
+        currentQuarter: 1,
         chosenPlacementCost: null,
         chosenAction: null,           //MAJA LA TILL DENNA
         marketValues: { fastaval: 0,
@@ -281,6 +281,7 @@ export default {
             this.marketPlacement = d.placements.marketPlacement;
             this.auctionPlacement = d.placements.auctionPlacement;
             this.workPlacement = d.placements.workPlacement;
+            this.currentQuarter= d.currentQuarter;
         //    this.workAction = d.placements.workPlacement.workAction;
         //    console.log("HÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄR" + this.workAction);
           }.bind(this));
@@ -314,11 +315,11 @@ export default {
 
       //          console.log(" chosenworkaction ", this.chosenWorkAction);
               }
-              //this.chosenWhichLap=1; //Få den att hämta chosenWhichlap
+              //this.currentQuarter=1; //Få den att hämta chosenWhichlap
               //få detta att fungera för workAction 1 och whichlap 0-3 TODO
               if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 1 ) {
                 console.log("inne första 2 if ");
-                if (this.chosenWhichLap <= 3){
+                if (this.currentQuarter <= 3){
                   console.log("inne första 3 if ");
 
                   this.$set(this.players[this.playerId].hand[c], "available", true);
@@ -348,11 +349,7 @@ export default {
           this.players = d;
         }.bind(this)
       );
-          this.$store.state.socket.on('collectorsGottenLaps',
-          function(d) {
-            this.players = d;
-          }.bind(this)
-        );
+
 
         this.$store.state.socket.on('collectorsCardBought',
         function(d) {
@@ -447,7 +444,6 @@ placeWorkBottle: function (p) { /* skicka till server och gör förändring där
 
   this.chosenPlacementCost = p.cost;
   this.chosenAction = "work";
-  this.chosenWhichLap=p.whichLap;
   this.chosenWorkAction= p.workAction;
   this.$store.state.socket.emit('collectorsPlaceWorkBottle', {
     roomId: this.$route.params.id,
@@ -472,13 +468,7 @@ getMoney: function () {
   }
 );
 },
-getLaps: function (){
-this.$store.state.socket.emit('collectorsGetLaps', {
- roomId: this.$route.params.id,
- playerId: this.playerId,
-}
-);
-},
+
 
 gainSkill: function (card) {
   /*console.log("gainSkill", card);     //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
@@ -562,15 +552,21 @@ nextQuarter:function(){
 //  this.players[this.playerId].whichLap+=1;
 //  console.log("whichLap i collectors" + this.players[this.playerId].whichLap)
   //console.log("total bottles" + this.players[this.playerId].totalBottles +" bottles left" + this.players[this.playerId].bottlesLeft) +" innan";
-  this.players[this.playerId].bottlesLeft=this.players[this.playerId].totalBottles
+  //OBSS
+    //this.players[this.playerId].bottlesLeft=this.players[this.playerId].totalBottles  //Ska flyttas till servern och gå genom alla spelare och nollställa individuellt
   //console.log("total bottles" + this.players[this.playerId].totalBottles +" bottles left" + this.players[this.playerId].bottlesLeft) +" efter";
   //Måste göra så att flaskknapparna blir oanvända
   //här ska saker hända!!!!! DANI
   //this.placeBottle('auction', 1);
 //  this.players[this.playerId].whichLap += 1;
-  this.getLaps();
+
+  this.$store.state.socket.emit('collectorsNextQuarter', {
+   roomId: this.$route.params.id,
+  }
+  );
 
   this.nextQuarterInfo();
+
 
 
 

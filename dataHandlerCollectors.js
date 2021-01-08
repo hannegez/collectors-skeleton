@@ -66,6 +66,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
   room.auctionCards = room.deck.splice(0, 4);
   // room.raiseValueOnSale = room.deck.splice(0, 4); //TA BORT raiseValueOnSale
   room.auctionSpot = [];
+  room.quarter=1;
   room.market = [];
   room.buyPlacement = [ {cost:1, playerId: null},           //HÄR ÄNDRAR VI OM VI VILL ÄNDRA VAD SAKER KOSTAR AV NÅGON ANLEDNING
     {cost:1, playerId: null},
@@ -153,16 +154,19 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
             }
           }
 
-          Data.prototype.getLaps = function (roomId, playerId) {
+          Data.prototype.nextQuarter = function (roomId) {
             let room = this.rooms[roomId];
             if (typeof room !== 'undefined') {
-              room.players[playerId].whichLap ++;
-              /*  room.money[player] += 1; */
-              room.players[playerId].whichLap;
-              if (room.players[playerId].whichLap === 4){
-                room.players[playerId].whichLap=0;
-              }
-              return room.players;
+              room.quarter ++;
+
+
+            }
+          }
+          Data.prototype.getQuarter= function(roomId){
+            let room = this.rooms[roomId];
+
+            if (typeof room !== 'undefined') {
+              return room.quarter;
             }
           }
 
@@ -268,8 +272,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                         futureIncome: 0,
                         secret: [],
                         totalBottles: 2,
-                        bottlesLeft: 2,
-                        whichLap: 0};
+                        bottlesLeft: 2};
                         return true;
                       }
                       console.log("Player", playerId, "was declined due to player limit");
@@ -518,26 +521,26 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                   if( activePlacement[i].workAction === workAction &&
                                     activePlacement[i].playerId === null ) {
                                       activePlacement[i].playerId = playerId;
-                                      if (workAction === 1 && room.players[playerId].whichLap === 0){
+                                      if (workAction === 1 && room.quarter === 1){
                                         console.log("workaction 1: lap1: 2 on future income");
 
 
-                                        room.players[playerId].bottlesLeft -= 1; //4th quarter
+                                      //  room.players[playerId].bottlesLeft -= 1; //4th quarter
                                       }
-                                      else if (workAction === 1 && room.players[playerId].whichLap === 1){
+                                      else if (workAction === 1 && room.quarter === 2){
                                         console.log("workaction 1: lap2: 1 coin 2 on future income");
                                         room.players[playerId].money + 1; // olika för olika rounds
-                                        room.players[playerId].bottlesLeft -= 1; //4th quarter
+                                      //  room.players[playerId].bottlesLeft -= 1; //4th quarter
                                       }
-                                      else if (workAction === 1 && room.players[playerId].whichLap === 2){
+                                      else if (workAction === 1 && room.quarter === 3){
                                         console.log("workaction 1: lap3: 2 coin 2 on future income");
                                         room.players[playerId].money + 2; // olika för olika rounds
-                                        room.players[playerId].bottlesLeft -= 1; //4th quarter
+                                      //  room.players[playerId].bottlesLeft -= 1; //4th quarter
                                       }
-                                      else if (workAction === 1 && room.players[playerId].whichLap === 3){
+                                      else if (workAction === 1 && room.quarter === 4){
                                         console.log("workaction 1: lap4: 1 bottle recycled");
                                         room.players[playerId].money -= cost; // olika för olika rounds
-                                        room.players[playerId].totalBottles -= 1; //4th quarter
+                                    //    room.players[playerId].totalBottles -= 1; //4th quarter
                                       }
 
 

@@ -136,10 +136,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
       <div class="yourBottles playerSymbols">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
 
-          <!-- FÖRSÖK ATT FÅ TILL BOTTLEPIC, MEN DEN HITTAR INTE PLAYER ALLS I DATA...
-              Vet dock att player.color finns och har ett värde
-          <img :src="bottlePic" alt="See complete bottle info" width="65%" @click='getYourInfo("yourBottles")' > -->
-          <img src='/images/playerbottle_basic.png' alt="See complete bottle info" width="65%" @click='getYourInfo("yourBottles")' >
+          <img :src="bottlePic" alt="See complete bottle info" width="75%" @click='getYourInfo("yourBottles")' >
           <div class="popuptext" id="yourBottlesPopup"  style= "left:10em; top:-3em;">
             <input class="closeCross" type="image" @click="getYourInfo('yourBottles')" alt="Login"
             src='/images/close.png' >
@@ -185,12 +182,6 @@ export default {
   components: {
     CollectorsCard
   },
-  // FÖRSÖK ATT FÅ TILL BOTTLEPIC
-/*  data: function () {
-    return {
-      bottlePic: '/images/bottle_' + this.player.color + '.png'
-    };
-  }, */
   props: {            //HÄR ÄR ALLA v-binds FRÅN ELEMENTET I Collectors.vue
     labels: Object,  //specify what kind of object
     player: Object,
@@ -203,12 +194,16 @@ export default {
       showHand: false
     }
   },
-
+  computed: {
+    bottlePic: function () {
+    return '/images/bottle_' + this.player.color + '.png';
+    }
+  },
   methods: {
     chooseAction(card){
       this.$emit('chooseAction', card);
     },
-  
+
 
       //Det rätta:
       getYourInfo: function(string){

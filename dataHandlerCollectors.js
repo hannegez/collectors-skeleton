@@ -68,34 +68,35 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
   room.auctionSpot = [];
   room.quarter=1;
   room.market = [];
-  room.buyPlacement = [ {cost:1, playerId: null},           //HÄR ÄNDRAR VI OM VI VILL ÄNDRA VAD SAKER KOSTAR AV NÅGON ANLEDNING
-    {cost:1, playerId: null},
-    {cost:2, playerId: null},
-    {cost:2, playerId: null},
-    {cost:3, playerId: null} ];
-    room.skillPlacement = [ {cost:0, playerId: null},
-      {cost:0, playerId: null},
-      {cost:0, playerId: null},
-      {cost:1, playerId: null},
-      {cost:1, playerId: null} ];
-      room.auctionPlacement = [ {cost:-2, playerId: null},
-        {cost:-1, playerId: null},
-        {cost:0, playerId: null},
-        {cost:0, playerId: null} ];
-        room.marketPlacement = [ {cost:0, playerId: null},
-          {cost:-2, playerId: null},
-          {cost:0, playerId: null} ];
+  this.resetPlacements(room);
+  this.rooms[roomId] = room;
+  }
 
-          /*DETTA VILL VI SEN IMPLEMENTERA MED workPlacement:*/
-          room.workPlacement = [
-            {cost:-3, playerId: null, workAction: 1},
-            {cost:-1, playerId: null, workAction: 2},
-            {cost:1, playerId: null, workAction: 3},
-            {cost:0, playerId: null, workAction: 4},
-            {cost:0, playerId: null, workAction: 5},]
+  Data.prototype.resetPlacements = function(room) {
 
-            this.rooms[roomId] = room;
-          }
+        room.buyPlacement = [ {cost:1, playerId: null},           //HÄR ÄNDRAR VI OM VI VILL ÄNDRA VAD SAKER KOSTAR AV NÅGON ANLEDNING
+                              {cost:1, playerId: null},
+                              {cost:2, playerId: null},
+                              {cost:2, playerId: null},
+                              {cost:3, playerId: null} ];
+        room.skillPlacement = [ {cost:0, playerId: null},
+                                {cost:0, playerId: null},
+                                {cost:0, playerId: null},
+                                {cost:1, playerId: null},
+                                {cost:1, playerId: null} ];
+        room.auctionPlacement = [ {cost:-2, playerId: null},
+                                  {cost:-1, playerId: null},
+                                  {cost:0, playerId: null},
+                                  {cost:0, playerId: null} ];
+        room.marketPlacement = [{cost:0, playerId: null},
+                                {cost:-2, playerId: null},
+                                {cost:0, playerId: null} ];
+        room.workPlacement = [ {cost:-3, playerId: null, workAction: 1},
+                                {cost:-1, playerId: null, workAction: 2},
+                                {cost:1, playerId: null, workAction: 3},
+                                {cost:0, playerId: null, workAction: 4},
+                                {cost:0, playerId: null, workAction: 5},]
+}
 
 
 
@@ -153,11 +154,18 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
               return room.players;
             }
           }
-
+          // HÄR SKA KORTEN FLYTTAS
           Data.prototype.nextQuarter = function (roomId) {
             let room = this.rooms[roomId];
             if (typeof room !== 'undefined') {
               room.quarter ++;
+
+              this.resetPlacements(room);
+              for (let playerId in room.players) {
+              //  console.log("nextQuarter " + room.players[playerId].bottlesLeft + room.players[playerId].totalBottles);
+                room.players[playerId].bottlesLeft=room.players[playerId].totalBottles;
+              }
+
 
 
             }
@@ -388,8 +396,9 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                       c = room.players[playerId].hand.splice(i,1);
                                       break;
                                     }
+
                                   }
-                                  room.market.push(...c);
+
 
                                 }
 
@@ -540,7 +549,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                       else if (workAction === 1 && room.quarter === 4){
                                         console.log("workaction 1: lap4: 1 bottle recycled");
                                         room.players[playerId].money -= cost; // olika för olika rounds
-                                    //    room.players[playerId].totalBottles -= 1; //4th quarter
+                                        room.players[playerId].totalBottles -= 1; //4th quarter
                                       }
 
 

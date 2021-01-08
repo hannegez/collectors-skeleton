@@ -121,7 +121,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
       <div class="yourHand playerSymbols">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
           <img src='/images/your_hand150.png' alt="See your hand" width="65%" @click='getYourInfo("yourHand")' >
-          <div :class="['popuptext', {show:showHand}]" style= "left:-45vw; top:25vh;"> <!--HANDLEDNING tar bort id -->
+          <div :class="['popuptext',  {show:showHand}]" style= "left:-45vw;  top:25vh;"> <!--HANDLEDNING tar bort id Maja -->
             <input class="closeCross" type="image" @click="getYourInfo('yourHand')" alt="Login"
             src='/images/close.png' >
             <h2>{{ labels.yourHand }}</h2>
@@ -201,7 +201,7 @@ export default {
     playerId: String,
   },
 
-// HANDLEDNING
+// Lades till under HANDLEDNING Maja
   data: function() {
     return {
       showHand: false

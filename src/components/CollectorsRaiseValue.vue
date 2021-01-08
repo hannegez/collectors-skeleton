@@ -11,15 +11,6 @@
 
       <div class="popup" style= "position:relative; left:0em; top:0em;">
         <img src='/images/infoknapp_rv.png' alt="Raise value" width="70%" @click="$emit('getInfo')" >
-        <!-- ta bort även på alla andra
-        <span class="popuptext" id="myMarketPopup"  style= "left:15vw; top:-48vh;">
-          <input class="closeCross" type="image" @click="$emit('getInfo')" alt="Login"
-          src='/images/close.png' >
-          <h2>{{ labels.raiseValue }}</h2>
-          {{ labels.valueInfo }}
-          <br>
-          <button class="closeButton"  @click="$emit('getInfo')">close</button>
-        </span> -->
       </div>
     </div>
 

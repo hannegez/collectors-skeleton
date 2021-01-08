@@ -6,17 +6,6 @@
     <div class="auctionInfo">
       <div class="popup" style= "position:relative; left:7em; top:0em;">
         <img src='/images/startAuction.png' alt="Start auction" width="45%"  @click="$emit('getInfo')" >
-        <!-- <span class="popuptext" id="myAuctionPopup"  style= "left:-30vw; top:-3vh;">
-          <input class="closeCross" type="image" @click="$emit('getInfo')" alt="Login"
-          src='/images/close.png' >
-          <h2>{{ labels.startAuction }}</h2>
-          {{ labels.auctionInfo }}
-          <br>
-          <button class="closeButton"  @click="$emit('getInfo')">close</button>
-
-
-        <img src='/images/skills_info.png'>
-        </span> -->
       </div>
     </div>
 

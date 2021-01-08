@@ -208,17 +208,23 @@ export default {
     chooseAction(card){
       this.$emit('chooseAction', card);
     },
-    getYourInfo: function(string){
-      console.log("inne i getYourInfo", string);
-      if (string=="yourSkills") {
-        document.getElementById("yourSkillsPopup").classList.toggle("show");
-      }
-      else if (string=="yourHand") {
-        document.getElementById("yourHandPopup").classList.toggle("show");
-      }
-      else if (string=="yourBottles") {
-        document.getElementById("yourBottlesPopup").classList.toggle("show");
-      }
+  
+
+      //Det rätta:
+      getYourInfo: function(string){
+  console.log("inne i getYourInfo", string);
+  if (string=="yourSkills") {
+
+    //document.getElementById("yourSkillsPopup").classList.toggle("show");
+  }
+  else if (string=="yourHand") {
+    this.showHand = !this.showHand;
+    // document.getElementById("yourHandPopup").classList.toggle("show");
+  }
+  else if (string=="yourBottles") {
+    document.getElementById("yourBottlesPopup").classList.toggle("show");
+  }
+
 
       // if (string === 'work') {
       //   var popupwork = document.getElementById("myWorkPopup");

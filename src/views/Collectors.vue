@@ -3,6 +3,12 @@
     <header>
       <div id="welcome">
         <h1>Welcome to Rich Collectors</h1>
+
+        <CollectorsRulesPopup v-if="showRulesPopup"
+        :content="rulesPopupContent"
+        :labels="labels"
+        @getInfo="getInfo('market')"/>
+
       </div>
 
       <div class="info left">
@@ -130,6 +136,7 @@
           <CollectorsRaiseValue v-if="players[playerId]"
           :labels="labels"
           :player="players[playerId]"
+          :players="players"
           :market="market"
           :marketValues="marketValues"
           :auctionCards="auctionCards"
@@ -177,6 +184,7 @@ import CollectorsRaiseValue from '@/components/CollectorsRaiseValue.vue'
 import CollectorsStartAuction from '@/components/CollectorsStartAuction.vue'
 import CollectorsStartWork from '@/components/CollectorsWork.vue'
 import CollectorsPlayerBoard from '@/components/CollectorsPlayerBoard.vue'
+import CollectorsRulesPopup from '@/components/CollectorsRulesPopup.vue'
 
 /* VUE-objekt för spelet*/
 export default {
@@ -188,7 +196,8 @@ export default {
     CollectorsRaiseValue,
     CollectorsStartAuction,
     CollectorsStartWork,
-    CollectorsPlayerBoard                                                                                                                                                         /*HÄÄÄÄÄÄÄÄÄÄR*/
+    CollectorsPlayerBoard,
+    CollectorsRulesPopup                                                                                                                                                         /*HÄÄÄÄÄÄÄÄÄÄR*/
   },
   data: function () {
     return {
@@ -233,7 +242,8 @@ export default {
 
           //NÅTT LIKNANDE SOM OVAN FAST FÖR WORK?
           workAction: 0,
-          playerid: 0
+          showRulesPopup: false,
+          rulesPopupContent: ''
         }
       },
       computed: {
@@ -515,27 +525,30 @@ buyCard: function (card) {
 );
 },
 getInfo: function(string){
-  if (string === 'work') {
-    var popupwork = document.getElementById("myWorkPopup");
-    popupwork.classList.toggle("show");
-  }
-  else if (string === 'auction') {
-    var popupauction = document.getElementById("myAuctionPopup");
-    popupauction.classList.toggle("show");
-
-  }
-  else if (string === 'market') {
-    var popupmarket = document.getElementById("myMarketPopup");
-    popupmarket.classList.toggle("show");
-  }
-  else if (string === 'skill') {
-    var popupskill = document.getElementById("mySkillPopup");
-    popupskill.classList.toggle("show");
-  }
-  else if (string === 'item') {
-    var popupitem = document.getElementById("myItemPopup");
-    popupitem.classList.toggle("show");
-  }
+  this.showRulesPopup = !this.showRulesPopup;
+  this.rulesPopupContent = string;
+  
+  // if (string === 'work') {
+  //   var popupwork = document.getElementById("myWorkPopup");
+  //   popupwork.classList.toggle("show");
+  // }
+  // else if (string === 'auction') {
+  //   var popupauction = document.getElementById("myAuctionPopup");
+  //   popupauction.classList.toggle("show");
+  //
+  // }
+  // else if (string === 'market') {
+  //    var popupmarket = document.getElementById("myMarketPopup");
+  //    popupmarket.classList.toggle("show");
+  // }
+  // else if (string === 'skill') {
+  //   var popupskill = document.getElementById("mySkillPopup");
+  //   popupskill.classList.toggle("show");
+  // }
+  // else if (string === 'item') {
+  //   var popupitem = document.getElementById("myItemPopup");
+  //   popupitem.classList.toggle("show");
+  // }
 },
 getHowToInfo:function(){
       var popupwork = document.getElementById("myHowToInfoPopup");

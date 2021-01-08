@@ -11,6 +11,7 @@
 
       <div class="popup" style= "position:relative; left:0em; top:0em;">
         <img src='/images/infoknapp_rv.png' alt="Raise value" width="70%" @click="$emit('getInfo')" >
+        <!-- ta bort även på alla andra
         <span class="popuptext" id="myMarketPopup"  style= "left:15vw; top:-48vh;">
           <input class="closeCross" type="image" @click="$emit('getInfo')" alt="Login"
           src='/images/close.png' >
@@ -18,7 +19,7 @@
           {{ labels.valueInfo }}
           <br>
           <button class="closeButton"  @click="$emit('getInfo')">close</button>
-        </span>
+        </span> -->
       </div>
     </div>
 
@@ -31,8 +32,9 @@
         :disabled="cannotAfford(p.cost)"
         @click="placeBottle(p)"
         src='/images/bottle_placement.png' >
-        <p class="buttonText"> ${{p.cost}} </p>
+        <p class="buttonText" v-if="p.playerId===null"> ${{p.cost}} </p>
         <div v-if="p.playerId !== null">
+          <input class="bottlePlacement" type="image" :src="placedBottle(p.playerId)" >
           {{p.playerId}}
         </div>
       </div>
@@ -84,6 +86,7 @@ export default {
   props: {            //HÄR ÄR ALLA v-binds FRÅN ELEMENTET I Collectors.vue
     labels: Object,  //specify what kind of object
     player: Object,
+    players: Object,
     //itemsOnSale: Array,
     auctionCards: Array,
     //  raiseValueOnSale: Array,
@@ -93,7 +96,13 @@ export default {
     placement: Array
     //NÅNTING MED WORK?
   },
+  computed: {
+
+  },
   methods: {
+    placedBottle: function (playerId) {
+      return '/images/bottle_' + this.players[playerId].color + '.png';
+    },
     cannotAfford: function (cost) {
       let minCost = 100;
       for(let key in this.marketValues) {

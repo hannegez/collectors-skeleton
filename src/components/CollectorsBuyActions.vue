@@ -32,9 +32,9 @@
     :disabled="cannotAfford(p.cost)"
     @click="placeBottle(p)"
     src='/images/bottle_placement.png' >
-    <span class="buttonText"> ${{p.cost}} </span>
+    <span class="buttonText" v-if="p.playerId===null"> ${{p.cost}} </span>
     <div v-if="p.playerId !== null">
-      {{p.playerId}}
+      <input class="bottlePlacement" type="image" :src="placedBottle(p.playerId)" >
     </div>
   </div>
 </div>
@@ -57,6 +57,7 @@ export default {
   props: {            //HÄR ÄR ALLA v-binds FRÅN ELEMENTET I Collectors.vue
     labels: Object,  //specify what kind of object
     player: Object,
+    players: Object,
     itemsOnSale: Array,
     skillsOnSale: Array,
     marketValues: Object,
@@ -64,6 +65,9 @@ export default {
     //NÅNTING MED WORK?
   },
   methods: {
+    placedBottle: function (playerId) {
+      return '/images/bottle_' + this.players[playerId].color + '.png';
+    },
     cannotAfford: function (cost) {
       let minCost = 100;
       for(let key in this.marketValues) {

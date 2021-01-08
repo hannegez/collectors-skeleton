@@ -26,33 +26,17 @@
         <p class="buttonText" v-if="p.playerId===null"> ${{p.cost}} </p>
         <div v-if="p.playerId !== null">
           <input class="bottlePlacement" type="image" :src="placedBottle(p.playerId)" >
-          {{p.playerId}}
         </div>
       </div>
     </div>
 
     <div class="marketValues">
-      <div class="marketValue">
-        <span>{{marketValues.fastaval}}</span>
-        <img class="valueSymbol" src='/images/fastaval_symbol.png'>
-      </div>
-      <div class="marketValue">
-        <span>{{marketValues.figures}}</span>
-        <img class="valueSymbol" src='/images/figures_symbol.png'>
-      </div>
-      <div class="marketValue">
-        <span>{{marketValues.music}}</span>
-        <img class="valueSymbol" src='/images/music_symbol.png'>
-      </div>
-      <div class="marketValue">
-        <span>{{marketValues.movie}}</span>
-        <img class="valueSymbol" src='/images/movie_symbol.png'>
-      </div>
-      <div class="marketValue">
-        <span>{{marketValues.technology}}</span>
-        <img class="valueSymbol" src='/images/technology_symbol.png'>
+      <div v-for="(valueSymbol, index) in valueSymbols" :key="index" class="marketValue">
+        <img class="valueSymbol" :src="valueSymbol.image">
+        <span>{{valueSymbol.value}}</span>
       </div>
     </div>
+    
   </div>
 
   <!-- OBS: alla kort som lagts till i market, detta ska ej synas i slutet, men låter det vara kvar tillfälligt -->
@@ -86,7 +70,25 @@ export default {
     //NÅNTING MED WORK?
   },
   computed: {
-
+    valueSymbols : function() {
+      return {
+        fastaval: {  image: '/images/fastaval_symbol.png',
+                     value: this.marketValues.fastaval
+                  },
+        figures: {  image: '/images/figures_symbol.png',
+                     value: this.marketValues.figures
+                  },
+        music: {  image: '/images/music_symbol.png',
+                     value: this.marketValues.music
+                  },
+        movie: {  image: '/images/movie_symbol.png',
+                     value: this.marketValues.movie
+                  },
+        technology: {  image: '/images/technology_symbol.png',
+                     value: this.marketValues.technology
+                  }
+      }
+    }
   },
   methods: {
     placedBottle: function (playerId) {

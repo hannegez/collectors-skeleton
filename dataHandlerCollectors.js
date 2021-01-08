@@ -193,24 +193,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                   }
                   room.players[playerId].items.push(...c);
                   room.players[playerId].money -= cost;
-
-                  //ÄVEN HÄR EN JÄTTEFUL LÖSNING PÅ ITEMCOUNTER!
-                  if ( card.item === 'fastaval' ) {
-                    room.players[playerId].itemCounter[0] ++;
-                  }
-                  else if ( card.item === 'figures' ) {
-                    room.players[playerId].itemCounter[1] ++;
-                  }
-                  else if ( card.item === 'music' ) {
-                    room.players[playerId].itemCounter[2] ++;
-                  }
-                  else if ( card.item === 'movie' ) {
-                    room.players[playerId].itemCounter[3] ++;
-                  }
-                  else if ( card.item === 'technology' ) {
-                    room.players[playerId].itemCounter[4] ++;
-                  }
-
+                  room.players[playerId].itemCounter[card.item].value ++;
 
                 }
               }
@@ -254,15 +237,41 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                         color: room.playerColors.shift(),
                         skills: [],
                         items: [],
-                        /*         itemCounter: { 'fastaval' : 0,
-                        'figures' : 0,
-                        'music' : 0,
-                        'movie' : 0,
-                        'technology' : 0 }, //LYCKADES INTE MED DETTA FÖRST, VILL GÖRA LIKNANDE PÅ skillCounter /KARRO */
-
-                        itemCounter: [0,0,0,0,0], //FÖRENKLING: fastaval, figures, music, movie, technology, /KARRO
-                        skillCounter: [0,0,0,0,0,0], //FÖRENKLING: workerIncome, workerCard, bottle, auctionIncome, VP-, VP-all /KARRO
-                        skillCounter_VP: [0,0,0,0,0], //FÖRENKLING: VP-fastaval, VP-figures, VP-music, VP-movie, VP-technology, /KARRO
+                        itemCounter:  { fastaval:       { image: '/images/item_fastaval.png',
+                                                          value: 0 },
+                                        figures:        { image: '/images/item_figures.png',
+                                                          value: 0 },
+                                        music:          { image: '/images/item_music.png',
+                                                          value: 0 },
+                                        movie:          { image: '/images/item_movie.png',
+                                                          value: 0 },
+                                        technology:     { image: '/images/item_technology.png',
+                                                          value: 0 }
+                                    },
+                       skillCounter:  { workerIncome:   { image: '/images/skills_workerIncome.png',
+                                                          value: 0 },
+                                        workerCard:     { image: '/images/skills_workerCard.png',
+                                                          value: 0 },
+                                        bottle:         { image: '/images/skills_bottle.png',
+                                                          value: 0 },
+                                        auctionIncome:  { image: '/images/skills_auctionIncome.png',
+                                                          value: 0 },
+                                        vp:             { image: '/images/skills_VP-.png',
+                                                          value: 0 },
+                                        vpAll:          { image: '/images/skills_VP-all.png',
+                                                          value: 0 }
+                                     },
+                        skillCounter_VP: { vp_fastaval:     { image: '/images/skills_VP-fastaval.png',
+                                                              value: 0 },
+                                           vp_figures:      { image: '/images/skills_VP-figures.png',
+                                                              value: 0 },
+                                           vp_music:        { image: '/images/skills_VP-music.png',
+                                                              value: 0 },
+                                           vp_movie:        { image: '/images/skills_VP-movie.png',
+                                                              value: 0 },
+                                           vp_technology:   { image: '/images/skills_VP-technology.png',
+                                                              value: 0 },
+                                     },
                         income: [],
                         futureIncome: 0,
                         secret: [],
@@ -425,48 +434,54 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                 }
                                 room.players[playerId].skills.push(...c);
                                 room.players[playerId].money -= cost;
-                                //kalla på skillmetod som vi skapar nedan this.skillHappening(card);
+
                                 if (card.skill === 'bottle') {
                                   room.players[playerId].totalBottles += 1;
                                   room.players[playerId].bottlesLeft += 1;
                                 }
 
+                                //SKILLCOUNTERS
+                                if (card.skill === 'workerIncome' || card.skill === 'workerCard' ||
+                                    card.skill === 'bottle' || card.skill === 'auctionIncome') {
+                                      room.players[playerId].skillCounter[card.skill].value ++;
+                                    }
+
 
                                 //ÄVEN HÄR EN JÄTTEFUL LÖSNING PÅ SKILLCOUNTER!
-                                if ( card.skill === 'workerIncome' ) {
-                                  room.players[playerId].skillCounter[0] ++;
-                                }
-                                else if ( card.skill === 'workerCard' ) {
-                                  room.players[playerId].skillCounter[1] ++;
-                                }
-                                else if ( card.skill === 'bottle' ) {
-                                  room.players[playerId].skillCounter[2] ++;
-                                }
-                                else if ( card.skill === 'auctionIncome' ) {
-                                  room.players[playerId].skillCounter[3] ++;
-                                }
-                                else if ( card.skill === 'VP-all' ) {
-                                  room.players[playerId].skillCounter[5] ++;
-                                }
-                                else {                                           //Lägger nr 5 (idx 4) sist på else (kan vara olika symboler på VP-...)
-                                  room.players[playerId].skillCounter[4] ++;
-                                  if ( card.skill === 'VP-fastaval' ) {
-                                    room.players[playerId].skillCounter_VP[0] ++;
-                                  }
-                                  else if ( card.skill === 'VP-figures' ) {
-                                    room.players[playerId].skillCounter_VP[1] ++;
-                                  }
-                                  else if ( card.skill === 'VP-music' ) {
-                                    room.players[playerId].skillCounter_VP[2] ++;
-                                  }
-                                  else if ( card.skill === 'VP-movie' ) {
-                                    room.players[playerId].skillCounter_VP[3] ++;
-                                  }
-                                  else if ( card.skill === 'VP-technology' ) {
-                                    room.players[playerId].skillCounter_VP[4] ++;
-                                  }
-
-                                }
+                                // if ( card.skill === 'workerIncome' ) {
+                                //   room.players[playerId].skillCounter[0] ++;
+                                // }
+                                // else if ( card.skill === 'workerCard' ) {
+                                //   room.players[playerId].skillCounter[1] ++;
+                                // }
+                                // else if ( card.skill === 'bottle' ) {
+                                //   room.players[playerId].skillCounter[2] ++;
+                                // }
+                                // else if ( card.skill === 'auctionIncome' ) {
+                                //   room.players[playerId].skillCounter[3] ++;
+                                // }
+                                // else if ( card.skill === 'VP-all' ) {
+                                //   room.players[playerId].skillCounter[5] ++;
+                                // }
+                                // else {                                           //Lägger nr 5 (idx 4) sist på else (kan vara olika symboler på VP-...)
+                                //   room.players[playerId].skillCounter[4] ++;
+                                //   if ( card.skill === 'VP-fastaval' ) {
+                                //     room.players[playerId].skillCounter_VP[0] ++;
+                                //   }
+                                //   else if ( card.skill === 'VP-figures' ) {
+                                //     room.players[playerId].skillCounter_VP[1] ++;
+                                //   }
+                                //   else if ( card.skill === 'VP-music' ) {
+                                //     room.players[playerId].skillCounter_VP[2] ++;
+                                //   }
+                                //   else if ( card.skill === 'VP-movie' ) {
+                                //     room.players[playerId].skillCounter_VP[3] ++;
+                                //   }
+                                //   else if ( card.skill === 'VP-technology' ) {
+                                //     room.players[playerId].skillCounter_VP[4] ++;
+                                //   }
+                                //
+                                // }
 
                               }
                             }
@@ -518,7 +533,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                       activePlacement[i].playerId = playerId;
                                       if (workAction === 1 && room.players[playerId].whichLap === 0){
                                         console.log("workaction 1: lap1: 2 on future income");
-                                        
+
 
                                         room.players[playerId].bottlesLeft -= 1; //4th quarter
                                       }

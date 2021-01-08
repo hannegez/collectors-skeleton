@@ -8,79 +8,27 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
       <h2>{{labels.playerInfo}} {{playerId}}</h2>
     </div>
 
-    <!--  OBS: dessa item/skillsymboler och counters vill vi egentligen lösa med en for-loop och lagra counters i ett objekt
-    istället så att vi kan komma åt dem på ett snyggare sätt. Men vi fick det inte att funka och gjorde denna
-    tillfälliga och "osnygga" lösningen så länge. -->
     <div class="itemCounters">
-      <div class="itemCounter">
-        <img class="itemSymbol" src='/images/item_fastaval.png'>
-        <span> {{ player.itemCounter[0] }} </span>
-      </div>
-      <div class="itemCounter">
-        <img class="itemSymbol" src='/images/item_figures.png'>
-        <span> {{ player.itemCounter[1] }} </span>
-      </div>
-      <div class="itemCounter">
-        <img class="itemSymbol" src='/images/item_music.png'>
-        <span> {{ player.itemCounter[2] }} </span>
-      </div>
-      <div class="itemCounter">
-        <img class="itemSymbol" src='/images/item_movie.png'>
-        <span> {{ player.itemCounter[3] }} </span>
-      </div>
-      <div class="itemCounter">
-        <img class="itemSymbol" src='/images/item_technology.png'>
-        <span> {{ player.itemCounter[4] }} </span>
+      <div v-for="(chosenItem, index) in itemCounter" :key="index" class="itemCounter">
+        <img class="itemSymbol" :src="chosenItem.image" >
+        <span> {{chosenItem.value }} </span>
       </div>
     </div>
 
     <div class="skillCounters">
-      <div class="skillCounter">
-        <img class="skillSymbol" src='/images/skills_workerIncome.png'>
-        <span> {{ player.skillCounter[0] }} </span>
+      <div v-for="(chosenSkill, index) in skillCounter" :key="index" class="skillCounter">
+        <img class="skillSymbol" :src="chosenSkill.image" >
+        <span> {{chosenSkill.value }} </span>
       </div>
-      <div class="skillCounter">
-        <img class="skillSymbol" src='/images/skills_workerCard.png'>
-        <span> {{ player.skillCounter[1] }} </span>
-      </div>
-      <div class="skillCounter">
-        <img class="skillSymbol" src='/images/skills_bottle.png'>
-        <span> {{ player.skillCounter[2] }} </span>
-      </div>
-      <div class="skillCounter">
-        <img class="skillSymbol" src='/images/skills_auctionIncome.png'>
-        <span> {{ player.skillCounter[3] }} </span>
-      </div>
-      <div class="skillCounter hoverSkill">
-        <div class="moreSkills moreSkillCounters">
-          <div class="skillCounter">
-            <img class="extraSkill" src='/images/skills_VP-fastaval.png'>
-            <span> {{ player.skillCounter_VP[0] }} </span>
+
+        <!-- <div class="moreSkills moreSkillCounters">
+          <div v-for="(chosenVPSkill, index) in skillCounter_VP" :key="index" class="skillCounter hoverSkill">
+            <img class="extraSkill" :src="chosenVPSkill.image">
+            <span> {{chosenVPSkill.value }} </span>
           </div>
-          <div class="skillCounter">
-            <img class="extraSkill" src='/images/skills_VP-figures.png'>
-            <span> {{ player.skillCounter_VP[1] }} </span>
-          </div>
-          <div class="skillCounter">
-            <img class="extraSkill" src='/images/skills_VP-music.png'>
-            <span> {{ player.skillCounter_VP[2] }} </span>
-          </div>
-          <div class="skillCounter">
-            <img class="extraSkill" src='/images/skills_VP-movie.png'>
-            <span> {{ player.skillCounter_VP[3] }} </span>
-          </div>
-          <div class="skillCounter">
-            <img class="extraSkill" src='/images/skills_VP-technology.png'>
-            <span> {{ player.skillCounter_VP[4] }} </span>
-          </div>
-        </div>
-        <img class="skillSymbol" src='/images/skills_VP-.png'>
-        <span> {{ player.skillCounter[4] }} </span>
-      </div>
-      <div class="skillCounter">
-        <img class="skillSymbol" src='/images/skills_VP-all.png'>
-        <span> {{ player.skillCounter[5] }} </span>
-      </div>
+        </div> -->
+
+    </div>
 
       <!-- DETTA KAN TAS BORT OM VI ÄR OK MED ITEMCOUNTERN, SKILLPOPUP OCH HANDPOPUP
       <div class="categoryHand">
@@ -109,8 +57,6 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
   </div>
   </div>-->
 
-
-    </div>
 
     <div class="clickToSee">
 
@@ -195,9 +141,18 @@ export default {
     }
   },
   computed: {
-    bottlePic: function () {
-    return '/images/bottle_' + this.player.color + '.png';
-    }
+    bottlePic: function() {
+      return '/images/bottle_' + this.player.color + '.png';
+    },
+    itemCounter: function() {
+      return this.player.itemCounter;
+    },
+    skillCounter: function() {
+      return this.player.skillCounter;
+    },
+    skillCounter_VP: function() {
+      return this.player.skillCounter_VP;
+    },
   },
   methods: {
     chooseAction(card){

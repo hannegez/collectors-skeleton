@@ -57,7 +57,7 @@ Data.prototype.getUILabels = function (roomId) {
 Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
   let room = {};
   room.players = {};
-  room.playerColors = ['#731F6D', '#4E4E4E', '#19B3A7', '#BF8F65']; //lila, grå, turkos, beige
+  room.playerColors = ['731F6D', '4E4E4E', '19B3A7', 'BF8F65']; //lila, grå, turkos, beige
   room.lang = lang;
   room.deck = this.createDeck(lang);
   room.playerCount = playerCount;
@@ -148,6 +148,19 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
               room.players[playerId].money ++;
               /*  room.money[player] += 1; */
               room.players[playerId].money;
+              return room.players;
+            }
+          }
+
+          Data.prototype.getLaps = function (roomId, playerId) {
+            let room = this.rooms[roomId];
+            if (typeof room !== 'undefined') {
+              room.players[playerId].whichLap ++;
+              /*  room.money[player] += 1; */
+              room.players[playerId].whichLap;
+              if (room.players[playerId].whichLap === 4){
+                room.players[playerId].whichLap=0;
+              }
               return room.players;
             }
           }
@@ -246,14 +259,16 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                         'music' : 0,
                         'movie' : 0,
                         'technology' : 0 }, //LYCKADES INTE MED DETTA FÖRST, VILL GÖRA LIKNANDE PÅ skillCounter /KARRO */
+
                         itemCounter: [0,0,0,0,0], //FÖRENKLING: fastaval, figures, music, movie, technology, /KARRO
                         skillCounter: [0,0,0,0,0,0], //FÖRENKLING: workerIncome, workerCard, bottle, auctionIncome, VP-, VP-all /KARRO
                         skillCounter_VP: [0,0,0,0,0], //FÖRENKLING: VP-fastaval, VP-figures, VP-music, VP-movie, VP-technology, /KARRO
                         income: [],
-                        futureIncome: 0, //ska sättas till längden av income när man väljer work som resulterar i income
+                        futureIncome: 0,
                         secret: [],
-                        totalBottles: 2, //ska ökas med en när man skaffar en bottle-skill
-                        bottlesLeft: 2}; //ska minska med en varje gång man gör ett drag, när allas är 0 ändras quarter
+                        totalBottles: 2,
+                        bottlesLeft: 2,
+                        whichLap: 0};
                         return true;
                       }
                       console.log("Player", playerId, "was declined due to player limit");
@@ -374,35 +389,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                 }
 
 
-                                /*
-                                console.log(workAction + "Går in här när workaction === 5");
-                                console.log("Data.prototype.startWork futureIncome: " + room.players[playerId].futureIncome );
-                                room.players[playerId].futureIncome += 1;
-                                console.log("Data.prototype.startWork futureIncome: " + room.players[playerId].futureIncome );
 
-                                console.log("room.players[playerId].hand[i].x är lika med:" + room.players[playerId].hand[i].x);
-                                console.log("room.players[playerId].hand.length är lika med:" + room.players[playerId].hand.length);
-                                console.log("room.players[playerId].hand[i].y är lika med:" + room.players[playerId].hand[i].y);
-
-                                /*                  let c = null;
-
-
-
-
-                                for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
-
-                                if (room.players[playerId].hand[i].x === card.x &&
-                                room.players[playerId].hand[i].y === card.y) {
-                                c = room.players[playerId].hand.splice(i,1);
-                                break;
-                              }
-                            }
-                            room.market.push(...c);
-
-
-
-
-                          }*/
 
 
                         }
@@ -523,17 +510,35 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                               if (typeof room !== 'undefined') {
                                 let activePlacement = room.workPlacement;
                                 room.players[playerId].bottlesLeft -= 1;
+                          //      console.log("whichLap i data " + room.players[playerId].whichLap);
 
                                 for(let i = 0; i < activePlacement.length; i += 1) {
                                   if( activePlacement[i].workAction === workAction &&
                                     activePlacement[i].playerId === null ) {
                                       activePlacement[i].playerId = playerId;
-                                      //lägg till if satser / metod med if satser.
-                                      if (workAction === 1){
-                                        console.log("workaction 1: 1 bottle recycled");
+                                      if (workAction === 1 && room.players[playerId].whichLap === 0){
+                                        console.log("workaction 1: lap1: 2 on future income");
+                                        
+
+                                        room.players[playerId].bottlesLeft -= 1; //4th quarter
+                                      }
+                                      else if (workAction === 1 && room.players[playerId].whichLap === 1){
+                                        console.log("workaction 1: lap2: 1 coin 2 on future income");
+                                        room.players[playerId].money + 1; // olika för olika rounds
+                                        room.players[playerId].bottlesLeft -= 1; //4th quarter
+                                      }
+                                      else if (workAction === 1 && room.players[playerId].whichLap === 2){
+                                        console.log("workaction 1: lap3: 2 coin 2 on future income");
+                                        room.players[playerId].money + 2; // olika för olika rounds
+                                        room.players[playerId].bottlesLeft -= 1; //4th quarter
+                                      }
+                                      else if (workAction === 1 && room.players[playerId].whichLap === 3){
+                                        console.log("workaction 1: lap4: 1 bottle recycled");
                                         room.players[playerId].money -= cost; // olika för olika rounds
                                         room.players[playerId].totalBottles -= 1; //4th quarter
                                       }
+
+
                                       else if (workAction === 2) {
                                         console.log("workaction 2: 1 bottle recycled");
                                         room.players[playerId].money -= cost;
@@ -554,14 +559,7 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                         console.log("workaction 5: 1 card added to your hand, now choose 1 card from your hand to discard as future income ");
                                         this.drawCard(roomId, playerId);
 
-                                        //chansning
-                                        //HJÄLP 18/12
-                                        //this.chooseIncomeCard(rommId, playerId);
 
-                                        //room.players[playerId].income PUSHA hit
-                                        //you must draw one card from the deck to your hand and place
-                                        // one card from your hand face down next to your player board
-                                        // on its right side
                                       }
 
 
@@ -570,6 +568,8 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                   }
                                 }
                               }
+
+
 
                               //------------------------------------------------------------------------------------//
 
@@ -589,7 +589,6 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                   return { buyPlacement: room.buyPlacement,
                                     skillPlacement: room.skillPlacement,
                                     auctionPlacement: room.auctionPlacement,
-                                    //HÄR VILL VI LÄGGA TILL workPlacement
                                     workPlacement: room.workPlacement,
                                     marketPlacement: room.marketPlacement }
                                   }

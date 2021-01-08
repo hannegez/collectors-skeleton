@@ -82,10 +82,6 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
         <span> {{ player.skillCounter[5] }} </span>
       </div>
 
-
-      <div class="playerslots" >
-        <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
-      </div>
       <!-- DETTA KAN TAS BORT OM VI ÄR OK MED ITEMCOUNTERN, SKILLPOPUP OCH HANDPOPUP
       <div class="categoryHand">
       <h2>Your hand</h2>
@@ -111,7 +107,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
   <div class="playerslots Yskills">
   <CollectorsCard v-for="(card, index) in player.skills" :card="card" :key="'skill' +index"/>
   </div>
-</div> -->
+  </div>-->
 
 
     </div>
@@ -144,7 +140,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
               Vet dock att player.color finns och har ett värde
           <img :src="bottlePic" alt="See complete bottle info" width="65%" @click='getYourInfo("yourBottles")' > -->
           <img src='/images/playerbottle_basic.png' alt="See complete bottle info" width="65%" @click='getYourInfo("yourBottles")' >
-          <div class="popuptext" id="yourBottlesPopup"  style= "left:-50vw; top:20vh;">
+          <div class="popuptext" id="yourBottlesPopup"  style= "left:10em; top:-3em;">
             <input class="closeCross" type="image" @click="getYourInfo('yourBottles')" alt="Login"
             src='/images/close.png' >
             <h2>{{ labels.yourBottles }}</h2>
@@ -215,12 +211,10 @@ export default {
     getYourInfo: function(string){
       console.log("inne i getYourInfo", string);
       if (string=="yourSkills") {
-
-        //document.getElementById("yourSkillsPopup").classList.toggle("show");
+        document.getElementById("yourSkillsPopup").classList.toggle("show");
       }
       else if (string=="yourHand") {
-        this.showHand = !this.showHand;
-        // document.getElementById("yourHandPopup").classList.toggle("show");
+        document.getElementById("yourHandPopup").classList.toggle("show");
       }
       else if (string=="yourBottles") {
         document.getElementById("yourBottlesPopup").classList.toggle("show");

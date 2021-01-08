@@ -37,7 +37,8 @@
           {{labels.howToInfo3}}
           <br>
           {{labels.howToInfo4}}
-
+          <br>
+          {{labels.howToInfo5}}
           <button class="buttons getButton" v-on:click="getMoney()" > {{this.labels.getCoins}} </button>
           <button class="buttons getButton" v-on:click="drawCard()" > {{this.labels.getCards}} </button>
           <button class="buttons" v-on:click="nextQuarter()" > {{this.labels.nextQuarterClose}} </button>
@@ -108,7 +109,6 @@
           :player="players[playerId]"
           :marketValues="marketValues"
           :placement="workPlacement"
-          @startWork="startWork($event)"
           @placeWorkBottle="placeWorkBottle( $event)"
           @getInfo="getInfo('work')"/>
         </div>
@@ -216,6 +216,7 @@ export default {
         //HÄR LÄGGER VI TILL workPlacement
         //workPlacement: [],
         chosenWorkAction: null, //bajs
+        chosenWhichLap: null,
         chosenPlacementCost: null,
         chosenAction: null,           //MAJA LA TILL DENNA
         marketValues: { fastaval: 0,
@@ -298,6 +299,8 @@ export default {
             this.placements = d.placements;
             this.workPlacement = d.placements.workPlacement;
 
+            document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
+
             //GÖR ATT HANDEN LYSER UPP NÄR MAN TRYCKER PÅ 5TE KNAPPEN, GER FELMEDDELANDE LÖS
             for(let c = 0; c < this.players[this.playerId].hand.length; c += 1 ) {
               if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 5 ) {
@@ -305,6 +308,11 @@ export default {
                 this.$set(this.players[this.playerId].hand[c], "available", true);
                 //console.log("efter: ", this.players[this.playerId].hand[c].available);
               }
+          /*    if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 1 ) {
+                if (this.chosenWorkAction<3){
+                  this.$set(this.players[this.playerId].hand[c], "available", true);
+                }
+              }*/
             }
 
 
@@ -327,6 +335,11 @@ export default {
           this.players = d;
         }.bind(this)
       );
+          this.$store.state.socket.on('collectorsGottenLaps',
+          function(d) {
+            this.players = d;
+          }.bind(this)
+        );
 
         this.$store.state.socket.on('collectorsCardBought',
         function(d) {
@@ -357,6 +370,8 @@ export default {
     }.bind(this)
   );
   //HÄÄR SKA FUTURE INCOME LÄGGAS IN!!!!!!!
+
+  // DANI
   this.$store.state.socket.on('collectorsWorkStarted',
   function(d) {
     document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`; //MÅSTE FIXAS
@@ -394,6 +409,7 @@ methods: {
       this.startWork(card); /*måste ändras*/
       //  work(card);
     }
+
   },
 
   selectAll: function (n) {
@@ -401,6 +417,7 @@ methods: {
   },
 
   placeBottle: function (action, cost) { /* skicka till server och gör förändring där.*/
+  //  console.log(action, cost);
     this.chosenPlacementCost = cost;
     this.chosenAction = action;
     this.$store.state.socket.emit('collectorsPlaceBottle', {
@@ -416,6 +433,7 @@ placeWorkBottle: function (p) { /* skicka till server och gör förändring där
 
   this.chosenPlacementCost = p.cost;
   this.chosenAction = "work";
+  this.chosenWhichLap=p.whichLap;
   this.chosenWorkAction= p.workAction;
   this.$store.state.socket.emit('collectorsPlaceWorkBottle', {
     roomId: this.$route.params.id,
@@ -440,6 +458,14 @@ getMoney: function () {
   }
 );
 },
+getLaps: function (){
+this.$store.state.socket.emit('collectorsGetLaps', {
+ roomId: this.$route.params.id,
+ playerId: this.playerId,
+}
+);
+},
+
 gainSkill: function (card) {
   /*console.log("gainSkill", card);     //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('collectorsGainSkill', {
@@ -462,13 +488,14 @@ startAuction: function (card) {
 );
 },
 startWork: function (card) {
-  /*console.log("startWork", card);   //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
+  //console.log("startWork ", card);   //GÅR ENDAST IN HÄR DÅ MAN TRYCKER PÅ ETT KORT
   this.$store.state.socket.emit('CollectorsStartWork', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
     card: card,
     cost: this.chosenPlacementCost,
-    workAction:this.chosenWorkAction
+    workAction:this.chosenWorkAction,
+    whichLap:this.chosenWhichLap
   }
 );
 },
@@ -516,8 +543,21 @@ nextQuarterInfo:function(){
 },
 nextQuarter:function(){
   this.changeImageNextQuarter();
-  this.nextQuarterInfo();
+
+//  console.log("whichLap i collectors" + this.players[this.playerId].whichLap)
+//  this.players[this.playerId].whichLap+=1;
+//  console.log("whichLap i collectors" + this.players[this.playerId].whichLap)
+  //console.log("total bottles" + this.players[this.playerId].totalBottles +" bottles left" + this.players[this.playerId].bottlesLeft) +" innan";
+  this.players[this.playerId].bottlesLeft=this.players[this.playerId].totalBottles
+  //console.log("total bottles" + this.players[this.playerId].totalBottles +" bottles left" + this.players[this.playerId].bottlesLeft) +" efter";
+  //Måste göra så att flaskknapparna blir oanvända
   //här ska saker hända!!!!! DANI
+  //this.placeBottle('auction', 1);
+//  this.players[this.playerId].whichLap += 1;
+  this.getLaps();
+  this.nextQuarterInfo();
+
+
 
 
 },

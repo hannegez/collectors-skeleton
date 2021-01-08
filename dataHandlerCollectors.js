@@ -488,46 +488,32 @@ Data.prototype.resetFourthQuarterPlacements = function(room) {
                                 //SKILLCOUNTERS
                                 if (card.skill === 'workerIncome' || card.skill === 'workerCard' ||
                                     card.skill === 'bottle' || card.skill === 'auctionIncome') {
-                                      room.players[playerId].skillCounter[card.skill].value ++;
-                                    }
+                                  room.players[playerId].skillCounter[card.skill].value ++;
+                                }
 
-
-                                //ÄVEN HÄR EN JÄTTEFUL LÖSNING PÅ SKILLCOUNTER!
-                                // if ( card.skill === 'workerIncome' ) {
-                                //   room.players[playerId].skillCounter[0] ++;
-                                // }
-                                // else if ( card.skill === 'workerCard' ) {
-                                //   room.players[playerId].skillCounter[1] ++;
-                                // }
-                                // else if ( card.skill === 'bottle' ) {
-                                //   room.players[playerId].skillCounter[2] ++;
-                                // }
-                                // else if ( card.skill === 'auctionIncome' ) {
-                                //   room.players[playerId].skillCounter[3] ++;
-                                // }
-                                // else if ( card.skill === 'VP-all' ) {
-                                //   room.players[playerId].skillCounter[5] ++;
-                                // }
-                                // else {                                           //Lägger nr 5 (idx 4) sist på else (kan vara olika symboler på VP-...)
-                                //   room.players[playerId].skillCounter[4] ++;
-                                //   if ( card.skill === 'VP-fastaval' ) {
-                                //     room.players[playerId].skillCounter_VP[0] ++;
-                                //   }
-                                //   else if ( card.skill === 'VP-figures' ) {
-                                //     room.players[playerId].skillCounter_VP[1] ++;
-                                //   }
-                                //   else if ( card.skill === 'VP-music' ) {
-                                //     room.players[playerId].skillCounter_VP[2] ++;
-                                //   }
-                                //   else if ( card.skill === 'VP-movie' ) {
-                                //     room.players[playerId].skillCounter_VP[3] ++;
-                                //   }
-                                //   else if ( card.skill === 'VP-technology' ) {
-                                //     room.players[playerId].skillCounter_VP[4] ++;
-                                //   }
-                                //
-                                // }
-
+                                //HÄRIFRÅN FICK DET BLI FULKOD PGA card.skill heter VP-
+                                //och dataHandler kunde ej hantera stora bokstäver och -
+                                else if (card.skill === 'VP-all') {
+                                  room.players[playerId].skillCounter['vpAll'].value ++;
+                                }
+                                else {
+                                  room.players[playerId].skillCounter['vp'].value ++;
+                                  if (card.skill === 'VP-fastaval') {
+                                    room.players[playerId].skillCounter_VP['vp_fastaval'].value ++;
+                                  }
+                                  else if (card.skill === 'VP-figures') {
+                                    room.players[playerId].skillCounter_VP['vp_figures'].value ++;
+                                  }
+                                  else if (card.skill === 'VP-music') {
+                                    room.players[playerId].skillCounter_VP['vp_music'].value ++;
+                                  }
+                                  else if (card.skill === 'VP-movie') {
+                                    room.players[playerId].skillCounter_VP['vp_movie'].value ++;
+                                  }
+                                  else if (card.skill === 'VP-technology') {
+                                    room.players[playerId].skillCounter_VP['vp_technology'].value ++;
+                                  }
+                                }
                               }
                             }
 

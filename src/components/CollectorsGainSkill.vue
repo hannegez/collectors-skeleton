@@ -1,37 +1,23 @@
 <template>
   <div class="gainSkill">
     <div class="gainSkillHeader">
-      <!-- {{ labels.gainSkill }} behövs ej längre pga infoknappar -->
+
     </div>
 
-    <div class="gainSkillInfo">
-      <div class="popup" style= "position:relative; left:0em; top:0em;">
-      <img src='/images/gainSkill.PNG' alt="Gain skill" width="70%" @click="$emit('getInfo')" >
-      <span class="popuptext" id="mySkillPopup"  style= "left: 24vw; top:-10vh;">
-        <input class="closeCross" type="image" @click="$emit('getInfo')" alt="Login"
-        src='/images/close.png' >
-        <h2>{{ labels.gainSkill }}</h2>
-        {{ labels.skillInfo }}
-
-        <br>
-        <img src='/images/skills_info1.PNG' width="300em">
-        <img src='/images/skills_info2.PNG' width="300em">
-        <img src='/images/skills_info3.PNG' width="300em">
-      <!--  <img src='/images/skills_info.png'>  Maja har lagt till-->
-      <br>
-      <button class="closeButton"  @click="$emit('getInfo')">close</button>
-      </span>
+      <div class="gainSkillInfo">
+        <div class="popup" style= "position:relative; left:0em; top:0em;">
+          <img src='/images/gainSkill.PNG' alt="Gain skill" width="70%" @click="$emit('getInfo')" >
+        </div>
       </div>
-    </div>
 
-    <div class="buyCards">
-      <div v-for="(card, index) in reversedSkills" :key="index">
-        <CollectorsCard
-        :card="card"
-        :availableAction="card.available"
-        @doAction="chooseAction(card)"/>
+      <div class="buyCards">
+        <div v-for="(card, index) in reversedSkills" :key="index">
+          <CollectorsCard
+          :card="card"
+          :availableAction="card.available"
+          @doAction="chooseAction(card)"/>
+        </div>
       </div>
-    </div>
 
 
 <div class="bottlePlacements">

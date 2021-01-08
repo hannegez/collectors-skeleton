@@ -221,6 +221,7 @@ export default {
         auctionPlacement: [],
         marketPlacement: [],
         workPlacement: [],
+        numberOfActions:0,
 
         //HÄR LÄGGER VI TILL workPlacement
         //workPlacement: [],
@@ -317,10 +318,10 @@ export default {
 
             //GÖR ATT HANDEN LYSER UPP NÄR MAN TRYCKER PÅ 5TE KNAPPEN, GER FELMEDDELANDE LÖS
             for(let c = 0; c < this.players[this.playerId].hand.length; c += 1 ) {
-              console.log("inne forloop ");
+          //    console.log("inne forloop ");
               if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 5 ) {
                 //console.log("före: ", this.players[this.playerId].hand[c].available);
-                console.log("inne första if ");
+          //      console.log("inne första if ");
                 this.$set(this.players[this.playerId].hand[c], "available", true);
 
       //          console.log(" chosenworkaction ", this.chosenWorkAction);
@@ -328,9 +329,9 @@ export default {
               //this.currentQuarter=1; //Få den att hämta chosenWhichlap
               //få detta att fungera för workAction 1 och whichlap 0-3 TODO
               if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 1 ) {
-                console.log("inne första 2 if ");
+            //    console.log("inne första 2 if ");
                 if (this.currentQuarter <= 3){
-                  console.log("inne första 3 if ");
+            //      console.log("inne första 3 if ");
 
                   this.$set(this.players[this.playerId].hand[c], "available", true);
                 }
@@ -455,12 +456,20 @@ placeWorkBottle: function (p) { /* skicka till server och gör förändring där
   this.chosenPlacementCost = p.cost;
   this.chosenAction = "work";
   this.chosenWorkAction= p.workAction;
+
+  if(this.chosenWorkAction === 1 && this.currentQuarter <=4){
+    console.log("number of actions" +this.numberOfActions);
+    this.numberOfActions = 2;
+    console.log("number of actions" +this.numberOfActions);
+  }
+
   this.$store.state.socket.emit('collectorsPlaceWorkBottle', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
     action: "work",
     cost: p.cost,
     workAction:p.workAction,
+    numberOfActions:this.numberOfActions,
   }
 );
 },
@@ -527,7 +536,7 @@ buyCard: function (card) {
 getInfo: function(string){
   this.showRulesPopup = !this.showRulesPopup;
   this.rulesPopupContent = string;
-  
+
   // if (string === 'work') {
   //   var popupwork = document.getElementById("myWorkPopup");
   //   popupwork.classList.toggle("show");

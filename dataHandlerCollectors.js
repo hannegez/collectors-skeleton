@@ -91,11 +91,32 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
         room.marketPlacement = [{cost:0, playerId: null},
                                 {cost:-2, playerId: null},
                                 {cost:0, playerId: null} ];
-        room.workPlacement = [ {cost:-3, playerId: null, workAction: 1},
+        room.workPlacement = [ {cost:0, playerId: null, workAction: 1},
                                 {cost:-1, playerId: null, workAction: 2},
                                 {cost:1, playerId: null, workAction: 3},
                                 {cost:0, playerId: null, workAction: 4},
                                 {cost:0, playerId: null, workAction: 5},]
+}
+Data.prototype.resetSecondQuarterPlacements = function(room) {
+      room.workPlacement = [ {cost:-1, playerId: null, workAction: 1},
+                              {cost:-1, playerId: null, workAction: 2},
+                              {cost:1, playerId: null, workAction: 3},
+                              {cost:0, playerId: null, workAction: 4},
+                              {cost:0, playerId: null, workAction: 5},]
+}
+Data.prototype.resetThirdQuarterPlacements = function(room) {
+      room.workPlacement = [ {cost:-2, playerId: null, workAction: 1},
+                              {cost:-1, playerId: null, workAction: 2},
+                              {cost:1, playerId: null, workAction: 3},
+                              {cost:0, playerId: null, workAction: 4},
+                              {cost:0, playerId: null, workAction: 5},]
+}
+Data.prototype.resetFourthQuarterPlacements = function(room) {
+      room.workPlacement = [ {cost:-3, playerId: null, workAction: 1},
+                              {cost:-1, playerId: null, workAction: 2},
+                              {cost:1, playerId: null, workAction: 3},
+                              {cost:0, playerId: null, workAction: 4},
+                              {cost:0, playerId: null, workAction: 5},]
 }
 
 
@@ -159,14 +180,24 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
             let room = this.rooms[roomId];
             if (typeof room !== 'undefined') {
               room.quarter ++;
+              if(room.quarter === 5){
+                room.quarter=1;
+              }
 
               this.resetPlacements(room);
               for (let playerId in room.players) {
               //  console.log("nextQuarter " + room.players[playerId].bottlesLeft + room.players[playerId].totalBottles);
                 room.players[playerId].bottlesLeft=room.players[playerId].totalBottles;
               }
-
-
+              if(room.quarter === 2){
+                this.resetSecondQuarterPlacements(room);
+              }
+              else if(room.quarter === 3){
+                this.resetThirdQuarterPlacements(room);
+              }
+              else if(room.quarter === 4){
+                this.resetFourthQuarterPlacements(room);
+              }
 
             }
           }
@@ -545,6 +576,15 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
                                   if( activePlacement[i].workAction === workAction &&
                                     activePlacement[i].playerId === null ) {
                                       activePlacement[i].playerId = playerId;
+                                //      for (let playerId in room.players) {
+                                //        console.log(room.players[playerId].numberOfActions);
+                                //      }
+                                //      console.log(room.players[playerId].numberOfActions);
+                                //      console.log(this.room.players[playerId].numberOfActions); //cannot find players of undef
+                                //      console.log(this.room.players.numberOfActions);
+                                //      console.log(this.room.numberOfActions);
+                                //        console.log(activePlacement[i].numberOfActions);
+                                        console.log(room.numberOfActions);
                                       if (workAction === 1 && room.quarter === 1){
                                         console.log("workaction 1: lap1: 2 on future income");
 

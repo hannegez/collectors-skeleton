@@ -85,7 +85,7 @@ function sockets(io, socket, data) {
 
   //DANI
   socket.on('CollectorsStartWork', function(d) {
-    data.startWork(d.roomId, d.playerId, d.card, d.cost, d.workAction)
+    data.startWork(d.roomId, d.playerId, d.card, d.cost, d.workAction, d.numberOfActions )
     io.to(d.roomId).emit('collectorsWorkStarted', {
       playerId: d.playerId,
       players: data.getPlayers(d.roomId),
@@ -132,7 +132,7 @@ function sockets(io, socket, data) {
       players: data.getPlayers(d.roomId),
       playerId: d.playerId,
       placements: data.getPlacements(d.roomId), //workAction finns med här
-      numberOfActions: d.numberOfActions,
+  //    numberOfActions: d.numberOfActions,
     }
   );
   });

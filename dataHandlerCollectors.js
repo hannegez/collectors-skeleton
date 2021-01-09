@@ -91,32 +91,32 @@ Data.prototype.createRoom = function(roomId, playerCount, lang="en") {
         room.marketPlacement = [{cost:0, playerId: null},
                                 {cost:-2, playerId: null},
                                 {cost:0, playerId: null} ];
-        room.workPlacement = [ {cost:0, playerId: null, workAction: 1},
-                                {cost:-1, playerId: null, workAction: 2},
-                                {cost:1, playerId: null, workAction: 3},
-                                {cost:0, playerId: null, workAction: 4},
-                                {cost:0, playerId: null, workAction: 5},]
+        room.workPlacement = [ {cost:0, playerId: null, workAction: 1 , numberOfActions:2},
+                                {cost:-1, playerId: null, workAction: 2, numberOfActions:1},
+                                {cost:1, playerId: null, workAction: 3, numberOfActions:1},
+                                {cost:0, playerId: null, workAction: 4, numberOfActions:1},
+                                {cost:0, playerId: null, workAction: 5, numberOfActions:1},]
 }
 Data.prototype.resetSecondQuarterPlacements = function(room) {
-      room.workPlacement = [ {cost:-1, playerId: null, workAction: 1},
-                              {cost:-1, playerId: null, workAction: 2},
-                              {cost:1, playerId: null, workAction: 3},
-                              {cost:0, playerId: null, workAction: 4},
-                              {cost:0, playerId: null, workAction: 5},]
+      room.workPlacement = [ {cost:-1, playerId: null, workAction: 1, numberOfActions:2},
+                              {cost:-1, playerId: null, workAction: 2, numberOfActions:1},
+                              {cost:1, playerId: null, workAction: 3, numberOfActions:1},
+                              {cost:0, playerId: null, workAction: 4, numberOfActions:1},
+                              {cost:0, playerId: null, workAction: 5, numberOfActions:1},]
 }
 Data.prototype.resetThirdQuarterPlacements = function(room) {
-      room.workPlacement = [ {cost:-2, playerId: null, workAction: 1},
-                              {cost:-1, playerId: null, workAction: 2},
-                              {cost:1, playerId: null, workAction: 3},
-                              {cost:0, playerId: null, workAction: 4},
-                              {cost:0, playerId: null, workAction: 5},]
+      room.workPlacement = [ {cost:-2, playerId: null, workAction: 1, numberOfActions:2},
+                              {cost:-1, playerId: null, workAction: 2, numberOfActions:1},
+                              {cost:1, playerId: null, workAction: 3, numberOfActions:1},
+                              {cost:0, playerId: null, workAction: 4, numberOfActions:1},
+                              {cost:0, playerId: null, workAction: 5, numberOfActions:1},]
 }
 Data.prototype.resetFourthQuarterPlacements = function(room) {
-      room.workPlacement = [ {cost:-3, playerId: null, workAction: 1},
-                              {cost:-1, playerId: null, workAction: 2},
-                              {cost:1, playerId: null, workAction: 3},
-                              {cost:0, playerId: null, workAction: 4},
-                              {cost:0, playerId: null, workAction: 5},]
+      room.workPlacement = [ {cost:-3, playerId: null, workAction: 1, numberOfActions:1},
+                              {cost:-1, playerId: null, workAction: 2, numberOfActions:1},
+                              {cost:1, playerId: null, workAction: 3, numberOfActions:1},
+                              {cost:0, playerId: null, workAction: 4, numberOfActions:1},
+                              {cost:0, playerId: null, workAction: 5, numberOfActions:1},]
 }
 
 
@@ -158,7 +158,7 @@ Data.prototype.resetFourthQuarterPlacements = function(room) {
           Data.prototype.drawCard = function (roomId, playerId) {
             let room = this.rooms[roomId];
             if (typeof room !== 'undefined') {
-              console.log("går in i draw card");
+      //        console.log("går in i draw card");
               let card = room.deck.pop();
               room.players[playerId].hand.push(card);
               return room.players;
@@ -423,11 +423,13 @@ Data.prototype.resetFourthQuarterPlacements = function(room) {
                               }
                             }
                             // lös problemet med att pengar inte dras bort
-                            Data.prototype.startWork = function (roomId, playerId, card, cost, workAction) { // bör läggas till workAction?
+                            Data.prototype.startWork = function (roomId, playerId, card, cost, workAction, numberOfActions) { // bör läggas till workAction?
                               let room = this.rooms[roomId];
                               if (typeof room !== 'undefined') {
                                 room.players[playerId].futureIncome += 1;
-                                console.log("går in i data.prototype.startwork");
+                                numberOfActions -=1;
+                                //
+                                console.log("går in i data.prototype.startwork EV reducering av , numberOfActions här?" + numberOfActions);
 
                                 let c = null;
                                 for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
@@ -551,17 +553,19 @@ Data.prototype.resetFourthQuarterPlacements = function(room) {
                               }
                             }
 
-                            Data.prototype.placeWorkBottle = function (roomId, playerId, cost, workAction) {
+                            Data.prototype.placeWorkBottle = function (roomId, playerId, cost, workAction, numberOfActions) {
                               let room = this.rooms[roomId];
                               if (typeof room !== 'undefined') {
                                 let activePlacement = room.workPlacement;
                                 room.players[playerId].bottlesLeft -= 1;
-                          //      console.log("whichLap i data " + room.players[playerId].whichLap);
+                                console.log("number of actions i placeWorkBottle " + workAction);
+                                console.log("number of actions i placeWorkBottle " + numberOfActions);
 
                                 for(let i = 0; i < activePlacement.length; i += 1) {
                                   if( activePlacement[i].workAction === workAction &&
                                     activePlacement[i].playerId === null ) {
                                       activePlacement[i].playerId = playerId;
+
                                 //      for (let playerId in room.players) {
                                 //        console.log(room.players[playerId].numberOfActions);
                                 //      }
@@ -570,7 +574,7 @@ Data.prototype.resetFourthQuarterPlacements = function(room) {
                                 //      console.log(this.room.players.numberOfActions);
                                 //      console.log(this.room.numberOfActions);
                                 //        console.log(activePlacement[i].numberOfActions);
-                                        console.log(room.numberOfActions);
+                                //        console.log("number of actions in placeWorkBottle" + numberOfActions);
                                       if (workAction === 1 && room.quarter === 1){
                                         console.log("workaction 1: lap1: 2 on future income");
 

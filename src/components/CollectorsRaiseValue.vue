@@ -36,7 +36,7 @@
         <span>{{valueSymbol.value}}</span>
       </div>
     </div>
-    
+
   </div>
 
   <!-- OBS: alla kort som lagts till i market, detta ska ej synas i slutet, men låter det vara kvar tillfälligt -->
@@ -130,7 +130,7 @@ export default {
       for (let i = 0; i < this.auctionCards.length; i += 1) {
         if (this.auctionCards[i].x>0) {
           this.setAvailable(this.auctionCards[i]);
-          console.log("first AuctionCard ska highlightas");
+  //        console.log("first AuctionCard ska highlightas");
           break;
         }
       }
@@ -142,7 +142,7 @@ export default {
       for (let i = 0; i < this.skillsOnSale.length; i += 1) {
         if (this.skillsOnSale[i].x>0) {
           this.setAvailable(this.skillsOnSale[i]);
-          console.log("first skillsOnSale ska highlightas");
+    //      console.log("first skillsOnSale ska highlightas");
           break;
         }
       }

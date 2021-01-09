@@ -84,7 +84,7 @@ export default {
       this.highlightAvailableCards(p.cost);
     },
     checkAvailable: function (card, cost) {
-      console.log("marketValue:",this.marketValues[card.item],"player money:",this.player.money, "cost:",cost);
+      
       if (this.marketValues[card.item] <= this.player.money - cost) {
         this.$set(card, "available", true);
       }

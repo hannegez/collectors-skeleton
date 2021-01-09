@@ -108,11 +108,11 @@ export default {
     highlightAvailableCards: function () {
       for (let i = 0; i < this.auctionCards.length; i += 1) {
         this.setAvailable(this.auctionCards[i]);
-        console.log("AuctionCard ska highlightas");
+  //      console.log("AuctionCard ska highlightas");
       }
       for (let i = 0; i < this.player.hand.length; i += 1) {
         this.setAvailable(this.player.hand[i]);
-        console.log("Hand ska highlightas");
+  //      console.log("Hand ska highlightas");
       }
     },
 

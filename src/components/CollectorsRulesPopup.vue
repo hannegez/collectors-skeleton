@@ -70,7 +70,7 @@ export default {
   }
 
   .closeCross {
-    width: 3%;
+    width: 1.5em;
     margin: 0%;
   }
 

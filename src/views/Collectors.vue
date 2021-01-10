@@ -20,7 +20,7 @@
           <input class="closeCross" type="image" @click="getHowToInfo()" alt="Login"
           src='/images/close.png' >
           <h1>{{ this.labels.rules }}</h1>
-          <embed src="/images/rules_collectors.pdf" width="1800em" height="950em"/>
+          <embed src="/images/rules_collectors.pdf" width="1000em" height="700em"/>
           <br>
           <button class="closeButton" v-on:click="getHowToInfo()" >{{this.labels.close}} </button>
 
@@ -226,11 +226,12 @@ export default {
         auctionPlacement: [],
         marketPlacement: [],
         workPlacement: [],
-        numberOfActions:0,
+      //  numberOfActions:0,
 
         //HÄR LÄGGER VI TILL workPlacement
         //workPlacement: [],
         chosenWorkAction: null, //bajs
+        chosenNumberOfActions: null,
         currentQuarter: 1,
         chosenPlacementCost: null,
         chosenAction: null,           //MAJA LA TILL DENNA
@@ -248,6 +249,7 @@ export default {
 
           //NÅTT LIKNANDE SOM OVAN FAST FÖR WORK?
           workAction: 0,
+          numberOfActions: 0,
           showRulesPopup: false,
           rulesPopupContent: ''
         }
@@ -315,30 +317,30 @@ export default {
             this.players= d.players;
             this.placements = d.placements;
             this.workPlacement = d.placements.workPlacement;
-            console.log("inne i funktionen ");
+      //      console.log("inne i funktionen ");
 
 
             document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
 
-
-            //GÖR ATT HANDEN LYSER UPP NÄR MAN TRYCKER PÅ 5TE KNAPPEN, GER FELMEDDELANDE LÖS
+        //    console.log("inne första  " + this.chosenNumberOfActions);
             for(let c = 0; c < this.players[this.playerId].hand.length; c += 1 ) {
           //    console.log("inne forloop ");
               if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 5 ) {
                 //console.log("före: ", this.players[this.playerId].hand[c].available);
           //      console.log("inne första if ");
                 this.$set(this.players[this.playerId].hand[c], "available", true);
-
-      //          console.log(" chosenworkaction ", this.chosenWorkAction);
               }
-              //this.currentQuarter=1; //Få den att hämta chosenWhichlap
-              //få detta att fungera för workAction 1 och whichlap 0-3 TODO
-              if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 1 ) {
-            //    console.log("inne första 2 if ");
-                if (this.currentQuarter <= 3){
-            //      console.log("inne första 3 if ");
 
-                  this.$set(this.players[this.playerId].hand[c], "available", true);
+              if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 1 ) {
+            //    console.log("inne första 2 if " + this.chosenNumberOfActions);
+                if (this.currentQuarter <= 3){
+            //      console.log("inne första 3 if " + this.chosenNumberOfActions);
+                  if (this.chosenNumberOfActions >0) {
+                    this.$set(this.players[this.playerId].hand[c], "available", true);
+              //      console.log("inne första 3 if " + this.chosenNumberOfActions);
+                  }
+
+
                 }
                 }
 
@@ -461,12 +463,13 @@ placeWorkBottle: function (p) { /* skicka till server och gör förändring där
   this.chosenPlacementCost = p.cost;
   this.chosenAction = "work";
   this.chosenWorkAction= p.workAction;
+  this.chosenNumberOfActions = p.numberOfActions;
 
-  if(this.chosenWorkAction === 1 && this.currentQuarter <=4){
+/*if(this.chosenWorkAction === 1 && this.currentQuarter <=4){
     console.log("number of actions" +this.numberOfActions);
     this.numberOfActions = 2;
     console.log("number of actions" +this.numberOfActions);
-  }
+  }*/
 
   this.$store.state.socket.emit('collectorsPlaceWorkBottle', {
     roomId: this.$route.params.id,
@@ -474,7 +477,8 @@ placeWorkBottle: function (p) { /* skicka till server och gör förändring där
     action: "work",
     cost: p.cost,
     workAction:p.workAction,
-    numberOfActions:this.numberOfActions,
+    numberOfActions:p.numberOfActions,
+  //  numberOfActions:this.numberOfActions,
   }
 );
 },
@@ -523,7 +527,8 @@ startWork: function (card) {
     card: card,
     cost: this.chosenPlacementCost,
     workAction:this.chosenWorkAction,
-    whichLap:this.chosenWhichLap
+    numberOfActions:this.chosenNumberOfActions,
+  //  whichLap:this.chosenWhichLap
   }
 );
 },
@@ -980,7 +985,7 @@ footer a:visited {
   transform: scale(1)translate(-25%,0);
   z-index: 1;
 }
-/*popup rutan som kommer upp */
+/* används i playerboard */
 
 .popuptext {
   position: absolute;
@@ -1025,7 +1030,6 @@ footer a:visited {
   color: black; /*textfärg popup*/
   text-align: center;
   border-radius: 0px;
-  padding: 20px 20px;  /*padding popup*/
   z-index: 1;
   margin-left: 0em;
   border-color: grey;

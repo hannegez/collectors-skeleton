@@ -56,7 +56,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
         <div class="popup" style= "position:relative; left:0em; top:0em;">
 
           <img :src="bottlePic" alt="See complete bottle info" width="75%" @click='getYourInfo("yourBottles")' >
-          <div class="popuptext" id="yourBottlesPopup"  style= "left:10em; top:-3em;">
+          <div class="popuptext" id="yourBottlesPopup"  style= "left:-10em; top:-3em;">
             <input class="closeCross" type="image" @click="getYourInfo('yourBottles')" alt="Login"
             src='/images/close.png' >
             <h2>{{ labels.yourBottles }}</h2>

@@ -136,9 +136,7 @@ export default {
       //Det rätta:
       getYourInfo: function(string){
         console.log("inne i getYourInfo", string);
-    //    if (string=="yourSkills") {
-          //HEJ
-      //  }
+
         if (string=="yourHand") {
           this.showHand = !this.showHand;
         }

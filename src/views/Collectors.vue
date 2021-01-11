@@ -268,115 +268,112 @@ export default {
         { roomId: this.$route.params.id,
           playerId: this.playerId } );
 
-          //HÄR LÄGGER VI TILL ALLA VÄRDEN SOM SKICKATS I OBJEKTET I socketsCollectors.js
-          this.$store.state.socket.on('collectorsInitialize',
-          function(d) {
-            this.labels = d.labels;
-            this.players = d.players;
-            this.itemsOnSale = d.itemsOnSale;
-            this.marketValues = d.marketValues;
-            this.market = d.market;
-            this.skillsOnSale = d.skillsOnSale;
-            this.auctionCards = d.auctionCards;
-            this.auctionSpot = d.auctionSpot;
-            this.buyPlacement = d.placements.buyPlacement;
-            this.skillPlacement = d.placements.skillPlacement;
-            this.marketPlacement = d.placements.marketPlacement;
-            this.auctionPlacement = d.placements.auctionPlacement;
-            this.workPlacement = d.placements.workPlacement;
-            this.currentQuarter= d.currentQuarter;
-          }.bind(this));
+        //HÄR LÄGGER VI TILL ALLA VÄRDEN SOM SKICKATS I OBJEKTET I socketsCollectors.js
+        this.$store.state.socket.on('collectorsInitialize',
+        function(d) {
+          this.labels = d.labels;
+          this.players = d.players;
+          this.itemsOnSale = d.itemsOnSale;
+          this.marketValues = d.marketValues;
+          this.market = d.market;
+          this.skillsOnSale = d.skillsOnSale;
+          this.auctionCards = d.auctionCards;
+          this.auctionSpot = d.auctionSpot;
+          this.buyPlacement = d.placements.buyPlacement;
+          this.skillPlacement = d.placements.skillPlacement;
+          this.marketPlacement = d.placements.marketPlacement;
+          this.auctionPlacement = d.placements.auctionPlacement;
+          this.workPlacement = d.placements.workPlacement;
+          this.currentQuarter= d.currentQuarter;
+        }.bind(this));
 
-          this.$store.state.socket.on('collectorsBottlePlaced',
-          function(d) {
-            this.buyPlacement = d.buyPlacement;
-            this.skillPlacement = d.skillPlacement;
-            this.marketPlacement = d.marketPlacement;
-            this.auctionPlacement = d.auctionPlacement;
-          }.bind(this));
+        this.$store.state.socket.on('collectorsBottlePlaced',
+        function(d) {
+          this.buyPlacement = d.buyPlacement;
+          this.skillPlacement = d.skillPlacement;
+          this.marketPlacement = d.marketPlacement;
+          this.auctionPlacement = d.auctionPlacement;
+        }.bind(this));
 
-          this.$store.state.socket.on('collectorsWorkBottlePlaced',
-          function(d) {
-            this.players= d.players;
-            this.placements = d.placements;
-            this.workPlacement = d.placements.workPlacement;
-            this.chosenNumberOfActions = d.numberOfActions;
+        this.$store.state.socket.on('collectorsWorkBottlePlaced',
+        function(d) {
+          this.players= d.players;
+          this.placements = d.placements;
+          this.workPlacement = d.placements.workPlacement;
+          this.chosenNumberOfActions = d.numberOfActions;
 
-            document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
-              for(let c = 0; c < this.players[this.playerId].hand.length; c += 1 ) {
-                if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 5 ) {
-                  this.$set(this.players[this.playerId].hand[c], "available", true);
-                }
-                if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 1 ) {
-                  if (this.currentQuarter <= 3){
-                    if (this.chosenNumberOfActions >0) {
-                      this.$set(this.players[this.playerId].hand[c], "available", true);
-                    }
+          document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
+            for(let c = 0; c < this.players[this.playerId].hand.length; c += 1 ) {
+              if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 5 ) {
+                this.$set(this.players[this.playerId].hand[c], "available", true);
+              }
+              if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 1 ) {
+                if (this.currentQuarter <= 3){
+                  if (this.chosenNumberOfActions >0) {
+                    this.$set(this.players[this.playerId].hand[c], "available", true);
                   }
                 }
               }
-          }.bind(this));
+            }
+        }.bind(this));
 
-          this.$store.state.socket.on('collectorsPointsUpdated', (d) => this.points = d );
+        this.$store.state.socket.on('collectorsPointsUpdated', (d) => this.points = d );
 
-          this.$store.state.socket.on('collectorsCardDrawn',
+        this.$store.state.socket.on('collectorsCardDrawn',
           function(d) {
             this.players = d;
           }.bind(this)
         );
 
         this.$store.state.socket.on('collectorsGottenMoney',
-        function(d) {
+          function(d) {
           this.players = d;
-        }.bind(this)
-      );
+          }.bind(this)
+        );
 
-      this.$store.state.socket.on('collectorsCardBought',
-      function(d) {
-        document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} bought an item!`;
-        this.players = d.players;
-        this.itemsOnSale = d.itemsOnSale;
-      }.bind(this)
-    );
+        this.$store.state.socket.on('collectorsCardBought',
+          function(d) {
+            document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} bought an item!`;
+            this.players = d.players;
+            this.itemsOnSale = d.itemsOnSale;
+          }.bind(this)
+        );
 
-    this.$store.state.socket.on('collectorsValueRaised',
-    function(d) {
-      document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} raised a value!`;
-      this.players = d.players;
-      this.skillsOnSale = d.skillsOnSale;
-      this.auctionCards = d.auctionCards;
-      this.marketValues = d.marketValues;
-      this.market = d.market;
-    }.bind(this)
-  );
+        this.$store.state.socket.on('collectorsValueRaised',
+          function(d) {
+          document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} raised a value!`;
+          this.players = d.players;
+          this.skillsOnSale = d.skillsOnSale;
+          this.auctionCards = d.auctionCards;
+          this.marketValues = d.marketValues;
+          this.market = d.market;
+          }.bind(this)
+        );
 
-  this.$store.state.socket.on('collectorsAuctionStarted',
-  function(d) {
-    document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started an auction!`;
-    this.players = d.players;
-    this.auctionCards = d.auctionCards;
-    this.auctionSpot = d.auctionSpot;
-  }.bind(this)
-);
+        this.$store.state.socket.on('collectorsAuctionStarted',
+          function(d) {
+            document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started an auction!`;
+            this.players = d.players;
+            this.auctionCards = d.auctionCards;
+            this.auctionSpot = d.auctionSpot;
+          }.bind(this)
+        );
 
+        this.$store.state.socket.on('collectorsWorkStarted',
+          function(d) {
+            document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
+            this.players = d.players;
+          }.bind(this)
+        );
 
-
-
-this.$store.state.socket.on('collectorsWorkStarted',
-function(d) {
-  document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
-  this.players = d.players;
-}.bind(this)
-);
-
-this.$store.state.socket.on('collectorsSkillGained',
-function(d) {
-  document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} gained a skill!`;
-  this.players = d.players;
-  this.skillsOnSale = d.skillsOnSale;
-}.bind(this)
-);
-},
+        this.$store.state.socket.on('collectorsSkillGained',
+          function(d) {
+            document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} gained a skill!`;
+            this.players = d.players;
+            this.skillsOnSale = d.skillsOnSale;
+          }.bind(this)
+        );
+    },
 
 
 methods: {
@@ -415,24 +412,21 @@ methods: {
   );
 },
 
-placeWorkBottle: function (p) { /* skicka till server och gör förändring där.*/
+placeWorkBottle: function (p) {
   this.chosenPlacementCost = p.cost;
   this.chosenAction = "work";
   this.chosenWorkAction= p.workAction;
   this.chosenNumberOfActions = p.numberOfActions;
   //this.chosenNumberOfActions -=1;
-
-
-
-this.$store.state.socket.emit('collectorsPlaceWorkBottle', {
-  roomId: this.$route.params.id,
-  playerId: this.playerId,
-  action: "work",
-  cost: p.cost,
-  workAction:p.workAction,
-  numberOfActions:p.numberOfActions
-}
-);
+  this.$store.state.socket.emit('collectorsPlaceWorkBottle', {
+    roomId: this.$route.params.id,
+    playerId: this.playerId,
+    action: "work",
+    cost: p.cost,
+    workAction:p.workAction,
+    numberOfActions:p.numberOfActions
+    }
+  );
 },
 drawCard: function () {
   this.$store.state.socket.emit('collectorsDrawCard', {
@@ -472,7 +466,6 @@ startAuction: function (card) {
 },
 //försök till number of actions men har inte fått ihop det.
 startWork: function (card) {
-
   this.$store.state.socket.emit('CollectorsStartWork', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -485,7 +478,6 @@ startWork: function (card) {
 },
 
 buyCard: function (card) {
-
   this.$store.state.socket.emit('collectorsBuyCard', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -514,29 +506,19 @@ nextQuarter:function(){
   this.changeImageNextQuarter();
   this.$store.state.socket.emit('collectorsNextQuarter', {
     roomId: this.$route.params.id,
-  }
-);
-
-this.nextQuarterInfo();
+    }
+  );
+  this.nextQuarterInfo();
 },
 
 changeImageNextQuarter: function(){
   if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_1.PNG")
-  {
-    document.getElementById("imgClickAndChange").src = "/images/quartertile_2.PNG";
-  }
+  {document.getElementById("imgClickAndChange").src = "/images/quartertile_2.PNG"; }
   else if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_2.PNG")
-  {
-    document.getElementById("imgClickAndChange").src = "/images/quartertile_3.PNG";
-  }
-
-  else if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_3.PNG") {
-    document.getElementById("imgClickAndChange").src = "/images/quartertile_4.PNG";
-
-  }
-  else {
-    document.getElementById("imgClickAndChange").src = "/images/quartertile_1.PNG";
-  }
+  {document.getElementById("imgClickAndChange").src = "/images/quartertile_3.PNG";}
+  else if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_3.PNG")
+  {document.getElementById("imgClickAndChange").src = "/images/quartertile_4.PNG";}
+  else {document.getElementById("imgClickAndChange").src = "/images/quartertile_1.PNG";}
 },
 
 raiseValue: function (card) {

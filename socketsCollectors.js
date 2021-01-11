@@ -9,6 +9,7 @@ function sockets(io, socket, data) {
   socket.on('setupCollectors', function(d) {
     data.createRoom(d.roomId, d.playerCount, d.lang);
   })
+
   socket.on('collectorsLoaded', function(d) {
     socket.join(d.roomId);
     if (data.joinGame(d.roomId, d.playerId)) {
@@ -54,7 +55,6 @@ function sockets(io, socket, data) {
     });
   });
 
-
   socket.on('collectorsGainSkill', function(d) {
     data.gainSkill(d.roomId, d.playerId, d.card, d.cost)
     io.to(d.roomId).emit('collectorsSkillGained', {
@@ -76,7 +76,6 @@ function sockets(io, socket, data) {
   );
   });
 
-  //försök till number of actions men har inte fått ihop det.
   socket.on('CollectorsStartWork', function(d) {
     data.startWork(d.roomId, d.playerId, d.card, d.cost, d.workAction, d.numberOfActions )
     io.to(d.roomId).emit('collectorsWorkStarted', {

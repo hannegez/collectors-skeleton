@@ -4,7 +4,7 @@
       <div id="welcome">
         <h1>Welcome to Rich Collectors</h1>
 
-        <!-- sehär
+        <!--
         oklart om det behöver stå nått argument i getInfo pga blir rätt oavsett, annars testa typ 'market' -->
         <CollectorsRulesPopup v-if="showRulesPopup"
         :content="rulesPopupContent"
@@ -551,7 +551,6 @@ raiseValue: function (card) {
 
 </script>
 
-<!-- sehär - behövs kanske ej längre? style scoped är bara för filen, utan scoped gäller det allt -->
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
 
@@ -903,15 +902,15 @@ footer a:visited {
   transform: scale(1)translate(-25%,0);
   z-index: 1;
 }
-/* sehär  används i playerboard */
 
+/* används i playerboard */
 .popuptext {
   position: absolute;
   display: none;
   cursor: pointer;
   user-select: none;
   width: 20em;
-  background-color: #f3f3f3;
+  background-color: #fff;
   color: black;
   text-align: center;
   border-radius: 6px;

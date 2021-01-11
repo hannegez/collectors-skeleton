@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div class="buyCards">
+    <div class="skillCards">
       <div v-for="(card, index) in reversedSkills" :key="index">
         <CollectorsCard
         :card="card"
@@ -105,11 +105,11 @@ export default {
   grid-template-columns: 50% 50%;
   grid-template-areas:
   "gainSkillHeader gainSkillInfo"
-  "buyCards gainSkillInfo"
-  "buyCards bottlePlacements";
+  "skillCards gainSkillInfo"
+  "skillCards bottlePlacements";
 }
 
-.buyCards{grid-area: buyCards;}
+.skillCards{grid-area: skillCards;}
 .bottlePlacements{grid-area: bottlePlacements;}
 .gainSkillHeader{grid-area: gainSkillHeader;
   font-weight: bold;

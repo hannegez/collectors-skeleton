@@ -5,7 +5,10 @@
     <header>
       <div id="welcome">
         <h1>Welcome to Rich Collectors</h1>
-
+        <p>
+          {{ labels.invite }}
+          <input type="text" :value="publicPath + $route.path" @click="selectAll" readonly="readonly">
+        </p>
         <!--
         oklart om det behöver stå nått argument i getInfo pga blir rätt oavsett, annars testa typ 'market' -->
         <CollectorsRulesPopup v-if="showRulesPopup"
@@ -64,7 +67,7 @@
 
         <div class="hoverButton hoverCoin">
           <div class="getButtons">
-            <p>{{ labels.getCoins }}</p>
+            <p>{{ labels.getCoin }}</p>
           </div>
           <input type="image" @click="getMoney" id="getMoneyButton" alt="Login"
           src='/images/coin100pxwhite.png' value="Get Money"  >
@@ -170,11 +173,6 @@
     </main>
 
     <footer>
-      <!-- Här finns länk till om man vill vara olika spelare -->
-      <p>
-        {{ labels.invite }}
-        <input type="text" :value="publicPath + $route.path" @click="selectAll" readonly="readonly">
-      </p>
     </footer>
   </div>
 </template>
@@ -543,11 +541,10 @@ raiseValue: function (card) {
   color: #000;
   padding: 1em;
   display: grid;
-  grid-template-rows: 6% 75% 5%;
+  grid-template-rows: 8% 70%;
   grid-template-areas:
   "header"
-  "main"
-  "footer";
+  "main";
 }
 
 header {
@@ -722,18 +719,6 @@ p, span {
   margin: 0;
 }
 
-footer {
-  margin-top: 5em auto;
-  grid-area: footer;
-}
-footer a {
-  text-decoration: none;
-  border-bottom: 2px dotted ivory;
-}
-footer a:visited {
-  color:ivory;
-}
-
 .board { padding: 0.2em; }
 
 /* ===================================================== */
@@ -798,13 +783,11 @@ footer a:visited {
 /* ======================================================== */
 
 /* BUY CARD BUTTON */
-.buyCards, .buttons {
-}
 
-.buyCards{
+/* .buyCards{
   display: grid;
   grid-template-columns: repeat(auto-fill, 15vw);
-}
+} */
 
 .horizontalBuyCards {
   display: grid;
@@ -847,43 +830,17 @@ footer a:visited {
 /* ============= CARD DESIGN =============== */
 .cardslots {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 130px);
-  grid-template-rows: repeat(auto-fill, 180px);
+  grid-template-columns: repeat(auto-fill, 30px);
+  grid-template-rows: repeat(10px, 180px);
+  margin: 10%;
 }
 .cardslots div {
-  transform: scale(0.5)translate(-50%,-50%);
+  transform: scale(1)translate(0,0);
   transition:0.2s;
   transition-timing-function: ease-out;
   z-index: 0;
 }
 .cardslots div:hover {
-  transform: scale(1)translate(-25%,0);
-  z-index: 1;
-}
-
-footer {
-  margin-top: 5em auto;
-}
-footer a {
-  text-decoration: none;
-  border-bottom: 2px dotted ivory;
-}
-footer a:visited {
-  color:ivory;
-}
-.cardslots {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 130px);
-  grid-template-rows: repeat(auto-fill, 180px);
-}
-.cardslots div {
-  transform: scale(0.5)translate(-50%,-50%);
-  transition:0.2s;
-  transition-timing-function: ease-out;
-  z-index: 0;
-}
-.cardslots div:hover {
-  transform: scale(1)translate(-25%,0);
   z-index: 1;
 }
 
@@ -906,7 +863,6 @@ footer a:visited {
   border-style:solid;
   /*overflow-y: scroll; / kan skrolla*/
 }
-
 
 .popup .popuptext::after {
   content: "";

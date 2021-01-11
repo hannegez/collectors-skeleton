@@ -40,11 +40,10 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
             <input class="closeCross" type="image" @click="getYourInfo('yourHand')" alt="Login"
             src='/images/close.png' >
             <h2>{{ labels.yourHand }}</h2>
-            <div class="playerslots" >
+            <div class="cardslots" >
               <CollectorsCard v-for="(card, index) in player.hand" :card="card" :availableAction="card.available" @doAction="chooseAction(card)" :key="'hand'+ index"/>
             </div>
             <br>
-            <button class="closeButton"  @click='getYourInfo("yourHand")'>close</button>
           </div>
           <span>
             {{ player.hand.length }}
@@ -55,7 +54,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
       <div class="yourBottles playerSymbols">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
 
-          <img :src="bottlePic" alt="See complete bottle info" width="75%" @click='getYourInfo("yourBottles")' >
+          <img :src="bottlePic" alt="See complete bottle info" width="70%" @click='getYourInfo("yourBottles")' >
           <div class="popuptext" id="yourBottlesPopup"  style= "left:-43vw;  top:8vh;">
             <input class="closeCross" type="image" @click="getYourInfo('yourBottles')" alt="Login"
             src='/images/close.png' >
@@ -67,7 +66,6 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
             <img src='/images/bottlemenu.png' width="90%">
             <p>{{ labels.bottleInfo }}</p>
             <br>
-            <button class="closeButton"  @click='getYourInfo("yourBottles")'>close</button>
           </div>
           <span>
             {{ player.bottlesLeft }}
@@ -244,21 +242,8 @@ span {
   font-size: 0.8em;
 }
 
-.playerslots {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 17px);
-  grid-template-rows: repeat(10px, 180px);
-  margin: 10%;
-}
-.playerslots div {
-  transform: scale(0.5)translate(-50%,-50%);
-  transition:0.2s;
-  transition-timing-function: ease-out;
-  z-index: 0;
-}
-.playerslots div:hover {
-  transform: scale(1)translate(-25%,0);
-  z-index: 1;
+.cardslots div:hover {
+  transform: scale(2.5)translate(0,0);
 }
 
 </style>

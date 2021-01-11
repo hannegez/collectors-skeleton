@@ -4,13 +4,13 @@
   <div class="startAuction">
 
     <div class="auctionInfo">
-      <div class="popup" style= "position:relative; left:7em; top:0em;">
+      <div class="popup" style= "position:relative; left:30%; top:0em;">
         <img src='/images/startAuction.png' alt="Start auction" width="45%"  @click="$emit('getInfo')" >
       </div>
     </div>
 
     <!--BUY CARDS -->
-    <div class="buyCards horizontalPlacement">
+    <div class="availableAuctionCards cardslots">
       <div v-for="(card, index) in reverseAuctionCards" :key="index">
         <CollectorsCard
         :card="card"
@@ -34,10 +34,8 @@
       </div>
     </div>
 
-    <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
     <div class="auctionCards horizontalPlacement">
-      <h2>{{ labels.auctionSpot }}</h2>
-      <br>
+      <h3>{{ labels.auctionSpot }}</h3>
       <div v-for="(card, index) in auctionSpot" :key="index">
         <CollectorsCard
         :card="card"
@@ -118,19 +116,24 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+h3 {
+  font-size: 1em;
+}
 .startAuction{
   grid-gap: 1em;
   display: grid;
-  grid-template-rows: 35% 25% 25%;
+  grid-template-rows: 20% 20% 20%;
   grid-template-columns: 50% 50%;
   grid-template-areas:
-  "bottlePlacements auctionInfo"
-  "auctionCards buyCards"
-  "auctionCards buyCards";
+  "availableAuctionCards auctionInfo"
+  "bottlePlacements bottlePlacements"
+  "auctionCards auctionCards";
 }
 
-.buyCards{
-  grid-area: buyCards;
+.availableAuctionCards{
+  grid-area: availableAuctionCards;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 20%);
   padding-top: 2.5em;
 }
 

@@ -31,15 +31,15 @@
       <br>
 
       <img  alt="" src="/images/quartertile_1.PNG"
-      height="65%" id="imgClickAndChange"   /> <!-- @click="startWork()" -->
+      height="28%" id="imgClickAndChange"   /> <!-- @click="startWork()" -->
       <br>
-      <img  src="/images/work_recycle.png" alt="" width="25%"> <!-- @click="$emit('startWork', card)"-->
+      <img  src="/images/work_recycle.png" alt="" height="28%"> <!-- @click="$emit('startWork', card)"-->
       <br>
-      <img src="/images/work_gainTwo.png" alt="" height="36%"> <!-- @click="$emit('startWork', card)"-->
+      <img src="/images/work_gainTwo.png" alt="" height="28%"> <!-- @click="$emit('startWork', card)"-->
       <br>
-      <img  src="/images/work_firstPlayer.png" alt="" height="36%"> <!-- @click="$emit('startWork', card)"-->
+      <img  src="/images/work_firstPlayer.png" alt="" height="28%"> <!-- @click="$emit('startWork', card)"-->
       <br>
-      <img src="/images/work_futureIncome.png" alt="" height="36%">
+      <img src="/images/work_futureIncome.png" alt="" height="28%">
     </div>
   </div>
 

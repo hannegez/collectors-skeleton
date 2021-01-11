@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <div class="buyCards horizontalBuyCards">
+    <div class="horizontalBuyCards">
       <div v-for="(card, index) in itemsOnSale" :key="index">
         <CollectorsCard
         :card="card"
@@ -110,7 +110,7 @@ export default {
   "bottlePlacements buyInfo";
 }
 
-.buyCards{grid-area: buyCards;}
+.horizontalBuyCards{grid-area: buyCards;}
 .bottlePlacements{grid-area: bottlePlacements;}
 .buyItemHeader{grid-area: buyItemHeader;}
 .buyInfo{grid-area: buyInfo;}

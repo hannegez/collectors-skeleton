@@ -1,6 +1,6 @@
 {
 	"draw": "Draw card",
-	"getCoins": "Get coins",
+	"getCoin": "Get coin",
 	"invite": "Invite other players with this link:",
 	"endTurn": "End turn",
 	"buyItem": "Buy an item",

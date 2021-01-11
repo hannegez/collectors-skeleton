@@ -199,8 +199,33 @@ Data.prototype.resetFourthQuarterPlacements = function(room) {
                 this.resetFourthQuarterPlacements(room);
               }
 
+              //this.moveCards(room);
+
             }
           }
+
+          //EN BÖRJAN PÅ ETT FÖRSÖK TILL MOVECARDS, LYCKADES INTE KOMMA ÅT SJÄLVA KORTEN,
+          //MEN ARRAYEN SKRIVS UT RÄTT
+          Data.prototype.moveCards = function (room) {
+            console.log("HÄR ÄR SKILLS ON SALE:", room.skillsOnSale);
+            console.log("LÄNGDEN", room.skillsOnSale.length);
+
+            //MOVE TO RAISEVALUE
+            let card = null;
+            console.log(card);
+            for (let i=0; i < room.skillsOnSale.length; i++) {
+              console.log("inne i for-loop");
+              card = room.skillsOnSale[i];
+              if (card !== {}) {
+                console.log("inne i if-satsen för", card)
+                this.market.push(...card);
+                break;
+                //pusha till raiseValue, ta bort från skillsOnsale
+                //break
+              }
+            }
+          }
+
           Data.prototype.getQuarter= function(roomId){
             let room = this.rooms[roomId];
 

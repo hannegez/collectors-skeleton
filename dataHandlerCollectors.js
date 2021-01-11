@@ -427,9 +427,10 @@ Data.prototype.resetFourthQuarterPlacements = function(room) {
                               let room = this.rooms[roomId];
                               if (typeof room !== 'undefined') {
                                 room.players[playerId].futureIncome += 1;
-                                numberOfActions -=1;
-                                //
-                                console.log("går in i data.prototype.startwork EV reducering av , numberOfActions här?" + numberOfActions);
+                            //    console.log("number of actions innan startwork" + room.players[playerId].numberOfActions);
+                            //    room.players[playerId].numberOfActions -=1;
+                            //    console.log("number of actions efter startwork" + room.players[playerId].numberOfActions);
+                            //    console.log("går in i data.prototype.startwork EV reducering av , numberOfActions här?" + numberOfActions);
 
                                 let c = null;
                                 for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
@@ -558,23 +559,16 @@ Data.prototype.resetFourthQuarterPlacements = function(room) {
                               if (typeof room !== 'undefined') {
                                 let activePlacement = room.workPlacement;
                                 room.players[playerId].bottlesLeft -= 1;
-                                console.log("number of actions i placeWorkBottle " + workAction);
-                                console.log("number of actions i placeWorkBottle " + numberOfActions);
 
                                 for(let i = 0; i < activePlacement.length; i += 1) {
+
                                   if( activePlacement[i].workAction === workAction &&
                                     activePlacement[i].playerId === null ) {
                                       activePlacement[i].playerId = playerId;
+                                    //    console.log("häär " + activePlacement[i].numberOfActions); påverkar inte chosenaction
+                                    //      activePlacement[i].numberOfActions -=1;
+                                    //  console.log("häär 3" + activePlacement[i].numberOfActions);
 
-                                //      for (let playerId in room.players) {
-                                //        console.log(room.players[playerId].numberOfActions);
-                                //      }
-                                //      console.log(room.players[playerId].numberOfActions);
-                                //      console.log(this.room.players[playerId].numberOfActions); //cannot find players of undef
-                                //      console.log(this.room.players.numberOfActions);
-                                //      console.log(this.room.numberOfActions);
-                                //        console.log(activePlacement[i].numberOfActions);
-                                //        console.log("number of actions in placeWorkBottle" + numberOfActions);
                                       if (workAction === 1 && room.quarter === 1){
                                         console.log("workaction 1: lap1: 2 on future income");
 

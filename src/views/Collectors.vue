@@ -1,3 +1,5 @@
+<!-- rätt version -->
+
 <template>
   <div id="wrapper">
     <header>

@@ -61,13 +61,13 @@ export default {
   z-index: 1;       /*denna gör att popupen placeras ovanpå andra element*/
 }
 
-  .rulesPopup {
-    background: #fff;
-    border: solid thin grey;
-    border-radius: 0.3em;
-    margin: 0 20%;
-    padding: 1em;
-  }
+.rulesPopup {
+  background: #fff;
+  border: solid thin grey;
+  border-radius: 0.3em;
+  margin: 0 20%;
+  padding: 1em;
+}
 
 .closeCross {
   width: 1.5em;

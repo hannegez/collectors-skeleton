@@ -4,7 +4,8 @@
       <div id="welcome">
         <h1>Welcome to Rich Collectors</h1>
 
-<!-- oklart om det behöver stå nått argument i getInfo pga blir rätt oavsett, annars testa typ 'market' -->
+        <!-- sehär
+        oklart om det behöver stå nått argument i getInfo pga blir rätt oavsett, annars testa typ 'market' -->
         <CollectorsRulesPopup v-if="showRulesPopup"
         :content="rulesPopupContent"
         :labels="labels"
@@ -12,68 +13,68 @@
 
       </div>
 
+      <!-- Informationen till vänster om rubriken i headern -->
       <div class="info left">
         <button class="buttons homeButton" v-on:click="getHowToInfo()"> {{ this.labels.rules }} </button>
         <div class="popup" style= "position:relative; left:0em; top:0em;">
-        <span class="popupHowToInfoText" id="myHowToInfoPopup"  style= "left:0em; top:0em;">
-          <!-- <a href="/images/rules_collectors.pdf" >Click here to open rules</a> -->
-          <input class="closeCross" type="image" @click="getHowToInfo()" alt="Login"
-          src='/images/close.png' >
-          <h1>{{ this.labels.rules }}</h1>
-          <embed src="/images/rules_collectors.pdf" width="1000em" height="700em"/>
-          <br>
-          <button class="closeButton" v-on:click="getHowToInfo()" >{{this.labels.close}} </button>
+          <span class="popupHowToInfoText" id="myHowToInfoPopup"  style= "left:0em; top:0em;">
+            <input class="closeCross" type="image" @click="getHowToInfo()" alt="Login"
+            src='/images/close.png' >
+            <h1>{{ this.labels.rules }}</h1>
+            <embed src="/images/rules_collectors.pdf" width="1000em" height="700em"/>
+            <br>
+            <button class="closeButton" v-on:click="getHowToInfo()" >{{this.labels.close}} </button>
 
-        </span>
+          </span>
         </div>
 
+
+        <!-- Knappen som vi vill ska göra att man kommer till nästa quarter -->
         <button class="buttons" v-on:click="nextQuarterInfo()"> {{ this.labels.nextQuarter }}</button>
         <div class="popup" style= "position:relative; left:0em; top:0em;">
-        <span class="popupNextQuarterText" id="myQuarterInfoPopup"  style= "left:0em; top:0em;">
-          <!-- <a href="/images/rules_collectors.pdf" >Click here to open rules</a> -->
-          <h1>{{ this.labels.nextQuarter }}</h1>
-          {{labels.newQuarterInfo}}
-          <br>
-          <br>
-          <h1>{{ this.labels.howToBottles }}</h1>
-          <br>
-          {{labels.howToInfo1}}
-          <br>
-          {{labels.howToInfo2}}
-          <br>
-          {{labels.howToInfo3}}
-          <br>
-          {{labels.howToInfo4}}
-          <br>
-          {{labels.howToInfo5}}
-          <button class="buttons getButton" v-on:click="getMoney()" > {{this.labels.getCoins}} </button>
-          <button class="buttons getButton" v-on:click="drawCard()" > {{this.labels.getCards}} </button>
-          <button class="buttons" v-on:click="nextQuarter()" > {{this.labels.nextQuarterClose}} </button>
-          <button class="closeButton" v-on:click="nextQuarterInfo()" > {{this.labels.close}} </button>
-        </span>
+          <span class="popupNextQuarterText" id="myQuarterInfoPopup"  style= "left:0em; top:0em;">
+            <h1>{{ this.labels.nextQuarter }}</h1>
+            {{labels.newQuarterInfo}}
+            <br>
+            <br>
+            <h1>{{ this.labels.howToBottles }}</h1>
+            <br>
+            {{labels.howToInfo1}}
+            <br>
+            {{labels.howToInfo2}}
+            <br>
+            {{labels.howToInfo3}}
+            <br>
+            {{labels.howToInfo4}}
+            <br>
+            {{labels.howToInfo5}}
+            <button class="buttons getButton" v-on:click="getMoney()" > {{this.labels.getCoins}} </button>
+            <button class="buttons getButton" v-on:click="drawCard()" > {{this.labels.getCards}} </button>
+            <button class="buttons" v-on:click="nextQuarter()" > {{this.labels.nextQuarterClose}} </button>
+            <button class="closeButton" v-on:click="nextQuarterInfo()" > {{this.labels.close}} </button>
+          </span>
         </div>
 
       </div>
 
-
-
+      <!-- Informationen till höger om rubriken i headern -->
       <div class="info right">
 
-          <div class="hoverButton hoverCoin">
-            <div class="getButtons">
-              <p>{{ labels.getCoins }}</p>
-            </div>
-            <input type="image" @click="getMoney" id="getMoneyButton" alt="Login"
-        src='/images/coin100pxwhite.png' value="Get Money"  >
+        <div class="hoverButton hoverCoin">
+          <div class="getButtons">
+            <p>{{ labels.getCoins }}</p>
           </div>
+          <input type="image" @click="getMoney" id="getMoneyButton" alt="Login"
+          src='/images/coin100pxwhite.png' value="Get Money"  >
+        </div>
 
-          <div class="hoverButton hoverCard">
-            <div class="getButtons">
-              <p>{{ labels.draw }}</p>
-            </div>
-            <input type="image" @click="drawCard" id="drawCardButton" alt="Login"
-            src='/images/card_backside_flipped.png' value="Draw card"  >    <!-- NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY -->
+        <div class="hoverButton hoverCard">
+          <div class="getButtons">
+            <p>{{ labels.draw }}</p>
           </div>
+          <input type="image" @click="drawCard" id="drawCardButton" alt="Login"
+          src='/images/card_backside_flipped.png' value="Draw card">
+        </div>
 
         <div class="gameLog">
           <p>
@@ -86,6 +87,7 @@
     </header>
 
     <main>
+      <!-- Game Board -->
       <div class="game board">
         <div class="item pool">
           <CollectorsBuyActions v-if="players[playerId]"
@@ -154,21 +156,19 @@
 
       </div>
 
+      <!-- Player Board  -->
       <div class="players board">
-
-        <!--Object.keys(this.players) ger en array med alla playerid -->
         <CollectorsPlayerBoard class="player" v-for='(data, id) in players' :key='id'
         :labels= "labels"
         :player= "data"
         :playerId= "id"
         @chooseAction= "chooseAction(chosenAction, $event)"/>
-
       </div>
-
 
     </main>
 
     <footer>
+      <!-- Här finns länk till om man vill vara olika spelare -->
       <p>
         {{ labels.invite }}
         <input type="text" :value="publicPath + $route.path" @click="selectAll" readonly="readonly">
@@ -180,7 +180,6 @@
 
 
 <script>
-/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "[iI]gnored" }]*/
 
 //import CollectorsCard from '@/components/CollectorsCard.vue'
 import CollectorsBuyActions from '@/components/CollectorsBuyActions.vue'
@@ -195,7 +194,6 @@ import CollectorsRulesPopup from '@/components/CollectorsRulesPopup.vue'
 export default {
   name: 'Collectors',
   components: {
-    //CollectorsCard,
     CollectorsBuyActions,
     CollectorsGainSkill,
     CollectorsRaiseValue,
@@ -210,42 +208,32 @@ export default {
       touchScreen: false,
       maxSizes: { x: 0,
         y: 0 },
-        labels: {},                                                           //ALLT ÄR TOMT, VÄRDENA SÄTTS LÄNGRE NER
+        //ALLT ÄR TOMT, VÄRDENA SÄTTS LÄNGRE NER
+        labels: {},
         players: {},
-        // playerId: {
-        //   hand: [],
-        //   money: 1,
-        //   points: 0,
-        //   skills: [],
-        //   items: [],
-        //   income: [],
-        //   secret: []
-        // }
         buyPlacement: [],
         skillPlacement: [],
         auctionPlacement: [],
         marketPlacement: [],
         workPlacement: [],
-      //  numberOfActions:0,
 
-        //HÄR LÄGGER VI TILL workPlacement
-        //workPlacement: [],
-        chosenWorkAction: null, //bajs
+        chosenWorkAction: null,
         chosenNumberOfActions: null,
         currentQuarter: 1,
         chosenPlacementCost: null,
-        chosenAction: null,           //MAJA LA TILL DENNA
-        marketValues: { fastaval: 0,
+        chosenAction: null,
+        marketValues: {
+          fastaval: 0,
           movie: 0,
           technology: 0,
           figures: 0,
           music: 0 },
-          //  raiseValueOnSale: [],
+
           market: [],
           itemsOnSale: [],
           skillsOnSale: [],
           auctionCards: [],
-          auctionSpot: [], // TEST??
+          auctionSpot: [],
 
           workAction: 0,
           numberOfActions: 0,
@@ -255,7 +243,6 @@ export default {
       },
       computed: {
         playerId: function() { return this.$store.state.playerId}
-
       },
       watch: {
         players: function(newP, oldP) {
@@ -265,9 +252,8 @@ export default {
               if (typeof this.players[p].hand[c].item !== "undefined" && !(this.players[p].hand[c].available))
               this.$set(this.players[p].hand[c], "available", false);
               console.log("är i players " + this.chosenNumberOfActions);
-              if (this.chosenNumberOfActions > 0) { //fortsätter vara aktiv tills chosen number of actions minskar
+              if (this.chosenNumberOfActions > 0) { //sehär  fortsätter vara aktiv tills chosen number of actions minskar
                 this.$set(this.players[p].hand[c], "available", true);
-
               }
             }
           }
@@ -275,7 +261,7 @@ export default {
       },
       created: function () {
         this.$store.commit('SET_PLAYER_ID', this.$route.query.id)
-        //TODO! Fix this ugly hack
+        //TODO! Fix this ugly hack   sehär
         //background: https://github.com/quasarframework/quasar/issues/5672
         const newRoute = this.$route.params.id + "?id=" + this.playerId;
         if (this.$route.params.id + "?id=" + this.$route.query.id !== newRoute)
@@ -284,26 +270,23 @@ export default {
         { roomId: this.$route.params.id,
           playerId: this.playerId } );
 
-
-          this.$store.state.socket.on('collectorsInitialize',    //HÄR LÄGGER VI TILL ALLA VÄRDEN SOM SKICKATS I OBJEKTET I socketsCollectors.js
+          //HÄR LÄGGER VI TILL ALLA VÄRDEN SOM SKICKATS I OBJEKTET I socketsCollectors.js
+          this.$store.state.socket.on('collectorsInitialize',
           function(d) {
             this.labels = d.labels;
             this.players = d.players;
             this.itemsOnSale = d.itemsOnSale;
-            //     this.raiseValueOnSale = d.raiseValueOnSale;
             this.marketValues = d.marketValues;
             this.market = d.market;
             this.skillsOnSale = d.skillsOnSale;
             this.auctionCards = d.auctionCards;
             this.auctionSpot = d.auctionSpot;
-            //NÅTT SOM OVAN FAST MED WORK
             this.buyPlacement = d.placements.buyPlacement;
             this.skillPlacement = d.placements.skillPlacement;
             this.marketPlacement = d.placements.marketPlacement;
             this.auctionPlacement = d.placements.auctionPlacement;
             this.workPlacement = d.placements.workPlacement;
             this.currentQuarter= d.currentQuarter;
-
           }.bind(this));
 
           this.$store.state.socket.on('collectorsBottlePlaced',
@@ -339,14 +322,10 @@ export default {
             }
           }.bind(this));
 
-
-
           this.$store.state.socket.on('collectorsPointsUpdated', (d) => this.points = d );
 
           this.$store.state.socket.on('collectorsCardDrawn',
           function(d) {
-            //this has been refactored to not single out one player's cards
-            //better to update the state of all cards
             this.players = d;
           }.bind(this)
         );
@@ -357,45 +336,42 @@ export default {
         }.bind(this)
       );
 
-
-        this.$store.state.socket.on('collectorsCardBought',
-        function(d) {
-          document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} bought an item!`;
-          this.players = d.players;
-          this.itemsOnSale = d.itemsOnSale;
-        }.bind(this)
-      );
-
-      this.$store.state.socket.on('collectorsValueRaised',
+      this.$store.state.socket.on('collectorsCardBought',
       function(d) {
-        document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} raised a value!`;
+        document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} bought an item!`;
         this.players = d.players;
-        //        this.raiseValueOnSale = d.raiseValueOnSale;
-        this.skillsOnSale = d.skillsOnSale;
-        this.auctionCards = d.auctionCards;
-        this.marketValues = d.marketValues;
-        this.market = d.market;
+        this.itemsOnSale = d.itemsOnSale;
       }.bind(this)
     );
 
-    this.$store.state.socket.on('collectorsAuctionStarted',
+    this.$store.state.socket.on('collectorsValueRaised',
     function(d) {
-      document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started an auction!`;
+      document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} raised a value!`;
       this.players = d.players;
+      this.skillsOnSale = d.skillsOnSale;
       this.auctionCards = d.auctionCards;
-      this.auctionSpot = d.auctionSpot; //TEST ???
+      this.marketValues = d.marketValues;
+      this.market = d.market;
     }.bind(this)
   );
-  //HÄÄR SKA FUTURE INCOME LÄGGAS IN!!!!!!!
 
-  // DANI
-  this.$store.state.socket.on('collectorsWorkStarted',
+  this.$store.state.socket.on('collectorsAuctionStarted',
   function(d) {
-    document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`; //MÅSTE FIXAS
+    document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started an auction!`;
     this.players = d.players;
-  //  this.auctionCards = d.auctionCards;
-  //  this.auctionSpot = d.auctionSpot; //TEST ???
+    this.auctionCards = d.auctionCards;
+    this.auctionSpot = d.auctionSpot;
   }.bind(this)
+);
+
+//Här vill vi lägga FUTURE INCOME
+
+// sehär DANI
+this.$store.state.socket.on('collectorsWorkStarted',
+function(d) {
+  document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`; //sehär MÅSTE FIXAS
+  this.players = d.players;
+}.bind(this)
 );
 
 this.$store.state.socket.on('collectorsSkillGained',
@@ -405,8 +381,10 @@ function(d) {
   this.skillsOnSale = d.skillsOnSale;
 }.bind(this)
 );
-},        //END OF CREATED
+},
+//END OF CREATED
 
+//Metoder som hämtar functioner
 methods: {
   chooseAction(action, card){
     if (action === "buy") {
@@ -421,14 +399,12 @@ methods: {
     else if (action === "market") {
       this.raiseValue(card);
     }
-    /* HÄR LÄGGER VI SEN TILL workPlacement: */
+
     else if (action === "work") {
       console.log("går in i chooseaction");
-      this.startWork(card); /*måste ändras*/
+      this.startWork(card); /*sehär måste ändras*/
       this.startWork(card);
-      //  work(card);
     }
-
   },
 
   selectAll: function (n) {
@@ -436,7 +412,6 @@ methods: {
   },
 
   placeBottle: function (action, cost) { /* skicka till server och gör förändring där.*/
-  //  console.log(action, cost);
     this.chosenPlacementCost = cost;
     this.chosenAction = action;
     this.$store.state.socket.emit('collectorsPlaceBottle', {
@@ -449,59 +424,56 @@ methods: {
 },
 
 placeWorkBottle: function (p) { /* skicka till server och gör förändring där.*/
-
   this.chosenPlacementCost = p.cost;
   this.chosenAction = "work";
   this.chosenWorkAction= p.workAction;
   this.chosenNumberOfActions = p.numberOfActions;
   //this.chosenNumberOfActions -=1;
 
-/*if(this.chosenWorkAction === 1 && this.currentQuarter <=4){
-    console.log("number of actions" +this.numberOfActions);
-    this.numberOfActions = 2;
-    console.log("number of actions" +this.numberOfActions);
-  }*/
+  /* sehär   if(this.chosenWorkAction === 1 && this.currentQuarter <=4){
+  console.log("number of actions" +this.numberOfActions);
+  this.numberOfActions = 2;
+  console.log("number of actions" +this.numberOfActions);
+}*/
 
-  this.$store.state.socket.emit('collectorsPlaceWorkBottle', {
-    roomId: this.$route.params.id,
-    playerId: this.playerId,
-    action: "work",
-    cost: p.cost,
-    workAction:p.workAction,
-    numberOfActions:p.numberOfActions,
-  //  numberOfActions:this.numberOfActions,
-  }
+this.$store.state.socket.emit('collectorsPlaceWorkBottle', {
+  roomId: this.$route.params.id,
+  playerId: this.playerId,
+  action: "work",
+  cost: p.cost,
+  workAction:p.workAction,
+  numberOfActions:p.numberOfActions
+}
 );
 },
-drawCard: function () {                                  /* NÄR MAN DRAR KORT ÅTERSTÄLLS ENS MONEY */
+drawCard: function () {
   this.$store.state.socket.emit('collectorsDrawCard', {
     roomId: this.$route.params.id,
     playerId: this.playerId
   }
 );
 },
+
 getMoney: function () {
-   this.$store.state.socket.emit('collectorsGetMoney', {
+  this.$store.state.socket.emit('collectorsGetMoney', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
   }
 );
 },
 
-
 gainSkill: function (card) {
-  /*console.log("gainSkill", card);     //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('collectorsGainSkill', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
     card: card,
-    cost: this.chosenPlacementCost     //placeringskostnad
+    //placeringskostnad
+    cost: this.chosenPlacementCost
   }
 );
 },
 
 startAuction: function (card) {
-  /*console.log("startAuction", card);    //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('CollectorsStartAuction', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -512,15 +484,8 @@ startAuction: function (card) {
 },
 startWork: function (card) {
   console.log("i startwork innan "+ this.chosenNumberOfActions);
-//  if (this.chosenNumberOfActions === 1) {
-//    this.chosenNumberOfActions -=1;
-//  }
-//  if (this.chosenNumberOfActions === 2) {
-//    this.chosenNumberOfActions -=1;
-//  }
 
   console.log("i startwork efter "+ this.chosenNumberOfActions);
-  //console.log("startWork ", card);   //GÅR ENDAST IN HÄR DÅ MAN TRYCKER PÅ ETT KORT
   this.$store.state.socket.emit('CollectorsStartWork', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -528,108 +493,81 @@ startWork: function (card) {
     cost: this.chosenPlacementCost,
     workAction:this.chosenWorkAction,
     numberOfActions:this.chosenNumberOfActions,
-  //  whichLap:this.chosenWhichLap
   }
 );
 },
 
 buyCard: function (card) {
-  /*console.log("buyCard", card);   //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('collectorsBuyCard', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
     card: card,
-    cost: this.marketValues[card.market] + this.chosenPlacementCost     //marknadsvärde (raise value) + placeringskostnad
+    //marknadsvärde(raise value) + placeringskostnad
+    cost: this.marketValues[card.market] + this.chosenPlacementCost
   }
 );
 },
+
 getInfo: function(string){
   this.showRulesPopup = !this.showRulesPopup;
   this.rulesPopupContent = string;
-
-  // if (string === 'work') {
-  //   var popupwork = document.getElementById("myWorkPopup");
-  //   popupwork.classList.toggle("show");
-  // }
-  // else if (string === 'auction') {
-  //   var popupauction = document.getElementById("myAuctionPopup");
-  //   popupauction.classList.toggle("show");
-  //
-  // }
-  // else if (string === 'market') {
-  //    var popupmarket = document.getElementById("myMarketPopup");
-  //    popupmarket.classList.toggle("show");
-  // }
-  // else if (string === 'skill') {
-  //   var popupskill = document.getElementById("mySkillPopup");
-  //   popupskill.classList.toggle("show");
-  // }
-  // else if (string === 'item') {
-  //   var popupitem = document.getElementById("myItemPopup");
-  //   popupitem.classList.toggle("show");
-  // }
 },
 getHowToInfo:function(){
-      var popupwork = document.getElementById("myHowToInfoPopup");
-      popupwork.classList.toggle("show");
+  var popupwork = document.getElementById("myHowToInfoPopup");
+  popupwork.classList.toggle("show");
 },
 nextQuarterInfo:function(){
-      var popupwork = document.getElementById("myQuarterInfoPopup");
-      popupwork.classList.toggle("show");
+  var popupwork = document.getElementById("myQuarterInfoPopup");
+  popupwork.classList.toggle("show");
 },
 nextQuarter:function(){
   this.changeImageNextQuarter();
 
-//  console.log("whichLap i collectors" + this.players[this.playerId].whichLap)
-//  this.players[this.playerId].whichLap+=1;
-//  console.log("whichLap i collectors" + this.players[this.playerId].whichLap)
+  //sehär   console.log("whichLap i collectors" + this.players[this.playerId].whichLap)
+  //  this.players[this.playerId].whichLap+=1;
+  //  console.log("whichLap i collectors" + this.players[this.playerId].whichLap)
   //console.log("total bottles" + this.players[this.playerId].totalBottles +" bottles left" + this.players[this.playerId].bottlesLeft) +" innan";
   //OBSS
-    //this.players[this.playerId].bottlesLeft=this.players[this.playerId].totalBottles  //Ska flyttas till servern och gå genom alla spelare och nollställa individuellt
+  //this.players[this.playerId].bottlesLeft=this.players[this.playerId].totalBottles  //Ska flyttas till servern och gå genom alla spelare och nollställa individuellt
   //console.log("total bottles" + this.players[this.playerId].totalBottles +" bottles left" + this.players[this.playerId].bottlesLeft) +" efter";
   //Måste göra så att flaskknapparna blir oanvända
   //här ska saker hända!!!!! DANI
   //this.placeBottle('auction', 1);
-//  this.players[this.playerId].whichLap += 1;
+  //  this.players[this.playerId].whichLap += 1;
 
   this.$store.state.socket.emit('collectorsNextQuarter', {
-   roomId: this.$route.params.id,
+    roomId: this.$route.params.id,
   }
-  );
+);
 
-  this.nextQuarterInfo();
-
-
-
-
-
+this.nextQuarterInfo();
 },
+
 changeImageNextQuarter: function(){
-  //  console.log("innan if " + document.getElementById("imgClickAndChange").src);
-    if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_1.PNG")
-    {
-        document.getElementById("imgClickAndChange").src = "/images/quartertile_2.PNG";
-      //  console.log("innuti if  " +document.getElementById("imgClickAndChange").src);
-    }
-    else if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_2.PNG")
-    {
-      document.getElementById("imgClickAndChange").src = "/images/quartertile_3.PNG";
-//      console.log("innuti 2 if  " +document.getElementById("imgClickAndChange").src);
-    }
+  // sehär   console.log("innan if " + document.getElementById("imgClickAndChange").src);
+  if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_1.PNG")
+  {
+    document.getElementById("imgClickAndChange").src = "/images/quartertile_2.PNG";
+    //  console.log("innuti if  " +document.getElementById("imgClickAndChange").src);
+  }
+  else if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_2.PNG")
+  {
+    document.getElementById("imgClickAndChange").src = "/images/quartertile_3.PNG";
+    //      console.log("innuti 2 if  " +document.getElementById("imgClickAndChange").src);
+  }
 
   else if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_3.PNG") {
     document.getElementById("imgClickAndChange").src = "/images/quartertile_4.PNG";
-//      console.log("innuti 2 if  " +document.getElementById("imgClickAndChange").src);
+    //      console.log("innuti 2 if  " +document.getElementById("imgClickAndChange").src);
 
   }
   else {
-      document.getElementById("imgClickAndChange").src = "/images/quartertile_1.PNG";
+    document.getElementById("imgClickAndChange").src = "/images/quartertile_1.PNG";
     //  console.log("else   " + document.getElementById("imgClickAndChange").src);
   }
 },
 
 raiseValue: function (card) {
-  /*console.log("raiseValue", card);    //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
   this.$store.state.socket.emit('collectorsRaiseValue', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -643,7 +581,7 @@ raiseValue: function (card) {
 
 </script>
 
-<!-- style scoped är bara för filen, utan scoped gäller det allt -->
+<!-- sehär - behövs kanske ej längre? style scoped är bara för filen, utan scoped gäller det allt -->
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
 
@@ -654,9 +592,9 @@ raiseValue: function (card) {
   display: grid;
   grid-template-rows: 6% 75% 5%;
   grid-template-areas:
-    "header"
-    "main"
-    "footer";
+  "header"
+  "main"
+  "footer";
 }
 
 header {
@@ -698,7 +636,7 @@ h2 {
   display: grid;
   grid-template-columns: 15% 30% 55%;
   grid-template-areas:
-    "hoverCoin hoverCard gameLog";
+  "hoverCoin hoverCard gameLog";
   font-weight: bold;
 }
 
@@ -711,8 +649,7 @@ h2 {
   margin-left: 2%;
 }
 
-/* =========================
-BUTTONS                    */
+/* =========== BUTTONS =========== */
 
 .buttons {
   width: 100%;
@@ -791,7 +728,9 @@ BUTTONS                    */
   width: 7%;
 }
 
-#drawCardButton, #getMoneyButton { margin: 2%; }
+#drawCardButton, #getMoneyButton {
+  margin: 2%;
+}
 
 #drawCardButton:hover, #getMoneyButton:hover {
   box-shadow: inset 0.2em 0.2em 0.3em #787975;
@@ -801,15 +740,19 @@ BUTTONS                    */
   outline: none;
 }
 
-#getMoneyButton { width: 50px; }
+#getMoneyButton {
+  width: 50px;
+}
+
 #drawCardButton {
   border-radius: 0.3em;
   box-shadow: 0.2em 0.2em 0.3em #787975;
   width: 70%;
 }
 
-/*  ===========================  */
+/*  ======================================  */
 
+/* ============ YTTRE GRID ===============*/
 main {
   user-select: none;
   grid-area: main;
@@ -840,8 +783,9 @@ footer a:visited {
 
 .board { padding: 0.2em; }
 
-/* =====================================
-GAME BOARD (GRID)                 */
+/* ===================================================== */
+
+/* =============== GAME BOARD (GRID) =================== */
 
 .game {
   grid-area: gameBoard;
@@ -855,7 +799,9 @@ GAME BOARD (GRID)                 */
   "skillPool marketPool marketPool";
 }
 
-.item, .skill, .work, .auction, .market{padding: 1em;}
+.item, .skill, .work, .auction, .market{
+  padding: 1em;
+}
 
 .item {
   grid-area: itemPool;
@@ -882,8 +828,9 @@ GAME BOARD (GRID)                 */
   background-color: #D0DCF2;
 }
 
-/* =====================================
-PLAYER BOARD                          */
+/* ======================================================== */
+
+/* ================= PLAYER BOARD (GRID) ================== */
 
 .players {
   grid-area: playerBoard;
@@ -895,9 +842,9 @@ PLAYER BOARD                          */
   padding: 0.5em;
 }
 
-/* ========================= */
-/* BUY CARD BUTTON */
+/* ======================================================== */
 
+/* BUY CARD BUTTON */
 .buyCards, .buttons {
 }
 
@@ -912,8 +859,8 @@ PLAYER BOARD                          */
 }
 
 /* ========================= */
-/* PLACE BOTTLE BUTTON */
 
+/* PLACE BOTTLE BUTTON */
 .bottlePlacement {
   width: 2.5vw;
 }
@@ -944,6 +891,7 @@ PLAYER BOARD                          */
 
 /* ========================= */
 
+/* ============= CARD DESIGN =============== */
 .cardslots {
   display: grid;
   grid-template-columns: repeat(auto-fill, 130px);
@@ -985,7 +933,7 @@ footer a:visited {
   transform: scale(1)translate(-25%,0);
   z-index: 1;
 }
-/* används i playerboard */
+/* sehär  används i playerboard */
 
 .popuptext {
   position: absolute;
@@ -1020,7 +968,7 @@ footer a:visited {
   display: block;
 }
 
-/* ==========HJÄLP Dåligt kodad få ihop popuptext klasserna snyggt==================== */
+/* sehär  ==========HJÄLP Dåligt kodad få ihop popuptext klasserna snyggt==================== */
 .popupHowToInfoText {
   position: absolute;
   display: none;

@@ -251,10 +251,8 @@ export default {
             for(let c = 0; c < this.players[p].hand.length; c += 1) {
               if (typeof this.players[p].hand[c].item !== "undefined" && !(this.players[p].hand[c].available))
               this.$set(this.players[p].hand[c], "available", false);
-              console.log("är i players " + this.chosenNumberOfActions);
-            //  if (this.chosenNumberOfActions > 0) { //sehär  fortsätter vara aktiv tills chosen number of actions minskar
-            //    this.$set(this.players[p].hand[c], "available", true);
-            //  }
+          //    console.log("är i players " + this.chosenNumberOfActions);
+
             }
           }
         }
@@ -303,8 +301,6 @@ export default {
             this.chosenNumberOfActions = d.numberOfActions;
 
             document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
-            console.log("innan " + this.chosenNumberOfActions);
-            if (this.chosenNumberOfActions > 0) {
               for(let c = 0; c < this.players[this.playerId].hand.length; c += 1 ) {
                 if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 5 ) {
                   this.$set(this.players[this.playerId].hand[c], "available", true);
@@ -317,7 +313,6 @@ export default {
                   }
                 }
               }
-            }
           }.bind(this));
 
           this.$store.state.socket.on('collectorsPointsUpdated', (d) => this.points = d );
@@ -362,7 +357,7 @@ export default {
   }.bind(this)
 );
 
-//Här vill vi lägga FUTURE INCOME
+
 
 
 this.$store.state.socket.on('collectorsWorkStarted',
@@ -380,9 +375,8 @@ function(d) {
 }.bind(this)
 );
 },
-//END OF CREATED
 
-//Metoder som hämtar functioner
+
 methods: {
   chooseAction(action, card){
     if (action === "buy") {
@@ -399,8 +393,6 @@ methods: {
     }
 
     else if (action === "work") {
-      console.log("går in i chooseaction");
-      this.startWork(card); /*sehär måste ändras*/
       this.startWork(card);
     }
   },
@@ -428,11 +420,7 @@ placeWorkBottle: function (p) { /* skicka till server och gör förändring där
   this.chosenNumberOfActions = p.numberOfActions;
   //this.chosenNumberOfActions -=1;
 
-  /* sehär   if(this.chosenWorkAction === 1 && this.currentQuarter <=4){
-  console.log("number of actions" +this.numberOfActions);
-  this.numberOfActions = 2;
-  console.log("number of actions" +this.numberOfActions);
-}*/
+
 
 this.$store.state.socket.emit('collectorsPlaceWorkBottle', {
   roomId: this.$route.params.id,
@@ -531,26 +519,21 @@ this.nextQuarterInfo();
 },
 
 changeImageNextQuarter: function(){
-  // sehär   console.log("innan if " + document.getElementById("imgClickAndChange").src);
   if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_1.PNG")
   {
     document.getElementById("imgClickAndChange").src = "/images/quartertile_2.PNG";
-    //  console.log("innuti if  " +document.getElementById("imgClickAndChange").src);
   }
   else if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_2.PNG")
   {
     document.getElementById("imgClickAndChange").src = "/images/quartertile_3.PNG";
-    //      console.log("innuti 2 if  " +document.getElementById("imgClickAndChange").src);
   }
 
   else if (document.getElementById("imgClickAndChange").src === "http://localhost:8080/images/quartertile_3.PNG") {
     document.getElementById("imgClickAndChange").src = "/images/quartertile_4.PNG";
-    //      console.log("innuti 2 if  " +document.getElementById("imgClickAndChange").src);
 
   }
   else {
     document.getElementById("imgClickAndChange").src = "/images/quartertile_1.PNG";
-    //  console.log("else   " + document.getElementById("imgClickAndChange").src);
   }
 },
 

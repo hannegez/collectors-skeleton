@@ -27,6 +27,7 @@ export default {
     doAction: function() {
       if (this.availableAction){ //han säger att vi ska lägga till det i bilden
       this.$emit('doAction');
+
     }
     }
   },

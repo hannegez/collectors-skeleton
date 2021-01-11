@@ -12,19 +12,17 @@ function sockets(io, socket, data) {
   socket.on('collectorsLoaded', function(d) {
     socket.join(d.roomId);
     if (data.joinGame(d.roomId, d.playerId)) {
-      socket.emit('collectorsInitialize', {                //HÄR LÄR VI LÄGGA TILL/ÄNDRA VAD SOM SKA SÄNDAS UT NÄR NÅN JOINAR
-        labels: data.getUILabels(d.roomId),              //OBJEKTET SOM SKICKAS SOM 2:A PARAMETER ÄR DET SOM KALLAS FÖR d I
-        players: data.getPlayers(d.roomId),              //Collectors.vue: "this.$store.state.socket.on('collectorsInitialize',
-        itemsOnSale: data.getItemsOnSale(d.roomId),      //  function(d) { ...... "
+      socket.emit('collectorsInitialize', {
+        labels: data.getUILabels(d.roomId),
+        players: data.getPlayers(d.roomId),
+        itemsOnSale: data.getItemsOnSale(d.roomId),
         marketValues: data.getMarketValues(d.roomId),
-        // raiseValueOnSale: data.getRaiseValueOnSale(d.roomId),
         market: data.getMarket(d.roomId),
         skillsOnSale: data.getSkillsOnSale(d.roomId),
         auctionCards: data.getAuctionCards(d.roomId),
         auctionSpot: data.getAuctionSpot(d.roomId),
         placements: data.getPlacements(d.roomId),
         currentQuarter:data.getQuarter(d.roomId)
-
       });
       }
   });
@@ -39,12 +37,13 @@ function sockets(io, socket, data) {
     data.getMoney(d.roomId, d.playerId)
   );
   });
+  //Initierar ett nytt kvartal när man trycker på next quarter knappen
   socket.on('collectorsNextQuarter', function(d) {
     data.nextQuarter(d.roomId)
-    io.to(d.roomId).emit('collectorsInitialize', {                //HÄR LÄR VI LÄGGA TILL/ÄNDRA VAD SOM SKA SÄNDAS UT NÄR NÅN JOINAR
-      labels: data.getUILabels(d.roomId),              //OBJEKTET SOM SKICKAS SOM 2:A PARAMETER ÄR DET SOM KALLAS FÖR d I
-      players: data.getPlayers(d.roomId),              //Collectors.vue: "this.$store.state.socket.on('collectorsInitialize',
-      itemsOnSale: data.getItemsOnSale(d.roomId),      //  function(d) { ...... "
+    io.to(d.roomId).emit('collectorsInitialize', {
+      labels: data.getUILabels(d.roomId),
+      players: data.getPlayers(d.roomId),
+      itemsOnSale: data.getItemsOnSale(d.roomId),
       marketValues: data.getMarketValues(d.roomId),
       market: data.getMarket(d.roomId),
       skillsOnSale: data.getSkillsOnSale(d.roomId),
@@ -52,9 +51,7 @@ function sockets(io, socket, data) {
       auctionSpot: data.getAuctionSpot(d.roomId),
       placements: data.getPlacements(d.roomId),
       currentQuarter:data.getQuarter(d.roomId)
-
     });
-
   });
 
 
@@ -118,12 +115,11 @@ function sockets(io, socket, data) {
     io.to(d.roomId).emit('collectorsBottlePlaced', data.getPlacements(d.roomId)
   );
   });
-  //försök till number of actions men har inte fått ihop det. 
+
+  //försök till number of actions men har inte fått ihop det.
   socket.on('collectorsPlaceWorkBottle', function(d) {
     data.placeWorkBottle(d.roomId, d.playerId, d.cost, d.workAction, d.numberOfActions);
-    d.numberOfActions -= 1;
-
-
+  //  d.numberOfActions -= 1;
     io.to(d.roomId).emit('collectorsWorkBottlePlaced', {
       players: data.getPlayers(d.roomId),
       playerId: d.playerId,

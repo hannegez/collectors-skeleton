@@ -200,6 +200,7 @@ Data.prototype.resetFourthQuarterPlacements = function(room) {
               }
 
             }
+
           }
           Data.prototype.getQuarter= function(roomId){
             let room = this.rooms[roomId];
@@ -369,15 +370,6 @@ Data.prototype.resetFourthQuarterPlacements = function(room) {
                             }
                           }
 
-                          // for (let i = 0; i < room.raiseValueOnSale.length; i += 1) {
-                          //   // since card comes from the client, it is NOT the same object (reference)
-                          //   // so we need to compare properties for determining equality
-                          //   if (room.raiseValueOnSale[i].x === card.x &&
-                          //       room.raiseValueOnSale[i].y === card.y) {
-                          //     c = room.raiseValueOnSale.splice(i,1, {});
-                          //     break;
-                          //   }
-                          // }
 
                           // ...then check if it is in the hand. It cannot be in both so it's safe
                           for (let i = 0; i < room.players[playerId].hand.length; i += 1) {

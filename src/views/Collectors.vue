@@ -264,11 +264,11 @@ export default {
             for(let c = 0; c < this.players[p].hand.length; c += 1) {
               if (typeof this.players[p].hand[c].item !== "undefined" && !(this.players[p].hand[c].available))
               this.$set(this.players[p].hand[c], "available", false);
-              console.log("är i players " + this.chosenNumberOfActions);
-              if (this.chosenNumberOfActions > 0) { //fortsätter vara aktiv tills chosen number of actions minskar
-                this.$set(this.players[p].hand[c], "available", true);
+          //    console.log("är i players " + this.chosenNumberOfActions); Får inte detta att fungera
+          //    if (this.chosenNumberOfActions > 0) { //fortsätter vara aktiv tills chosen number of actions minskar
+          //      this.$set(this.players[p].hand[c], "available", true);
 
-              }
+          //    }
             }
           }
         }
@@ -547,27 +547,7 @@ getInfo: function(string){
   this.showRulesPopup = !this.showRulesPopup;
   this.rulesPopupContent = string;
 
-  // if (string === 'work') {
-  //   var popupwork = document.getElementById("myWorkPopup");
-  //   popupwork.classList.toggle("show");
-  // }
-  // else if (string === 'auction') {
-  //   var popupauction = document.getElementById("myAuctionPopup");
-  //   popupauction.classList.toggle("show");
-  //
-  // }
-  // else if (string === 'market') {
-  //    var popupmarket = document.getElementById("myMarketPopup");
-  //    popupmarket.classList.toggle("show");
-  // }
-  // else if (string === 'skill') {
-  //   var popupskill = document.getElementById("mySkillPopup");
-  //   popupskill.classList.toggle("show");
-  // }
-  // else if (string === 'item') {
-  //   var popupitem = document.getElementById("myItemPopup");
-  //   popupitem.classList.toggle("show");
-  // }
+
 },
 getHowToInfo:function(){
       var popupwork = document.getElementById("myHowToInfoPopup");
@@ -579,19 +559,6 @@ nextQuarterInfo:function(){
 },
 nextQuarter:function(){
   this.changeImageNextQuarter();
-
-//  console.log("whichLap i collectors" + this.players[this.playerId].whichLap)
-//  this.players[this.playerId].whichLap+=1;
-//  console.log("whichLap i collectors" + this.players[this.playerId].whichLap)
-  //console.log("total bottles" + this.players[this.playerId].totalBottles +" bottles left" + this.players[this.playerId].bottlesLeft) +" innan";
-  //OBSS
-    //this.players[this.playerId].bottlesLeft=this.players[this.playerId].totalBottles  //Ska flyttas till servern och gå genom alla spelare och nollställa individuellt
-  //console.log("total bottles" + this.players[this.playerId].totalBottles +" bottles left" + this.players[this.playerId].bottlesLeft) +" efter";
-  //Måste göra så att flaskknapparna blir oanvända
-  //här ska saker hända!!!!! DANI
-  //this.placeBottle('auction', 1);
-//  this.players[this.playerId].whichLap += 1;
-
   this.$store.state.socket.emit('collectorsNextQuarter', {
    roomId: this.$route.params.id,
   }

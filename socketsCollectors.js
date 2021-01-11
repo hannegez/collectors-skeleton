@@ -48,12 +48,10 @@ function sockets(io, socket, data) {
       players: data.getPlayers(d.roomId),              //Collectors.vue: "this.$store.state.socket.on('collectorsInitialize',
       itemsOnSale: data.getItemsOnSale(d.roomId),      //  function(d) { ...... "
       marketValues: data.getMarketValues(d.roomId),
-      // raiseValueOnSale: data.getRaiseValueOnSale(d.roomId),
       market: data.getMarket(d.roomId),
       skillsOnSale: data.getSkillsOnSale(d.roomId),
       auctionCards: data.getAuctionCards(d.roomId),
-      auctionSpot: data.getAuctionSpot(d.roomId), // TEST ???
-      //NÅTT MED WORK
+      auctionSpot: data.getAuctionSpot(d.roomId), 
       placements: data.getPlacements(d.roomId),
       currentQuarter:data.getQuarter(d.roomId)
 
@@ -139,7 +137,7 @@ function sockets(io, socket, data) {
       numberOfActions: d.numberOfActions,
     },
 
-    
+
   );
   });
 

@@ -247,7 +247,6 @@ export default {
           auctionCards: [],
           auctionSpot: [], // TEST??
 
-          //NÅTT LIKNANDE SOM OVAN FAST FÖR WORK?
           workAction: 0,
           numberOfActions: 0,
           showRulesPopup: false,
@@ -256,7 +255,7 @@ export default {
       },
       computed: {
         playerId: function() { return this.$store.state.playerId}
-        //workAction: function() { return this.$store.state.workAction}
+
       },
       watch: {
         players: function(newP, oldP) {
@@ -265,8 +264,12 @@ export default {
             for(let c = 0; c < this.players[p].hand.length; c += 1) {
               if (typeof this.players[p].hand[c].item !== "undefined" && !(this.players[p].hand[c].available))
               this.$set(this.players[p].hand[c], "available", false);
-            }
+              console.log("är i players " + this.chosenNumberOfActions);
+              if (this.chosenNumberOfActions > 0) { //fortsätter vara aktiv tills chosen number of actions minskar
+                this.$set(this.players[p].hand[c], "available", true);
 
+              }
+            }
           }
         }
       },
@@ -300,8 +303,7 @@ export default {
             this.auctionPlacement = d.placements.auctionPlacement;
             this.workPlacement = d.placements.workPlacement;
             this.currentQuarter= d.currentQuarter;
-        //    this.workAction = d.placements.workPlacement.workAction;
-        //    console.log("HÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄR" + this.workAction);
+
           }.bind(this));
 
           this.$store.state.socket.on('collectorsBottlePlaced',
@@ -317,37 +319,24 @@ export default {
             this.players= d.players;
             this.placements = d.placements;
             this.workPlacement = d.placements.workPlacement;
-      //      console.log("inne i funktionen ");
-
+            this.chosenNumberOfActions = d.numberOfActions;
 
             document.querySelector('.gameLog').innerHTML = `Player ${d.playerId} started work!`;
-
-        //    console.log("inne första  " + this.chosenNumberOfActions);
-            for(let c = 0; c < this.players[this.playerId].hand.length; c += 1 ) {
-          //    console.log("inne forloop ");
-              if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 5 ) {
-                //console.log("före: ", this.players[this.playerId].hand[c].available);
-          //      console.log("inne första if ");
-                this.$set(this.players[this.playerId].hand[c], "available", true);
-              }
-
-              if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 1 ) {
-            //    console.log("inne första 2 if " + this.chosenNumberOfActions);
-                if (this.currentQuarter <= 3){
-            //      console.log("inne första 3 if " + this.chosenNumberOfActions);
-                  if (this.chosenNumberOfActions >0) {
-                    this.$set(this.players[this.playerId].hand[c], "available", true);
-              //      console.log("inne första 3 if " + this.chosenNumberOfActions);
+            console.log("innan " + this.chosenNumberOfActions);
+            if (this.chosenNumberOfActions > 0) {
+              for(let c = 0; c < this.players[this.playerId].hand.length; c += 1 ) {
+                if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 5 ) {
+                  this.$set(this.players[this.playerId].hand[c], "available", true);
+                }
+                if (typeof this.players[this.playerId].hand[c].item !== "undefined" && this.chosenWorkAction === 1 ) {
+                  if (this.currentQuarter <= 3){
+                    if (this.chosenNumberOfActions >0) {
+                      this.$set(this.players[this.playerId].hand[c], "available", true);
+                    }
                   }
-
-
                 }
-                }
-
-
+              }
             }
-
-
           }.bind(this));
 
 
@@ -436,6 +425,7 @@ methods: {
     else if (action === "work") {
       console.log("går in i chooseaction");
       this.startWork(card); /*måste ändras*/
+      this.startWork(card);
       //  work(card);
     }
 
@@ -464,6 +454,7 @@ placeWorkBottle: function (p) { /* skicka till server och gör förändring där
   this.chosenAction = "work";
   this.chosenWorkAction= p.workAction;
   this.chosenNumberOfActions = p.numberOfActions;
+  //this.chosenNumberOfActions -=1;
 
 /*if(this.chosenWorkAction === 1 && this.currentQuarter <=4){
     console.log("number of actions" +this.numberOfActions);
@@ -520,6 +511,15 @@ startAuction: function (card) {
 );
 },
 startWork: function (card) {
+  console.log("i startwork innan "+ this.chosenNumberOfActions);
+//  if (this.chosenNumberOfActions === 1) {
+//    this.chosenNumberOfActions -=1;
+//  }
+//  if (this.chosenNumberOfActions === 2) {
+//    this.chosenNumberOfActions -=1;
+//  }
+
+  console.log("i startwork efter "+ this.chosenNumberOfActions);
   //console.log("startWork ", card);   //GÅR ENDAST IN HÄR DÅ MAN TRYCKER PÅ ETT KORT
   this.$store.state.socket.emit('CollectorsStartWork', {
     roomId: this.$route.params.id,

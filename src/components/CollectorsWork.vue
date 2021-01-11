@@ -75,11 +75,11 @@ export default {
     placeWorkBottle: function (p) {
       this.$emit('placeWorkBottle', p); //emitta hela p.
     },
-
+/*
     setAvailable: function (card) {
       this.$set(card, "available", true);
-    },
-  
+    },*/
+
 
 
 

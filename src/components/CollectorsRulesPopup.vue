@@ -58,7 +58,7 @@ export default {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 1;       /*denna gör att popupen placeras ovanpå andra element*/
+  z-index: 1;       
 }
 
 .rulesPopup {

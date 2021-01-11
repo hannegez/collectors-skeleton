@@ -22,8 +22,7 @@ function sockets(io, socket, data) {
         market: data.getMarket(d.roomId),
         skillsOnSale: data.getSkillsOnSale(d.roomId),
         auctionCards: data.getAuctionCards(d.roomId),
-        auctionSpot: data.getAuctionSpot(d.roomId), // TEST ???
-        //NÅTT MED WORK
+        auctionSpot: data.getAuctionSpot(d.roomId), 
         placements: data.getPlacements(d.roomId),
         currentQuarter:data.getQuarter(d.roomId)
 
@@ -51,7 +50,7 @@ function sockets(io, socket, data) {
       market: data.getMarket(d.roomId),
       skillsOnSale: data.getSkillsOnSale(d.roomId),
       auctionCards: data.getAuctionCards(d.roomId),
-      auctionSpot: data.getAuctionSpot(d.roomId), 
+      auctionSpot: data.getAuctionSpot(d.roomId),
       placements: data.getPlacements(d.roomId),
       currentQuarter:data.getQuarter(d.roomId)
 

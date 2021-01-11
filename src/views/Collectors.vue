@@ -226,10 +226,6 @@ export default {
         auctionPlacement: [],
         marketPlacement: [],
         workPlacement: [],
-      //  numberOfActions:0,
-
-        //HÄR LÄGGER VI TILL workPlacement
-        //workPlacement: [],
         chosenWorkAction: null, //bajs
         chosenNumberOfActions: null,
         currentQuarter: 1,
@@ -510,17 +506,9 @@ startAuction: function (card) {
   }
 );
 },
+//försök till number of actions men har inte fått ihop det.
 startWork: function (card) {
-  console.log("i startwork innan "+ this.chosenNumberOfActions);
-//  if (this.chosenNumberOfActions === 1) {
-//    this.chosenNumberOfActions -=1;
-//  }
-//  if (this.chosenNumberOfActions === 2) {
-//    this.chosenNumberOfActions -=1;
-//  }
 
-  console.log("i startwork efter "+ this.chosenNumberOfActions);
-  //console.log("startWork ", card);   //GÅR ENDAST IN HÄR DÅ MAN TRYCKER PÅ ETT KORT
   this.$store.state.socket.emit('CollectorsStartWork', {
     roomId: this.$route.params.id,
     playerId: this.playerId,
@@ -534,7 +522,7 @@ startWork: function (card) {
 },
 
 buyCard: function (card) {
-  /*console.log("buyCard", card);   //DENNA UTSKRIFT BEHÖVS KANSKE EJ? */
+
   this.$store.state.socket.emit('collectorsBuyCard', {
     roomId: this.$route.params.id,
     playerId: this.playerId,

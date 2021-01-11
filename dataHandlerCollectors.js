@@ -439,15 +439,11 @@ Data.prototype.resetFourthQuarterPlacements = function(room) {
 
                               }
                             }
-                            // lös problemet med att pengar inte dras bort
+                            //försök till number of actions men har inte fått ihop det.
                             Data.prototype.startWork = function (roomId, playerId, card, cost, workAction, numberOfActions) { // bör läggas till workAction?
                               let room = this.rooms[roomId];
                               if (typeof room !== 'undefined') {
                                 room.players[playerId].futureIncome += 1;
-                            //    console.log("number of actions innan startwork" + room.players[playerId].numberOfActions);
-                            //    room.players[playerId].numberOfActions -=1;
-                            //    console.log("number of actions efter startwork" + room.players[playerId].numberOfActions);
-                            //    console.log("går in i data.prototype.startwork EV reducering av , numberOfActions här?" + numberOfActions);
 
                                 let c = null;
                                 for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
@@ -456,16 +452,8 @@ Data.prototype.resetFourthQuarterPlacements = function(room) {
                                       c = room.players[playerId].hand.splice(i,1);
                                       break;
                                     }
-
                                   }
-
-
                                 }
-
-
-
-
-
                         }
 
 
@@ -570,7 +558,7 @@ Data.prototype.resetFourthQuarterPlacements = function(room) {
                                 }
                               }
                             }
-
+                            //försök till number of actions men har inte fått ihop det.
                             Data.prototype.placeWorkBottle = function (roomId, playerId, cost, workAction, numberOfActions) {
                               let room = this.rooms[roomId];
                               if (typeof room !== 'undefined') {
@@ -582,9 +570,6 @@ Data.prototype.resetFourthQuarterPlacements = function(room) {
                                   if( activePlacement[i].workAction === workAction &&
                                     activePlacement[i].playerId === null ) {
                                       activePlacement[i].playerId = playerId;
-                                    //    console.log("häär " + activePlacement[i].numberOfActions); påverkar inte chosenaction
-                                    //      activePlacement[i].numberOfActions -=1;
-                                    //  console.log("häär 3" + activePlacement[i].numberOfActions);
 
                                       if (workAction === 1 && room.quarter === 1){
                                         console.log("workaction 1: lap1: 2 on future income");

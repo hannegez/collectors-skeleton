@@ -9,7 +9,6 @@ function sockets(io, socket, data) {
   socket.on('setupCollectors', function(d) {
     data.createRoom(d.roomId, d.playerCount, d.lang);
   })
-  /**/
   socket.on('collectorsLoaded', function(d) {
     socket.join(d.roomId);
     if (data.joinGame(d.roomId, d.playerId)) {
@@ -22,7 +21,7 @@ function sockets(io, socket, data) {
         market: data.getMarket(d.roomId),
         skillsOnSale: data.getSkillsOnSale(d.roomId),
         auctionCards: data.getAuctionCards(d.roomId),
-        auctionSpot: data.getAuctionSpot(d.roomId), 
+        auctionSpot: data.getAuctionSpot(d.roomId),
         placements: data.getPlacements(d.roomId),
         currentQuarter:data.getQuarter(d.roomId)
 
@@ -80,14 +79,12 @@ function sockets(io, socket, data) {
   );
   });
 
-  //DANI
+  //försök till number of actions men har inte fått ihop det.
   socket.on('CollectorsStartWork', function(d) {
     data.startWork(d.roomId, d.playerId, d.card, d.cost, d.workAction, d.numberOfActions )
     io.to(d.roomId).emit('collectorsWorkStarted', {
       playerId: d.playerId,
       players: data.getPlayers(d.roomId),
-      //  auctionCards: data.getAuctionCards(d.roomId),
-      //    auctionSpot: data.getAuctionSpot(d.roomId) //TEST ??
     }
   );
   });
@@ -110,7 +107,6 @@ function sockets(io, socket, data) {
 
       skillsOnSale: data.getSkillsOnSale(d.roomId),
       auctionCards: data.getAuctionCards(d.roomId),
-      //    raiseValueOnSale: data.getRaiseValueOnSale(d.roomId),
       marketValues: data.getMarketValues(d.roomId),
       market: data.getMarket(d.roomId)
     }
@@ -122,26 +118,19 @@ function sockets(io, socket, data) {
     io.to(d.roomId).emit('collectorsBottlePlaced', data.getPlacements(d.roomId)
   );
   });
+  //försök till number of actions men har inte fått ihop det. 
   socket.on('collectorsPlaceWorkBottle', function(d) {
     data.placeWorkBottle(d.roomId, d.playerId, d.cost, d.workAction, d.numberOfActions);
-    //påverkar inget i sig
-    console.log("number of actions i placeWorkBottle 1" + d.numberOfActions);
     d.numberOfActions -= 1;
-    console.log("number of actions i placeWorkBottle 1" + d.numberOfActions);
 
-    io.to(d.roomId).emit('collectorsWorkBottlePlaced', {             //OBJEKTET SOM SKICKAS SOM 2:A PARAMETER ÄR DET SOM KALLAS FÖR d I
+
+    io.to(d.roomId).emit('collectorsWorkBottlePlaced', {
       players: data.getPlayers(d.roomId),
       playerId: d.playerId,
-      placements: data.getPlacements(d.roomId), //workAction finns med här
+      placements: data.getPlacements(d.roomId),
       numberOfActions: d.numberOfActions,
     },
-
-
   );
   });
-
-
-
   }
-
   module.exports = sockets;

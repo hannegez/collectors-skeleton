@@ -36,7 +36,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
       <div class="yourHand playerSymbols">
         <div class="popup" style= "position:relative; left:0em; top:0em;">
           <img src='/images/your_hand150.png' alt="See your hand" width="65%" @click='getYourInfo("yourHand")' >
-          <div :class="['popuptext',  {show:showHand}]" style= "left:-45vw;  top:25vh;"> <!--HANDLEDNING tar bort id Maja -->
+          <div :class="['popuptext',  {show:showHand}]" style= "left:-38vw;  top:8vh;"> <!--HANDLEDNING tar bort id Maja -->
             <input class="closeCross" type="image" @click="getYourInfo('yourHand')" alt="Login"
             src='/images/close.png' >
             <h2>{{ labels.yourHand }}</h2>
@@ -56,7 +56,7 @@ copy paste från GameBoard.vue, sen försökt ändra och anpassa   -->
         <div class="popup" style= "position:relative; left:0em; top:0em;">
 
           <img :src="bottlePic" alt="See complete bottle info" width="75%" @click='getYourInfo("yourBottles")' >
-          <div class="popuptext" id="yourBottlesPopup"  style= "left:-10em; top:-3em;">
+          <div class="popuptext" id="yourBottlesPopup"  style= "left:-43vw;  top:8vh;">
             <input class="closeCross" type="image" @click="getYourInfo('yourBottles')" alt="Login"
             src='/images/close.png' >
             <h2>{{ labels.yourBottles }}</h2>
@@ -137,39 +137,14 @@ export default {
       getYourInfo: function(string){
   console.log("inne i getYourInfo", string);
   if (string=="yourSkills") {
-
     //document.getElementById("yourSkillsPopup").classList.toggle("show");
   }
   else if (string=="yourHand") {
     this.showHand = !this.showHand;
-    // document.getElementById("yourHandPopup").classList.toggle("show");
   }
   else if (string=="yourBottles") {
     document.getElementById("yourBottlesPopup").classList.toggle("show");
   }
-
-
-      // if (string === 'work') {
-      //   var popupwork = document.getElementById("myWorkPopup");
-      //   popupwork.classList.toggle("show");
-      // }
-      // else if (string === 'auction') {
-      //   var popupauction = document.getElementById("myAuctionPopup");
-      //   popupauction.classList.toggle("show");
-      //
-      // }
-      // else if (string === 'market') {
-      //   var popupmarket = document.getElementById("myMarketPopup");
-      //   popupmarket.classList.toggle("show");
-      // }
-      // else if (string === 'skill') {
-      //   var popupskill = document.getElementById("mySkillPopup");
-      //   popupskill.classList.toggle("show");
-      // }
-      // else if (string === 'item') {
-      //   var popupitem = document.getElementById("myItemPopup");
-      //   popupitem.classList.toggle("show");
-      // }
     },
   }
 }
@@ -247,7 +222,7 @@ PLAYER BOARD (GRID)                 */
   background-color: #fff;
   border: solid thin #4E4E4E;
   color: #4E4E4E;
-  border-radius: 5px;
+  border-radius: 0.3em;
   opacity: 0;
   position: absolute;
   -webkit-transition: opacity 0.5s;
@@ -275,6 +250,7 @@ span {
   display: grid;
   grid-template-columns: repeat(auto-fill, 17px);
   grid-template-rows: repeat(10px, 180px);
+  margin: 10%;
 }
 .playerslots div {
   transform: scale(0.5)translate(-50%,-50%);
@@ -286,6 +262,5 @@ span {
   transform: scale(1)translate(-25%,0);
   z-index: 1;
 }
-
 
 </style>

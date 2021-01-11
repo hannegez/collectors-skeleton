@@ -1,7 +1,6 @@
 <template>
   <div class="startWork">
     <div class="workHeader" >
-    <!--  {{ labels.startWork }}     behövs ej längre pga infoknappar-->
     </div>
 
     <div class="workInfo">
@@ -24,24 +23,22 @@
         <div v-if="p.playerId !== null">
           <input class="bottlePlacement" type="image" :src="placedBottle(p.playerId)" >
         </div>
-
       </div>
     </div>
+
     <!--försöker koppla till start work, sista kopplar för att kortenfinns men emit fungerar ej DANI-->
     <div class="workImages">
       <br>
 
       <img  alt="" src="/images/quartertile_1.PNG"
-            height="65%" id="imgClickAndChange"   /> <!-- @click="startWork()" -->
-
-
+      height="65%" id="imgClickAndChange"   /> <!-- @click="startWork()" -->
       <br>
       <img  src="/images/work_recycle.png" alt="" width="25%"> <!-- @click="$emit('startWork', card)"-->
-        <br>
+      <br>
       <img src="/images/work_gainTwo.png" alt="" height="36%"> <!-- @click="$emit('startWork', card)"-->
-        <br>
+      <br>
       <img  src="/images/work_firstPlayer.png" alt="" height="36%"> <!-- @click="$emit('startWork', card)"-->
-        <br>
+      <br>
       <img src="/images/work_futureIncome.png" alt="" height="36%">
     </div>
   </div>
@@ -75,17 +72,10 @@ export default {
     placeWorkBottle: function (p) {
       this.$emit('placeWorkBottle', p); //emitta hela p.
     },
-/*
-    setAvailable: function (card) {
-      this.$set(card, "available", true);
-    },*/
-
-
-
-
   }
 }
 </script>
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
@@ -97,7 +87,6 @@ export default {
 .startWork{
   grid-gap: 0em;
   display: grid;
-
   grid-template-rows: 12% 10% 10%;
   grid-template-columns: 40% 60%;
   grid-template-areas:
@@ -106,16 +95,12 @@ export default {
   "bottlePlacements workImages";
 }
 
-
-.bottlePlacements{grid-area: bottlePlacements;
-margin-top: 2em;}
+.bottlePlacements{
+  grid-area: bottlePlacements;
+  margin-top: 2em;
+}
 .workHeader{grid-area: gainWorkHeader;}
 .workInfo{grid-area: workInfo;}
 .workImages{grid-area: workImages;}
-
-
-
-
-
 
 </style>

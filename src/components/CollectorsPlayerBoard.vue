@@ -137,39 +137,13 @@ export default {
       getYourInfo: function(string){
   console.log("inne i getYourInfo", string);
   if (string=="yourSkills") {
-
-    //document.getElementById("yourSkillsPopup").classList.toggle("show");
   }
   else if (string=="yourHand") {
     this.showHand = !this.showHand;
-    // document.getElementById("yourHandPopup").classList.toggle("show");
   }
   else if (string=="yourBottles") {
     document.getElementById("yourBottlesPopup").classList.toggle("show");
   }
-
-
-      // if (string === 'work') {
-      //   var popupwork = document.getElementById("myWorkPopup");
-      //   popupwork.classList.toggle("show");
-      // }
-      // else if (string === 'auction') {
-      //   var popupauction = document.getElementById("myAuctionPopup");
-      //   popupauction.classList.toggle("show");
-      //
-      // }
-      // else if (string === 'market') {
-      //   var popupmarket = document.getElementById("myMarketPopup");
-      //   popupmarket.classList.toggle("show");
-      // }
-      // else if (string === 'skill') {
-      //   var popupskill = document.getElementById("mySkillPopup");
-      //   popupskill.classList.toggle("show");
-      // }
-      // else if (string === 'item') {
-      //   var popupitem = document.getElementById("myItemPopup");
-      //   popupitem.classList.toggle("show");
-      // }
     },
   }
 }
@@ -286,6 +260,5 @@ span {
   transform: scale(1)translate(-25%,0);
   z-index: 1;
 }
-
 
 </style>

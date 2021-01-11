@@ -1,14 +1,11 @@
 <template>
   <div class="buyItem">
-
     <div class="buyItemHeader">
-    <!--  <h3>{{ labels.buyItem }}</h3>       behövs ej längre pga infoknapparna -->
-
-    <div class="buyInfo">
-      <div class="popup" style= "position:relative; left:0em; top:0em;">
-        <img src='/images/buyItem.PNG' alt="Buy Item" width="60%" @click="$emit('getInfo')" >
+      <div class="buyInfo">
+        <div class="popup" style= "position:relative; left:0em; top:0em;">
+          <img src='/images/buyItem.PNG' alt="Buy Item" width="60%" @click="$emit('getInfo')" >
+        </div>
       </div>
-    </div>
     </div>
 
     <div class="buyCards horizontalBuyCards">
@@ -17,34 +14,26 @@
         :card="card"
         :availableAction="card.available"
         @doAction="buyCard(card)"/>
-        <!-- {{ cardCost(card) }} -->
       </div>
     </div>
 
     <div>
-
-
-<div class="bottlePlacements horizontalPlacement">
-  <div v-for="(p, index) in placement" :key="'bp' + index">
-    <input class="bottlePlacement"
-    type="image"
-    v-if="p.playerId===null"
-    :disabled="cannotAfford(p.cost)"
-    @click="placeBottle(p)"
-    src='/images/bottle_placement.png' >
-    <span class="buttonText" v-if="p.playerId===null"> ${{p.cost}} </span>
-    <div v-if="p.playerId !== null">
-      <input class="bottlePlacement" type="image" :src="placedBottle(p.playerId)" >
+      <div class="bottlePlacements horizontalPlacement">
+        <div v-for="(p, index) in placement" :key="'bp' + index">
+          <input class="bottlePlacement"
+          type="image"
+          v-if="p.playerId===null"
+          :disabled="cannotAfford(p.cost)"
+          @click="placeBottle(p)"
+          src='/images/bottle_placement.png' >
+          <span class="buttonText" v-if="p.playerId===null"> ${{p.cost}} </span>
+          <div v-if="p.playerId !== null">
+            <input class="bottlePlacement" type="image" :src="placedBottle(p.playerId)" >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
-
-</div>
-
-</div>
-
-
 </template>
 
 <script>
@@ -62,8 +51,8 @@ export default {
     skillsOnSale: Array,
     marketValues: Object,
     placement: Array
-    //NÅNTING MED WORK?
   },
+
   methods: {
     placedBottle: function (playerId) {
       return '/images/bottle_' + this.players[playerId].color + '.png';
@@ -84,7 +73,6 @@ export default {
       this.highlightAvailableCards(p.cost);
     },
     checkAvailable: function (card, cost) {
-      
       if (this.marketValues[card.item] <= this.player.money - cost) {
         this.$set(card, "available", true);
       }
@@ -109,6 +97,7 @@ export default {
   }
 }
 </script>
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .buyItem{

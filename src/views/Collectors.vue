@@ -261,8 +261,6 @@ export default {
       },
       created: function () {
         this.$store.commit('SET_PLAYER_ID', this.$route.query.id)
-        //TODO! Fix this ugly hack   sehär
-        //background: https://github.com/quasarframework/quasar/issues/5672
         const newRoute = this.$route.params.id + "?id=" + this.playerId;
         if (this.$route.params.id + "?id=" + this.$route.query.id !== newRoute)
         this.$router.push(newRoute);

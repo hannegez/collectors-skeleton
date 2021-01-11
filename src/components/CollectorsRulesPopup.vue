@@ -31,7 +31,7 @@
         <img width="95%" src='/images/skills_info.png'>
       </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -44,38 +44,35 @@ export default {
     content: String,
   },
   methods: {
-    }
+  }
 }
 </script>
 
-
 <style scoped>
-  .rulesPopupWrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;       /*denna gör att popupen placeras ovanpå andra element*/
-  }
+.rulesPopupWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;       /*denna gör att popupen placeras ovanpå andra element*/
+}
 
-  .rulesPopup {
-    background: #fff;
-    border: solid thin #ececec;
-    margin: 0 20%;
-    padding: 1em;
-  }
+.rulesPopup {
+  background: #fff;
+  border: solid thin #ececec;
+  margin: 0 20%;
+  padding: 1em;
+}
 
-  .closeCross {
-    width: 1.5em;
-    margin: 0%;
-  }
+.closeCross {
+  width: 1.5em;
+  margin: 0%;
+}
 
-  p {
-    margin: 2%;
-  }
+p { margin: 2%; }
 
 </style>

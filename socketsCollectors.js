@@ -9,7 +9,7 @@ function sockets(io, socket, data) {
   socket.on('setupCollectors', function(d) {
     data.createRoom(d.roomId, d.playerCount, d.lang);
   })
-  /**/
+  
   socket.on('collectorsLoaded', function(d) {
     socket.join(d.roomId);
     if (data.joinGame(d.roomId, d.playerId)) {
@@ -18,15 +18,12 @@ function sockets(io, socket, data) {
         players: data.getPlayers(d.roomId),              //Collectors.vue: "this.$store.state.socket.on('collectorsInitialize',
         itemsOnSale: data.getItemsOnSale(d.roomId),      //  function(d) { ...... "
         marketValues: data.getMarketValues(d.roomId),
-        // raiseValueOnSale: data.getRaiseValueOnSale(d.roomId),
         market: data.getMarket(d.roomId),
         skillsOnSale: data.getSkillsOnSale(d.roomId),
         auctionCards: data.getAuctionCards(d.roomId),
-        auctionSpot: data.getAuctionSpot(d.roomId), // TEST ???
-        //NÅTT MED WORK
+        auctionSpot: data.getAuctionSpot(d.roomId),
         placements: data.getPlacements(d.roomId),
         currentQuarter:data.getQuarter(d.roomId)
-
       });
       }
   });
@@ -43,24 +40,19 @@ function sockets(io, socket, data) {
   });
   socket.on('collectorsNextQuarter', function(d) {
     data.nextQuarter(d.roomId)
-    io.to(d.roomId).emit('collectorsInitialize', {                //HÄR LÄR VI LÄGGA TILL/ÄNDRA VAD SOM SKA SÄNDAS UT NÄR NÅN JOINAR
+    io.to(d.roomId).emit('collectorsInitialize', {     //HÄR LÄR VI LÄGGA TILL/ÄNDRA VAD SOM SKA SÄNDAS UT NÄR NÅN JOINAR
       labels: data.getUILabels(d.roomId),              //OBJEKTET SOM SKICKAS SOM 2:A PARAMETER ÄR DET SOM KALLAS FÖR d I
       players: data.getPlayers(d.roomId),              //Collectors.vue: "this.$store.state.socket.on('collectorsInitialize',
       itemsOnSale: data.getItemsOnSale(d.roomId),      //  function(d) { ...... "
       marketValues: data.getMarketValues(d.roomId),
-      // raiseValueOnSale: data.getRaiseValueOnSale(d.roomId),
       market: data.getMarket(d.roomId),
       skillsOnSale: data.getSkillsOnSale(d.roomId),
       auctionCards: data.getAuctionCards(d.roomId),
-      auctionSpot: data.getAuctionSpot(d.roomId), // TEST ???
-      //NÅTT MED WORK
+      auctionSpot: data.getAuctionSpot(d.roomId),
       placements: data.getPlacements(d.roomId),
       currentQuarter:data.getQuarter(d.roomId)
-
     });
-
   });
-
 
   socket.on('collectorsGainSkill', function(d) {
     data.gainSkill(d.roomId, d.playerId, d.card, d.cost)
@@ -83,14 +75,11 @@ function sockets(io, socket, data) {
   );
   });
 
-  //DANI
   socket.on('CollectorsStartWork', function(d) {
     data.startWork(d.roomId, d.playerId, d.card, d.cost, d.workAction, d.numberOfActions )
     io.to(d.roomId).emit('collectorsWorkStarted', {
       playerId: d.playerId,
       players: data.getPlayers(d.roomId),
-      //  auctionCards: data.getAuctionCards(d.roomId),
-      //    auctionSpot: data.getAuctionSpot(d.roomId) //TEST ??
     }
   );
   });
@@ -125,26 +114,20 @@ function sockets(io, socket, data) {
     io.to(d.roomId).emit('collectorsBottlePlaced', data.getPlacements(d.roomId)
   );
   });
+
   socket.on('collectorsPlaceWorkBottle', function(d) {
     data.placeWorkBottle(d.roomId, d.playerId, d.cost, d.workAction, d.numberOfActions);
-    //påverkar inget i sig
     console.log("number of actions i placeWorkBottle 1" + d.numberOfActions);
     d.numberOfActions -= 1;
     console.log("number of actions i placeWorkBottle 1" + d.numberOfActions);
-
     io.to(d.roomId).emit('collectorsWorkBottlePlaced', {             //OBJEKTET SOM SKICKAS SOM 2:A PARAMETER ÄR DET SOM KALLAS FÖR d I
       players: data.getPlayers(d.roomId),
       playerId: d.playerId,
       placements: data.getPlacements(d.roomId), //workAction finns med här
       numberOfActions: d.numberOfActions,
     },
-
-    
   );
   });
-
-
-
   }
 
   module.exports = sockets;

@@ -9,8 +9,6 @@
       </div>
     </div>
 
-
-
     <!--BUY CARDS -->
     <div class="buyCards horizontalPlacement">
       <div v-for="(card, index) in reverseAuctionCards" :key="index">
@@ -18,42 +16,36 @@
         :card="card"
         :availableAction="card.available"
         @doAction="chooseAction(card)"/>
-        <!-- {{ cardCost(card) }} -->
       </div>
     </div>
 
+    <div class="bottlePlacements horizontalPlacement">
+      <div v-for="(p, index) in placement" :key="'bp' + index">
+        <input class="bottlePlacement"
+        type="image"
+        v-if="p.playerId===null"
+        :disabled="cannotAfford(p.cost)"
+        @click="placeBottle(p)"
+        src='/images/bottle_placement.png' >
+        <p class="buttonText" v-if="p.playerId===null"> ${{p.cost}} </p>
+        <div v-if="p.playerId !== null">
+          <input class="bottlePlacement" type="image" :src="placedBottle(p.playerId)" >
+        </div>
+      </div>
+    </div>
 
-
-<div class="bottlePlacements horizontalPlacement">
-  <div v-for="(p, index) in placement" :key="'bp' + index">
-    <input class="bottlePlacement"
-    type="image"
-    v-if="p.playerId===null"
-    :disabled="cannotAfford(p.cost)"
-    @click="placeBottle(p)"
-    src='/images/bottle_placement.png' >
-    <p class="buttonText" v-if="p.playerId===null"> ${{p.cost}} </p>
-    <div v-if="p.playerId !== null">
-      <input class="bottlePlacement" type="image" :src="placedBottle(p.playerId)" >
+    <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
+    <div class="auctionCards horizontalPlacement">
+      <h2>{{ labels.auctionSpot }}</h2>
+      <br>
+      <div v-for="(card, index) in auctionSpot" :key="index">
+        <CollectorsCard
+        :card="card"
+        :availableAction="card.available"
+        @doAction="startAuction(card)"/>
+      </div>
     </div>
   </div>
-</div>
-
- <!-- FATTAR EJ VARFÖR DENNA INTE VERKAR FUNKA... -->
-<div class="auctionCards horizontalPlacement">
-  <h2>{{ labels.auctionSpot }}</h2>
-  <br>
-  <div v-for="(card, index) in auctionSpot" :key="index">
-    <CollectorsCard
-    :card="card"
-    :availableAction="card.available"
-    @doAction="startAuction(card)"/>
-    <!-- {{ cardCost(card) }} -->
-  </div>
-</div>
-
-</div>
-
 </template>
 
 <script>
@@ -108,11 +100,9 @@ export default {
     highlightAvailableCards: function () {
       for (let i = 0; i < this.auctionCards.length; i += 1) {
         this.setAvailable(this.auctionCards[i]);
-  //      console.log("AuctionCard ska highlightas");
       }
       for (let i = 0; i < this.player.hand.length; i += 1) {
         this.setAvailable(this.player.hand[i]);
-  //      console.log("Hand ska highlightas");
       }
     },
 
@@ -124,8 +114,8 @@ export default {
     }
   }
 }
-
 </script>
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .startAuction{
@@ -139,26 +129,21 @@ export default {
   "auctionCards buyCards";
 }
 
-.buyCards{grid-area: buyCards;
-padding-top: 2.5em;}
-.bottlePlacements{grid-area: bottlePlacements;
+.buyCards{
+  grid-area: buyCards;
+  padding-top: 2.5em;
+}
+
+.bottlePlacements{
+  grid-area: bottlePlacements;
   padding-top: 3em;
 }
-/*
-.auctionHeader{grid-area: auctionHeader;
-  font-weight: bold;
-  font-size: 1.4em;
-  padding-top: 0.9em;
-  padding-left: 1em;} */
+
 .auctionInfo{grid-area: auctionInfo;}
-.auctionCards{grid-area: auctionCards;
-padding-top: 2em;}
 
+.auctionCards{
+  grid-area: auctionCards;
+  padding-top: 2em;
+}
 
-
-
-/* .buy-cards, .buttons {
-display: grid;
-grid-template-columns: repeat(auto-fill, 130px);
-} */
 </style>

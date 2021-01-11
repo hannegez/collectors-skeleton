@@ -64,7 +64,8 @@ export default {
 
   .rulesPopup {
     background: #fff;
-    border: solid thin #ececec;
+    border: solid thin grey;
+    border-radius: 0.3em;
     margin: 0 20%;
     padding: 1em;
   }

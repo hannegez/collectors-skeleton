@@ -123,18 +123,17 @@ Data.prototype.resetPlacements = function(room) {
                 }
 
 
-                Data.prototype.getPlayers = function (id) {
-                  let room = this.rooms[id]
-                  if (typeof room !== 'undefined') {
-                    return room.players;
-                  }
-                  else return {};
-                }
 
               //this.moveCards(room);
 
-            }
-          }
+              Data.prototype.getPlayers = function (id) {
+                let room = this.rooms[id]
+                if (typeof room !== 'undefined') {
+                  return room.players;
+                }
+                else return {};
+              }
+
 
           //EN BÖRJAN PÅ ETT FÖRSÖK TILL MOVECARDS, LYCKADES INTE KOMMA ÅT SJÄLVA KORTEN,
           //MEN ARRAYEN SKRIVS UT RÄTT
@@ -152,15 +151,12 @@ Data.prototype.resetPlacements = function(room) {
                 console.log("inne i if-satsen för", card)
                 this.market.push(...card);
                 break;
-                //pusha till raiseValue, ta bort från skillsOnsale
-                //break
               }
             }
           }
 
           Data.prototype.getQuarter= function(roomId){
             let room = this.rooms[roomId];
-
                 Data.prototype.updatePoints = function (roomId, player, points) {
                   let room = this.rooms[roomId]
                   if (typeof room !== 'undefined') {
@@ -168,7 +164,7 @@ Data.prototype.resetPlacements = function(room) {
                     return room.points;
                   }
                   else return {};
-                }
+                }}
 
                 /* returns players after a new card is drawn */
                 Data.prototype.drawCard = function (roomId, playerId) {
@@ -333,12 +329,7 @@ Data.prototype.resetPlacements = function(room) {
                   let room = this.rooms[roomId];
                   if (typeof room !== 'undefined') {
                     let c = null;
-
-                    //GÅ IGENOM SKILLSONSALE, AUCTIONCARDS OCH HAND
-                    //NÄSTA STEG: ta bort raiseValueOnSale
-                    //för skill och auction istället för raisevalueonsale
-
-                    /// check first if the card is among the raise value on sale
+                    // check first if the card is among the raise value on sale
                     for (let i = 0; i < room.auctionCards.length; i += 1) {
                       // since card comes from the client, it is NOT the same object (reference)
                       // so we need to compare properties for determining equality
@@ -358,17 +349,6 @@ Data.prototype.resetPlacements = function(room) {
                             break;
                           }
                         }
-
-                        // for (let i = 0; i < room.raiseValueOnSale.length; i += 1) {
-                        //   // since card comes from the client, it is NOT the same object (reference)
-                        //   // so we need to compare properties for determining equality
-                        //   if (room.raiseValueOnSale[i].x === card.x &&
-                        //       room.raiseValueOnSale[i].y === card.y) {
-                        //     c = room.raiseValueOnSale.splice(i,1, {});
-                        //     break;
-                        //   }
-                        // }
-
                         // ...then check if it is in the hand. It cannot be in both so it's safe
                         for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
                           // since card comes from the client, it is NOT the same object (reference)
@@ -409,19 +389,13 @@ Data.prototype.resetPlacements = function(room) {
                               //room.players[playerId].items.push(...c);
                               room.auctionSpot.push(...c);
                               room.players[playerId].money -= cost;
-
                             }
                           }
-                          // lös problemet med att pengar inte dras bort
+
                           Data.prototype.startWork = function (roomId, playerId, card, cost, workAction, numberOfActions) { // bör läggas till workAction?
                             let room = this.rooms[roomId];
                             if (typeof room !== 'undefined') {
                               room.players[playerId].futureIncome += 1;
-                              //    console.log("number of actions innan startwork" + room.players[playerId].numberOfActions);
-                              //    room.players[playerId].numberOfActions -=1;
-                              //    console.log("number of actions efter startwork" + room.players[playerId].numberOfActions);
-                              //    console.log("går in i data.prototype.startwork EV reducering av , numberOfActions här?" + numberOfActions);
-
                               let c = null;
                               for (let i = 0; i < room.players[playerId].hand.length; i += 1) {
                                 if (room.players[playerId].hand[i].x === card.x &&
@@ -429,27 +403,16 @@ Data.prototype.resetPlacements = function(room) {
                                     c = room.players[playerId].hand.splice(i,1);
                                     break;
                                   }
-
                                 }
-
-
                               }
-
-
-
-
-
                             }
-
-
-
 
                             /* moves card from skillsOnSale to a player's hand */
                             Data.prototype.gainSkill = function (roomId, playerId, card, cost) {
                               let room = this.rooms[roomId];
                               if (typeof room !== 'undefined') {
                                 let c = null;
-                                /// check first if the card is among the skills on sale
+                                // check first if the card is among the skills on sale
                                 for (let i = 0; i < room.skillsOnSale.length; i += 1) {
                                   // since card comes from the client, it is NOT the same object (reference)
                                   // so we need to compare properties for determining equality
@@ -458,7 +421,6 @@ Data.prototype.resetPlacements = function(room) {
                                       c = room.skillsOnSale.splice(i,1, {});
                                       break;
                                     }
-
                                   }
                                   // ...then check if it is in the hand. It cannot be in both so it's safe
                                   for (let i = 0; i < room.players[playerId].hand.length; i += 1) {

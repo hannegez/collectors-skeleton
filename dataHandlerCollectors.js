@@ -133,6 +133,8 @@ Data.prototype.resetPlacements = function(room) {
 
               //this.moveCards(room);
 
+            }
+          }
 
           //EN BÖRJAN PÅ ETT FÖRSÖK TILL MOVECARDS, LYCKADES INTE KOMMA ÅT SJÄLVA KORTEN,
           //MEN ARRAYEN SKRIVS UT RÄTT

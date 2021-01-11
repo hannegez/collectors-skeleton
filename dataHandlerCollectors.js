@@ -239,6 +239,9 @@ Data.prototype.buyCard = function (roomId, playerId, card, cost) {
             c = room.players[playerId].hand.splice(i,1);
             break;
           }
+        }
+      }
+    }
 
           Data.prototype.resetSecondQuarterPlacements = function(room) {
             room.workPlacement = [ {cost:-1, playerId: null, workAction: 1, numberOfActions:2},
@@ -473,10 +476,6 @@ Data.prototype.buyCard = function (roomId, playerId, card, cost) {
                         if (typeof room !== 'undefined') {
                           let c = null;
 
-                          //GÅ IGENOM SKILLSONSALE, AUCTIONCARDS OCH HAND
-                          //NÄSTA STEG: ta bort raiseValueOnSale
-                          //för skill och auction istället för raisevalueonsale
-
                           /// check first if the card is among the raise value on sale
                           for (let i = 0; i < room.auctionCards.length; i += 1) {
                             // since card comes from the client, it is NOT the same object (reference)
@@ -498,15 +497,7 @@ Data.prototype.buyCard = function (roomId, playerId, card, cost) {
                                 }
                               }
 
-                              // for (let i = 0; i < room.raiseValueOnSale.length; i += 1) {
-                              //   // since card comes from the client, it is NOT the same object (reference)
-                              //   // so we need to compare properties for determining equality
-                              //   if (room.raiseValueOnSale[i].x === card.x &&
-                              //       room.raiseValueOnSale[i].y === card.y) {
-                              //     c = room.raiseValueOnSale.splice(i,1, {});
-                              //     break;
-                              //   }
-                              // }
+
 
                               // ...then check if it is in the hand. It cannot be in both so it's safe
                               for (let i = 0; i < room.players[playerId].hand.length; i += 1) {

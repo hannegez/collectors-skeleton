@@ -72,14 +72,6 @@ export default {
     placeWorkBottle: function (p) {
       this.$emit('placeWorkBottle', p); //emitta hela p.
     },
-<<<<<<< HEAD
-
-
-
-
-
-=======
->>>>>>> 570bb4fe1ff3669e09329d778a6fd1c5ba0d14b9
   }
 }
 </script>

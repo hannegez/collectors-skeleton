@@ -9,14 +9,14 @@ function sockets(io, socket, data) {
   socket.on('setupCollectors', function(d) {
     data.createRoom(d.roomId, d.playerCount, d.lang);
   })
-  
+
   socket.on('collectorsLoaded', function(d) {
     socket.join(d.roomId);
     if (data.joinGame(d.roomId, d.playerId)) {
-      socket.emit('collectorsInitialize', {                //HÄR LÄR VI LÄGGA TILL/ÄNDRA VAD SOM SKA SÄNDAS UT NÄR NÅN JOINAR
-        labels: data.getUILabels(d.roomId),              //OBJEKTET SOM SKICKAS SOM 2:A PARAMETER ÄR DET SOM KALLAS FÖR d I
-        players: data.getPlayers(d.roomId),              //Collectors.vue: "this.$store.state.socket.on('collectorsInitialize',
-        itemsOnSale: data.getItemsOnSale(d.roomId),      //  function(d) { ...... "
+      socket.emit('collectorsInitialize', {
+        labels: data.getUILabels(d.roomId),
+        players: data.getPlayers(d.roomId),
+        itemsOnSale: data.getItemsOnSale(d.roomId),
         marketValues: data.getMarketValues(d.roomId),
         market: data.getMarket(d.roomId),
         skillsOnSale: data.getSkillsOnSale(d.roomId),
@@ -38,12 +38,13 @@ function sockets(io, socket, data) {
     data.getMoney(d.roomId, d.playerId)
   );
   });
+  //Initierar ett nytt kvartal när man trycker på next quarter knappen
   socket.on('collectorsNextQuarter', function(d) {
     data.nextQuarter(d.roomId)
-    io.to(d.roomId).emit('collectorsInitialize', {     //HÄR LÄR VI LÄGGA TILL/ÄNDRA VAD SOM SKA SÄNDAS UT NÄR NÅN JOINAR
-      labels: data.getUILabels(d.roomId),              //OBJEKTET SOM SKICKAS SOM 2:A PARAMETER ÄR DET SOM KALLAS FÖR d I
-      players: data.getPlayers(d.roomId),              //Collectors.vue: "this.$store.state.socket.on('collectorsInitialize',
-      itemsOnSale: data.getItemsOnSale(d.roomId),      //  function(d) { ...... "
+    io.to(d.roomId).emit('collectorsInitialize', {
+      labels: data.getUILabels(d.roomId),
+      players: data.getPlayers(d.roomId),
+      itemsOnSale: data.getItemsOnSale(d.roomId),
       marketValues: data.getMarketValues(d.roomId),
       market: data.getMarket(d.roomId),
       skillsOnSale: data.getSkillsOnSale(d.roomId),
@@ -102,7 +103,6 @@ function sockets(io, socket, data) {
 
       skillsOnSale: data.getSkillsOnSale(d.roomId),
       auctionCards: data.getAuctionCards(d.roomId),
-      //    raiseValueOnSale: data.getRaiseValueOnSale(d.roomId),
       marketValues: data.getMarketValues(d.roomId),
       market: data.getMarket(d.roomId)
     }
@@ -115,19 +115,17 @@ function sockets(io, socket, data) {
   );
   });
 
+  //försök till number of actions men har inte fått ihop det.
   socket.on('collectorsPlaceWorkBottle', function(d) {
     data.placeWorkBottle(d.roomId, d.playerId, d.cost, d.workAction, d.numberOfActions);
-    console.log("number of actions i placeWorkBottle 1" + d.numberOfActions);
-    d.numberOfActions -= 1;
-    console.log("number of actions i placeWorkBottle 1" + d.numberOfActions);
-    io.to(d.roomId).emit('collectorsWorkBottlePlaced', {             //OBJEKTET SOM SKICKAS SOM 2:A PARAMETER ÄR DET SOM KALLAS FÖR d I
+  //  d.numberOfActions -= 1;
+    io.to(d.roomId).emit('collectorsWorkBottlePlaced', {
       players: data.getPlayers(d.roomId),
       playerId: d.playerId,
-      placements: data.getPlacements(d.roomId), //workAction finns med här
+      placements: data.getPlacements(d.roomId),
       numberOfActions: d.numberOfActions,
     },
   );
   });
   }
-
   module.exports = sockets;

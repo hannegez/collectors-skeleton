@@ -3,7 +3,7 @@
     <div id="welcome-info">
 
       <h1>Welcome to Rich Collectors!</h1>
-      <p> Collect items and become the richest player.</p>    
+      <p> Collect items and become the richest player.</p>
 
       <button class="buttons homeButton" v-on:click="getHowToInfo()">How to play?</button>
       <div class="popupInfo" style= "position:relative; left:0em; top:0em;">

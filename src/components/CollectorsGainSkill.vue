@@ -1,7 +1,6 @@
 <template>
   <div class="gainSkill">
-    <div class="gainSkillHeader">
-    </div>
+
 
     <div class="gainSkillInfo">
       <div class="popup" style= "position:relative; left:0em; top:0em;">
@@ -101,20 +100,16 @@ export default {
 .gainSkill{
   grid-gap: 1em;
   display: grid;
-  grid-template-rows: 1% 25% 10%;
+  grid-template-rows: 25% 10%;
   grid-template-columns: 50% 50%;
   grid-template-areas:
-  "gainSkillHeader gainSkillInfo"
   "skillCards gainSkillInfo"
   "skillCards bottlePlacements";
 }
 
 .skillCards{grid-area: skillCards;}
 .bottlePlacements{grid-area: bottlePlacements;}
-.gainSkillHeader{grid-area: gainSkillHeader;
-  font-weight: bold;
-  font-size: 1.2em;
-  padding-top: 0;}
-  .gainSkillInfo{grid-area: gainSkillInfo;}
+
+.gainSkillInfo{grid-area: gainSkillInfo;}
 
   </style>

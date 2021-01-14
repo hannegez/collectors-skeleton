@@ -87,7 +87,7 @@ export default {
 .startWork{
   grid-gap: 0em;
   display: grid;
-  grid-template-rows: 8% 12% 12%;
+  grid-template-rows: 10% 12% 12%;
   grid-template-columns: 40% 60%;
   grid-template-areas:
   "gainWorkHeader workInfo"

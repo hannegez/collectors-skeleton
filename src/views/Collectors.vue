@@ -528,6 +528,7 @@ raiseValue: function (card) {
 },
 };
 
+
 </script>
 
 <style>
@@ -536,7 +537,9 @@ raiseValue: function (card) {
 #wrapper {
   font-family: arial, verdana, sans-serif;
   color: #000;
-  padding: 1em;
+  padding: 0.8em;
+  padding-left: 2.5em;
+  padding-right: 1.2em;
   display: grid;
   grid-template-rows: 10% 70%;
   grid-template-areas:
@@ -727,7 +730,7 @@ p, span {
   grid-gap: 0.5%;
   display: grid;
   grid-template-columns: 25% 25% 49%;
-  grid-template-rows: 24% 50% 24%;
+  grid-template-rows: 24% 50% 23%;
   grid-template-areas:
   "itemPool itemPool itemPool"
   "skillPool workPool auctionPool"

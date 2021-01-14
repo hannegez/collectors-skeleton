@@ -122,7 +122,7 @@ h3 {
 .startAuction{
   grid-gap: 1em;
   display: grid;
-  grid-template-rows: 20% 20% 20%;
+  grid-template-rows: 22% 15% 30%;
   grid-template-columns: 50% 50%;
   grid-template-areas:
   "availableAuctionCards auctionInfo"
@@ -134,7 +134,7 @@ h3 {
   grid-area: availableAuctionCards;
   display: grid;
   grid-template-columns: repeat(auto-fill, 20%);
-  padding-top: 2.5em;
+  /*padding-top: 2.5em;*/
 }
 
 .bottlePlacements{

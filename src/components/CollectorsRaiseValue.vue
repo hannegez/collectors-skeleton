@@ -142,7 +142,7 @@ methods: {
 .raiseValue{
   grid-gap: 2%;
   display: grid;
-  grid-template-rows: 50% 50%;
+  grid-template-rows: 38% 65%;
   grid-template-columns: 15% 85%;
   grid-template-areas:
   "raiseValueInfo marketValues"

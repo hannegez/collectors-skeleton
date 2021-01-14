@@ -103,7 +103,7 @@ export default {
 .buyItem{
   grid-gap: 5%;
   display: grid;
-  grid-template-rows: 48% 48%;
+  grid-template-rows: 40% 10%;
   grid-template-columns: 80% 20%;
   grid-template-areas:
   "buyCards buyItemHeader"

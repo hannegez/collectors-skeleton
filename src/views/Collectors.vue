@@ -171,9 +171,6 @@
       </div>
 
     </main>
-
-    <footer>
-    </footer>
   </div>
 </template>
 
@@ -541,7 +538,7 @@ raiseValue: function (card) {
   color: #000;
   padding: 1em;
   display: grid;
-  grid-template-rows: 8% 70%;
+  grid-template-rows: 10% 70%;
   grid-template-areas:
   "header"
   "main";
@@ -709,7 +706,7 @@ main {
   display: grid;
   grid-gap: 0.5em;
   grid-template-columns: 70% 30%;
-  grid-template-rows: 150vh;
+  grid-template-rows: 90vh;
   grid-template-areas:
   "gameBoard playerBoard";
 }
@@ -730,7 +727,7 @@ p, span {
   grid-gap: 0.5%;
   display: grid;
   grid-template-columns: 25% 25% 49%;
-  grid-template-rows: 20% 40% 20%;
+  grid-template-rows: 24% 50% 24%;
   grid-template-areas:
   "itemPool itemPool itemPool"
   "skillPool workPool auctionPool"
